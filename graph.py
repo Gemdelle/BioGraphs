@@ -20,7 +20,7 @@ positions = {
 
 # AGRGAR NODOS AL GRAFO
 for node, pos in positions.items():
-    G.add_node(node, pos=pos, color=(255, 255, 255))  # Color inicial de los nodos
+    G.add_node(node, pos=pos, color=(0, 0, 0))  # Color inicial de los nodos
 
 # CREAR DE ARISTAS ENTRE NODOS CON VALENCIAS
 edges = [
