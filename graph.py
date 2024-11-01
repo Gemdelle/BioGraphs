@@ -4,6 +4,7 @@ from core.screens import Screens
 from ui.screens.digrafos_euler_1 import render_digrafos_euler_1, handle_digrafos_euler_1_keydown
 from ui.screens.digrafos_hamilton_1 import render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown
 from ui.screens.grafos_euler_1 import render_grafos_euler_1, handle_grafos_euler_1_keydown
+from ui.screens.grafos_euler_2 import render_grafos_euler_2, handle_grafos_euler_2_keydown
 from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown
 from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown
 from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown
@@ -14,8 +15,8 @@ pygame.init()
 pygame.font.init()
 
 # CONFIGURACIÓN DE PANTALLA
-SCREEN_WIDTH = 1920
-SCREEN_HEIGHT = 1080
+SCREEN_WIDTH = 1710
+SCREEN_HEIGHT = 1034
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
@@ -25,13 +26,13 @@ completed = False
 
 font = pygame.font.SysFont(None, 36)
 
-screen_selected = Screens.SPLASH
+screen_selected = Screens.GRAFOS_HAMILTON_2
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
 def goToMain():
     global screen_selected
-    screen_selected = Screens.MAIN
+    screen_selected = Screens.GRAFOS_HAMILTON_2
 def goToLevel(screen):
     global screen_selected
     screen_selected = screen
@@ -45,6 +46,8 @@ while running:
                 running = False
         if screen_selected == Screens.GRAFOS_EULER_1:
             completed, current_node = handle_grafos_euler_1_keydown(event)
+        elif screen_selected == Screens.GRAFOS_EULER_2:
+            completed, current_node = handle_grafos_euler_2_keydown(event)
         elif screen_selected == Screens.GRAFOS_HAMILTON_1:
             completed, current_node = handle_grafos_hamilton_1_keydown(event)
         elif screen_selected == Screens.GRAFOS_HAMILTON_2:
@@ -62,6 +65,8 @@ while running:
         render_main(screen, goToLevel)
     elif screen_selected == Screens.GRAFOS_EULER_1:
         completed = render_grafos_euler_1(screen, font)
+    elif screen_selected == Screens.GRAFOS_EULER_2:
+        completed = render_grafos_euler_2(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_1:
         completed = render_grafos_hamilton_1(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_2:

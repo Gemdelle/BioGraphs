@@ -4,12 +4,20 @@ import networkx as nx
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
+# restarle 60 a y
 positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450), 'G': (250, 400), 'H': (300, 300)
+    'A': (400, 550),
+    'B': (220, 440),
+    'C': (550, 240),
+    'D': (790, 520),
+    'E': (930, 640),
+    'F': (1100, 350),
+    'G': (1390, 385),
+    'H': (1490, 650)
 }
+
 for node, pos in positions.items():
-    G.add_node(node, pos=pos, color=(0, 0, 0))
+    G.add_node(node, pos=pos, color=(200, 0, 0))
 
 edges = [
     ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
@@ -32,6 +40,9 @@ start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
 def render_grafos_euler_1(screen, font):
+    background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0,0))
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     if not timer_started:
@@ -52,11 +63,11 @@ def render_grafos_euler_1(screen, font):
     render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions)
 
     # Draw the energy bar
-    pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
+    pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
 
     # Draw the timer text
-    timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
-    screen.blit(timer_text, (10, 40))
+    timer_text = font.render(f"{remaining_time // 1000}", True, (0, 0, 0))
+    screen.blit(timer_text, (100, 100))
 
     # Check if time is up
     if remaining_time <= 0:

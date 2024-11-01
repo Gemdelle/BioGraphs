@@ -5,15 +5,15 @@ from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450), 'G': (250, 400), 'H': (300, 300)
+    'A': (560,470-60), 'B': (311,704-60), 'C': (558,327-60), 'D': (775,576-60),
+    'E': (195,519-60), 'F': (360,434-60), 'G': (1095,308-60), 'H': (711,431-60),
+    'I': (1033,705-60), 'J': (1416,360-60), 'K': (1160,508-60), 'L': (1521,698-60),
 }
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
-    ('C', 'F'), ('D', 'F'), ('F', 'E'), ('F', 'H'), ('E', 'G'), ('G', 'H')
+    ('B', 'A'),
 ]
 for edge in edges:
     G.add_edge(edge[0], edge[1])
@@ -32,6 +32,9 @@ start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
 def render_grafos_hamilton_2(screen, font):
+    background_image = pygame.image.load("assets/G-hamilton-2.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0, 0))
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     if not timer_started:
