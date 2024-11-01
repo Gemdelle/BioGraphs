@@ -1,7 +1,7 @@
 import pygame
 import networkx as nx
 
-from ui.screens.graph_renderer import render_graph, get_node_at_position
+from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
@@ -29,7 +29,7 @@ current_node = None
 initial_energy = 17
 energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
-timer_duration = 60000  # 30 seconds duration
+timer_duration = 60000  # 60 seconds duration
 
 def render_grafos_hamilton_1(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
@@ -65,31 +65,28 @@ def render_grafos_hamilton_1(screen, font):
         current_node = None
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
-        return False
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        elif event.type == pygame.KEYDOWN:
-            key = pygame.key.name(event.key).upper()
-            print(key)
-            if key in G.nodes:
-                if current_node is None:
-                    current_node = key
-                    G.nodes[current_node]['color'] = (255, 0, 0)
-                elif key in G.neighbors(current_node):
-                    G.nodes[current_node]['color'] = (0, 100, 0)
-                    current_node = key
-                    G.nodes[current_node]['color'] = (255, 0, 0)
-                    path.append(current_node)
-                    if current_node == end_node and len(path) == len(G.nodes):
-                        print("Congratulations! You completed the Hamiltonian Path.")
-                        return True
 
     return False
 
+def handle_grafos_hamilton_1_keydown(event):
+    global current_node
+    if event.type == pygame.KEYDOWN:
+        key = pygame.key.name(event.key).upper()
 
+        if key in G.nodes:
+            if current_node is None:
+                current_node = key
+                G.nodes[current_node]['color'] = (255, 0, 0)
+            elif key in G.neighbors(current_node):
+                G.nodes[current_node]['color'] = (0, 100, 0)
+                current_node = key
+                G.nodes[current_node]['color'] = (255, 0, 0)
+                path.append(current_node)
+
+                if current_node == end_node and len(path) == len(G.nodes):
+                    print("Congratulations! You completed the Hamiltonian Path.")
+                    return True, current_node
+    return False, current_node
 
 
 

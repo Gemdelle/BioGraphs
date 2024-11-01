@@ -12,13 +12,13 @@ def render_main(screen, goToLevel):
         'D': {'pos': (250, 200), 'color': (255, 102, 102), 'enabled': True},  # Pink
         'E': {'pos': (300, 300), 'color': (204, 153, 255), 'enabled': True},  # Purple
         'F': {'pos': (400, 200), 'color': (255, 102, 178), 'enabled': True},  # Red
-        'G': {'pos': (500, 100), 'color': (0, 0, 0), 'enabled': True},        # Black
-        'H': {'pos': (600, 200), 'color': (0, 204, 204), 'enabled': True},     # Teal
-        'I': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': True},         # Black
-        'J': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': True},         # Black
-        'K': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': True},         # Black
-        'L': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': True},         # Black
-        'M': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': True},         # Black
+        'G': {'pos': (500, 100), 'color': (0, 0, 0), 'enabled': False},        # Black
+        'H': {'pos': (600, 200), 'color': (0, 204, 204), 'enabled': False},     # Teal
+        'I': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': False},         # Black
+        'J': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': False},         # Black
+        'K': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': False},         # Black
+        'L': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': False},         # Black
+        'M': {'pos': (700, 300), 'color': (0, 0, 0), 'enabled': False},         # Black
     }
 
     edges = [

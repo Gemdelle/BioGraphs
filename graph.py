@@ -1,13 +1,12 @@
 import pygame
-import networkx as nx
 
 from core.screens import Screens
-from ui.screens.digrafos_euler_1 import render_digrafos_euler_1
-from ui.screens.digrafos_hamilton_1 import render_digrafos_hamilton_1
-from ui.screens.grafos_euler_1 import handle_graph_events, render_grafos_euler_1
-from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1
-from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2
-from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3
+from ui.screens.digrafos_euler_1 import render_digrafos_euler_1, handle_digrafos_euler_1_keydown
+from ui.screens.digrafos_hamilton_1 import render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown
+from ui.screens.grafos_euler_1 import render_grafos_euler_1, handle_grafos_euler_1_keydown
+from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown
+from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown
+from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown
 from ui.screens.main import render_main
 from ui.screens.splash import render_splash
 
@@ -20,26 +19,9 @@ SCREEN_HEIGHT = 1080
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
-Grafo = nx.Graph()
-
-positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450)
-}
-
-for node, pos in positions.items():
-    Grafo.add_node(node, pos=pos, color=(0, 0, 0))
-
-edges = [
-    ('A', 'B'), ('B', 'C'), ('C', 'E'), ('A', 'D'), ('D', 'F'),
-    ('E', 'D')
-]
-
-for edge in edges:
-    Grafo.add_edge(edge[0], edge[1])
-
 running = True
 current_node = None
+completed = False
 
 font = pygame.font.SysFont(None, 36)
 
@@ -54,42 +36,49 @@ def goToLevel(screen):
     global screen_selected
     screen_selected = screen
 
-
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
         if screen_selected == Screens.GRAFOS_EULER_1:
-            current_node = handle_graph_events(Grafo, current_node, event)
+            completed, current_node = handle_grafos_euler_1_keydown(event)
+        elif screen_selected == Screens.GRAFOS_HAMILTON_1:
+            completed, current_node = handle_grafos_hamilton_1_keydown(event)
+        elif screen_selected == Screens.GRAFOS_HAMILTON_2:
+            completed, current_node = handle_grafos_hamilton_2_keydown(event)
+        elif screen_selected == Screens.GRAFOS_HAMILTON_3:
+            completed, current_node = handle_grafos_hamilton_3_keydown(event)
+        elif screen_selected == Screens.DIGRAFOS_EULER_1:
+            completed, current_node = handle_digrafos_euler_1_keydown(event)
+        elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
+            completed, current_node = handle_digrafos_hamilton_1_keydown(event)
 
     if screen_selected == Screens.SPLASH:
         render_splash(screen, goToMain)
     elif screen_selected == Screens.MAIN:
         render_main(screen, goToLevel)
     elif screen_selected == Screens.GRAFOS_EULER_1:
-        render_grafos_euler_1(screen, Grafo, font, 0)
+        completed = render_grafos_euler_1(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_1:
         completed = render_grafos_hamilton_1(screen, font)
-        if completed:
-            print("Hamiltonian path completed!")
-            screen_selected = Screens.MAIN
     elif screen_selected == Screens.GRAFOS_HAMILTON_2:
-        energy = 0
-        render_grafos_hamilton_2(screen, Grafo, font, energy)
+        completed = render_grafos_hamilton_2(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_3:
-        energy = 0
-        render_grafos_hamilton_3(screen, Grafo, font, energy)
+        completed = render_grafos_hamilton_3(screen, font)
     elif screen_selected == Screens.DIGRAFOS_EULER_1:
-        energy = 0
-        render_digrafos_euler_1(screen, Grafo, font, energy)
+        completed = render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
-        energy = 0
-        render_digrafos_hamilton_1(screen, Grafo, font, energy)
+        completed = render_digrafos_hamilton_1(screen, font)
     else:
         print("Screen not found")
 
+    if completed:
+        screen_selected = Screens.MAIN
+
     pygame.display.flip()
-    clock.tick(60)
+    clock.tick(30)
 
 pygame.quit()
