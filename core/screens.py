@@ -3,6 +3,9 @@ from enum import Enum
 class Screens(Enum):
     SPLASH = "SPLASH"
     MAIN = "MAIN"
+    MAP = "MAP"
+    INSTRUCTIONS = "INSTRUCTIONS"
+    PLAYGROUND = "PLAYGROUND"
     GRAFOS_EULER_1 = "GRAFOS_EULER_1"
     GRAFOS_EULER_2 = "GRAFOS_EULER_2"
     GRAFOS_EULER_3 = "GRAFOS_EULER_3"

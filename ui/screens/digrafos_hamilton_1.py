@@ -39,11 +39,13 @@ energy = initial_energy  # Energía inicial
 start_ticks = pygame.time.get_ticks()  # Tiempo de inicio
 timer_duration = 60000  # 60 segundos
 
+back_button_clicked_hamilton_1 = None
 
 # Función de renderizado con flechas en aristas
-def render_digrafos_hamilton_1(screen, font):
-    global timer_started, start_time, path, start_node, positions, current_node, energy
+def render_digrafos_hamilton_1(screen, font, go_to_map, events):
+    global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
 
+    # Inicializar el temporizador si no ha comenzado
     if not timer_started:
         start_time = pygame.time.get_ticks()
         timer_started = True
@@ -59,7 +61,7 @@ def render_digrafos_hamilton_1(screen, font):
         energy = initial_energy  # Resetear energía si se acaba el tiempo
 
     # Renderizar el grafo con flechas
-    render_graph_with_arrows(screen, G, font,positions)
+    render_graph_with_arrows(screen, G, font, positions)
 
     # Dibujar la barra de energía
     pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
@@ -67,6 +69,12 @@ def render_digrafos_hamilton_1(screen, font):
     # Dibujar el texto del temporizador
     timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
     screen.blit(timer_text, (10, 40))
+
+    # Dibujar el botón "Back"
+    back_button_text = font.render("Back", True, (255, 255, 255))
+    back_button_clicked_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_hamilton_1)  # Fondo del botón
+    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
@@ -78,6 +86,11 @@ def render_digrafos_hamilton_1(screen, font):
         return False
 
     return False
+
+
+def is_back_button_clicked_hamilton_1(event):
+    global back_button_clicked_hamilton_1
+    return back_button_clicked_hamilton_1 is not None and back_button_clicked_hamilton_1.collidepoint(event.pos)
 
 
 # Función para renderizar el grafo con flechas

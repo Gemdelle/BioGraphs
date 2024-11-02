@@ -31,6 +31,8 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
+back_button_clicked_digrafos_euler = None
+
 def render_digrafos_euler_1(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
@@ -58,6 +60,12 @@ def render_digrafos_euler_1(screen, font):
     timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
     screen.blit(timer_text, (10, 40))
 
+    # Dibujar el botón "Back"
+    back_button_text = font.render("Back", True, (255, 255, 255))
+    back_button_rect = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_rect)  # Fondo del botón
+    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+
     # Check if time is up
     if remaining_time <= 0:
         print("Time's up! You lost.")
@@ -68,6 +76,10 @@ def render_digrafos_euler_1(screen, font):
         return False
 
     return False
+
+def is_back_button_clicked_digrafos_euler(event):
+    global back_button_clicked_digrafos_euler
+    return back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos)
 
 def handle_digrafos_euler_1_keydown(event):
     global current_node

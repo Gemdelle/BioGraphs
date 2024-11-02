@@ -30,7 +30,10 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
+back_button_clicked_grafos_hamilton_1 = None
+
 def render_grafos_hamilton_1(screen, font):
+    global back_button_clicked_grafos_hamilton_1
     background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -62,6 +65,12 @@ def render_grafos_hamilton_1(screen, font):
     timer_text = font.render(f"{remaining_time // 1000}", True, (0, 0, 0))
     screen.blit(timer_text, (100, 100))
 
+    # Dibujar el botón "Back"
+    back_button_text = font.render("Back", True, (255, 255, 255))
+    back_button_clicked_grafos_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_hamilton_1)  # Fondo del botón
+    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+
     # Check if time is up
     if remaining_time <= 0:
         print("Time's up! You lost.")
@@ -71,6 +80,10 @@ def render_grafos_hamilton_1(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
 
     return False
+
+def is_back_button_clicked_grafos_hamilton_1(event):
+    global back_button_clicked_grafos_hamilton_1
+    return back_button_clicked_grafos_hamilton_1 is not None and back_button_clicked_grafos_hamilton_1.collidepoint(event.pos)
 
 def handle_grafos_hamilton_1_keydown(event):
     global current_node

@@ -10,7 +10,7 @@ scale_change_per_frame = (target_scale - start_scale) / (total_duration * frames
 
 current_scale = start_scale
 
-def render_splash(screen, goToMain):
+def render_splash(screen, go_to_map):
     global current_scale
 
     background_image = pygame.image.load("assets/splash_background.png").convert()
@@ -38,4 +38,4 @@ def render_splash(screen, goToMain):
         screen.blit(scaled_background, scaled_rect)
         screen.blit(scaled_logo, scaled_logo_rect)
     else:
-        goToMain()
+        go_to_map()
