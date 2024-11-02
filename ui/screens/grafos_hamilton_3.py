@@ -5,16 +5,24 @@ from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450), 'G': (250, 400), 'H': (300, 300)
+    'A': (1000, 585), 'B': (1500, 505), 'C': (1085, 258), 'D': (1180, 657),
+    'E': (1237, 459), 'F': (932, 285), 'G': (844, 418), 'H': (1337, 320),
+    'I': (804, 640), 'J': (481, 455), 'K': (343, 260), 'L': (741, 234),
+    'M': (585, 324), 'N': (553, 681), 'O': (357, 535), 'P': (231, 424)
 }
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
-    ('C', 'F'), ('D', 'F'), ('F', 'E'), ('F', 'H'), ('E', 'G'), ('G', 'H')
+    ('O', 'P'), ('J', 'K'), ('L', 'K'), ('L', 'M'), ('L', 'G'),
+    ('F', 'G'), ('C', 'D'), ('B', 'C'), ('A', 'B'),
+    ('E', 'D'), ('I', 'D'), ('O', 'I'), ('N', 'G'), ('O', 'N'),
+    ('O', 'J'), ('M', 'N'), ('M', 'I'), ('I', 'J'), ('E', 'J'),
+    ('A', 'F'), ('C', 'D'), ('H', 'I'), ('E', 'F'), ('G', 'H'),
+    ('B', 'E')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 
@@ -35,6 +43,9 @@ back_button_clicked_grafos_hamilton_3 = None
 
 
 def render_grafos_hamilton_3(screen, font):
+    # background_image = pygame.image.load("assets/G-hamilton-3.png").convert()
+    # background_image = pygame.transform.scale(background_image, (1710, 1034))
+    # screen.blit(background_image, (0, 0))
     global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_grafos_hamilton_3
 
     if not timer_started:
