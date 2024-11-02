@@ -26,13 +26,13 @@ completed = False
 
 font = pygame.font.SysFont(None, 36)
 
-screen_selected = Screens.GRAFOS_HAMILTON_2
+screen_selected = Screens.MAIN
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
 def goToMain():
     global screen_selected
-    screen_selected = Screens.GRAFOS_HAMILTON_2
+    screen_selected = Screens.MAIN
 def goToLevel(screen):
     global screen_selected
     screen_selected = screen

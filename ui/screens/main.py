@@ -11,10 +11,10 @@ def render_main(screen, goToLevel):
     nodes = {
         'A': {'pos': (500, 450), 'color': (255, 204, 102), 'enabled': True},  # Yellow: GRAFOS_EULER_1
         'B': {'pos': (1180, 430), 'color': (153, 204, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
-        'C': {'pos': (1120, 170), 'color': (255, 178, 102), 'enabled': True},  # Orange: GRAFOS_HAMILTON_2
-        'D': {'pos': (1450, 260), 'color': (255, 102, 102), 'enabled': True},  # Pink: GRAFOS_HAMILTON_3
-        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
-        'F': {'pos': (200,230), 'color': (255, 102, 178), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
+        'C': {'pos': (1450, 260), 'color': (255, 102, 102), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
+        'D': {'pos': (1120, 170), 'color': (255, 178, 102), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
+        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': False},  # Purple: DIGRAFOS_EULER_1
+        'F': {'pos': (200,230), 'color': (255, 102, 178), 'enabled': False},  # Red: DIGRAFOS_HAMILTON_1
         'G': {'pos': (700,700), 'color': (255, 102, 178), 'enabled': False},        # Black: GRAFOS_EULER_1
         'H': {'pos': (600,850), 'color': (255, 102, 178), 'enabled': False},     # Teal: GRAFOS_EULER_1
         'I': {'pos': (300,750), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
@@ -25,7 +25,7 @@ def render_main(screen, goToLevel):
     }
 
     edges = [
-        ('M', 'A'),('A', 'E'),('E', 'F'),('M', 'B'),('B', 'D'),('D', 'C'),('M', 'G'),('G', 'H'),('H', 'I'),('M', 'J'),
+        ('M', 'A'),('A', 'E'),('E', 'F'),('M', 'B'),('B', 'C'),('C', 'D'),('M', 'G'),('G', 'H'),('H', 'I'),('M', 'J'),
         ('J', 'K'),('K', 'L')
     ]
 
