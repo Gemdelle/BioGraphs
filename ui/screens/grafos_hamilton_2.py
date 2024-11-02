@@ -13,8 +13,11 @@ for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'),
+    ('J', 'L'), ('J', 'I'), ('I', 'B'), ('K', 'I'), ('J', 'H'),
+    ('G', 'H'), ('C', 'G'), ('B', 'D'), ('E', 'D'), ('A', 'F'),
+    ('E', 'F'), ('F', 'C'), ('G', 'K'), ('B', 'A'), ('C', 'A')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 
