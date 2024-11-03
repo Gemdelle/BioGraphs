@@ -8,8 +8,8 @@ G = nx.DiGraph()
 
 # Definir posiciones de los nodos
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0),
-    'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0)
+    'A': (791, 495), 'B': (850, 270), 'C': (377, 259), 'D': (473, 615),
+    'E': (925, 658), 'F': (642, 408), 'G': (1370, 316), 'H': (900, 481)
 }
 
 for node, pos in positions.items():
@@ -42,7 +42,7 @@ back_button_clicked_hamilton_1 = None
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
     background_image = pygame.image.load("assets/D-hamilton.png").convert()
-    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 

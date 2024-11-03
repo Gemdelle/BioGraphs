@@ -5,8 +5,8 @@ from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
-    'A': (0,0), 'B': (0,0), 'C': (0,0), 'D': (0,0),
-    'E': (0,0)
+    'A': (1209, 335), 'B': (272, 283), 'C': (1407, 601), 'D': (953, 397),
+    'E': (394, 528), 'F': (1246, 646)
 }
 
 for node, pos in positions.items():
@@ -36,7 +36,7 @@ back_button_clicked_digrafos_euler = None
 def render_digrafos_euler_1(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
     background_image = pygame.image.load("assets/D-euler.png").convert()
-    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 

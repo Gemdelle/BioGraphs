@@ -6,9 +6,9 @@ from ui.screens.graph_renderer import render_graph
 G = nx.Graph()
 # restarle 60 a y
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0),
-    'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0),
-    'I': (0, 0), 'J': (0, 0)
+    'A': (186, 284), 'B': (555, 324), 'C': (190, 616), 'D': (501, 521),
+    'E': (1034, 276), 'F': (650, 655), 'G': (1004, 472), 'H': (1510, 634),
+    'I': (1516, 397), 'J': (1390, 498)
 }
 
 for node, pos in positions.items():
@@ -41,7 +41,7 @@ back_button_clicked_grafos_euler_2 = None
 def render_grafos_euler_3(screen, font):
     global back_button_clicked_grafos_euler_2
     background_image = pygame.image.load("assets/G-euler-3.png").convert()
-    #background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
     global timer_started, start_time, path, start_node, positions, current_node, energy
