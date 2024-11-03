@@ -19,21 +19,21 @@ from ui.screens.playground_5 import (render_playground_5, handle_playground_5_ke
                                      is_back_button_clicked_playground_5)
 
 from ui.screens.digrafos_euler_1 import (render_digrafos_euler_1, handle_digrafos_euler_1_keydown,
-                                         is_back_button_clicked_digrafos_euler)
+                                         handle_grafos_digrafos_euler_mousedown)
 from ui.screens.digrafos_hamilton_1 import (render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown,
-                                            is_back_button_clicked_hamilton_1)
+                                            handle_grafos_digrafos_hamilton_1_mousedown)
 from ui.screens.grafos_euler_1 import (render_grafos_euler_1, handle_grafos_euler_1_keydown,
-                                       is_back_button_clicked_grafos_euler_1)
+                                       handle_grafos_euler_1_mousedown)
 from ui.screens.grafos_euler_2 import (render_grafos_euler_2, handle_grafos_euler_2_keydown,
-                                       is_back_button_clicked_grafos_euler_2)
+                                       handle_grafos_euler_2_mousedown)
 from ui.screens.grafos_euler_3 import (render_grafos_euler_3, handle_grafos_euler_3_keydown,
-                                       is_back_button_clicked_grafos_euler_3)
+                                       handle_grafos_euler_3_mousedown)
 from ui.screens.grafos_hamilton_1 import (render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown,
-                                          is_back_button_clicked_grafos_hamilton_1)
+                                          handle_grafos_hamilton_1_mousedown)
 from ui.screens.grafos_hamilton_2 import (render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown,
-                                          is_back_button_clicked_grafos_hamilton_2)
+                                          handle_grafos_hamilton_2_mousedown)
 from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown,
-                                          is_back_button_clicked_grafos_hamilton_3)
+                                          handle_grafos_hamilton_3_mousedown)
 from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
 from ui.screens.main import render_main_screen
 from ui.screens.map import render_map
@@ -52,6 +52,7 @@ current_node = None
 completed = False
 
 font = pygame.font.SysFont(None, 36)
+fontButtons = pygame.font.SysFont(None, 66)
 
 screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
@@ -101,16 +102,6 @@ while running:
                         elif text == "Map":
                             go_to_map()
 
-            elif (is_back_button_clicked_digrafos_euler(event) or
-                  is_back_button_clicked_hamilton_1(event) or
-                  is_back_button_clicked_grafos_euler_1(event) or
-                  is_back_button_clicked_grafos_euler_2(event) or
-                  is_back_button_clicked_grafos_euler_3(event) or
-                  is_back_button_clicked_grafos_hamilton_1(event) or
-                  is_back_button_clicked_grafos_hamilton_2(event) or
-                  is_back_button_clicked_grafos_hamilton_3(event)):
-                go_to_map()
-
             elif (is_back_button_clicked_playground_1(event) or
                   is_back_button_clicked_playground_2(event) or
                   is_back_button_clicked_playground_3(event) or
@@ -126,6 +117,15 @@ while running:
 
             elif is_back_button_clicked_instructions(event):
                 go_to_main()
+
+            handle_grafos_digrafos_euler_mousedown(event, go_to_map)
+            handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map)
+            handle_grafos_euler_1_mousedown(event, go_to_map)
+            handle_grafos_euler_2_mousedown(event, go_to_map)
+            handle_grafos_euler_3_mousedown(event, go_to_map)
+            handle_grafos_hamilton_1_mousedown(event, go_to_map)
+            handle_grafos_hamilton_2_mousedown(event, go_to_map)
+            handle_grafos_hamilton_3_mousedown(event, go_to_map)
 
         if screen_selected == Screens.GRAFOS_EULER_1:
             completed, current_node = handle_grafos_euler_1_keydown(event)

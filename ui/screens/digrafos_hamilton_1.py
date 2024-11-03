@@ -39,24 +39,23 @@ energy = initial_energy  # Energía inicial
 start_ticks = pygame.time.get_ticks()  # Tiempo de inicio
 timer_duration = 60000  # 60 segundos
 
-back_button_clicked_hamilton_1 = None
+back_button_clicked_digrafos_hamilton_1 = None
+start_button_clicked_digrafos_hamilton_1 = None
 
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
-    global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
+    from graph import fontButtons
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
     background_image = pygame.image.load("assets/D-hamilton.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
-
-    # Inicializar el temporizador si no ha comenzado
-    if not timer_started:
-        start_time = pygame.time.get_ticks()
-        timer_started = True
-
     current_time = pygame.time.get_ticks()
-    elapsed_time = current_time - start_time
-    remaining_time = max(0, 60000 - elapsed_time)  # 1 minuto (60000 ms)
+    if timer_started:
+        elapsed_time = current_time - start_time
+        remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
+    else:
+        start_time = pygame.time.get_ticks()
+        remaining_time = 60000
 
     # Actualizar energía en función del tiempo restante
     if remaining_time > 0:
@@ -76,9 +75,19 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_hamilton_1)  # Fondo del botón
+    back_button_clicked_digrafos_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_digrafos_hamilton_1)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+
+    if not timer_started:
+        graph_frame_blur_image = pygame.image.load("assets/UB_logo.jpg").convert()
+        graph_frame_blur_image = pygame.transform.scale(graph_frame_blur_image, (1500, 500))
+        screen.blit(graph_frame_blur_image, (100, 200))
+
+        start_button_text = fontButtons.render("Start", True, (255, 255, 255))
+        start_button_clicked_digrafos_hamilton_1 = pygame.Rect(750, 400, 160, 80)
+        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_digrafos_hamilton_1)
+        screen.blit(start_button_text, (775, 415))
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
@@ -91,10 +100,13 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
     return False
 
-
-def is_back_button_clicked_hamilton_1(event):
-    global back_button_clicked_hamilton_1
-    return back_button_clicked_hamilton_1 is not None and back_button_clicked_hamilton_1.collidepoint(event.pos)
+def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map):
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, timer_started
+    if back_button_clicked_digrafos_hamilton_1 is not None and back_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
+        timer_started = False
+        go_to_map()
+    elif start_button_clicked_digrafos_hamilton_1 is not None and start_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
+        timer_started = True
 
 # Función para renderizar el grafo con flechas
 def render_graph_with_arrows(screen, G, font, positions):
