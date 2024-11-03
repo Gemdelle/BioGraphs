@@ -28,9 +28,11 @@ start_time = 0
 current_node = None
 
 back_button_clicked_playground_1 = None
+restart_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
-    global back_button_clicked_playground_1
+    from graph import fontButtons
+    global back_button_clicked_playground_1, restart_button_clicked_playground_1
     background_image = pygame.image.load("assets/pg-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -46,12 +48,32 @@ def render_playground_1(screen, font):
     back_button_clicked_playground_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
     pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_playground_1)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+
+    # Draw the "Restart" button
+    restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
+    restart_button_clicked_playground_1 = pygame.Rect(1420, 85, 200, 60)
+    pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_playground_1, width=5, border_radius=15)
+    screen.blit(restart_button_text, (1430, 95))
+
     return False
 
 
-def is_back_button_clicked_playground_1(event):
-    global back_button_clicked_playground_1
-    return back_button_clicked_playground_1 is not None and back_button_clicked_playground_1.collidepoint(event.pos)
+def handle_playground_1_mousedown(event, go_to_playground):
+    global back_button_clicked_playground_1, restart_button_clicked_playground_1, timer_started, path, current_node
+    if back_button_clicked_playground_1 is not None and back_button_clicked_playground_1.collidepoint(event.pos):
+        go_to_playground()
+        reset_nodes(path)
+    elif restart_button_clicked_playground_1 is not None and restart_button_clicked_playground_1.collidepoint(event.pos):
+        timer_started = False
+        reset_nodes(path)
+
+
+def reset_nodes(path):
+    global current_node
+    path.clear()
+    current_node = None
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
 
 
 def handle_playground_1_keydown(event):

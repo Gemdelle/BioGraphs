@@ -1,6 +1,7 @@
 import pygame
 
 from core.screens import Screens
+from ui.characters.euler_1_flower import Euler1Flower
 from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from ui.screens.intro_euler_cicle import render_intro_euler_cicle, is_back_button_clicked_intro_euler_cicle
 from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
@@ -8,15 +9,14 @@ from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back
 from ui.screens.intro_hamilton_path import render_intro_hamilton_path, is_back_button_clicked_intro_hamilton_path
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
-                                     is_back_button_clicked_playground_1)
-from ui.screens.playground_2 import (render_playground_2, handle_playground_2_keydown,
-                                     is_back_button_clicked_playground_2)
+                                     handle_playground_1_mousedown)
+from ui.screens.playground_2 import (render_playground_2, handle_playground_2_keydown, handle_playground_2_mousedown)
 from ui.screens.playground_3 import (render_playground_3, handle_playground_3_keydown,
-                                     is_back_button_clicked_playground_3)
+                                     handle_playground_3_mousedown)
 from ui.screens.playground_4 import (render_playground_4, handle_playground_4_keydown,
-                                     is_back_button_clicked_playground_4)
+                                     handle_playground_4_mousedown)
 from ui.screens.playground_5 import (render_playground_5, handle_playground_5_keydown,
-                                     is_back_button_clicked_playground_5)
+                                     handle_playground_5_mousedown)
 
 from ui.screens.digrafos_euler_1 import (render_digrafos_euler_1, handle_digrafos_euler_1_keydown,
                                          handle_grafos_digrafos_euler_mousedown)
@@ -52,12 +52,13 @@ current_node = None
 completed = False
 
 font = pygame.font.SysFont(None, 36)
-fontButtons = pygame.font.SysFont(None, 66)
+fontButtons = pygame.font.SysFont(None, 56)
 
 screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
+#euler_1_flower = Euler1Flower()
 
 def go_to_map():
     global screen_selected
@@ -102,13 +103,6 @@ while running:
                         elif text == "Map":
                             go_to_map()
 
-            elif (is_back_button_clicked_playground_1(event) or
-                  is_back_button_clicked_playground_2(event) or
-                  is_back_button_clicked_playground_3(event) or
-                  is_back_button_clicked_playground_4(event) or
-                  is_back_button_clicked_playground_5(event)):
-                go_to_playground()
-
             elif (is_back_button_clicked_intro_euler_cicle(event) or
                   is_back_button_clicked_intro_euler_path(event) or
                   is_back_button_clicked_intro_hamilton_cicle(event) or
@@ -126,6 +120,11 @@ while running:
             handle_grafos_hamilton_1_mousedown(event, go_to_map)
             handle_grafos_hamilton_2_mousedown(event, go_to_map)
             handle_grafos_hamilton_3_mousedown(event, go_to_map)
+            handle_playground_1_mousedown(event, go_to_playground)
+            handle_playground_2_mousedown(event, go_to_playground)
+            handle_playground_3_mousedown(event, go_to_playground)
+            handle_playground_4_mousedown(event, go_to_playground)
+            handle_playground_5_mousedown(event, go_to_playground)
 
         if screen_selected == Screens.GRAFOS_EULER_1:
             completed, current_node = handle_grafos_euler_1_keydown(event)

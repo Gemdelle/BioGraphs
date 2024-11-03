@@ -40,10 +40,11 @@ timer_duration = 60000  # 60 seconds duration
 
 back_button_clicked_grafos_euler_2 = None
 start_button_clicked_grafos_euler_2 = None
+restart_button_clicked_grafos_euler_2 = None
 
 def render_grafos_euler_2(screen, font):
     from graph import fontButtons
-    global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2,  timer_started, start_time, path, start_node, positions, current_node, energy
+    global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2, restart_button_clicked_grafos_euler_2, timer_started, start_time, path, start_node, positions, current_node, energy
     background_image = pygame.image.load("assets/G-euler-2.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -87,6 +88,12 @@ def render_grafos_euler_2(screen, font):
         start_button_clicked_grafos_euler_2 = pygame.Rect(750, 400, 160, 80)
         pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_2)
         screen.blit(start_button_text, (775, 415))
+    else:
+        # Draw the "Restart" button
+        restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
+        restart_button_clicked_grafos_euler_2 = pygame.Rect(1420, 85, 200, 60)
+        pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_euler_2, width=5, border_radius=15)
+        screen.blit(restart_button_text, (1430, 95))
 
     # Check if time is up
     if remaining_time <= 0:
@@ -100,12 +107,23 @@ def render_grafos_euler_2(screen, font):
     return False
 
 def handle_grafos_euler_2_mousedown(event, go_to_map):
-    global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2, timer_started
+    global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2, restart_button_clicked_grafos_euler_2, timer_started
     if back_button_clicked_grafos_euler_2 is not None and back_button_clicked_grafos_euler_2.collidepoint(event.pos):
         timer_started = False
         go_to_map()
+        reset_nodes(path)
     elif start_button_clicked_grafos_euler_2 is not None and start_button_clicked_grafos_euler_2.collidepoint(event.pos):
         timer_started = True
+    elif restart_button_clicked_grafos_euler_2 is not None and restart_button_clicked_grafos_euler_2.collidepoint(event.pos):
+        timer_started = False
+        reset_nodes(path)
+
+def reset_nodes(path):
+    global current_node
+    path.clear()
+    current_node = None
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_2_keydown(event):
     global current_node
