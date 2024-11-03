@@ -96,7 +96,6 @@ def is_back_button_clicked_hamilton_1(event):
     global back_button_clicked_hamilton_1
     return back_button_clicked_hamilton_1 is not None and back_button_clicked_hamilton_1.collidepoint(event.pos)
 
-
 # Función para renderizar el grafo con flechas
 def render_graph_with_arrows(screen, G, font, positions):
     screen.fill((255, 255, 255))  # Fondo blanco
