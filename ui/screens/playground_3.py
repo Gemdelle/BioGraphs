@@ -5,7 +5,7 @@ from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0), 'E': (0, 0)
+    'A': (616, 405), 'B': (1068, 405), 'C': (700, 661), 'D': (853, 240), 'E': (995, 661)
 }
 
 for node, pos in positions.items():
@@ -35,8 +35,8 @@ back_button_clicked_grafos_euler_1 = None
 
 
 def render_playground_3(screen, font):
-    global back_button_clicked_grafos_euler_1
-    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
+    global back_button_clicked_grafos_euler_3
+    background_image = pygame.image.load("assets/pg-3.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))

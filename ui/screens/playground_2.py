@@ -6,15 +6,26 @@ from ui.screens.graph_renderer import render_graph
 G = nx.Graph()
 
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0), 'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0),
+    'A': (854, 683),
+    'B': (854, 470),
+    'C': (692, 518),
+    'D': (591, 395),
+    'E': (720, 397),
+    'F': (781, 320),
+    'G': (854, 213),
+    'H': (930, 320),
+    'I': (978, 397),
+    'J': (1123, 395),
+    'K': (1020, 518)
 }
+
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
     ('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E'), ('E', 'B'), ('B', 'F'), ('F', 'G'), ('G', 'H'), ('H', 'B'),
-    ('B', 'I'), ('I', 'J'), ('B', 'H')
+    ('B', 'I'), ('I', 'J'), ('J', 'K'), ('B', 'K')
 ]
 
 for edge in edges:
@@ -37,8 +48,8 @@ back_button_clicked_grafos_euler_1 = None
 
 
 def render_playground_2(screen, font):
-    global back_button_clicked_grafos_euler_1
-    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
+    global back_button_clicked_grafos_euler_2
+    background_image = pygame.image.load("assets/pg-2.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))

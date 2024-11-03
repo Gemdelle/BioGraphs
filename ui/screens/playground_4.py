@@ -4,9 +4,12 @@ import networkx as nx
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
+
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0), 'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0)
+    'A': (933, 681),  'B': (728, 681),  'C': (831, 499),  'D': (621, 499),  'E': (721, 352),  'F': (831, 215),
+    'G': (935, 352),  'H': (1045, 499)
 }
+
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -35,8 +38,8 @@ back_button_clicked_grafos_euler_1 = None
 
 
 def render_playground_4(screen, font):
-    global back_button_clicked_grafos_euler_1
-    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
+    global back_button_clicked_grafos_euler_4
+    background_image = pygame.image.load("assets/pg-4.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))

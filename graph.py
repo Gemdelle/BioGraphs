@@ -149,13 +149,13 @@ while running:
     elif screen_selected == Screens.PLAYGROUND_1:
         completed = render_playground_1(screen, font)
     elif screen_selected == Screens.PLAYGROUND_2:
-        completed = render_playground_1(screen, font)
+        completed = render_playground_2(screen, font)
     elif screen_selected == Screens.PLAYGROUND_3:
-        completed = render_playground_1(screen, font)
+        completed = render_playground_3(screen, font)
     elif screen_selected == Screens.PLAYGROUND_4:
-        completed = render_playground_1(screen, font)
+        completed = render_playground_4(screen, font)
     elif screen_selected == Screens.PLAYGROUND_5:
-        completed = render_playground_1(screen, font)
+        completed = render_playground_5(screen, font)
 
     elif screen_selected == Screens.GRAFOS_EULER_1:
         completed = render_grafos_euler_1(screen, font)
