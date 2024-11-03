@@ -5,15 +5,15 @@ from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
 positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450), 'G': (250, 400), 'H': (300, 300)
+    'A': (0,0), 'B': (0,0), 'C': (0,0), 'D': (0,0),
+    'E': (0,0)
 }
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
-    ('C', 'F'), ('D', 'F'), ('F', 'E'), ('F', 'H'), ('E', 'G'), ('G', 'H')
+    ('B', 'A'),
 ]
 for edge in edges:
     G.add_edge(edge[0], edge[1])

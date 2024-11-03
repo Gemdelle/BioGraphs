@@ -8,19 +8,16 @@ G = nx.DiGraph()
 
 # Definir posiciones de los nodos
 positions = {
-    'A': (100, 300), 'B': (50, 100), 'C': (200, 100), 'D': (150, 250),
-    'E': (50, 400), 'F': (150, 450), 'G': (250, 400), 'H': (300, 300),
-    'I': (400, 100), 'J': (400, 400)
+    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0),
+    'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0)
 }
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 # Definir múltiples aristas con direcciones específicas para formar un camino hamiltoniano en el digrafo
 edges = [
-    ('B', 'A'), ('A', 'C'), ('C', 'D'), ('D', 'F'),
-    ('F', 'E'), ('E', 'G'), ('G', 'H'), ('H', 'I'),
-    ('I', 'J'), ('J', 'A'), ('A', 'F'), ('F', 'C'),
-    ('C', 'H'), ('H', 'D'), ('D', 'J'), ('J', 'E')
+    ('B', 'A'),
 ]
 for edge in edges:
     G.add_edge(edge[0], edge[1])
@@ -98,7 +95,7 @@ def is_back_button_clicked_hamilton_1(event):
 
 # Función para renderizar el grafo con flechas
 def render_graph_with_arrows(screen, G, font, positions):
-    screen.fill((255, 255, 255))  # Fondo blanco
+    #screen.fill((255, 255, 255))  # Fondo blanco
     for u, v in G.edges():
         start_pos = positions[u]
         end_pos = positions[v]
