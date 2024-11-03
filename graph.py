@@ -1,6 +1,11 @@
 import pygame
 
 from core.screens import Screens
+from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.screens.intro_euler_cicle import render_intro_euler_cicle, is_back_button_clicked_intro_euler_cicle
+from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
+from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back_button_clicked_intro_hamilton_cicle
+from ui.screens.intro_hamilton_path import render_intro_hamilton_path, is_back_button_clicked_intro_hamilton_path
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
                                      is_back_button_clicked_playground_1)
@@ -29,7 +34,7 @@ from ui.screens.grafos_hamilton_2 import (render_grafos_hamilton_2, handle_grafo
                                           is_back_button_clicked_grafos_hamilton_2)
 from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown,
                                           is_back_button_clicked_grafos_hamilton_3)
-from ui.screens.instructions import render_instructions
+from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
 from ui.screens.main import render_main_screen
 from ui.screens.map import render_map
 from ui.screens.playground import render_playground
@@ -38,9 +43,7 @@ from ui.screens.splash import render_splash
 pygame.init()
 pygame.font.init()
 
-# CONFIGURACIÓN DE PANTALLA
-SCREEN_WIDTH = 1710
-SCREEN_HEIGHT = 1034
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
@@ -68,6 +71,14 @@ def go_to_playground():
 def go_to_level(screen):
     global screen_selected
     screen_selected = screen
+
+def go_to_instructions():
+    global screen_selected
+    screen_selected = Screens.INSTRUCTIONS
+
+def go_to_main():
+    global screen_selected
+    screen_selected = Screens.MAIN
 
 buttons = []
 # Main game loop
@@ -107,6 +118,15 @@ while running:
                   is_back_button_clicked_playground_5(event)):
                 go_to_playground()
 
+            elif (is_back_button_clicked_intro_euler_cicle(event) or
+                  is_back_button_clicked_intro_euler_path(event) or
+                  is_back_button_clicked_intro_hamilton_cicle(event) or
+                  is_back_button_clicked_intro_hamilton_path(event)):
+                go_to_instructions()
+
+            elif is_back_button_clicked_instructions(event):
+                go_to_main()
+
         if screen_selected == Screens.GRAFOS_EULER_1:
             completed, current_node = handle_grafos_euler_1_keydown(event)
         elif screen_selected == Screens.GRAFOS_EULER_2:
@@ -134,6 +154,8 @@ while running:
             completed, current_node = handle_playground_4_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_5:
             completed, current_node = handle_playground_5_keydown(event)
+        elif screen_selected == Screens.INSTRUCTIONS:
+            handle_instructions_keydown(event, go_to_level)
 
     # Screen rendering
     if screen_selected == Screens.SPLASH:
@@ -174,6 +196,14 @@ while running:
         completed = render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
         completed = render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
+    elif screen_selected == Screens.INTRO_HAMILTON_PATH:
+        render_intro_hamilton_path(screen, font)
+    elif screen_selected == Screens.INTRO_HAMILTON_CICLE:
+        render_intro_hamilton_cicle(screen, font)
+    elif screen_selected == Screens.INTRO_EULER_PATH:
+        render_intro_euler_path(screen, font)
+    elif screen_selected == Screens.INTRO_EULER_CICLE:
+        render_intro_euler_cicle(screen, font)
     else:
         print("Screen not found")
 
