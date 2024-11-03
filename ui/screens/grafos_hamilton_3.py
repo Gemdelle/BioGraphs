@@ -43,9 +43,10 @@ back_button_clicked_grafos_hamilton_3 = None
 
 
 def render_grafos_hamilton_3(screen, font):
-    # background_image = pygame.image.load("assets/G-hamilton-3.png").convert()
-    # background_image = pygame.transform.scale(background_image, (1710, 1034))
-    # screen.blit(background_image, (0, 0))
+    background_image = pygame.image.load("assets/G-hamilton-3.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0, 0))
     global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_grafos_hamilton_3
 
     if not timer_started:

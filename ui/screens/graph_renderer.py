@@ -1,7 +1,6 @@
 import pygame
 import networkx as nx
 
-
 def render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions):
     # screen.fill((255, 255, 255))  # Fondo blanco
     for node, pos in nx.get_node_attributes(G, 'pos').items():

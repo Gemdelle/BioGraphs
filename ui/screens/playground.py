@@ -2,47 +2,33 @@ import pygame
 import math
 from core.screens import Screens
 
+
 def render_playground(screen, goToLevel):
-    # background_image = pygame.image.load("assets/map.png").convert()
+    # background_image = pygame.image.load("assets/map-pg.png").convert()
     # background_image = pygame.transform.scale(background_image, (1710, 1034))
     # screen.blit(background_image, (0,0))
     screen.fill((255, 255, 255))
 
     nodes = {
-        'A': {'pos': (500, 450), 'color': (255, 204, 102), 'enabled': True},  # Yellow: GRAFOS_EULER_1
-        'B': {'pos': (1180, 430), 'color': (153, 204, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
-        'C': {'pos': (1450, 260), 'color': (255, 102, 102), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
-        'D': {'pos': (1120, 170), 'color': (255, 178, 102), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
-        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': False},  # Purple: DIGRAFOS_EULER_1
-        'F': {'pos': (200,230), 'color': (255, 102, 178), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
-        'G': {'pos': (700,700), 'color': (255, 102, 178), 'enabled': False},        # Black: GRAFOS_EULER_1
-        'H': {'pos': (600,850), 'color': (255, 102, 178), 'enabled': False},     # Teal: GRAFOS_EULER_1
-        'I': {'pos': (300,750), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'J': {'pos': (1050,760), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'K': {'pos': (1300,850), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'L': {'pos': (1550,650), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'M': {'pos': (870,500), 'color': (0, 0, 0), 'enabled': False},         # Black: GRAFOS_EULER_1
+        'A': {'pos': (255, 453), 'color': (0, 0, 0), 'enabled': False},  # Negro
+        'B': {'pos': (591, 255), 'color': (255, 255, 102), 'enabled': True},  # Amarillo
+        'C': {'pos': (476, 722), 'color': (200, 150, 255), 'enabled': True},  # Lila
+        'D': {'pos': (1038, 575), 'color': (102, 204, 255), 'enabled': True},  # Celeste
+        'E': {'pos': (1316, 338), 'color': (255, 182, 193), 'enabled': True},  # Rosa
+        'F': {'pos': (1465, 846), 'color': (144, 238, 144), 'enabled': True},  # Verde
     }
 
     edges = [
-        ('M', 'A'),('A', 'E'),('E', 'F'),('M', 'B'),('B', 'C'),('C', 'D'),('M', 'G'),('G', 'H'),('H', 'I'),('M', 'J'),
-        ('J', 'K'),('K', 'L')
+        ('A', 'B'), ('B', 'C'), ('C', 'D'),
+        ('D', 'E'), ('E', 'F')
     ]
 
     node_screens = {
-        'A': Screens.GRAFOS_EULER_1,
-        'B': Screens.GRAFOS_HAMILTON_1,
-        'C': Screens.GRAFOS_HAMILTON_2,
-        'D': Screens.GRAFOS_HAMILTON_3,
-        'E': Screens.DIGRAFOS_EULER_1,
-        'F': Screens.DIGRAFOS_HAMILTON_1,
-        'G': Screens.GRAFOS_EULER_1,
-        'H': Screens.GRAFOS_EULER_1,
-        'I': Screens.GRAFOS_EULER_1,
-        'J': Screens.GRAFOS_EULER_1,
-        'K': Screens.GRAFOS_EULER_1,
-        'L': Screens.GRAFOS_EULER_1,
-        'M': Screens.GRAFOS_EULER_1,
+        'B': Screens.PLAYGROUND_1,
+        'C': Screens.PLAYGROUND_2,
+        'D': Screens.PLAYGROUND_3,
+        'E': Screens.PLAYGROUND_4,
+        'F': Screens.PLAYGROUND_5
     }
 
     font = pygame.font.SysFont(None, 36)
@@ -60,16 +46,9 @@ def render_playground(screen, goToLevel):
         letter_rect = letter_text.get_rect(center=data['pos'])
         screen.blit(letter_text, letter_rect)
 
-    grafo_euler_text = font.render("GRAFO Euler", True, (0, 0, 0))
-    grafo_hamilton_text = font.render("GRAFO Hamilton", True, (0, 0, 0))
-    digrafo_euler_text = font.render("DIGRAFO Euler", True, (0, 0, 0))
-    digrafo_hamilton_text = font.render("DIGRAFO Hamilton", True, (0, 0, 0))
+    playground_text = font.render("Playground", True, (0, 0, 0))
 
-
-    screen.blit(grafo_euler_text, (100, 100))
-    screen.blit(grafo_hamilton_text, (1400, 100))
-    screen.blit(digrafo_euler_text, (100, 950))
-    screen.blit(digrafo_hamilton_text, (1400, 950))
+    screen.blit(playground_text, (100, 100))
 
     handle_node_click(nodes, node_screens, goToLevel)
 
@@ -87,6 +66,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     for i in range(len(points) - 1):
         if i % 2 == 0:
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
+
 
 def handle_node_click(nodes, node_screens, goToLevel):
     mouse_pos = pygame.mouse.get_pos()

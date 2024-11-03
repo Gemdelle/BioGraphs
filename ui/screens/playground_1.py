@@ -4,20 +4,15 @@ import networkx as nx
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
-# restarle 60 a y
 positions = {
-    'A': (186, 284), 'B': (555, 324), 'C': (190, 616), 'D': (501, 521),
-    'E': (1034, 276), 'F': (650, 655), 'G': (1004, 472), 'H': (1510, 634),
-    'I': (1516, 397), 'J': (1390, 498)
+    'A': (0,0), 'B': (0,0), 'C': (0,0), 'D': (0,0), 'E': (0,0),
 }
 
 for node, pos in positions.items():
-    G.add_node(node, pos=pos, color=(200, 0, 0))
+    G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('H', 'G'), ('I', 'H'), ('I', 'J'), ('G', 'I'), ('E', 'I'),
-    ('F', 'G'), ('E', 'F'), ('D', 'E'), ('D', 'F'), ('B', 'F'),
-    ('C', 'D'), ('B', 'C'), ('A', 'D'), ('A', 'B'), ('E', 'G')
+    ('A', 'B'), ('A', 'C'), ('A', 'D'), ('B', 'C'), ('C', 'D'), ('B', 'E'), ('C', 'E'), ('D', 'E')
 ]
 
 for edge in edges:
@@ -36,14 +31,16 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
-back_button_clicked_grafos_euler_3 = None
+back_button_clicked_grafos_euler_1 = None
 
-def render_grafos_euler_3(screen, font):
-    global back_button_clicked_grafos_euler_3
-    background_image = pygame.image.load("assets/G-euler-3.png").convert()
+
+def render_playground_1(screen, font):
+    global back_button_clicked_grafos_euler_1
+    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0,0))
+    screen.blit(background_image, (0, 0))
+
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     if not timer_started:
@@ -72,8 +69,8 @@ def render_grafos_euler_3(screen, font):
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_grafos_euler_3 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_3)  # Fondo del botón
+    back_button_clicked_grafos_euler_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_1)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Check if time is up
@@ -83,15 +80,16 @@ def render_grafos_euler_3(screen, font):
         current_node = None
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
-        return False
 
     return False
 
-def is_back_button_clicked_grafos_euler_3(event):
-    global back_button_clicked_grafos_euler_3
-    return back_button_clicked_grafos_euler_3 is not None and back_button_clicked_grafos_euler_3.collidepoint(event.pos)
 
-def handle_grafos_euler_3_keydown(event):
+def is_back_button_clicked_playground_1(event):
+    global back_button_clicked_grafos_euler_1
+    return back_button_clicked_grafos_euler_1 is not None and back_button_clicked_grafos_euler_1.collidepoint(event.pos)
+
+
+def handle_playground_1_keydown(event):
     global current_node
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
@@ -110,3 +108,6 @@ def handle_grafos_euler_3_keydown(event):
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node
+
+
+

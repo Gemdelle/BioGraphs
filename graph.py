@@ -1,14 +1,34 @@
 import pygame
 
 from core.screens import Screens
-from ui.screens.digrafos_euler_1 import render_digrafos_euler_1, handle_digrafos_euler_1_keydown, is_back_button_clicked_digrafos_euler
-from ui.screens.digrafos_hamilton_1 import render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown, is_back_button_clicked_hamilton_1
-from ui.screens.grafos_euler_1 import render_grafos_euler_1, handle_grafos_euler_1_keydown, is_back_button_clicked_grafos_euler_1
-from ui.screens.grafos_euler_2 import render_grafos_euler_2, handle_grafos_euler_2_keydown, is_back_button_clicked_grafos_euler_2
-from ui.screens.grafos_euler_3 import render_grafos_euler_3, handle_grafos_euler_3_keydown, is_back_button_clicked_grafos_euler_3
-from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown, is_back_button_clicked_grafos_hamilton_1
-from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown, is_back_button_clicked_grafos_hamilton_2
-from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown, is_back_button_clicked_grafos_hamilton_3
+
+from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
+                                     is_back_button_clicked_playground_1)
+from ui.screens.playground_2 import (render_playground_2, handle_playground_2_keydown,
+                                     is_back_button_clicked_playground_2)
+from ui.screens.playground_3 import (render_playground_3, handle_playground_3_keydown,
+                                     is_back_button_clicked_playground_3)
+from ui.screens.playground_4 import (render_playground_4, handle_playground_4_keydown,
+                                     is_back_button_clicked_playground_4)
+from ui.screens.playground_5 import (render_playground_5, handle_playground_5_keydown,
+                                     is_back_button_clicked_playground_5)
+
+from ui.screens.digrafos_euler_1 import (render_digrafos_euler_1, handle_digrafos_euler_1_keydown,
+                                         is_back_button_clicked_digrafos_euler)
+from ui.screens.digrafos_hamilton_1 import (render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown,
+                                            is_back_button_clicked_hamilton_1)
+from ui.screens.grafos_euler_1 import (render_grafos_euler_1, handle_grafos_euler_1_keydown,
+                                       is_back_button_clicked_grafos_euler_1)
+from ui.screens.grafos_euler_2 import (render_grafos_euler_2, handle_grafos_euler_2_keydown,
+                                       is_back_button_clicked_grafos_euler_2)
+from ui.screens.grafos_euler_3 import (render_grafos_euler_3, handle_grafos_euler_3_keydown,
+                                       is_back_button_clicked_grafos_euler_3)
+from ui.screens.grafos_hamilton_1 import (render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown,
+                                          is_back_button_clicked_grafos_hamilton_1)
+from ui.screens.grafos_hamilton_2 import (render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown,
+                                          is_back_button_clicked_grafos_hamilton_2)
+from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown,
+                                          is_back_button_clicked_grafos_hamilton_3)
 from ui.screens.instructions import render_instructions
 from ui.screens.main import render_main_screen
 from ui.screens.map import render_map
@@ -38,6 +58,11 @@ timer_duration = 30000
 def go_to_map():
     global screen_selected
     screen_selected = Screens.MAP
+
+
+def go_to_playground():
+    global screen_selected
+    screen_selected = Screens.PLAYGROUND
 
 
 def go_to_level(screen):
@@ -75,6 +100,13 @@ while running:
                   is_back_button_clicked_grafos_hamilton_3(event)):
                 go_to_map()
 
+            elif (is_back_button_clicked_playground_1(event) or
+                  is_back_button_clicked_playground_2(event) or
+                  is_back_button_clicked_playground_3(event) or
+                  is_back_button_clicked_playground_4(event) or
+                  is_back_button_clicked_playground_5(event)):
+                go_to_playground()
+
         if screen_selected == Screens.GRAFOS_EULER_1:
             completed, current_node = handle_grafos_euler_1_keydown(event)
         elif screen_selected == Screens.GRAFOS_EULER_2:
@@ -92,6 +124,17 @@ while running:
         elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
             completed, current_node = handle_digrafos_hamilton_1_keydown(event)
 
+        elif screen_selected == Screens.PLAYGROUND_1:
+            completed, current_node = handle_playground_1_keydown(event)
+        elif screen_selected == Screens.PLAYGROUND_2:
+            completed, current_node = handle_playground_2_keydown(event)
+        elif screen_selected == Screens.PLAYGROUND_3:
+            completed, current_node = handle_playground_3_keydown(event)
+        elif screen_selected == Screens.PLAYGROUND_4:
+            completed, current_node = handle_playground_4_keydown(event)
+        elif screen_selected == Screens.PLAYGROUND_5:
+            completed, current_node = handle_playground_5_keydown(event)
+
     # Screen rendering
     if screen_selected == Screens.SPLASH:
         render_splash(screen, go_to_map)
@@ -103,6 +146,18 @@ while running:
         render_instructions(screen)
     elif screen_selected == Screens.PLAYGROUND:
         render_playground(screen, go_to_level)
+
+    elif screen_selected == Screens.PLAYGROUND_1:
+        completed = render_playground_1(screen, font)
+    elif screen_selected == Screens.PLAYGROUND_2:
+        completed = render_playground_1(screen, font)
+    elif screen_selected == Screens.PLAYGROUND_3:
+        completed = render_playground_1(screen, font)
+    elif screen_selected == Screens.PLAYGROUND_4:
+        completed = render_playground_1(screen, font)
+    elif screen_selected == Screens.PLAYGROUND_5:
+        completed = render_playground_1(screen, font)
+
     elif screen_selected == Screens.GRAFOS_EULER_1:
         completed = render_grafos_euler_1(screen, font)
     elif screen_selected == Screens.GRAFOS_EULER_2:

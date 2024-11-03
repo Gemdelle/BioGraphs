@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.screens.digraph_renderer import render_digraph
 from ui.screens.graph_renderer import render_graph
 
 # Crear un DiGraph para representar el digrafo
@@ -8,8 +9,8 @@ G = nx.DiGraph()
 
 # Definir posiciones de los nodos
 positions = {
-    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0),
-    'E': (0, 0), 'F': (0, 0), 'G': (0, 0), 'H': (0, 0)
+    'A': (791, 495), 'B': (850, 270), 'C': (377, 259), 'D': (473, 615),
+    'E': (925, 658), 'F': (642, 408), 'G': (1370, 316), 'H': (900, 481)
 }
 
 for node, pos in positions.items():
@@ -17,8 +18,10 @@ for node, pos in positions.items():
 
 # Definir múltiples aristas con direcciones específicas para formar un camino hamiltoniano en el digrafo
 edges = [
-    ('B', 'A'),
+    ('A', 'B'), ('B', 'C'), ('B', 'G'), ('F', 'G'), ('G', 'H'), ('E', 'G'), ('D', 'E'), ('E', 'F'), ('D', 'F'),
+    ('C', 'D'), ('C', 'F')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 
@@ -42,7 +45,7 @@ back_button_clicked_hamilton_1 = None
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
     background_image = pygame.image.load("assets/D-hamilton.png").convert()
-    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
@@ -62,7 +65,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         energy = initial_energy  # Resetear energía si se acaba el tiempo
 
     # Renderizar el grafo con flechas
-    render_graph_with_arrows(screen, G, font, positions)
+    render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
 
     # Dibujar la barra de energía
     pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))

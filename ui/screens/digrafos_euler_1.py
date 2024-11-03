@@ -1,20 +1,23 @@
 import pygame
 import networkx as nx
+import math
 
+from ui.screens.digraph_renderer import render_digraph
 from ui.screens.graph_renderer import render_graph
 
-G = nx.Graph()
+G = nx.DiGraph()
 positions = {
-    'A': (0,0), 'B': (0,0), 'C': (0,0), 'D': (0,0),
-    'E': (0,0)
+    'A': (1209, 335), 'B': (272, 283), 'C': (1407, 601), 'D': (853, 527),
+    'E': (394, 528), 'F': (1246, 646)
 }
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'),
+    ('B', 'A'), ('A', 'B'), ('A', 'D'), ('A', 'C'), ('B', 'D'), ('C', 'B'), ('D', 'E'), ('E', 'F')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 
@@ -36,7 +39,7 @@ back_button_clicked_digrafos_euler = None
 def render_digrafos_euler_1(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
     background_image = pygame.image.load("assets/D-euler.png").convert()
-    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
@@ -55,7 +58,7 @@ def render_digrafos_euler_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Render the graph and energy bar
-    render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+    render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
 
     # Draw the energy bar
     pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
