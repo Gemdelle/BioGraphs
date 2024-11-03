@@ -1,7 +1,7 @@
 import pygame
 import networkx as nx
 
-def render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions):
+def render_graph(screen, G, font, path, positions):
     # screen.fill((255, 255, 255))  # Fondo blanco
     for edge in G.edges():
         pygame.draw.line(screen, (0, 0, 0), positions[edge[0]], positions[edge[1]], 2)
