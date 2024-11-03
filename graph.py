@@ -1,8 +1,8 @@
 import pygame
 
 from core.screens import Screens
-from ui.characters.euler_1_flower import Euler1Flower
 from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.flowers.euler_1_flower import Euler1Flower
 from ui.screens.intro_euler_cicle import render_intro_euler_cicle, is_back_button_clicked_intro_euler_cicle
 from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
 from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back_button_clicked_intro_hamilton_cicle
@@ -58,7 +58,7 @@ screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
-#euler_1_flower = Euler1Flower()
+euler_1_flower = Euler1Flower()
 
 def go_to_map():
     global screen_selected

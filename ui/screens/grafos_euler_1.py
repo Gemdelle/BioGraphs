@@ -1,7 +1,6 @@
 import pygame
 import networkx as nx
 
-from ui.characters.euler_1_flower import Euler1Flower
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
@@ -42,7 +41,7 @@ def render_grafos_euler_1(screen, font):
 
     current_time = pygame.time.get_ticks()
     if timer_started:
-        background_image = pygame.image.load("assets/final-bg/euler-1.png").convert()
+        background_image = pygame.image.load("assets/initial-bg/euler-1.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time

@@ -48,7 +48,7 @@ def render_grafos_euler_2(screen, font):
 
     current_time = pygame.time.get_ticks()
     if timer_started:
-        background_image = pygame.image.load("assets/final-bg/euler-2.png").convert()
+        background_image = pygame.image.load("assets/initial-bg/euler-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
