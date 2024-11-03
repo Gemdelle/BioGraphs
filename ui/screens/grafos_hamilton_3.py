@@ -113,10 +113,19 @@ def handle_grafos_hamilton_3_mousedown(event, go_to_map):
     if back_button_clicked_grafos_hamilton_3 is not None and back_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = False
         go_to_map()
+        reset_nodes(path)
     elif start_button_clicked_grafos_hamilton_3 is not None and start_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = True
     elif restart_button_clicked_grafos_hamilton_3 is not None and restart_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = False
+        reset_nodes(path)
+
+def reset_nodes(path):
+    global current_node
+    path.clear()
+    current_node = None
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_3_keydown(event):
     global current_node

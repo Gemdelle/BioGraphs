@@ -59,11 +59,21 @@ def render_playground_1(screen, font):
 
 
 def handle_playground_1_mousedown(event, go_to_playground):
-    global back_button_clicked_playground_1, restart_button_clicked_playground_1, timer_started
+    global back_button_clicked_playground_1, restart_button_clicked_playground_1, timer_started, path, current_node
     if back_button_clicked_playground_1 is not None and back_button_clicked_playground_1.collidepoint(event.pos):
         go_to_playground()
+        reset_nodes(path)
     elif restart_button_clicked_playground_1 is not None and restart_button_clicked_playground_1.collidepoint(event.pos):
         timer_started = False
+        reset_nodes(path)
+
+
+def reset_nodes(path):
+    global current_node
+    path.clear()
+    current_node = None
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
 
 
 def handle_playground_1_keydown(event):

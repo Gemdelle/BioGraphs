@@ -101,19 +101,24 @@ def render_digrafos_euler_1(screen, font):
 
     return False
 
-def is_back_button_clicked_digrafos_euler(event):
-    global back_button_clicked_digrafos_euler
-    return back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos)
-
 def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler,restart_button_clicked_digrafos_euler, timer_started
     if back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = False
         go_to_map()
+        reset_nodes(path)
     elif start_button_clicked_digrafos_euler is not None and start_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = True
     elif restart_button_clicked_digrafos_euler is not None and restart_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = False
+        reset_nodes(path)
+
+def reset_nodes(path):
+    global current_node
+    path.clear()
+    current_node = None
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_digrafos_euler_1_keydown(event):
     global current_node
