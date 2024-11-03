@@ -47,14 +47,18 @@ restart_button_clicked_digrafos_hamilton_1 = None
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from graph import fontButtons
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
-    background_image = pygame.image.load("assets/D-hamilton.png").convert()
-    background_image = pygame.image.load("assets/default-bg.png").convert()
-    background_image = pygame.transform.scale(background_image, (1710, 1034))
+
     current_time = pygame.time.get_ticks()
     if timer_started:
+        background_image = pygame.image.load("assets/final-bg/d-hamilton.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
     else:
+        background_image = pygame.image.load("assets/blur/d-hamilton.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
         start_time = pygame.time.get_ticks()
         remaining_time = 60000
 
@@ -64,16 +68,6 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     else:
         energy = initial_energy  # Resetear energía si se acaba el tiempo
 
-    # Renderizar el grafo con flechas
-    render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
-
-    # Dibujar la barra de energía
-    pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
-
-    # Dibujar el texto del temporizador
-    timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
-    screen.blit(timer_text, (10, 40))
-
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
     back_button_clicked_digrafos_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
@@ -81,15 +75,20 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     if not timer_started:
-        graph_frame_blur_image = pygame.image.load("assets/UB_logo.jpg").convert()
-        graph_frame_blur_image = pygame.transform.scale(graph_frame_blur_image, (1500, 500))
-        screen.blit(graph_frame_blur_image, (100, 200))
-
         start_button_text = fontButtons.render("Start", True, (255, 255, 255))
         start_button_clicked_digrafos_hamilton_1 = pygame.Rect(750, 400, 160, 80)
         pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_digrafos_hamilton_1)
         screen.blit(start_button_text, (775, 415))
     else:
+        # Renderizar el grafo con flechas
+        render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+
+        # Dibujar la barra de energía
+        pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
+
+        # Dibujar el texto del temporizador
+        timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
+        screen.blit(timer_text, (10, 40))
         # Draw the "Restart" button
         restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
         restart_button_clicked_digrafos_hamilton_1 = pygame.Rect(1420, 85, 200, 60)
