@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.characters.euler_1_flower import Euler1Flower
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
@@ -36,6 +37,7 @@ restart_button_clicked_grafos_euler_1 = None
 
 def render_grafos_euler_1(screen, font):
     from graph import fontButtons
+    from graph import euler_1_flower
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy
     background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
@@ -90,6 +92,9 @@ def render_grafos_euler_1(screen, font):
         restart_button_clicked_grafos_euler_1 = pygame.Rect(1420, 85, 200, 60)
         pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_euler_1, width=5, border_radius=15)
         screen.blit(restart_button_text, (1430, 95))
+
+    # euler_1_flower.update_animation()
+    # euler_1_flower.draw(screen, 1220, 85)
 
     # Check if time is up
     if remaining_time <= 0:
