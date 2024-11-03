@@ -4,15 +4,24 @@ import networkx as nx
 from ui.screens.graph_renderer import render_graph
 
 G = nx.Graph()
+# restarle 60 a y
 positions = {
-    'A': (890, 270), 'B': (1410, 430), 'C': (1460, 610), 'D': (760, 600),
-    'E': (250, 530), 'F': (430, 440)
+    'A': (400, 550),
+    'B': (220, 440),
+    'C': (550, 240),
+    'D': (790, 520),
+    'E': (930, 640),
+    'F': (1100, 350),
+    'G': (1390, 385),
+    'H': (1490, 650)
 }
+
 for node, pos in positions.items():
-    G.add_node(node, pos=pos, color=(0, 0, 0))
+    G.add_node(node, pos=pos, color=(200, 0, 0))
 
 edges = [
-    ('A', 'B'),('B', 'C'),('C', 'D'),('B', 'D'),('A', 'D'),('F', 'D'),('A', 'F'),('D', 'E')
+    ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
+    ('C', 'F'), ('D', 'F'), ('F', 'E'), ('F', 'H'), ('E', 'G'), ('G', 'H')
 ]
 for edge in edges:
     G.add_edge(edge[0], edge[1])
@@ -34,11 +43,9 @@ back_button_clicked_grafos_hamilton_1 = None
 
 def render_grafos_hamilton_1(screen, font):
     global back_button_clicked_grafos_hamilton_1
-    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
-
+    screen.blit(background_image, (0,0))
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     if not timer_started:
@@ -78,6 +85,7 @@ def render_grafos_hamilton_1(screen, font):
         current_node = None
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
+        return False
 
     return False
 
@@ -104,6 +112,3 @@ def handle_grafos_hamilton_1_keydown(event):
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node
-
-
-

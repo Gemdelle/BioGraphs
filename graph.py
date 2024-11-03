@@ -9,7 +9,10 @@ from ui.screens.grafos_euler_3 import render_grafos_euler_3, handle_grafos_euler
 from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown, is_back_button_clicked_grafos_hamilton_1
 from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown, is_back_button_clicked_grafos_hamilton_2
 from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown, is_back_button_clicked_grafos_hamilton_3
+from ui.screens.instructions import render_instructions
+from ui.screens.main import render_main_screen
 from ui.screens.map import render_map
+from ui.screens.playground import render_playground
 from ui.screens.splash import render_splash
 
 pygame.init()
@@ -27,7 +30,7 @@ completed = False
 
 font = pygame.font.SysFont(None, 36)
 
-screen_selected = Screens.MAP
+screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
@@ -41,29 +44,9 @@ def go_to_level(screen):
     global screen_selected
     screen_selected = screen
 
-
-def render_main_screen(screen, font):
-    #screen.fill((255, 255, 255))
-    title_text = font.render("BioGraphs", True, (0, 0, 0))
-    title_rect = title_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4))
-    screen.blit(title_text, title_rect)
-
-    # Button definitions
-    button_texts = ["Instructions", "Playground", "Map"]
-    buttons = []
-    for i, text in enumerate(button_texts):
-        btn_text = font.render(text, True, (0, 0, 0))
-        btn_rect = btn_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2 + i * 60))
-        screen.blit(btn_text, btn_rect)
-        buttons.append((text, btn_rect))
-
-    return buttons  # Return button rects for click handling
-
-
+buttons = []
 # Main game loop
 while running:
-    buttons = []  # Variable to store button positions for the MAIN screen
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -81,6 +64,7 @@ while running:
                             screen_selected = Screens.PLAYGROUND
                         elif text == "Map":
                             go_to_map()
+
             elif (is_back_button_clicked_digrafos_euler(event) or
                   is_back_button_clicked_hamilton_1(event) or
                   is_back_button_clicked_grafos_euler_1(event) or
@@ -114,6 +98,10 @@ while running:
         buttons = render_main_screen(screen, font)
     elif screen_selected == Screens.MAP:
         render_map(screen, go_to_level)
+    elif screen_selected == Screens.INSTRUCTIONS:
+        render_instructions(screen)
+    elif screen_selected == Screens.PLAYGROUND:
+        render_playground(screen, go_to_level)
     elif screen_selected == Screens.GRAFOS_EULER_1:
         completed = render_grafos_euler_1(screen, font)
     elif screen_selected == Screens.GRAFOS_EULER_2:
