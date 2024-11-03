@@ -37,7 +37,7 @@ restart_button_clicked_grafos_euler_1 = None
 
 def render_grafos_euler_1(screen, font):
     from graph import fontButtons
-    from graph import euler_1_flower
+    # from graph import euler_1_flower
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy
     background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
