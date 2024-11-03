@@ -1,21 +1,18 @@
 import pygame
 import networkx as nx
-import math
 
-from ui.screens.digraph_renderer import render_digraph
 from ui.screens.graph_renderer import render_graph
 
-G = nx.DiGraph()
+G = nx.Graph()
 positions = {
-    'A': (1209, 335), 'B': (272, 283), 'C': (1407, 601), 'D': (853, 527),
-    'E': (394, 528), 'F': (1246, 646)
+    'A': (0, 0), 'B': (0, 0), 'C': (0, 0), 'D': (0, 0), 'E': (0, 0)
 }
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'), ('A', 'B'), ('A', 'D'), ('A', 'C'), ('B', 'D'), ('C', 'B'), ('D', 'E'), ('E', 'F')
+    ('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E'), ('E', 'A')
 ]
 
 for edge in edges:
@@ -34,14 +31,17 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
-back_button_clicked_digrafos_euler = None
+back_button_clicked_grafos_euler_1 = None
 
-def render_digrafos_euler_1(screen, font):
-    global timer_started, start_time, path, start_node, positions, current_node, energy
-    background_image = pygame.image.load("assets/D-euler.png").convert()
+
+def render_playground_3(screen, font):
+    global back_button_clicked_grafos_euler_1
+    background_image = pygame.image.load("assets/G-hamilton-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
+
+    global timer_started, start_time, path, start_node, positions, current_node, energy
 
     if not timer_started:
         start_time = pygame.time.get_ticks()
@@ -58,19 +58,19 @@ def render_digrafos_euler_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Render the graph and energy bar
-    render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+    render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions)
 
     # Draw the energy bar
-    pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
+    pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
 
     # Draw the timer text
-    timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
-    screen.blit(timer_text, (10, 40))
+    timer_text = font.render(f"{remaining_time // 1000}", True, (0, 0, 0))
+    screen.blit(timer_text, (100, 100))
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_rect = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_rect)  # Fondo del botón
+    back_button_clicked_grafos_euler_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_1)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Check if time is up
@@ -80,15 +80,16 @@ def render_digrafos_euler_1(screen, font):
         current_node = None
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
-        return False
 
     return False
 
-def is_back_button_clicked_digrafos_euler(event):
-    global back_button_clicked_digrafos_euler
-    return back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos)
 
-def handle_digrafos_euler_1_keydown(event):
+def is_back_button_clicked_playground_3(event):
+    global back_button_clicked_grafos_euler_1
+    return back_button_clicked_grafos_euler_1 is not None and back_button_clicked_grafos_euler_1.collidepoint(event.pos)
+
+
+def handle_playground_3_keydown(event):
     global current_node
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
