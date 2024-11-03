@@ -44,6 +44,10 @@ back_button_clicked_hamilton_1 = None
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     global timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
+    background_image = pygame.image.load("assets/D-hamilton.png").convert()
+    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0, 0))
 
     # Inicializar el temporizador si no ha comenzado
     if not timer_started:

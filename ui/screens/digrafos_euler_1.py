@@ -35,6 +35,10 @@ back_button_clicked_digrafos_euler = None
 
 def render_digrafos_euler_1(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
+    background_image = pygame.image.load("assets/D-euler.png").convert()
+    # background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0, 0))
 
     if not timer_started:
         start_time = pygame.time.get_ticks()

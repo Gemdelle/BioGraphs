@@ -40,8 +40,8 @@ back_button_clicked_grafos_euler_2 = None
 
 def render_grafos_euler_3(screen, font):
     global back_button_clicked_grafos_euler_2
-    background_image = pygame.image.load("assets/G-euler-2.png").convert()
-    background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/G-euler-3.png").convert()
+    #background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
     global timer_started, start_time, path, start_node, positions, current_node, energy
