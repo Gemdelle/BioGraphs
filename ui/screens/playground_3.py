@@ -31,11 +31,11 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
-back_button_clicked_grafos_euler_1 = None
+back_button_clicked_playground_3 = None
 
 
 def render_playground_3(screen, font):
-    global back_button_clicked_grafos_euler_3
+    global back_button_clicked_playground_3
     background_image = pygame.image.load("assets/pg-3.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -69,8 +69,8 @@ def render_playground_3(screen, font):
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_grafos_euler_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_1)  # Fondo del botón
+    back_button_clicked_playground_3 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_playground_3)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Check if time is up
@@ -85,8 +85,8 @@ def render_playground_3(screen, font):
 
 
 def is_back_button_clicked_playground_3(event):
-    global back_button_clicked_grafos_euler_1
-    return back_button_clicked_grafos_euler_1 is not None and back_button_clicked_grafos_euler_1.collidepoint(event.pos)
+    global back_button_clicked_playground_3
+    return back_button_clicked_playground_3 is not None and back_button_clicked_playground_3.collidepoint(event.pos)
 
 
 def handle_playground_3_keydown(event):
