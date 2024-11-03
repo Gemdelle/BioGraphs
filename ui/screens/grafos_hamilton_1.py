@@ -63,7 +63,7 @@ def render_grafos_hamilton_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Render the graph and energy bar
-    render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+    render_graph(screen, G, font, path, positions)
 
     # Draw the energy bar
     pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))

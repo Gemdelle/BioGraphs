@@ -59,7 +59,7 @@ def render_grafos_euler_1(screen, font):
     pygame.draw.rect(screen, (0, 0, 0), graph_frame, width=10, border_radius=15)  # Black border with radius and no fill
 
     # Render the graph and energy bar
-    render_graph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+    render_graph(screen, G, font, path, positions)
 
     # Draw the energy bar
     pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
