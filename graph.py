@@ -94,6 +94,7 @@ while running:
                   is_back_button_clicked_hamilton_1(event) or
                   is_back_button_clicked_grafos_euler_1(event) or
                   is_back_button_clicked_grafos_euler_2(event) or
+                  is_back_button_clicked_grafos_euler_3(event) or
                   is_back_button_clicked_grafos_hamilton_1(event) or
                   is_back_button_clicked_grafos_hamilton_2(event) or
                   is_back_button_clicked_grafos_hamilton_3(event)):
