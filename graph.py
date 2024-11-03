@@ -8,7 +8,7 @@ from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back
 from ui.screens.intro_hamilton_path import render_intro_hamilton_path, is_back_button_clicked_intro_hamilton_path
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
-                                     is_back_button_clicked_playground_1)
+                                     handle_playground_1_mousedown)
 from ui.screens.playground_2 import (render_playground_2, handle_playground_2_keydown,
                                      is_back_button_clicked_playground_2)
 from ui.screens.playground_3 import (render_playground_3, handle_playground_3_keydown,
@@ -52,7 +52,7 @@ current_node = None
 completed = False
 
 font = pygame.font.SysFont(None, 36)
-fontButtons = pygame.font.SysFont(None, 66)
+fontButtons = pygame.font.SysFont(None, 56)
 
 screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
@@ -102,7 +102,7 @@ while running:
                         elif text == "Map":
                             go_to_map()
 
-            elif (is_back_button_clicked_playground_1(event) or
+            elif (handle_playground_1_mousedown(event, go_to_playground) or
                   is_back_button_clicked_playground_2(event) or
                   is_back_button_clicked_playground_3(event) or
                   is_back_button_clicked_playground_4(event) or

@@ -41,11 +41,12 @@ timer_duration = 60000  # 60 segundos
 
 back_button_clicked_digrafos_hamilton_1 = None
 start_button_clicked_digrafos_hamilton_1 = None
+restart_button_clicked_digrafos_hamilton_1 = None
 
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from graph import fontButtons
-    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
     background_image = pygame.image.load("assets/D-hamilton.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -88,6 +89,12 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         start_button_clicked_digrafos_hamilton_1 = pygame.Rect(750, 400, 160, 80)
         pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_digrafos_hamilton_1)
         screen.blit(start_button_text, (775, 415))
+    else:
+        # Draw the "Restart" button
+        restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
+        restart_button_clicked_digrafos_hamilton_1 = pygame.Rect(1420, 85, 200, 60)
+        pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_digrafos_hamilton_1, width=5, border_radius=15)
+        screen.blit(restart_button_text, (1430, 95))
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
@@ -101,12 +108,14 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     return False
 
 def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map):
-    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, timer_started
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started
     if back_button_clicked_digrafos_hamilton_1 is not None and back_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
         timer_started = False
         go_to_map()
     elif start_button_clicked_digrafos_hamilton_1 is not None and start_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
         timer_started = True
+    elif restart_button_clicked_digrafos_hamilton_1 is not None and restart_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
+        timer_started = False
 
 # Función para renderizar el grafo con flechas
 def render_graph_with_arrows(screen, G, font, positions):
