@@ -13,15 +13,15 @@ def render_map(screen, goToLevel):
         'B': {'pos': (1180, 430), 'color': (153, 204, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
         'C': {'pos': (1450, 260), 'color': (255, 102, 102), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
         'D': {'pos': (1120, 170), 'color': (255, 178, 102), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
-        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': False},  # Purple: DIGRAFOS_EULER_1
-        'F': {'pos': (200,230), 'color': (255, 102, 178), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
-        'G': {'pos': (700,700), 'color': (255, 102, 178), 'enabled': False},        # Black: GRAFOS_EULER_1
-        'H': {'pos': (600,850), 'color': (255, 102, 178), 'enabled': False},     # Teal: GRAFOS_EULER_1
-        'I': {'pos': (300,750), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'J': {'pos': (1050,760), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'K': {'pos': (1300,850), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'L': {'pos': (1550,650), 'color': (255, 102, 178), 'enabled': False},         # Black: GRAFOS_EULER_1
-        'M': {'pos': (870,500), 'color': (0, 0, 0), 'enabled': False},         # Black: GRAFOS_EULER_1
+        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
+        'F': {'pos': (200, 230), 'color': (255, 102, 178), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
+        'G': {'pos': (700, 700), 'color': (255, 102, 178), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'H': {'pos': (600, 850), 'color': (255, 102, 178), 'enabled': False},  # Teal: GRAFOS_EULER_1
+        'I': {'pos': (300, 750), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'J': {'pos': (1050, 760), 'color': (255, 102, 178), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'K': {'pos': (1300, 850), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'L': {'pos': (1550, 650), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'M': {'pos': (870, 500), 'color': (0, 0, 0), 'enabled': False}  # Black: GRAFOS_EULER_1
     }
 
     edges = [
@@ -34,15 +34,15 @@ def render_map(screen, goToLevel):
         'B': Screens.GRAFOS_HAMILTON_1,
         'C': Screens.GRAFOS_HAMILTON_2,
         'D': Screens.GRAFOS_HAMILTON_3,
-        'E': Screens.DIGRAFOS_EULER_1,
-        'F': Screens.DIGRAFOS_HAMILTON_1,
-        'G': Screens.GRAFOS_EULER_1,
-        'H': Screens.GRAFOS_EULER_1,
-        'I': Screens.GRAFOS_EULER_1,
-        'J': Screens.GRAFOS_EULER_1,
-        'K': Screens.GRAFOS_EULER_1,
-        'L': Screens.GRAFOS_EULER_1,
-        'M': Screens.GRAFOS_EULER_1,
+        'E': Screens.GRAFOS_EULER_2,
+        'F': Screens.GRAFOS_EULER_3,
+        'G': Screens.DIGRAFOS_EULER_1,
+        # 'H': Screens.GRAFOS_EULER_1,
+        # 'I': Screens.GRAFOS_EULER_1,
+        'J': Screens.DIGRAFOS_HAMILTON_1,
+        # 'K': Screens.GRAFOS_EULER_1,
+        # 'L': Screens.GRAFOS_EULER_1,
+        # 'M': Screens.GRAFOS_EULER_1,
     }
 
     font = pygame.font.SysFont(None, 36)

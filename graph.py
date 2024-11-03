@@ -5,6 +5,7 @@ from ui.screens.digrafos_euler_1 import render_digrafos_euler_1, handle_digrafos
 from ui.screens.digrafos_hamilton_1 import render_digrafos_hamilton_1, handle_digrafos_hamilton_1_keydown, is_back_button_clicked_hamilton_1
 from ui.screens.grafos_euler_1 import render_grafos_euler_1, handle_grafos_euler_1_keydown, is_back_button_clicked_grafos_euler_1
 from ui.screens.grafos_euler_2 import render_grafos_euler_2, handle_grafos_euler_2_keydown, is_back_button_clicked_grafos_euler_2
+from ui.screens.grafos_euler_3 import render_grafos_euler_3, handle_grafos_euler_3_keydown, is_back_button_clicked_grafos_euler_3
 from ui.screens.grafos_hamilton_1 import render_grafos_hamilton_1, handle_grafos_hamilton_1_keydown, is_back_button_clicked_grafos_hamilton_1
 from ui.screens.grafos_hamilton_2 import render_grafos_hamilton_2, handle_grafos_hamilton_2_keydown, is_back_button_clicked_grafos_hamilton_2
 from ui.screens.grafos_hamilton_3 import render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown, is_back_button_clicked_grafos_hamilton_3
@@ -93,6 +94,8 @@ while running:
             completed, current_node = handle_grafos_euler_1_keydown(event)
         elif screen_selected == Screens.GRAFOS_EULER_2:
             completed, current_node = handle_grafos_euler_2_keydown(event)
+        elif screen_selected == Screens.GRAFOS_EULER_3:
+            completed, current_node = handle_grafos_euler_3_keydown(event)
         elif screen_selected == Screens.GRAFOS_HAMILTON_1:
             completed, current_node = handle_grafos_hamilton_1_keydown(event)
         elif screen_selected == Screens.GRAFOS_HAMILTON_2:
@@ -115,6 +118,8 @@ while running:
         completed = render_grafos_euler_1(screen, font)
     elif screen_selected == Screens.GRAFOS_EULER_2:
         completed = render_grafos_euler_2(screen, font)
+    elif screen_selected == Screens.GRAFOS_EULER_3:
+        completed = render_grafos_euler_3(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_1:
         completed = render_grafos_hamilton_1(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_2:
