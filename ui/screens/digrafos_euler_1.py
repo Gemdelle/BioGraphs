@@ -2,8 +2,8 @@ import pygame
 import networkx as nx
 import math
 
+from ui.flowers.d_euler_1_flower import DEuler1Flower
 from ui.screens.digraph_renderer import render_digraph
-from ui.screens.graph_renderer import render_graph
 from ui.seeds.disabled.digrafos_euler_1_seed_disabled import DigrafosEuler1SeedDisabled
 from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 
@@ -17,6 +17,8 @@ seeds = {
     'A': DigrafosEuler1Seed(), 'B': DigrafosEuler1Seed(), 'C': DigrafosEuler1Seed(), 'D': DigrafosEuler1Seed(),
     'E': DigrafosEuler1Seed(), 'F': DigrafosEuler1Seed()
 }
+
+flower = DEuler1Flower()
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -35,7 +37,7 @@ timer_started = False
 start_time = 0
 
 current_node = None
-
+won_level = False
 initial_energy = 17
 energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
@@ -46,7 +48,7 @@ start_button_clicked_digrafos_euler = None
 restart_button_clicked_digrafos_euler = None
 def render_digrafos_euler_1(screen, font):
     from graph import fontButtons
-    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy
+    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -105,6 +107,10 @@ def render_digrafos_euler_1(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
 
+    if won_level:
+        flower.update_animation()
+        flower.draw(screen, 1450, 780)
+
     return False
 
 def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
@@ -127,7 +133,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_digrafos_euler_1_keydown(event):
-    global current_node, seeds
+    global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -143,6 +149,7 @@ def handle_digrafos_euler_1_keydown(event):
                 seeds[current_node] = DigrafosEuler1SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
+                    won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node

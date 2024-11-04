@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.flowers.euler_3_flower import Euler3Flower
 from ui.screens.graph_renderer import render_graph
 from ui.seeds.disabled.euler_3_seed_disabled import Euler3SeedDisabled
 from ui.seeds.enabled.euler_3_seed import Euler3Seed
@@ -18,7 +19,7 @@ seeds = {
     'E': Euler3Seed(), 'F': Euler3Seed(), 'G': Euler3Seed(), 'H': Euler3Seed(),
     'I': Euler3Seed(), 'J': Euler3Seed()
 }
-
+flower = Euler3Flower()
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
 
@@ -38,6 +39,7 @@ timer_started = False
 start_time = 0
 
 current_node = None
+won_level = False
 
 initial_energy = 17
 energy = initial_energy  # Starting energy level
@@ -50,7 +52,7 @@ restart_button_clicked_grafos_euler_3 = None
 
 def render_grafos_euler_3(screen, font):
     from graph import fontButtons
-    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy
+    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -107,6 +109,9 @@ def render_grafos_euler_3(screen, font):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
+    if won_level:
+        flower.update_animation()
+        flower.draw(screen, 1450, 780)
 
     return False
 
@@ -130,7 +135,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_3_keydown(event):
-    global current_node, seeds
+    global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -146,6 +151,7 @@ def handle_grafos_euler_3_keydown(event):
                 seeds[current_node] = Euler3SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
+                    won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node

@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
 from ui.screens.digraph_renderer import render_digraph
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
@@ -18,6 +19,8 @@ seeds = {
     'A': DigrafosHamilton1Seed(), 'B': DigrafosHamilton1Seed(), 'C': DigrafosHamilton1Seed(), 'D': DigrafosHamilton1Seed(),
     'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
 }
+
+flower = DHamilton1Flower()
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -39,7 +42,7 @@ timer_started = False
 start_time = 0
 
 current_node = None
-
+won_level = False
 initial_energy = 17
 energy = initial_energy  # Energía inicial
 start_ticks = pygame.time.get_ticks()  # Tiempo de inicio
@@ -52,7 +55,7 @@ restart_button_clicked_digrafos_hamilton_1 = None
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from graph import fontButtons
-    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_hamilton_1
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -110,6 +113,10 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
             G.nodes[node]['color'] = (0, 0, 0)  # Resetear color de los nodos
         return False
 
+    if won_level:
+        flower.update_animation()
+        flower.draw(screen, 1450, 780)
+
     return False
 
 def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map):
@@ -164,7 +171,7 @@ def draw_arrow(screen, start, end):
 
 # Función para manejar eventos de teclas en el digrafo de Hamilton
 def handle_digrafos_hamilton_1_keydown(event):
-    global current_node, seeds
+    global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -181,6 +188,7 @@ def handle_digrafos_hamilton_1_keydown(event):
 
                 # Verificar si el camino hamiltoniano está completo
                 if current_node == end_node and len(path) == len(G.nodes):
+                    won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node

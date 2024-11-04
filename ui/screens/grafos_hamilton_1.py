@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.flowers.hamilton_1_flower import Hamilton1Flower
 from ui.screens.graph_renderer import render_graph
 from ui.seeds.disabled.hamilton_1_seed_disabled import Hamilton1SeedDisabled
 from ui.seeds.enabled.hamilton_1_seed import Hamilton1Seed
@@ -28,7 +29,7 @@ seeds = {
     'G': Hamilton1Seed(),
     'H': Hamilton1Seed()
 }
-
+flower = Hamilton1Flower()
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
 
@@ -46,7 +47,7 @@ timer_started = False
 start_time = 0
 
 current_node = None
-
+won_level = False
 initial_energy = 17
 energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
@@ -58,7 +59,7 @@ restart_button_clicked_grafos_hamilton_1 = None
 
 def render_grafos_hamilton_1(screen, font):
     from graph import fontButtons
-    global back_button_clicked_grafos_hamilton_1, start_button_clicked_grafos_hamilton_1, restart_button_clicked_grafos_hamilton_1,timer_started, start_time, path, start_node, positions, current_node, energy
+    global back_button_clicked_grafos_hamilton_1, start_button_clicked_grafos_hamilton_1, restart_button_clicked_grafos_hamilton_1,timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -116,6 +117,10 @@ def render_grafos_hamilton_1(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
 
+    if won_level:
+        flower.update_animation()
+        flower.draw(screen, 1450, 780)
+
     return False
 
 def handle_grafos_hamilton_1_mousedown(event, go_to_map):
@@ -138,7 +143,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_1_keydown(event):
-    global current_node, seeds
+    global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -154,6 +159,7 @@ def handle_grafos_hamilton_1_keydown(event):
                 seeds[current_node] = Hamilton1SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
+                    won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node
