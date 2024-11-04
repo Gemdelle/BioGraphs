@@ -5,7 +5,8 @@ class Euler1Seed:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1
-        self.rect = pygame.Rect(0, 0, 100, 100)
+        # Asegúrate de que el rect tenga un tamaño inicial correcto
+        self.rect = pygame.Rect(0, 0, 90, 90)  # Ajustar a las dimensiones de la imagen
         self.is_colliding = False
         self.tooltip_text = "frog"
         self.current_text_length = 0
@@ -24,7 +25,6 @@ class Euler1Seed:
                 self.frames[index] = None  # Mark as None if the frame does not exist
 
     def update_animation(self):
-        
         current_time = pygame.time.get_ticks()
         self.frame_index = (current_time // 30) % 74  # Assuming 74 frames
         self.load_frame(self.frame_index)  # Lazy load the current frame
@@ -33,7 +33,6 @@ class Euler1Seed:
         self.rect.x = x
         self.rect.y = y
         was_visible = self.visible
-        
 
         if not was_visible:
             self.load_frame(self.frame_index)
