@@ -19,12 +19,14 @@ def draw_arrow(screen, start, end, color=(0, 0, 0), arrow_size=10):
     # Dibujar las flechas
     pygame.draw.polygon(screen, color, [end, left, right])
 
-def render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions):
+def render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, animated_nodes):
     # screen.fill((255, 255, 255))  # Fondo blanco
     for node, pos in nx.get_node_attributes(G, 'pos').items():
-        color = (0, 255, 0) if node in path else (200, 200, 255)  # Verde si es parte del camino
-        pygame.draw.circle(screen, (255,0,0), pos, 35)
-        pygame.draw.circle(screen, color, pos, 30)
+        animated_nodes[node].update_animation()
+        animated_nodes[node].draw(screen, pos[0] - 25, pos[1] - 25)
+        # color = (0, 255, 0) if node in path else (200, 200, 255)  # Verde si es parte del camino
+        # pygame.draw.circle(screen, (255,0,0), pos, 35)
+        # pygame.draw.circle(screen, color, pos, 30)
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 10, pos[1] - 10))
 
     for start, end in G.edges():

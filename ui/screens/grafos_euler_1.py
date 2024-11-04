@@ -1,13 +1,18 @@
 import pygame
 import networkx as nx
 
-from ui.characters.euler_1_flower import Euler1Flower
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
+from ui.seeds.enabled.euler_1_seed import Euler1Seed
 
 G = nx.Graph()
 positions = {
     'A': (890, 270), 'B': (1410, 430), 'C': (1460, 610), 'D': (760, 600),
     'E': (250, 530), 'F': (430, 440)
+}
+seeds = {
+    'A': Euler1Seed(), 'B': Euler1Seed(), 'C': Euler1Seed(), 'D': Euler1Seed(),
+    'E': Euler1Seed(), 'F': Euler1Seed()
 }
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -37,12 +42,11 @@ restart_button_clicked_grafos_euler_1 = None
 
 def render_grafos_euler_1(screen, font):
     from graph import fontButtons
-    # from graph import euler_1_flower
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy
 
     current_time = pygame.time.get_ticks()
     if timer_started:
-        background_image = pygame.image.load("assets/final-bg/euler-1.png").convert()
+        background_image = pygame.image.load("assets/initial-bg/euler-1.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
@@ -73,7 +77,7 @@ def render_grafos_euler_1(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph
-        render_graph(screen, G, font, path, positions)
+        render_graph(screen, G, font, path, positions, seeds)
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
 
@@ -120,7 +124,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_1_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -133,6 +137,7 @@ def handle_grafos_euler_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = Euler1SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")

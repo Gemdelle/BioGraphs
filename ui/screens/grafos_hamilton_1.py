@@ -2,6 +2,8 @@ import pygame
 import networkx as nx
 
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.hamilton_1_seed_disabled import Hamilton1SeedDisabled
+from ui.seeds.enabled.hamilton_1_seed import Hamilton1Seed
 
 G = nx.Graph()
 # restarle 60 a y
@@ -14,6 +16,17 @@ positions = {
     'F': (1100, 350),
     'G': (1390, 385),
     'H': (1490, 650)
+}
+
+seeds = {
+    'A': Hamilton1Seed(),
+    'B': Hamilton1Seed(),
+    'C': Hamilton1Seed(),
+    'D': Hamilton1Seed(),
+    'E': Hamilton1Seed(),
+    'F': Hamilton1Seed(),
+    'G': Hamilton1Seed(),
+    'H': Hamilton1Seed()
 }
 
 for node, pos in positions.items():
@@ -49,7 +62,7 @@ def render_grafos_hamilton_1(screen, font):
 
     current_time = pygame.time.get_ticks()
     if timer_started:
-        background_image = pygame.image.load("assets/final-bg/hamilton-1.png").convert()
+        background_image = pygame.image.load("assets/initial-bg/hamilton-1.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
@@ -80,7 +93,7 @@ def render_grafos_hamilton_1(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_graph(screen, G, font, path, positions)
+        render_graph(screen, G, font, path, positions, seeds)
 
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
@@ -125,7 +138,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_1_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -138,6 +151,7 @@ def handle_grafos_hamilton_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = Hamilton1SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")
