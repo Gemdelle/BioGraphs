@@ -4,11 +4,18 @@ import math
 
 from ui.screens.digraph_renderer import render_digraph
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.digrafos_euler_1_seed_disabled import DigrafosEuler1SeedDisabled
+from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 
 G = nx.DiGraph()
 positions = {
     'A': (1209, 335), 'B': (272, 283), 'C': (1407, 601), 'D': (853, 527),
     'E': (394, 528), 'F': (1246, 646)
+}
+
+seeds = {
+    'A': DigrafosEuler1Seed(), 'B': DigrafosEuler1Seed(), 'C': DigrafosEuler1Seed(), 'D': DigrafosEuler1Seed(),
+    'E': DigrafosEuler1Seed(), 'F': DigrafosEuler1Seed()
 }
 
 for node, pos in positions.items():
@@ -75,7 +82,7 @@ def render_digrafos_euler_1(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+        render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, seeds)
 
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
@@ -120,7 +127,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_digrafos_euler_1_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -133,6 +140,7 @@ def handle_digrafos_euler_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = DigrafosEuler1SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")

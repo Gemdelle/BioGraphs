@@ -24,7 +24,6 @@ class Euler2Seed:
                 self.frames[index] = None  # Mark as None if the frame does not exist
 
     def update_animation(self):
-        print(self.visible)
         current_time = pygame.time.get_ticks()
         self.frame_index = (current_time // 30) % 74  # Assuming 74 frames
         self.load_frame(self.frame_index)  # Lazy load the current frame
@@ -33,7 +32,6 @@ class Euler2Seed:
         self.rect.x = x
         self.rect.y = y
         was_visible = self.visible
-        print(self.visible)
 
         if not was_visible:
             self.load_frame(self.frame_index)

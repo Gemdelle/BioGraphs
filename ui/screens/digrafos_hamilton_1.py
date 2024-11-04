@@ -2,7 +2,8 @@ import pygame
 import networkx as nx
 
 from ui.screens.digraph_renderer import render_digraph
-from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
+from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
 
 # Crear un DiGraph para representar el digrafo
 G = nx.DiGraph()
@@ -11,6 +12,11 @@ G = nx.DiGraph()
 positions = {
     'A': (791, 495), 'B': (850, 270), 'C': (377, 259), 'D': (473, 615),
     'E': (925, 658), 'F': (642, 408), 'G': (1370, 316), 'H': (900, 481)
+}
+
+seeds = {
+    'A': DigrafosHamilton1Seed(), 'B': DigrafosHamilton1Seed(), 'C': DigrafosHamilton1Seed(), 'D': DigrafosHamilton1Seed(),
+    'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
 }
 
 for node, pos in positions.items():
@@ -81,7 +87,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         screen.blit(start_button_text, (775, 415))
     else:
         # Renderizar el grafo con flechas
-        render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions)
+        render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, seeds)
 
         # Dibujar la barra de energía
         pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
@@ -158,7 +164,7 @@ def draw_arrow(screen, start, end):
 
 # Función para manejar eventos de teclas en el digrafo de Hamilton
 def handle_digrafos_hamilton_1_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -171,6 +177,7 @@ def handle_digrafos_hamilton_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = DigrafosHamilton1SeedDisabled()
 
                 # Verificar si el camino hamiltoniano está completo
                 if current_node == end_node and len(path) == len(G.nodes):

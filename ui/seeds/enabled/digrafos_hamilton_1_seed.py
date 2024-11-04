@@ -1,7 +1,7 @@
 import os
 import pygame
 
-class Hamilton2Seed:
+class DigrafosHamilton1Seed:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1
@@ -15,7 +15,7 @@ class Hamilton2Seed:
 
     def load_frame(self, index):
         if index not in self.frames:
-            frame_path = os.path.join("./assets/giphs/seeds/hamilton-2-seed", f'hamilton-2-seed.png{index}.gif')
+            frame_path = os.path.join("./assets/giphs/seeds/d-hamilton-seed", f'd-hamilton-seed.png{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
                 surf = pygame.transform.scale(surf, (50, 50))
