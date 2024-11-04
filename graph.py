@@ -164,7 +164,7 @@ while running:
     elif screen_selected == Screens.INSTRUCTIONS:
         render_instructions(screen)
     elif screen_selected == Screens.PLAYGROUND:
-        render_playground(screen, go_to_level)
+        render_playground(screen, go_to_level, pygame.time.get_ticks() / 150)
 
     elif screen_selected == Screens.PLAYGROUND_1:
         completed = render_playground_1(screen, font)

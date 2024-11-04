@@ -2,20 +2,34 @@ import pygame
 import math
 from core.screens import Screens
 
+import pygame
+import math
 
-def render_playground(screen, goToLevel):
-    # background_image = pygame.image.load("assets/map-pg.png").convert()
-    # background_image = pygame.transform.scale(background_image, (1710, 1034))
-    # screen.blit(background_image, (0,0))
-    screen.fill((255, 255, 255))
+import pygame
+import math
+
+
+def render_playground(screen, goToLevel, time):
+    # Fondo de mapa con movimiento flotante
+    background_image = pygame.image.load("assets/playground-bg/map.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+
+    # Movimiento flotante suave
+    float_offset = math.sin(time * 0.3) * 3  # Reduce la frecuencia (0.3) y amplitud (3) para suavizar
+    screen.blit(background_image, (0, float_offset))
+
+    # Nubes estáticas
+    background_clouds = pygame.image.load("assets/playground-bg/static-clouds.png").convert_alpha()
+    background_clouds = pygame.transform.scale(background_clouds, (1710, 1034))
+    screen.blit(background_clouds, (0, 0))
 
     nodes = {
-        'A': {'pos': (255, 453), 'color': (0, 0, 0), 'enabled': False},  # Negro
-        'B': {'pos': (591, 255), 'color': (255, 255, 102), 'enabled': True},  # Amarillo
-        'C': {'pos': (476, 722), 'color': (200, 150, 255), 'enabled': True},  # Lila
-        'D': {'pos': (1038, 575), 'color': (102, 204, 255), 'enabled': True},  # Celeste
-        'E': {'pos': (1316, 338), 'color': (255, 182, 193), 'enabled': True},  # Rosa
-        'F': {'pos': (1465, 846), 'color': (144, 238, 144), 'enabled': True},  # Verde
+        'A': {'pos': (141, 602-60), 'color': (0, 0, 0), 'enabled': False},  # Negro
+        'B': {'pos': (597, 641-60), 'color': (255, 255, 255), 'enabled': True},  # Amarillo
+        'C': {'pos': (927, 709-60), 'color': (255, 255, 255), 'enabled': True},  # Lila
+        'D': {'pos': (600, 234-60), 'color': (255, 255, 255), 'enabled': True},  # Celeste
+        'E': {'pos': (994, 347-60), 'color': (255, 255, 255), 'enabled': True},  # Rosa
+        'F': {'pos': (1305, 485-60), 'color': (255, 255, 255), 'enabled': True},  # Verde
     }
 
     edges = [
@@ -39,7 +53,7 @@ def render_playground(screen, goToLevel):
         draw_curved_line(screen, (0, 0, 0), start_pos, end_pos, dash_length=10)
 
     for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 60)
+        pygame.draw.circle(screen, data['color'], data['pos'], 40)
 
         # Renderizar la letra del nodo
         letter_text = font.render(node, True, (0, 0, 0))

@@ -3,25 +3,24 @@ import math
 from core.screens import Screens
 
 def render_map(screen, goToLevel):
-    # background_image = pygame.image.load("assets/map.png").convert()
-    # background_image = pygame.transform.scale(background_image, (1710, 1034))
-    # screen.blit(background_image, (0,0))
-    screen.fill((255, 255, 255))
+    background_image = pygame.image.load("assets/map.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0,0))
 
     nodes = {
-        'A': {'pos': (500, 450), 'color': (255, 204, 102), 'enabled': True},  # Yellow: GRAFOS_EULER_1
-        'B': {'pos': (1180, 430), 'color': (153, 204, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
-        'C': {'pos': (1450, 260), 'color': (255, 102, 102), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
-        'D': {'pos': (1120, 170), 'color': (255, 178, 102), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
-        'E': {'pos': (450, 180), 'color': (255, 102, 178), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
-        'F': {'pos': (200, 230), 'color': (255, 102, 178), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
-        'G': {'pos': (700, 700), 'color': (255, 102, 178), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'H': {'pos': (600, 850), 'color': (255, 102, 178), 'enabled': False},  # Teal: GRAFOS_EULER_1
-        'I': {'pos': (300, 750), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'J': {'pos': (1050, 760), 'color': (255, 102, 178), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'K': {'pos': (1300, 850), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'L': {'pos': (1550, 650), 'color': (255, 102, 178), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'M': {'pos': (870, 500), 'color': (0, 0, 0), 'enabled': False}  # Black: GRAFOS_EULER_1
+        'A': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
+        'B': {'pos': (1094, 510-60), 'color': (255, 255, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
+        'C': {'pos': (1307, 418-60), 'color': (255, 255, 255), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
+        'D': {'pos': (1225, 246-60), 'color': (255, 255, 255), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
+        'E': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
+        'F': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
+        'G': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'H': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
+        'I': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'J': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'K': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'L': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'M': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Black: GRAFOS_EULER_1
     }
 
     edges = [
@@ -53,7 +52,7 @@ def render_map(screen, goToLevel):
         draw_curved_line(screen, (0, 0, 0), start_pos, end_pos, dash_length=10)
 
     for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 60)
+        pygame.draw.circle(screen, data['color'], data['pos'], 40)
 
         # Renderizar la letra del nodo
         letter_text = font.render(node, True, (0, 0, 0))
