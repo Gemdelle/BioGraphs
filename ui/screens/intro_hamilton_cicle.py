@@ -1,7 +1,7 @@
 import pygame
 import networkx as nx
 
-from ui.screens.graph_renderer import render_graph
+from ui.screens.common.graph_renderer import render_graph
 
 G = nx.Graph()
 

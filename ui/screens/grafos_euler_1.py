@@ -1,8 +1,10 @@
 import pygame
 import networkx as nx
 
+from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.euler_1_flower import Euler1Flower
-from ui.screens.graph_renderer import render_graph
+from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.graph_renderer import render_graph
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
 
@@ -95,6 +97,8 @@ def render_grafos_euler_1(screen, font):
         restart_button_clicked_grafos_euler_1 = pygame.Rect(1420, 85, 200, 60)
         pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_euler_1, width=5, border_radius=15)
         screen.blit(restart_button_text, (1430, 95))
+
+        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
 
     # Check if time is up

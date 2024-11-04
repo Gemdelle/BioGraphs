@@ -1,8 +1,10 @@
 import pygame
 import networkx as nx
 
+from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.hamilton_3_flower import Hamilton3Flower
-from ui.screens.graph_renderer import render_graph
+from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.graph_renderer import render_graph
 from ui.seeds.disabled.hamilton_3_seed_disabled import Hamilton3SeedDisabled
 from ui.seeds.enabled.hamilton_3_seed import Hamilton3Seed
 
@@ -103,6 +105,8 @@ def render_grafos_hamilton_3(screen, font):
         restart_button_clicked_grafos_hamilton_3 = pygame.Rect(1420, 85, 200, 60)
         pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_hamilton_3, width=5, border_radius=15)
         screen.blit(restart_button_text, (1430, 95))
+
+    render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
     # Check if time is up
     if remaining_time <= 0:

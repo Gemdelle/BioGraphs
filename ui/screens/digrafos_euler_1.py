@@ -1,9 +1,10 @@
 import pygame
 import networkx as nx
-import math
 
+from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.d_euler_1_flower import DEuler1Flower
-from ui.screens.digraph_renderer import render_digraph
+from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.digraph_renderer import render_digraph
 from ui.seeds.disabled.digrafos_euler_1_seed_disabled import DigrafosEuler1SeedDisabled
 from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 
@@ -97,6 +98,8 @@ def render_digrafos_euler_1(screen, font):
         restart_button_clicked_digrafos_euler = pygame.Rect(1420, 85, 200, 60)
         pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_digrafos_euler, width=5, border_radius=15)
         screen.blit(restart_button_text, (1430, 95))
+
+        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
     # Check if time is up
     if remaining_time <= 0:

@@ -1,8 +1,10 @@
 import pygame
 import networkx as nx
 
+from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
-from ui.screens.digraph_renderer import render_digraph
+from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.digraph_renderer import render_digraph
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
 
@@ -103,6 +105,8 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         restart_button_clicked_digrafos_hamilton_1 = pygame.Rect(1420, 85, 200, 60)
         pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_digrafos_hamilton_1, width=5, border_radius=15)
         screen.blit(restart_button_text, (1430, 95))
+
+        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:

@@ -1,7 +1,9 @@
 import pygame
 import networkx as nx
 
-from ui.screens.graph_renderer import render_simple_node_graph
+from ui.characters.frog_neutral import FrogNeutral
+from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.graph_renderer import render_simple_node_graph
 
 G = nx.Graph()
 positions = {
@@ -52,6 +54,7 @@ def render_playground_5(screen, font):
     restart_button_clicked_playground_5 = pygame.Rect(1420, 85, 200, 60)
     pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_playground_5, width=5, border_radius=15)
     screen.blit(restart_button_text, (1430, 95))
+    render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
     return False
 
 def handle_playground_5_mousedown(event, go_to_playground):
