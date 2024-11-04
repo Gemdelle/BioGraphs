@@ -11,7 +11,7 @@ from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 G = nx.DiGraph()
 positions = {
     'A': (1209, 335), 'B': (272, 283), 'C': (1407, 601), 'D': (853, 527),
-    'E': (394, 528), 'F': (1246, 646)
+    'E': (478, 557), 'F': (1078, 678)
 }
 
 seeds = {

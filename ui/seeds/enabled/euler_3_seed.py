@@ -18,7 +18,7 @@ class Euler3Seed:
             frame_path = os.path.join("./assets/giphs/seeds/euler-3-seed", f'euler-3-seed.png{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
-                surf = pygame.transform.scale(surf, (50, 50))
+                surf = pygame.transform.scale(surf, (80, 80))
                 self.frames[index] = surf
             else:
                 self.frames[index] = None  # Mark as None if the frame does not exist
