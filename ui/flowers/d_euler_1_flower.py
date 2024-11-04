@@ -1,7 +1,8 @@
 import os
 import pygame
 
-class Euler1Flower:
+
+class DEuler1Flower:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1
@@ -15,7 +16,7 @@ class Euler1Flower:
 
     def load_frame(self, index):
         if index not in self.frames:
-            frame_path = os.path.join("./assets/giphs/flowers/euler-1-flower", f'euler-1-flower{index}.gif')
+            frame_path = os.path.join("./assets/giphs/flowers/d-euler-flower", f'd-euler-flower{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
                 surf = pygame.transform.scale(surf, (200, 200))

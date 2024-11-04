@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.flowers.hamilton_3_flower import Hamilton3Flower
 from ui.screens.graph_renderer import render_graph
 from ui.seeds.disabled.hamilton_3_seed_disabled import Hamilton3SeedDisabled
 from ui.seeds.enabled.hamilton_3_seed import Hamilton3Seed
@@ -19,7 +20,7 @@ seeds = {
     'I': Hamilton3Seed(), 'J': Hamilton3Seed(), 'K': Hamilton3Seed(), 'L': Hamilton3Seed(),
     'M': Hamilton3Seed(), 'N': Hamilton3Seed(), 'O': Hamilton3Seed(), 'P': Hamilton3Seed()
 }
-
+flower = Hamilton3Flower()
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
@@ -42,7 +43,7 @@ timer_started = False
 start_time = 0
 
 current_node = None
-
+won_level = False
 initial_energy = 17
 energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
@@ -54,7 +55,7 @@ restart_button_clicked_grafos_hamilton_3 = None
 
 def render_grafos_hamilton_3(screen, font):
     from graph import fontButtons
-    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3, restart_button_clicked_grafos_hamilton_3, timer_started, start_time, path, start_node, positions, current_node, energy, back_button_clicked_grafos_hamilton_3
+    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3, restart_button_clicked_grafos_hamilton_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -112,6 +113,10 @@ def render_grafos_hamilton_3(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
 
+    if won_level:
+        flower.update_animation()
+        flower.draw(screen, 1450, 780)
+
     return False
 
 def handle_grafos_hamilton_3_mousedown(event, go_to_map):
@@ -134,7 +139,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_3_keydown(event):
-    global current_node, seeds
+    global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -150,6 +155,7 @@ def handle_grafos_hamilton_3_keydown(event):
                 seeds[current_node] = Hamilton3SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
+                    won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
                     return True, current_node
     return False, current_node
