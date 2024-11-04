@@ -15,7 +15,7 @@ class DigrafosHamilton1Seed:
         self.visible = True
         # Parámetros específicos de la animación
         self.path = "./assets/giphs/seeds/d-hamilton-seed"
-        self.file_prefix = "d-hamilton-seed"
+        self.file_prefix = "d-hamilton-seed.png"
         self.scale = (80, 80)  # Puedes cambiar esto si el tamaño varía
 
     def load_frame(self, index):

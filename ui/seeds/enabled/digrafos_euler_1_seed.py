@@ -15,7 +15,7 @@ class DigrafosEuler1Seed:
         self.visible = True
         # Parámetros específicos de la animación
         self.path = "./assets/giphs/seeds/d-euler-seed"
-        self.file_prefix = "d-euler-seed"
+        self.file_prefix = "d-euler-seed.png"
         self.scale = (80, 80)  # Ajusta esto si el tamaño varía
 
     def load_frame(self, index):
