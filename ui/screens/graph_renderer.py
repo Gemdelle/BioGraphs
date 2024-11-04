@@ -4,7 +4,7 @@ import networkx as nx
 def render_graph(screen, G, font, path, positions, animated_nodes):
     # Draw edges
     for edge in G.edges():
-        pygame.draw.line(screen, (0, 0, 0), positions[edge[0]], positions[edge[1]], 2)
+        pygame.draw.line(screen, (0, 0, 0), positions[edge[0]], positions[edge[1]], 4)
 
     # Draw nodes and animations
     for node, pos in nx.get_node_attributes(G, 'pos').items():
