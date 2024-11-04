@@ -1,7 +1,7 @@
 import pygame
 import networkx as nx
 
-from ui.screens.graph_renderer import render_graph
+from ui.screens.graph_renderer import render_simple_node_graph
 
 G = nx.Graph()
 positions = {
@@ -31,15 +31,15 @@ restart_button_clicked_playground_3 = None
 def render_playground_3(screen, font):
     from graph import fontButtons
     global back_button_clicked_playground_3, restart_button_clicked_playground_3
-    background_image = pygame.image.load("assets/pg-3.png").convert()
-    background_image = pygame.image.load("assets/default-bg.png").convert()
+    background_image = pygame.image.load("assets/playground-bg/bg-level-3.png").convert()
+    #background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     # Render the graph and energy bar
-    render_graph(screen, G, font, path, positions)
+    render_simple_node_graph(screen, G, font, path, positions)
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
