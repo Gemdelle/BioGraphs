@@ -2,6 +2,8 @@ import pygame
 import networkx as nx
 
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.hamilton_2_seed_disabled import Hamilton2SeedDisabled
+from ui.seeds.enabled.hamilton_2_seed import Hamilton2Seed
 
 G = nx.Graph()
 positions = {
@@ -9,6 +11,13 @@ positions = {
     'E': (195,519-60), 'F': (360,434-60), 'G': (1095,308-60), 'H': (711,431-60),
     'I': (1033,705-60), 'J': (1416,360-60), 'K': (1160,508-60), 'L': (1521,698-60),
 }
+
+seeds = {
+    'A': Hamilton2Seed(), 'B': Hamilton2Seed(), 'C': Hamilton2Seed(), 'D': Hamilton2Seed(),
+    'E': Hamilton2Seed(), 'F': Hamilton2Seed(), 'G': Hamilton2Seed(), 'H': Hamilton2Seed(),
+    'I': Hamilton2Seed(), 'J': Hamilton2Seed(), 'K': Hamilton2Seed(), 'L': Hamilton2Seed(),
+}
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
@@ -75,7 +84,7 @@ def render_grafos_hamilton_2(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_graph(screen, G, font, path, positions)
+        render_graph(screen, G, font, path, positions, seeds)
 
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
@@ -119,7 +128,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_2_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -132,6 +141,7 @@ def handle_grafos_hamilton_2_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = Hamilton2SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")

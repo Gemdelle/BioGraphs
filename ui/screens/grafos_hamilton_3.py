@@ -2,6 +2,8 @@ import pygame
 import networkx as nx
 
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.hamilton_3_seed_disabled import Hamilton3SeedDisabled
+from ui.seeds.enabled.hamilton_3_seed import Hamilton3Seed
 
 G = nx.Graph()
 positions = {
@@ -9,6 +11,13 @@ positions = {
     'E': (1237, 459), 'F': (932, 285), 'G': (844, 418), 'H': (1337, 320),
     'I': (804, 640), 'J': (481, 455), 'K': (343, 260), 'L': (741, 234),
     'M': (585, 324), 'N': (553, 681), 'O': (357, 535), 'P': (231, 424)
+}
+
+seeds = {
+    'A': Hamilton3Seed(), 'B': Hamilton3Seed(), 'C': Hamilton3Seed(), 'D': Hamilton3Seed(),
+    'E': Hamilton3Seed(), 'F': Hamilton3Seed(), 'G': Hamilton3Seed(), 'H': Hamilton3Seed(),
+    'I': Hamilton3Seed(), 'J': Hamilton3Seed(), 'K': Hamilton3Seed(), 'L': Hamilton3Seed(),
+    'M': Hamilton3Seed(), 'N': Hamilton3Seed(), 'O': Hamilton3Seed(), 'P': Hamilton3Seed()
 }
 
 for node, pos in positions.items():
@@ -80,7 +89,7 @@ def render_grafos_hamilton_3(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_graph(screen, G, font, path, positions)
+        render_graph(screen, G, font, path, positions, seeds)
 
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
@@ -125,7 +134,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_hamilton_3_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -138,6 +147,7 @@ def handle_grafos_hamilton_3_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = Hamilton3SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")

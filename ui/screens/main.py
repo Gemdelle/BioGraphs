@@ -10,7 +10,10 @@ def render_main_screen(screen, font):
     screen.blit(title_text, title_rect)
 
     # Button definitions
-    button_texts = ["Instructions", "Playground", "Map"]
+    button_texts = [
+        # "Instructions",
+        "Playground",
+        "Map"]
     buttons = []
     for i, text in enumerate(button_texts):
         rect = pygame.Rect(SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + i * 70, 200, 50)

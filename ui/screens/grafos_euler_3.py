@@ -2,6 +2,8 @@ import pygame
 import networkx as nx
 
 from ui.screens.graph_renderer import render_graph
+from ui.seeds.disabled.euler_3_seed_disabled import Euler3SeedDisabled
+from ui.seeds.enabled.euler_3_seed import Euler3Seed
 
 G = nx.Graph()
 # restarle 60 a y
@@ -9,6 +11,12 @@ positions = {
     'A': (186, 284), 'B': (555, 324), 'C': (190, 616), 'D': (501, 521),
     'E': (1034, 276), 'F': (650, 655), 'G': (1004, 472), 'H': (1510, 634),
     'I': (1516, 397), 'J': (1390, 498)
+}
+
+seeds = {
+    'A': Euler3Seed(), 'B': Euler3Seed(), 'C': Euler3Seed(), 'D': Euler3Seed(),
+    'E': Euler3Seed(), 'F': Euler3Seed(), 'G': Euler3Seed(), 'H': Euler3Seed(),
+    'I': Euler3Seed(), 'J': Euler3Seed()
 }
 
 for node, pos in positions.items():
@@ -77,7 +85,7 @@ def render_grafos_euler_3(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_graph(screen, G, font, path, positions)
+        render_graph(screen, G, font, path, positions, seeds)
         # Draw the energy bar
         pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
 
@@ -122,7 +130,7 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_3_keydown(event):
-    global current_node
+    global current_node, seeds
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -135,6 +143,7 @@ def handle_grafos_euler_3_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
+                seeds[current_node] = Euler3SeedDisabled()
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     print("Congratulations! You completed the Hamiltonian Path.")
