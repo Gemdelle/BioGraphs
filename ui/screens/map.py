@@ -1,6 +1,7 @@
 import pygame
 import math
 from core.screens import Screens
+from ui.screens.common.graph_renderer import draw_curved_line
 
 def render_map(screen, goToLevel):
     background_image = pygame.image.load("assets/map.png").convert()
@@ -49,7 +50,7 @@ def render_map(screen, goToLevel):
     for edge in edges:
         start_pos = nodes[edge[0]]['pos']
         end_pos = nodes[edge[1]]['pos']
-        draw_curved_line(screen, (0, 0, 0), start_pos, end_pos, dash_length=10)
+        draw_curved_line(screen, (255, 255, 255), start_pos, end_pos, dash_length=10)
 
     for node, data in nodes.items():
         pygame.draw.circle(screen, data['color'], data['pos'], 40)
@@ -72,6 +73,7 @@ def render_map(screen, goToLevel):
 
     handle_node_click(nodes, node_screens, goToLevel)
 
+
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2
     control_y = min(start_pos[1], end_pos[1]) - 50
@@ -86,6 +88,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     for i in range(len(points) - 1):
         if i % 2 == 0:
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
+
 
 def handle_node_click(nodes, node_screens, goToLevel):
     mouse_pos = pygame.mouse.get_pos()

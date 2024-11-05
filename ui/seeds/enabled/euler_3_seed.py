@@ -5,12 +5,12 @@ class Euler3Seed:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1
-        self.rect = pygame.Rect(0, 0, 100, 100)
+        self.rect = pygame.Rect(0, 0, 100, 100)  # Rectángulo inicial con dimensiones adecuadas
         self.is_colliding = False
         self.tooltip_text = "frog"
         self.current_text_length = 0
         self.last_update_time = 0
-        self.typing_speed = 100  # Time in milliseconds between each character
+        self.typing_speed = 100  # Tiempo en milisegundos entre cada carácter
         self.visible = True
 
     def load_frame(self, index):
@@ -18,25 +18,22 @@ class Euler3Seed:
             frame_path = os.path.join("./assets/giphs/seeds/euler-3-seed", f'euler-3-seed.png{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
-                surf = pygame.transform.scale(surf, (80, 80))
+                surf = pygame.transform.scale(surf, (90, 90))  # Escalar a 80x80 píxeles
                 self.frames[index] = surf
             else:
-                self.frames[index] = None  # Mark as None if the frame does not exist
+                self.frames[index] = None  # Marca como None si el frame no existe
 
     def update_animation(self):
-        
         current_time = pygame.time.get_ticks()
-        self.frame_index = (current_time // 30) % 74  # Assuming 74 frames
-        self.load_frame(self.frame_index)  # Lazy load the current frame
+        self.frame_index = (current_time // 30) % 74  # Suponiendo 74 frames
+        self.load_frame(self.frame_index)  # Cargar solo el frame actual
 
     def draw(self, screen, x, y):
-        self.rect.x = x
-        self.rect.y = y
-        was_visible = self.visible
-        
+        # Centrar el rect en (x, y)
+        self.rect.center = (x, y)
 
-        if not was_visible:
-            self.load_frame(self.frame_index)
         if self.frames[self.frame_index] is not None:
-            screen.blit(self.frames[self.frame_index], (self.rect.x, self.rect.y))
+            # Dibujar la imagen centrada en el rectángulo
+            screen.blit(self.frames[self.frame_index], self.rect.topleft)
+
         self.visible = True

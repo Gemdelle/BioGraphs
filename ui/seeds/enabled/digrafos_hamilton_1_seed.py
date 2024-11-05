@@ -16,7 +16,7 @@ class DigrafosHamilton1Seed:
         # Parámetros específicos de la animación
         self.path = "./assets/giphs/seeds/d-hamilton-seed"
         self.file_prefix = "d-hamilton-seed.png"
-        self.scale = (80, 80)  # Puedes cambiar esto si el tamaño varía
+        self.scale = (90, 90)  # Puedes cambiar esto si el tamaño varía
 
     def load_frame(self, index):
         # Llama a la función de `seed_functions` y pasa `self` junto con los parámetros específicos

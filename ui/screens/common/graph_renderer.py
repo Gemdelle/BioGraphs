@@ -2,6 +2,7 @@ import pygame
 import networkx as nx
 import numpy as np
 
+
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10, dot_radius=2):
     # Definir el punto de control para la curva
     control_x = (start_pos[0] + end_pos[0]) / 2
@@ -32,6 +33,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10, dot_rad
             current_length = 0  # Reinicia la longitud acumulada después de cada punto
 
 
+
 def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
     # Definir el punto de control para la curva
     control_x = (start_pos[0] + end_pos[0]) / 2
@@ -50,6 +52,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
         end_point = points[i + 1]
         pygame.draw.line(surface, color, start_point, end_point, line_width)
 
+
 def render_graph(screen, G, font, path, positions, animated_nodes):
     # Dibuja bordes curvos y punteados
     for edge in G.edges():
@@ -60,10 +63,10 @@ def render_graph(screen, G, font, path, positions, animated_nodes):
     # Dibuja nodos y animaciones
     for node, pos in nx.get_node_attributes(G, 'pos').items():
         animated_nodes[node].update_animation()
-        animated_nodes[node].draw(screen, pos[0] - 25, pos[1] - 25)
+        animated_nodes[node].draw(screen, pos[0], pos[1])
 
         # Dibuja el texto de cada nodo
-        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 10, pos[1] - 10))
+        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
 
 def render_simple_node_graph(screen, G, font, path, positions):

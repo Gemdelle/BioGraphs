@@ -10,8 +10,8 @@ from ui.seeds.enabled.euler_1_seed import Euler1Seed
 
 G = nx.Graph()
 positions = {
-    'A': (890, 270), 'B': (1410, 430), 'C': (1460, 610), 'D': (760, 600),
-    'E': (250, 530), 'F': (430, 440)
+    'A': (891, 254-60), 'B': (1339, 371-60), 'C': (1447, 546-60), 'D': (752, 595-60),
+    'E': (235, 525-60), 'F': (484, 410-60)
 }
 seeds = {
     'A': Euler1Seed(), 'B': Euler1Seed(), 'C': Euler1Seed(), 'D': Euler1Seed(),
