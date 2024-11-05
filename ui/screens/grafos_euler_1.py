@@ -3,9 +3,12 @@ import networkx as nx
 
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.euler_1_flower import Euler1Flower
+from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
 
@@ -73,10 +76,7 @@ def render_grafos_euler_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Draw the "Back" button
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_grafos_euler_1 = pygame.Rect(1610, 10, 80, 40)
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_1)
-    screen.blit(back_button_text, (1620, 15))
+    back_button_clicked_grafos_euler_1 = render_map_button(screen, font, fontButtons)
 
     if not timer_started:
         start_button_text = fontButtons.render("Start", True, (255, 255, 255))
@@ -91,10 +91,10 @@ def render_grafos_euler_1(screen, font):
         render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
-        restart_button_clicked_grafos_euler_1 = pygame.Rect(1420, 85, 200, 60)
-        pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_euler_1, width=5, border_radius=15)
-        screen.blit(restart_button_text, (1430, 95))
+        restart_button_clicked_grafos_euler_1 = render_restart_button(screen, font, fontButtons)
+
+        # Draw the "Main Menu" button
+        render_main_menu_button(screen, font, fontButtons)
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
