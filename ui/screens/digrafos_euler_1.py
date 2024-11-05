@@ -74,8 +74,8 @@ def render_digrafos_euler_1(screen, font):
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_rect = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_rect)  # Fondo del botón
+    back_button_clicked_digrafos_euler = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_digrafos_euler)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     if not timer_started:
