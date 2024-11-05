@@ -4,6 +4,7 @@ import networkx as nx
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.euler_1_flower import Euler1Flower
 from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
@@ -85,12 +86,9 @@ def render_grafos_euler_1(screen, font):
     else:
         # Render the graph
         render_graph(screen, G, font, path, positions, seeds)
-        # Draw the energy bar
-        pygame.draw.rect(screen, (200, 0, 0), (160, 80, int(energy * 40), 50))
 
-        # Draw the timer text
-        timer_text = font.render(f"{remaining_time // 1000}", True, (0, 0, 0))
-        screen.blit(timer_text, (100, 100))
+        # Render energy bar and timer
+        render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
         restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))

@@ -5,6 +5,7 @@ from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.d_euler_1_flower import DEuler1Flower
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_digraph
+from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.seeds.disabled.digrafos_euler_1_seed_disabled import DigrafosEuler1SeedDisabled
 from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 
@@ -87,12 +88,9 @@ def render_digrafos_euler_1(screen, font):
         # Render the graph and energy bar
         render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, seeds)
 
-        # Draw the energy bar
-        pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
+        # Render energy bar and timer
+        render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
 
-        # Draw the timer text
-        timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
-        screen.blit(timer_text, (10, 40))
         # Draw the "Restart" button
         restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
         restart_button_clicked_digrafos_euler = pygame.Rect(1420, 85, 200, 60)

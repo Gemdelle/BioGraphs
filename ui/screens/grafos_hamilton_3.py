@@ -4,6 +4,7 @@ import networkx as nx
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.hamilton_3_flower import Hamilton3Flower
 from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.seeds.disabled.hamilton_3_seed_disabled import Hamilton3SeedDisabled
 from ui.seeds.enabled.hamilton_3_seed import Hamilton3Seed
@@ -94,12 +95,9 @@ def render_grafos_hamilton_3(screen, font):
         # Render the graph and energy bar
         render_graph(screen, G, font, path, positions, seeds)
 
-        # Draw the energy bar
-        pygame.draw.rect(screen, (200, 0, 0), (10, 10, int(energy * 20), 20))
+        # Render energy bar and timer
+        render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
 
-        # Draw the timer text
-        timer_text = font.render(f"Time: {remaining_time // 1000}s", True, (0, 0, 0))
-        screen.blit(timer_text, (10, 40))
         # Draw the "Restart" button
         restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
         restart_button_clicked_grafos_hamilton_3 = pygame.Rect(1420, 85, 200, 60)
