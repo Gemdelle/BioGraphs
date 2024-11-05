@@ -40,10 +40,11 @@ def draw(self, screen, x, y):
         y (int): Posición y en la pantalla.
     """
     was_visible = self.visible
+    self.rect.center = (x, y)
 
     if not was_visible:
         self.load_frame(self.frame_index)
     if self.frames[self.frame_index] is not None:
-        screen.blit(self.frames[self.frame_index], (x, y))
+        screen.blit(self.frames[self.frame_index], self.rect.topleft)
     self.visible = True
 

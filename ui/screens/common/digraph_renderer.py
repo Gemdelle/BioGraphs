@@ -23,11 +23,11 @@ def render_digraph(screen, G, font, remaining_time, path, start_node, end_node, 
     # screen.fill((255, 255, 255))  # Fondo blanco
     for node, pos in nx.get_node_attributes(G, 'pos').items():
         animated_nodes[node].update_animation()
-        animated_nodes[node].draw(screen, pos[0] - 25, pos[1] - 25)
+        animated_nodes[node].draw(screen, pos[0], pos[1])
         # color = (0, 255, 0) if node in path else (200, 200, 255)  # Verde si es parte del camino
         # pygame.draw.circle(screen, (255,0,0), pos, 35)
         # pygame.draw.circle(screen, color, pos, 30)
-        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 10, pos[1] - 10))
+        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
     for start, end in G.edges():
         start_pos = G.nodes[start]['pos']

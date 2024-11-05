@@ -7,16 +7,12 @@ class DigrafosEuler1Seed:
         self.frames = {}
         self.frame_index = 1
         self.rect = pygame.Rect(0, 0, 100, 100)
-        self.is_colliding = False
-        self.tooltip_text = "frog"
-        self.current_text_length = 0
         self.last_update_time = 0
-        self.typing_speed = 100  # Tiempo en milisegundos entre cada carácter
         self.visible = True
         # Parámetros específicos de la animación
         self.path = "./assets/giphs/seeds/d-euler-seed"
         self.file_prefix = "d-euler-seed.png"
-        self.scale = (100, 100)  # Ajusta esto si el tamaño varía
+        self.scale = (90, 90)  # Ajusta esto si el tamaño varía
 
     def load_frame(self, index):
         # Llama a la función de `seed_functions` y pasa `self` junto con los parámetros específicos
