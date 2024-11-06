@@ -53,17 +53,34 @@ def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
         pygame.draw.line(surface, color, start_point, end_point, line_width)
 
 
+def render_map_graph(screen, graph, font, positions, animated_nodes):
+    # Dibuja bordes curvos y punteados
+    for edge in graph.edges():
+        start_pos = positions[edge[0]]['pos']
+        end_pos = positions[edge[1]]['pos']
+
+        if len(start_pos) != 2 or len(end_pos) != 2:
+            print(f"Error: Invalid position for edge {edge}. start_pos: {start_pos}, end_pos: {end_pos}")
+        else:
+            draw_curved_line(screen, (255, 255, 255), start_pos, end_pos)
+
+    for node, pos in positions.items():
+        if pos['enabled']:  # Si el nodo está habilitado
+            animated_nodes[node].update_animation()
+            animated_nodes[node].draw(screen, pos['pos'][0], pos['pos'][1])  # Usa las coordenadas de 'pos'
+
+
 def render_graph(screen, G, font, path, positions, animated_nodes):
     # Dibuja bordes curvos y punteados
     for edge in G.edges():
-        start_pos = positions[edge[0]]
+        start_pos = positions[edge[0]]  # Accede a las posiciones de los nodos
         end_pos = positions[edge[1]]
         draw_curved_line(screen, (255, 255, 255), start_pos, end_pos)
 
     # Dibuja nodos y animaciones
-    for node, pos in nx.get_node_attributes(G, 'pos').items():
+    for node, pos in positions.items():  # Recorre 'positions'
         animated_nodes[node].update_animation()
-        animated_nodes[node].draw(screen, pos[0], pos[1])
+        animated_nodes[node].draw(screen, pos[0], pos[1])  # Usa las coordenadas de 'pos'
 
         # Dibuja el texto de cada nodo
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))

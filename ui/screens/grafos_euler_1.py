@@ -30,6 +30,7 @@ for node, pos in positions.items():
 edges = [
     ('A', 'B'),('B', 'C'),('C', 'D'),('B', 'D'),('A', 'D'),('F', 'D'),('A', 'F'),('D', 'E')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 
@@ -133,6 +134,8 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_1_keydown(event):
+    end_node = 'E'
+
     global current_node, seeds, won_level
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()

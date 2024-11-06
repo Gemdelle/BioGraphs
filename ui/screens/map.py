@@ -1,12 +1,63 @@
+import os
+
+import networkx as nx
 import pygame
 import math
 from core.screens import Screens
-from ui.screens.common.graph_renderer import draw_curved_line
+from ui.flowers.d_euler_1_flower import DEuler1Flower
+from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
+from ui.flowers.euler_1_flower import Euler1Flower
+from ui.flowers.euler_2_flower import Euler2Flower
+from ui.flowers.euler_3_flower import Euler3Flower
+from ui.flowers.hamilton_1_flower import Hamilton1Flower
+from ui.flowers.hamilton_2_flower import Hamilton2Flower
+from ui.flowers.hamilton_3_flower import Hamilton3Flower
+from ui.screens.common.graph_renderer import render_map_graph
+
+#from graph import fonts
+
+# def load_animation_images(path, num_images):
+#     images = []
+#     for i in range(num_images):
+#         # Cambiar la ruta para que coincida con el formato
+#         image_path = os.path.join(path, f"hamilton-1-flower{i:02d}.png00.gif")  # El formato correcto
+#         image = pygame.image.load(image_path).convert_alpha()  # Usar .convert_alpha() si tiene transparencia
+#         images.append(image)
+#     return images
+
 
 def render_map(screen, goToLevel):
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
+    #font = fonts[0]
+    font_path = 'assets/fonts/'
+
+    #FUENTES QUE DEBERÍA IMPORTAR COMO ARRAY DESDE GRAPH
+    berry_rotunda = pygame.font.Font(os.path.join(font_path, 'Berry Rotunda.ttf'), 32)
+    celtg = pygame.font.Font(os.path.join(font_path, 'CELTG___.TTF'), 32)
+    magic_school_two = pygame.font.Font(os.path.join(font_path, 'MagicSchoolTwo.ttf'), 32)
+    megphis = pygame.font.Font(os.path.join(font_path, 'MEGPHIS.otf'), 32)
+    strange_dreams = pygame.font.Font(os.path.join(font_path, 'Strange Dreams.otf'), 32)
+    strange_dreams_italic = pygame.font.Font(os.path.join(font_path, 'Strange Dreams Italic.otf'), 32)
+    van_helsing = pygame.font.Font(os.path.join(font_path, 'Van Helsing.ttf'), 32)
+    alice_in_wonderland = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+
+    font = strange_dreams_italic #5 fea pero se entiende
+    font = berry_rotunda #6 puede ser
+    font = celtg #6 zafa pero no me gusta tanto
+    font = megphis #7 parece agua
+    font = strange_dreams #7 se entiende
+    font = magic_school_two #8 no se entiende pero bueno para algún tiítulo
+    font = van_helsing #8
+    font = alice_in_wonderland #9
+
+    # animation_images = load_animation_images("assets/giphs/flowers/hamilton-1-flower", 124)
+    # animation_index = 0  # Para llevar el índice de la imagen actual
+    # animation_speed = 0.1  # Velocidad de la animación (puedes ajustarla)
+    # last_time = pygame.time.get_ticks()
+
+    G = nx.Graph()
 
     nodes = {
         'A': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
@@ -24,10 +75,21 @@ def render_map(screen, goToLevel):
         'M': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Black: GRAFOS_EULER_1
     }
 
+    for node, pos in nodes.items():
+        G.add_node(node, pos=pos, color=(0, 0, 0))
+
+    seeds = {
+        'A': Euler1Flower(), 'B': Hamilton1Flower(), 'C': Hamilton2Flower(), 'D': Hamilton3Flower(),
+        'E': Euler2Flower(), 'F': Euler3Flower(), 'G': DEuler1Flower(), 'J': DHamilton1Flower()
+    }
+
     edges = [
         ('M', 'A'),('A', 'E'),('E', 'F'),('M', 'B'),('B', 'C'),('C', 'D'),('M', 'G'),('G', 'H'),('H', 'I'),('M', 'J'),
         ('J', 'K'),('K', 'L')
     ]
+
+    for edge in edges:
+        G.add_edge(edge[0], edge[1])
 
     node_screens = {
         'A': Screens.GRAFOS_EULER_1,
@@ -45,20 +107,15 @@ def render_map(screen, goToLevel):
         # 'M': Screens.GRAFOS_EULER_1,
     }
 
-    font = pygame.font.SysFont(None, 36)
+    render_map_graph(screen, G, font, nodes, seeds)
 
-    for edge in edges:
-        start_pos = nodes[edge[0]]['pos']
-        end_pos = nodes[edge[1]]['pos']
-        draw_curved_line(screen, (255, 255, 255), start_pos, end_pos, dash_length=10)
-
-    for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 40)
-
-        # Renderizar la letra del nodo
-        letter_text = font.render(node, True, (0, 0, 0))
-        letter_rect = letter_text.get_rect(center=data['pos'])
-        screen.blit(letter_text, letter_rect)
+    # for node, data in nodes.items():
+    #     pygame.draw.circle(screen, data['color'], data['pos'], 40)
+    #
+    #     # Renderizar la letra del nodo
+    #     letter_text = font.render(node, True, (0, 0, 0))
+    #     letter_rect = letter_text.get_rect(center=data['pos'])
+    #     screen.blit(letter_text, letter_rect)
 
     grafo_euler_text = font.render("GRAFO Euler", True, (0, 0, 0))
     grafo_hamilton_text = font.render("GRAFO Hamilton", True, (0, 0, 0))

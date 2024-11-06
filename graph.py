@@ -1,3 +1,5 @@
+import os
+
 import pygame
 
 from core.screens import Screens
@@ -50,12 +52,32 @@ running = True
 current_node = None
 completed = False
 
-font = pygame.font.SysFont(None, 36)
-fontButtons = pygame.font.SysFont(None, 56)
+# FONTS
+
+font_path = 'assets/fonts/'
+
+alice_in_wonderland = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+berry_rotunda = pygame.font.Font(os.path.join(font_path, 'Berry Rotunda.ttf'), 32)
+cardinal = pygame.font.Font(os.path.join(font_path, 'Cardinal.ttf'), 32)
+cardinal_alternate = pygame.font.Font(os.path.join(font_path, 'Cardinal-Alternate.ttf'), 32)
+celtg = pygame.font.Font(os.path.join(font_path, 'CELTG___.TTF'), 32)
+magic_school_two = pygame.font.Font(os.path.join(font_path, 'MagicSchoolTwo.ttf'), 32)
+megphis = pygame.font.Font(os.path.join(font_path, 'MEGPHIS.otf'), 32)
+strange_dreams = pygame.font.Font(os.path.join(font_path, 'Strange Dreams.otf'), 32)
+strange_dreams_italic = pygame.font.Font(os.path.join(font_path, 'Strange Dreams Italic.otf'), 32)
+van_helsing = pygame.font.Font(os.path.join(font_path, 'Van Helsing.ttf'), 32)
+
+fonts = [alice_in_wonderland,berry_rotunda,celtg,magic_school_two,megphis,strange_dreams,strange_dreams_italic,
+         van_helsing]
+
+font = fonts[0]
+fontButtons = alice_in_wonderland
 
 screen_selected = Screens.MAIN  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
+
+# FUNCTIONS
 
 def go_to_map():
     global screen_selected
