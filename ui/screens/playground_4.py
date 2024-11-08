@@ -70,7 +70,7 @@ def handle_playground_4_mousedown(event, go_to_playground):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node
+    global current_node,G
     path.clear()
     current_node = None
     for node in G.nodes:
@@ -85,15 +85,16 @@ def handle_playground_4_keydown(event):
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                path.append(current_node)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    return True, current_node
+            if current_node == end_node and len(path) == len(G.nodes):
+                print("Congratulations! You completed the Hamiltonian Path.")
+                return True, current_node
     return False, current_node
 
 

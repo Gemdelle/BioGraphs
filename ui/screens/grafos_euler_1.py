@@ -37,7 +37,7 @@ for edge in edges:
     G.add_edge(edge[0], edge[1])
 
 start_node = None
-end_node = 'H'
+end_node = 'E'
 path = []
 timer_started = False
 start_time = 0
@@ -129,31 +129,28 @@ def handle_grafos_euler_1_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node
+    global current_node,G
     path.clear()
     current_node = None
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_1_keydown(event):
-    end_node = 'E'
-
     global current_node, seeds, won_level, G
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
-        print(f'Key: {key}')
-        print(f'G.nodes: {G.nodes}')
         if key in G.nodes:
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                path.append(current_node)
                 seeds[current_node] = Euler1SeedDisabled()
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-            path.append(current_node)
-            seeds[current_node] = Euler1SeedDisabled()
+                path.append(current_node)
+                seeds[current_node] = Euler1SeedDisabled()
 
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True

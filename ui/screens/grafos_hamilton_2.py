@@ -127,7 +127,7 @@ def handle_grafos_hamilton_2_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node
+    global current_node,G
     path.clear()
     current_node = None
     for node in G.nodes:
@@ -142,13 +142,14 @@ def handle_grafos_hamilton_2_keydown(event):
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                path.append(current_node)
                 seeds[current_node] = Hamilton2SeedDisabled()
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-            path.append(current_node)
-            seeds[current_node] = Hamilton2SeedDisabled()
+                path.append(current_node)
+                seeds[current_node] = Hamilton2SeedDisabled()
 
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True
