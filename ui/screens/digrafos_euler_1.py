@@ -127,9 +127,13 @@ def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node,G,seeds
     path.clear()
     current_node = None
+    seeds = {
+        'A': DigrafosEuler1Seed(), 'B': DigrafosEuler1Seed(), 'C': DigrafosEuler1Seed(), 'D': DigrafosEuler1Seed(),
+        'E': DigrafosEuler1Seed(), 'F': DigrafosEuler1Seed()
+    }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 

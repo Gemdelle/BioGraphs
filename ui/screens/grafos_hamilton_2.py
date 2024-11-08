@@ -127,9 +127,14 @@ def handle_grafos_hamilton_2_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node,G, seeds
     path.clear()
     current_node = None
+    seeds = {
+        'A': Hamilton2Seed(), 'B': Hamilton2Seed(), 'C': Hamilton2Seed(), 'D': Hamilton2Seed(),
+        'E': Hamilton2Seed(), 'F': Hamilton2Seed(), 'G': Hamilton2Seed(), 'H': Hamilton2Seed(),
+        'I': Hamilton2Seed(), 'J': Hamilton2Seed(), 'K': Hamilton2Seed(), 'L': Hamilton2Seed(),
+    }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 

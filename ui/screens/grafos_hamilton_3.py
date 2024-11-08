@@ -134,9 +134,15 @@ def handle_grafos_hamilton_3_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node,G, seeds
     path.clear()
     current_node = None
+    seeds = {
+        'A': Hamilton3Seed(), 'B': Hamilton3Seed(), 'C': Hamilton3Seed(), 'D': Hamilton3Seed(),
+        'E': Hamilton3Seed(), 'F': Hamilton3Seed(), 'G': Hamilton3Seed(), 'H': Hamilton3Seed(),
+        'I': Hamilton3Seed(), 'J': Hamilton3Seed(), 'K': Hamilton3Seed(), 'L': Hamilton3Seed(),
+        'M': Hamilton3Seed(), 'N': Hamilton3Seed(), 'O': Hamilton3Seed(), 'P': Hamilton3Seed()
+    }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 

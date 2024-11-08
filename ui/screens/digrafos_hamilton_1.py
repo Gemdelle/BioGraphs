@@ -134,9 +134,13 @@ def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node,G, seeds
     path.clear()
     current_node = None
+    seeds = {
+        'A': DigrafosHamilton1Seed(), 'B': DigrafosHamilton1Seed(), 'C': DigrafosHamilton1Seed(), 'D': DigrafosHamilton1Seed(),
+        'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
+    }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
