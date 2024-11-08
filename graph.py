@@ -39,6 +39,7 @@ from ui.screens.instructions import render_instructions, handle_instructions_key
 from ui.screens.main import render_main_screen
 from ui.screens.map import render_map
 from ui.screens.playground import render_playground
+from ui.screens.select_your_pet import render_select_your_pet_screen
 from ui.screens.splash import render_splash
 
 pygame.init()
@@ -73,7 +74,7 @@ fonts = [alice_in_wonderland,berry_rotunda,celtg,magic_school_two,megphis,strang
 font = fonts[0]
 fontButtons = alice_in_wonderland
 
-screen_selected = Screens.MAIN  # Start at MAIN screen
+screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
@@ -179,6 +180,8 @@ while running:
     # Screen rendering
     if screen_selected == Screens.SPLASH:
         render_splash(screen, go_to_map)
+    elif screen_selected == Screens.SELECT_YOUR_PET:
+        render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
         buttons = render_main_screen(screen, font)
     elif screen_selected == Screens.MAP:
