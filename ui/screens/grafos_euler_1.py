@@ -11,6 +11,8 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
+import warnings
+warnings.filterwarnings("ignore")
 
 G = nx.Graph()
 positions = {
@@ -136,23 +138,26 @@ def reset_nodes(path):
 def handle_grafos_euler_1_keydown(event):
     end_node = 'E'
 
-    global current_node, seeds, won_level
+    global current_node, seeds, won_level, G
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
+        print(f'Key: {key}')
+        print(f'G.nodes: {G.nodes}')
         if key in G.nodes:
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                seeds[current_node] = Euler1SeedDisabled()
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-                path.append(current_node)
-                seeds[current_node] = Euler1SeedDisabled()
+            path.append(current_node)
+            seeds[current_node] = Euler1SeedDisabled()
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
+            if current_node == end_node and len(path) == len(G.nodes):
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
 
-                    return True, current_node
+                return True, current_node
     return False, current_node

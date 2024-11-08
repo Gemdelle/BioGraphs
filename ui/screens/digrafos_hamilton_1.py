@@ -181,16 +181,17 @@ def handle_digrafos_hamilton_1_keydown(event):
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                seeds[current_node] = DigrafosHamilton1SeedDisabled()
             elif key in G.successors(current_node):  # Solo moverse a nodos sucesores válidos
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-                path.append(current_node)
-                seeds[current_node] = DigrafosHamilton1SeedDisabled()
+            path.append(current_node)
+            seeds[current_node] = DigrafosHamilton1SeedDisabled()
 
-                # Verificar si el camino hamiltoniano está completo
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    return True, current_node
+            # Verificar si el camino hamiltoniano está completo
+            if current_node == end_node and len(path) == len(G.nodes):
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
+                return True, current_node
     return False, current_node
