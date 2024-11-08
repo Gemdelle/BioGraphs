@@ -146,22 +146,23 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_euler_2_keydown(event):
-    global current_node, seeds, won_level
+    global current_node, seeds, won_level, G
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                seeds[current_node] = Euler2SeedDisabled()
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-                path.append(current_node)
-                seeds[current_node] = Euler2SeedDisabled()
+            path.append(current_node)
+            seeds[current_node] = Euler2SeedDisabled()
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    return True, current_node
+            if current_node == end_node and len(path) == len(G.nodes):
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
+                return True, current_node
     return False, current_node

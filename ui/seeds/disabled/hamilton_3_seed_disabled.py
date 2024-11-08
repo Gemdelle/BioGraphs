@@ -10,7 +10,7 @@ class Hamilton3SeedDisabled:
         self.last_update_time = 0
         self.visible = True
         # Parámetros específicos de la animación
-        self.path = "./assets/giphs/seeds/hamilton-3-seed"
+        self.path = "./assets/giphs/seeds-b&w/hamilton-3-seed"
         self.file_prefix = "hamilton-3-seed.png"
         self.scale = (90, 90)  # Ajusta esto si el tamaño varía
 

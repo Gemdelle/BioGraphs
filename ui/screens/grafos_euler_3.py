@@ -145,15 +145,16 @@ def handle_grafos_euler_3_keydown(event):
             if current_node is None:
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
+                seeds[current_node] = Euler3SeedDisabled()
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
-                path.append(current_node)
-                seeds[current_node] = Euler3SeedDisabled()
+            path.append(current_node)
+            seeds[current_node] = Euler3SeedDisabled()
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    return True, current_node
+            if current_node == end_node and len(path) == len(G.nodes):
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
+                return True, current_node
     return False, current_node
