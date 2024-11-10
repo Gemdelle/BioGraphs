@@ -4,14 +4,14 @@ import networkx as nx
 import pygame
 import math
 from core.screens import Screens
-from ui.flowers.black_white.d_euler_1_flower import DEuler1FlowerBW
-from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
-from ui.flowers.euler_1_flower import Euler1Flower
-from ui.flowers.euler_2_flower import Euler2Flower
-from ui.flowers.euler_3_flower import Euler3Flower
-from ui.flowers.hamilton_1_flower import Hamilton1Flower
-from ui.flowers.hamilton_2_flower import Hamilton2Flower
-from ui.flowers.hamilton_3_flower import Hamilton3Flower
+from ui.flowers.black.d_euler_1_flower import DEuler1FlowerBlack
+from ui.flowers.black.d_hamilton_1_flower import DHamilton1FlowerBlack
+from ui.flowers.black.euler_1_flower import Euler1FlowerBlack
+from ui.flowers.black.euler_2_flower import Euler2FlowerBlack
+from ui.flowers.black.euler_3_flower import Euler3FlowerBlack
+from ui.flowers.black.hamilton_1_flower import Hamilton1FlowerBlack
+from ui.flowers.black.hamilton_2_flower import Hamilton2FlowerBlack
+from ui.flowers.black.hamilton_3_flower import Hamilton3FlowerBlack
 from ui.screens.common.graph_renderer import render_map_graph
 
 #from graph import fonts
@@ -64,8 +64,8 @@ def render_map(screen, goToLevel):
         G.add_node(node, pos=pos, color=(0, 0, 0))
 
     seeds = {
-        'A': Euler1Flower(), 'B': Hamilton1Flower(), 'C': Hamilton2Flower(), 'D': Hamilton3Flower(),
-        'E': Euler2Flower(), 'F': Euler3Flower(), 'G': DEuler1FlowerBW(), 'J': DHamilton1Flower()
+        'A': Euler1FlowerBlack(), 'B': Hamilton1FlowerBlack(), 'C': Hamilton2FlowerBlack(), 'D': Hamilton3FlowerBlack(),
+        'E': Euler2FlowerBlack(), 'F': Euler3FlowerBlack(), 'G': DEuler1FlowerBlack(), 'J': DHamilton1FlowerBlack()
     }
 
     edges = [
