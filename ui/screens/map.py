@@ -92,7 +92,7 @@ def render_map(screen, goToLevel):
         # 'M': Screens.GRAFOS_EULER_1,
     }
 
-    render_map_graph(screen, G, font, nodes, seeds)
+    render_map_graph(screen, G, nodes, seeds)
 
     # for node, data in nodes.items():
     #     pygame.draw.circle(screen, data['color'], data['pos'], 40)

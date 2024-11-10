@@ -53,7 +53,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
         pygame.draw.line(surface, color, start_point, end_point, line_width)
 
 
-def render_map_graph(screen, graph, font, positions, animated_nodes):
+def render_map_graph(screen, graph, positions, animated_nodes):
     # Dibuja bordes curvos y punteados
     for edge in graph.edges():
         start_pos = positions[edge[0]]['pos']
@@ -67,7 +67,7 @@ def render_map_graph(screen, graph, font, positions, animated_nodes):
     for node, pos in positions.items():
         if pos['enabled']:  # Si el nodo está habilitado
             animated_nodes[node].update_animation()
-            animated_nodes[node].draw(screen, pos['pos'][0], pos['pos'][1])  # Usa las coordenadas de 'pos'
+            animated_nodes[node].draw(screen, pos['pos'][0]-80, pos['pos'][1]-100)  # Usa las coordenadas de 'pos'
 
 
 def render_graph(screen, G, font, path, positions, animated_nodes):

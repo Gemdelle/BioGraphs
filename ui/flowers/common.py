@@ -12,7 +12,7 @@ def load_frame(flower, index):
         )
         if os.path.exists(frame_path):
             surf = pygame.image.load(frame_path).convert_alpha()
-            surf = pygame.transform.scale(surf, (200, 200))
+            surf = pygame.transform.scale(surf, (160, 160))
             flower.frames[index] = surf
         else:
             flower.frames[index] = None  # Marcar como None si el frame no existe
