@@ -57,7 +57,7 @@ def render_map(screen, goToLevel):
         'J': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
         'K': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'L': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'M': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Black: GRAFOS_EULER_1
+        'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Frog
     }
 
     for node, pos in nodes.items():
@@ -69,7 +69,7 @@ def render_map(screen, goToLevel):
     }
 
     edges = [
-        ('M', 'A'),('A', 'E'),('E', 'F'),('M', 'B'),('B', 'C'),('C', 'D'),('M', 'G'),('G', 'H'),('H', 'I'),('M', 'J'),
+        ('Frog', 'A'),('A', 'E'),('E', 'F'),('Frog', 'B'),('B', 'C'),('C', 'D'),('Frog', 'G'),('G', 'H'),('H', 'I'),('Frog', 'J'),
         ('J', 'K'),('K', 'L')
     ]
 
@@ -94,13 +94,13 @@ def render_map(screen, goToLevel):
 
     render_map_graph(screen, G, nodes, seeds)
 
-    # for node, data in nodes.items():
-    #     pygame.draw.circle(screen, data['color'], data['pos'], 40)
-    #
-    #     # Renderizar la letra del nodo
-    #     letter_text = font.render(node, True, (0, 0, 0))
-    #     letter_rect = letter_text.get_rect(center=data['pos'])
-    #     screen.blit(letter_text, letter_rect)
+    for node, data in nodes.items():
+        pygame.draw.circle(screen, data['color'], data['pos'], 40)
+    
+        # Renderizar la letra del nodo
+        letter_text = font.render(node, True, (0, 0, 0))
+        letter_rect = letter_text.get_rect(center=data['pos'])
+        screen.blit(letter_text, letter_rect)
 
     grafo_euler_text = font.render("GRAFO Euler", True, (0, 0, 0))
     grafo_hamilton_text = font.render("GRAFO Hamilton", True, (0, 0, 0))
