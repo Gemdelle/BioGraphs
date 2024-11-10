@@ -36,7 +36,7 @@ def render_map(screen, goToLevel):
     font = strange_dreams_italic #5 fea pero se entiende
     font = berry_rotunda #6 puede ser
     font = celtg #6 zafa pero no me gusta tanto
-    font = megphis #7 parece agua
+    font_water = megphis #7 parece agua
     font = strange_dreams #7 se entiende
     font = magic_school_two #8 no se entiende pero bueno para algún tiítulo
     font = van_helsing #8

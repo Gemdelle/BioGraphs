@@ -5,13 +5,13 @@ def render_main_screen(screen, font):
     from graph import SCREEN_WIDTH
     from graph import SCREEN_HEIGHT
     screen.fill((255, 255, 255))
-    title_text = font.render("BioGraphs", True, (0, 0, 0))
+    title_text = font.render("BIOGRAPHS", True, (0, 0, 0))
     title_rect = title_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4))
     screen.blit(title_text, title_rect)
 
     # Button definitions
     button_texts = [
-        # "Instructions",
+        "Instructions",
         "Playground",
         "Map"]
     buttons = []

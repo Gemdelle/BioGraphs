@@ -1,5 +1,4 @@
 import os
-
 import pygame
 
 from core.screens import Screens
@@ -72,6 +71,7 @@ fonts = [alice_in_wonderland,berry_rotunda,celtg,magic_school_two,megphis,strang
          van_helsing]
 
 font = fonts[0]
+font_water = fonts[4]
 fontButtons = alice_in_wonderland
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
@@ -116,10 +116,9 @@ while running:
             if screen_selected == Screens.MAIN:
                 for text, btn_rect in buttons:
                     if btn_rect.collidepoint(mouse_pos):
-                        # if text == "Instructions":
-                        #     screen_selected = Screens.INSTRUCTIONS
-                        # el
-                        if text == "Playground":
+                        if text == "Instructions":
+                            screen_selected = Screens.INSTRUCTIONS
+                        elif text == "Playground":
                             screen_selected = Screens.PLAYGROUND
                         elif text == "Map":
                             go_to_map()
