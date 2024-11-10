@@ -15,7 +15,7 @@ class DarkEgg:
 
     def load_frame(self, index):
         if index not in self.frames:
-            frame_path = os.path.join("./assets/giphs/egg/dark", f'dark0{index}.gif')
+            frame_path = os.path.join("./assets/giphs/egg/dark", f'dark{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
                 surf = pygame.transform.scale(surf, (200, 200))

@@ -15,7 +15,7 @@ class SwampEgg:
 
     def load_frame(self, index):
         if index not in self.frames:
-            frame_path = os.path.join("./assets/giphs/egg/swamp", f'swamp0{index}.gif')
+            frame_path = os.path.join("./assets/giphs/egg/swamp", f'swamp{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
                 surf = pygame.transform.scale(surf, (200, 200))
