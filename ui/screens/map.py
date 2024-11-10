@@ -45,18 +45,18 @@ def render_map(screen, goToLevel):
     G = nx.Graph()
 
     nodes = {
-        'A': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
-        'B': {'pos': (1094, 510-60), 'color': (255, 255, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
-        'C': {'pos': (1307, 418-60), 'color': (255, 255, 255), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
-        'D': {'pos': (1225, 246-60), 'color': (255, 255, 255), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
-        'E': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
-        'F': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
-        'G': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'H': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
-        'I': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'J': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'K': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'L': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
+        'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
+        'Twyle': {'pos': (1307, 418-60), 'color': (255, 255, 255), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
+        'Bloona': {'pos': (1225, 246-60), 'color': (255, 255, 255), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
+        'Frood': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
+        'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
+        'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'DE-II': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
+        'DE-III': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
+        'DH-II': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'DH-III': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Frog
     }
 
@@ -64,38 +64,38 @@ def render_map(screen, goToLevel):
         G.add_node(node, pos=pos, color=(0, 0, 0))
 
     seeds = {
-        'A': Euler1FlowerBlack(), 'B': Hamilton1FlowerBlack(), 'C': Hamilton2FlowerBlack(), 'D': Hamilton3FlowerBlack(),
-        'E': Euler2FlowerBlack(), 'F': Euler3FlowerBlack(), 'G': DEuler1FlowerBlack(), 'J': DHamilton1FlowerBlack()
+        'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
+        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack()
     }
 
     edges = [
-        ('Frog', 'A'),('A', 'E'),('E', 'F'),('Frog', 'B'),('B', 'C'),('C', 'D'),('Frog', 'G'),('G', 'H'),('H', 'I'),('Frog', 'J'),
-        ('J', 'K'),('K', 'L')
+        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'DE-II'),('DE-II', 'DE-III'),('Frog', 'Uchya'),
+        ('Uchya', 'DH-II'),('DH-II', 'DH-III')
     ]
 
     for edge in edges:
         G.add_edge(edge[0], edge[1])
 
     node_screens = {
-        'A': Screens.GRAFOS_EULER_1,
-        'B': Screens.GRAFOS_HAMILTON_1,
-        'C': Screens.GRAFOS_HAMILTON_2,
-        'D': Screens.GRAFOS_HAMILTON_3,
-        'E': Screens.GRAFOS_EULER_2,
-        'F': Screens.GRAFOS_EULER_3,
-        'G': Screens.DIGRAFOS_EULER_1,
-        # 'H': Screens.GRAFOS_EULER_1,
-        # 'I': Screens.GRAFOS_EULER_1,
-        'J': Screens.DIGRAFOS_HAMILTON_1,
-        # 'K': Screens.GRAFOS_EULER_1,
-        # 'L': Screens.GRAFOS_EULER_1,
-        # 'M': Screens.GRAFOS_EULER_1,
+        'Erlem': Screens.GRAFOS_EULER_1,
+        'Ulfex': Screens.GRAFOS_HAMILTON_1,
+        'Twyle': Screens.GRAFOS_HAMILTON_2,
+        'Bloona': Screens.GRAFOS_HAMILTON_3,
+        'Frood': Screens.GRAFOS_EULER_2,
+        'Orrox': Screens.GRAFOS_EULER_3,
+        'Spyx': Screens.DIGRAFOS_EULER_1,
+        # 'H': Screens.DIGRAFOS_EULER_1,
+        # 'I': Screens.DIGRAFOS_EULER_1,
+        'Uchya': Screens.DIGRAFOS_HAMILTON_1,
+        # 'K': Screens.DIGRAFOS_HAMILTON_2,
+        # 'L': Screens.DIGRAFOS_HAMILTON_3,
+        # 'M': Screens.PROFILE
     }
 
     render_map_graph(screen, G, nodes, seeds)
 
     for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 40)
+        pygame.draw.circle(screen, data['color'], data['pos'], 45)
     
         # Renderizar la letra del nodo
         letter_text = font.render(node, True, (0, 0, 0))
