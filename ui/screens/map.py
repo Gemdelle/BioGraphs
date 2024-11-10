@@ -42,6 +42,25 @@ def render_map(screen, goToLevel):
     font = van_helsing #8
     font = alice_in_wonderland #9
 
+    # NODE IMG
+    done_node_image = pygame.image.load('./assets/map-nodes/done-node.png').convert_alpha()
+    done_node_image = pygame.transform.scale(done_node_image,(130,130))
+    undone_node_image = pygame.image.load('./assets/map-nodes/undone-node.png').convert_alpha()
+    undone_node_image = pygame.transform.scale(undone_node_image,(130,130))
+
+    #SIGN IMG LOAD & RESIZE
+    sign_width = 350
+    sign_height = 150
+    
+    sign_euler_image = pygame.image.load('./assets/signs/sign-euler.png').convert_alpha()
+    sign_euler_image = pygame.transform.scale(sign_euler_image,(sign_width,sign_height-50))
+    sign_hamilton_image = pygame.image.load('./assets/signs/sign-hamilton.png').convert_alpha()
+    sign_hamilton_image = pygame.transform.scale(sign_hamilton_image,(sign_width,sign_height))
+    sign_d_euler_image = pygame.image.load('./assets/signs/sign-d-euler.png').convert_alpha()
+    sign_d_euler_image = pygame.transform.scale(sign_d_euler_image,(sign_width,sign_height))
+    sign_d_hamilton_image = pygame.image.load('./assets/signs/sign-d-hamilton.png').convert_alpha()
+    sign_d_hamilton_image = pygame.transform.scale(sign_d_hamilton_image,(sign_width,sign_height))
+
     G = nx.Graph()
 
     nodes = {
@@ -52,11 +71,11 @@ def render_map(screen, goToLevel):
         'Frood': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
         'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
         'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'DE-II': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
-        'DE-III': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'DEII': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
+        'DEIII': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'DH-II': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'DH-III': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'DHII': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'DHIII': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Frog
     }
 
@@ -69,8 +88,8 @@ def render_map(screen, goToLevel):
     }
 
     edges = [
-        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'DE-II'),('DE-II', 'DE-III'),('Frog', 'Uchya'),
-        ('Uchya', 'DH-II'),('DH-II', 'DH-III')
+        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'DEII'),('DEII', 'DEIII'),('Frog', 'Uchya'),
+        ('Uchya', 'DHII'),('DHII', 'DHIII')
     ]
 
     for edge in edges:
@@ -95,23 +114,30 @@ def render_map(screen, goToLevel):
     render_map_graph(screen, G, nodes, seeds)
 
     for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 45)
-    
-        # Renderizar la letra del nodo
-        letter_text = font.render(node, True, (0, 0, 0))
-        letter_rect = letter_text.get_rect(center=data['pos'])
-        screen.blit(letter_text, letter_rect)
+        if node != 'Frog':
+            img_rect = undone_node_image.get_rect(center=data['pos'])
+            screen.blit(undone_node_image, img_rect)
+            #pygame.draw.circle(screen, data['color'], data['pos'], 45)
+        
+            # Renderizar la letra del nodo
+            letter_text = font.render(node, True, (255, 255, 255))
+            letter_rect = letter_text.get_rect(center=data['pos'])
+            screen.blit(letter_text, letter_rect)
 
-    grafo_euler_text = font.render("GRAFO Euler", True, (0, 0, 0))
-    grafo_hamilton_text = font.render("GRAFO Hamilton", True, (0, 0, 0))
-    digrafo_euler_text = font.render("DIGRAFO Euler", True, (0, 0, 0))
-    digrafo_hamilton_text = font.render("DIGRAFO Hamilton", True, (0, 0, 0))
+    graph_euler_text = font.render("Euler GRAPHS", True, (0, 0, 0))
+    graph_hamilton_text = font.render("Hamilton GRAPHS", True, (0, 0, 0))
+    digraph_euler_text = font.render("Euler DIGRAPHS", True, (0, 0, 0))
+    digraph_hamilton_text = font.render("Hamilton DIGRAPHS", True, (0, 0, 0))
 
+    screen.blit(sign_euler_image, (40,50))
+    screen.blit(sign_hamilton_image, (1340, 110))
+    screen.blit(sign_d_euler_image, (200, 750))
+    screen.blit(sign_d_hamilton_image, (1300, 550))
 
-    screen.blit(grafo_euler_text, (100, 100))
-    screen.blit(grafo_hamilton_text, (1400, 100))
-    screen.blit(digrafo_euler_text, (100, 950))
-    screen.blit(digrafo_hamilton_text, (1400, 950))
+    screen.blit(graph_euler_text, (110, 80))
+    screen.blit(graph_hamilton_text, (1400, 175))
+    screen.blit(digraph_euler_text, (270, 805))
+    screen.blit(digraph_hamilton_text, (1300+50, 550+50))
 
     handle_node_click(nodes, node_screens, goToLevel)
 
