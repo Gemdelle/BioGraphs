@@ -12,10 +12,10 @@ def render_energy_and_timer(screen, font, initial_energy, energy, timer_duration
     foreground_bar_img = pygame.transform.scale(foreground_bar_img, (initial_energy*40+80,90))
 
     # Draw the time bar
-    screen.blit(background_bar_img, (110, 50))
-    screen.blit(liquid_bar_img, (110, 50))
-    screen.blit(foreground_bar_img, (90, 30))
+    screen.blit(background_bar_img, (110+130, 50))
+    screen.blit(liquid_bar_img, (110+130, 50))
+    screen.blit(foreground_bar_img, (90+130, 30))
 
     # Draw the timer text
-    timer_text = font.render(f"{remaining_time // 1000}", True, (0, 0, 0))
-    screen.blit(timer_text, (50, 60))
+    timer_text = font.render(f"{remaining_time // 1000}", True, (255, 255, 255))
+    screen.blit(timer_text, (50+950, 60))

@@ -12,6 +12,7 @@ from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.restart_button_renderer import render_restart_button
+from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
 import warnings
@@ -29,6 +30,7 @@ seeds = {
 
 dead_flower = Euler1FlowerBlackWhite()
 flower = Euler1Flower()
+missing_nodes = len(positions)
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -61,7 +63,7 @@ restart_button_clicked_grafos_euler_1 = None
 
 def render_grafos_euler_1(screen, font):
     from graph import font_small_buttons
-    global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
+    global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -104,6 +106,8 @@ def render_grafos_euler_1(screen, font):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
+        render_seed_counter(screen,font,missing_nodes,Euler1Seed())
+
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
         dead_flower.update_animation()
@@ -136,7 +140,7 @@ def handle_grafos_euler_1_mousedown(event, go_to_map):
         reset_nodes(path)
 
 def reset_nodes(path):
-    global current_node,G, seeds
+    global current_node,G, seeds, missing_nodes
     path.clear()
     current_node = None
     seeds = {
@@ -145,9 +149,10 @@ def reset_nodes(path):
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+    missing_nodes = len(positions)
 
 def handle_grafos_euler_1_keydown(event):
-    global current_node, seeds, won_level, G
+    global current_node, seeds, won_level, G, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
@@ -162,6 +167,7 @@ def handle_grafos_euler_1_keydown(event):
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = Euler1SeedDisabled()
+            missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True

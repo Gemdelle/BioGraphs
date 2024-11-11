@@ -3,7 +3,7 @@ import pygame
 from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_neutral_frog
 
 
-class NeutralEgg:
+class NeutralFrog:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1

@@ -12,6 +12,7 @@ from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
+from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.seeds.disabled.euler_2_seed_disabled import Euler2SeedDisabled
 from ui.seeds.enabled.euler_2_seed import Euler2Seed
 
@@ -39,6 +40,7 @@ seeds = {
     'H': Euler2Seed()
 }
 
+missing_nodes = len(positions)
 dead_flower = Euler2FlowerBlackWhite()
 flower = Euler2Flower()
 
@@ -116,6 +118,8 @@ def render_grafos_euler_2(screen, font):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
+        render_seed_counter(screen,font,missing_nodes,Euler2Seed())
+
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
         dead_flower.update_animation()
@@ -151,7 +155,7 @@ def handle_grafos_euler_2_mousedown(event, go_to_map):
 
 
 def reset_nodes(path):
-    global current_node,G, seeds
+    global current_node,G, seeds, missing_nodes
     path.clear()
     current_node = None
     seeds = {
@@ -166,10 +170,12 @@ def reset_nodes(path):
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+    
+    missing_nodes = len(positions)
 
 
 def handle_grafos_euler_2_keydown(event):
-    global current_node, seeds, won_level, G
+    global current_node, seeds, won_level, G, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
@@ -184,6 +190,7 @@ def handle_grafos_euler_2_keydown(event):
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = Euler2SeedDisabled()
+            missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True
