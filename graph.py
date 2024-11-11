@@ -1,9 +1,13 @@
 import os
 import pygame
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='pygame')
+
+
 from core.screens import Screens
 from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
-from ui.screens.intro_euler_cicle import render_intro_euler_cicle, is_back_button_clicked_intro_euler_cicle
+from ui.screens.intro_euler_cycle import render_intro_euler_cycle, is_back_button_clicked_intro_euler_cicle
 from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
 from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back_button_clicked_intro_hamilton_cicle
 from ui.screens.intro_hamilton_path import render_intro_hamilton_path, is_back_button_clicked_intro_hamilton_path
@@ -59,7 +63,7 @@ font_path = 'assets/fonts/'
 title_font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 55)
 
 font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
-fontButtons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+font_buttons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
 font_small_buttons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 28)
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
@@ -67,6 +71,7 @@ start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
 # FUNCTIONS
+
 
 def go_to_map():
     global screen_selected
@@ -211,12 +216,12 @@ while running:
         completed = render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
     elif screen_selected == Screens.INTRO_HAMILTON_PATH:
         render_intro_hamilton_path(screen, font)
-    elif screen_selected == Screens.INTRO_HAMILTON_CICLE:
+    elif screen_selected == Screens.INTRO_HAMILTON_CYCLE:
         render_intro_hamilton_cicle(screen, font)
     elif screen_selected == Screens.INTRO_EULER_PATH:
         render_intro_euler_path(screen, font)
     elif screen_selected == Screens.INTRO_EULER_CICLE:
-        render_intro_euler_cicle(screen, font)
+        render_intro_euler_cycle(screen, font)
     else:
         print("Screen not found")
 

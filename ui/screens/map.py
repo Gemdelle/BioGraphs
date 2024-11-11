@@ -3,6 +3,8 @@ import os
 import networkx as nx
 import pygame
 import math
+
+from core.pet import get_selected_pet
 from core.screens import Screens
 from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack
 from ui.flowers.black.d_hamilton_1_flower_black import DHamilton1FlowerBlack
@@ -14,37 +16,18 @@ from ui.flowers.black.hamilton_2_flower_black import Hamilton2FlowerBlack
 from ui.flowers.black.hamilton_3_flower_black import Hamilton3FlowerBlack
 from ui.screens.common.graph_renderer import render_map_graph
 
-#from graph import fonts
 
 def render_map(screen, goToLevel):
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
-    #font = fonts[0]
+
     font_path = 'assets/fonts/'
-
-    #FUENTES QUE DEBERÍA IMPORTAR COMO ARRAY DESDE GRAPH
-    berry_rotunda = pygame.font.Font(os.path.join(font_path, 'Berry Rotunda.ttf'), 32)
-    celtg = pygame.font.Font(os.path.join(font_path, 'CELTG___.TTF'), 32)
-    magic_school_two = pygame.font.Font(os.path.join(font_path, 'MagicSchoolTwo.ttf'), 32)
-    megphis = pygame.font.Font(os.path.join(font_path, 'MEGPHIS.otf'), 32)
-    strange_dreams = pygame.font.Font(os.path.join(font_path, 'Strange Dreams.otf'), 32)
-    strange_dreams_italic = pygame.font.Font(os.path.join(font_path, 'Strange Dreams Italic.otf'), 32)
-    van_helsing = pygame.font.Font(os.path.join(font_path, 'Van Helsing.ttf'), 32)
-    alice_in_wonderland = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
-
-    font = strange_dreams_italic #5 fea pero se entiende
-    font = berry_rotunda #6 puede ser
-    font = celtg #6 zafa pero no me gusta tanto
-    font_water = megphis #7 parece agua
-    font = strange_dreams #7 se entiende
-    font = magic_school_two #8 no se entiende pero bueno para algún tiítulo
-    font = van_helsing #8
-    font = alice_in_wonderland #9
+    font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
 
     # NODE IMG
     done_node_image = pygame.image.load('./assets/map-nodes/done-node.png').convert_alpha()
-    done_node_image = pygame.transform.scale(done_node_image,(130,130))
+    done_node_image = pygame.transform.scale(done_node_image,(130, 130))
     undone_node_image = pygame.image.load('./assets/map-nodes/undone-node.png').convert_alpha()
     undone_node_image = pygame.transform.scale(undone_node_image,(130,130))
 
@@ -63,6 +46,8 @@ def render_map(screen, goToLevel):
 
     G = nx.Graph()
 
+    selected_frog = get_selected_pet()
+
     nodes = {
         'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
         'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
@@ -76,7 +61,7 @@ def render_map(screen, goToLevel):
         'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
         'HII': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Frog
+        'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': True}  # Frog
     }
 
     for node, pos in nodes.items():
@@ -84,7 +69,7 @@ def render_map(screen, goToLevel):
 
     seeds = {
         'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
-        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack()
+        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack(), 'Frog': selected_frog
     }
 
     edges = [
@@ -117,7 +102,6 @@ def render_map(screen, goToLevel):
         if node != 'Frog':
             img_rect = undone_node_image.get_rect(center=data['pos'])
             screen.blit(undone_node_image, img_rect)
-            #pygame.draw.circle(screen, data['color'], data['pos'], 45)
         
             # Renderizar la letra del nodo
             letter_text = font.render(node, True, (255, 255, 255))

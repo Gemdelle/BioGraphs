@@ -9,8 +9,8 @@ button_spacing = 20
 button_texts = [
     ("¿Qué es un camino de Euler?", Screens.INTRO_EULER_PATH),
     ("¿Qué es un camino de Hamilton?", Screens.INTRO_HAMILTON_PATH),
-    ("¿Qué es un ciclo de Euler?", Screens.INTRO_EULER_CICLE),
-    ("¿Qué es un ciclo de Hamilton?", Screens.INTRO_HAMILTON_CICLE)
+    ("¿Qué es un ciclo de Euler?", Screens.INTRO_EULER_CYCLE),
+    ("¿Qué es un ciclo de Hamilton?", Screens.INTRO_HAMILTON_CYCLE)
 ]
 
 # Colors

@@ -33,7 +33,7 @@ back_button_clicked_playground_1 = None
 restart_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
-    from graph import fontButtons
+    from graph import font_buttons
     global back_button_clicked_playground_1, restart_button_clicked_playground_1
     background_image = pygame.image.load("assets/playground-bg/bg-level-1.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()
@@ -51,7 +51,7 @@ def render_playground_1(screen, font):
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Draw the "Restart" button
-    restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
+    restart_button_text = font_buttons.render("RESTART", True, (0, 0, 0))
     restart_button_clicked_playground_1 = pygame.Rect(1420, 85, 200, 60)
     pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_playground_1, width=5, border_radius=15)
     screen.blit(restart_button_text, (1430, 95))

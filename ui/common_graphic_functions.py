@@ -33,6 +33,56 @@ def draw(element, screen, x, y):
         screen.blit(element.frames[element.frame_index], (element.rect.x-60, element.rect.y-60))
     element.visible = True
 
+# FROGS
+def load_frame_dark_frog(frog, index):
+    if index not in frog.frames:
+        frame_path = os.path.join(
+            f"./assets/giphs/frog/{frog.name}",
+            f"frog-night{index}.gif"
+        )
+        if os.path.exists(frame_path):
+            surf = pygame.image.load(frame_path).convert_alpha()
+            surf = pygame.transform.scale(surf, (400, 400))
+            frog.frames[index] = surf
+        else:
+            frog.frames[index] = None
 
 
+def load_frame_neutral_frog(frog, index):
+    if index not in frog.frames:
+        frame_path = os.path.join(
+            f"./assets/giphs/frog/{frog.name}",
+            f"frog_neutral_1_{index}.gif"
+        )
+        if os.path.exists(frame_path):
+            surf = pygame.image.load(frame_path).convert_alpha()
+            surf = pygame.transform.scale(surf, (400, 400))
+            frog.frames[index] = surf
+        else:
+            frog.frames[index] = None
 
+
+def load_frame_frog(frog, index):
+    if index not in frog.frames:
+        frame_path = os.path.join(
+            f"./assets/giphs/frog/{frog.name}",
+            f"{frog.name}{index}.gif"
+        )
+        if os.path.exists(frame_path):
+            surf = pygame.image.load(frame_path).convert_alpha()
+            surf = pygame.transform.scale(surf, (400, 400))
+            frog.frames[index] = surf
+        else:
+            frog.frames[index] = None
+
+
+def draw_frog(frog, screen, x, y):
+    frog.rect.x = x
+    frog.rect.y = y
+    was_visible = frog.visible
+
+    if not was_visible:
+        load_frame(frog, frog.frame_index)
+    if frog.frames[frog.frame_index] is not None:
+        screen.blit(frog.frames[frog.frame_index], (frog.rect.x-60, frog.rect.y-60))
+    frog.visible = True

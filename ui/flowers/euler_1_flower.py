@@ -1,6 +1,7 @@
 import os
 import pygame
 
+
 class Euler1Flower:
     def __init__(self):
         self.frames = {}

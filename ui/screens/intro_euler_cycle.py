@@ -32,10 +32,11 @@ energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
 timer_duration = 60000  # 60 seconds duration
 
-back_button_clicked_intro_euler_cicle = None
+back_button_clicked_intro_euler_cycle = None
 
-def render_intro_euler_cicle(screen, font):
-    global back_button_clicked_intro_euler_cicle
+
+def render_intro_euler_cycle(screen, font):
+    global back_button_clicked_intro_euler_cycle
     background_image = pygame.image.load("assets/pg-1.png").convert()
     background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -69,8 +70,8 @@ def render_intro_euler_cicle(screen, font):
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_intro_euler_cicle = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_intro_euler_cicle)  # Fondo del botón
+    back_button_clicked_intro_euler_cycle = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
+    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_intro_euler_cycle)  # Fondo del botón
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     # Check if time is up
@@ -85,8 +86,8 @@ def render_intro_euler_cicle(screen, font):
 
 
 def is_back_button_clicked_intro_euler_cicle(event):
-    global back_button_clicked_intro_euler_cicle
-    return back_button_clicked_intro_euler_cicle is not None and back_button_clicked_intro_euler_cicle.collidepoint(event.pos)
+    global back_button_clicked_intro_euler_cycle
+    return back_button_clicked_intro_euler_cycle is not None and back_button_clicked_intro_euler_cycle.collidepoint(event.pos)
 
 
 
