@@ -70,6 +70,8 @@ van_helsing = pygame.font.Font(os.path.join(font_path, 'Van Helsing.ttf'), 32)
 fonts = [alice_in_wonderland,berry_rotunda,celtg,magic_school_two,megphis,strange_dreams,strange_dreams_italic,
          van_helsing]
 
+title_font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 55)
+
 font = fonts[0]
 font_water = fonts[4]
 fontButtons = alice_in_wonderland
@@ -182,7 +184,7 @@ while running:
     elif screen_selected == Screens.SELECT_YOUR_PET:
         render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
-        buttons = render_main_screen(screen, font)
+        buttons = render_main_screen(screen, title_font, font)
     elif screen_selected == Screens.MAP:
         render_map(screen, go_to_level)
     elif screen_selected == Screens.INSTRUCTIONS:

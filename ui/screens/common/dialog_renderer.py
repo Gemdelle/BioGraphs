@@ -19,18 +19,28 @@ text_box_y = SCREEN_HEIGHT - text_box_height - 50
 circle_radius = 100
 circle_x = text_box_x - 20
 circle_y = text_box_y + text_box_height // 2
+
 def render_dialog(screen, text, font, avatar):
-    # Dibuja la caja de texto
-    pygame.draw.rect(screen, background_color, (text_box_x, text_box_y, text_box_width, text_box_height), border_radius=20)
-    pygame.draw.rect(screen, border_color, (text_box_x, text_box_y, text_box_width, text_box_height), 2, border_radius=20)
+    # Cargar las imágenes de los marcos
+    dialogue_frame = pygame.image.load("./assets/dialogue/dialogue-frame.png").convert_alpha()
+    character_frame = pygame.image.load("./assets/dialogue/character-frame.png").convert_alpha()
 
-    # Dibuja el círculo a la izquierda de la caja de texto
-    pygame.draw.circle(screen, circle_color, (circle_x, circle_y), circle_radius)
+    # Escalar las imágenes al tamaño adecuado
+    dialogue_frame = pygame.transform.scale(dialogue_frame, (text_box_width, text_box_height))
+    character_frame = pygame.transform.scale(character_frame, (circle_radius * 2, circle_radius * 2))
 
+    # Dibuja el marco del diálogo (en lugar del rectángulo relleno)
+    screen.blit(dialogue_frame, (text_box_x, text_box_y))
+
+    # Dibuja el marco del personaje (en lugar del círculo)
+    screen.blit(character_frame, (circle_x - circle_radius, circle_y - circle_radius))
+
+    # Actualiza y dibuja la animación del avatar dentro del marco del personaje
     avatar.update_animation()
-    avatar.draw(screen, circle_x-75, circle_y-75)
+    avatar.draw(screen, circle_x - 75, circle_y - 75)
 
-    # Dibuja el texto del prompt en la caja de texto
+    # Dibuja el texto en el marco de diálogo
     prompt_text = font.render(text, True, text_color)
     prompt_rect = prompt_text.get_rect(center=(text_box_x + text_box_width // 2, text_box_y + text_box_height // 2))
     screen.blit(prompt_text, prompt_rect)
+

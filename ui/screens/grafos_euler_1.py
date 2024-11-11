@@ -91,7 +91,7 @@ def render_grafos_euler_1(screen, font):
         render_graph(screen, G, font, path, positions, seeds)
 
         # Render energy bar and timer
-        render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
+        render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
         restart_button_clicked_grafos_euler_1 = render_restart_button(screen, font, fontButtons)
