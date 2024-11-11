@@ -5,10 +5,12 @@ import networkx as nx
 
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.euler_3_flower import Euler3Flower
+from ui.flowers.black_white.euler_3_flower_black_white import Euler3FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.euler_3_seed_disabled import Euler3SeedDisabled
 from ui.seeds.enabled.euler_3_seed import Euler3Seed
@@ -17,7 +19,7 @@ G = nx.Graph()
 # restarle 60 a y
 positions = {
     'A': (298, 295-60), 'B': (732, 245-60), 'C': (308, 533-60), 'D': (558, 514-60),
-    'E': (1070, 280-60), 'F': (708, 608-60), 'G': (929, 424-60), 'H': (1386, 588-60),
+    'E': (1070, 280-60), 'F': (708, 608-60), 'G': (929, 424-60), 'H': (1000, 620-60),
     'I': (1480, 375-60), 'J': (1238, 477-60)
 }
 
@@ -26,7 +28,10 @@ seeds = {
     'E': Euler3Seed(), 'F': Euler3Seed(), 'G': Euler3Seed(), 'H': Euler3Seed(),
     'I': Euler3Seed(), 'J': Euler3Seed()
 }
+
+dead_flower = Euler3FlowerBlackWhite()
 flower = Euler3Flower()
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
 
@@ -57,6 +62,7 @@ back_button_clicked_grafos_euler_3 = None
 start_button_clicked_grafos_euler_3 = None
 restart_button_clicked_grafos_euler_3 = None
 
+
 def render_grafos_euler_3(screen, font):
     from graph import font_small_buttons
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
@@ -81,11 +87,8 @@ def render_grafos_euler_3(screen, font):
     else:
         energy = initial_energy  # Reset energy if time runs out
 
-    # Dibujar el botón "Back"
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_grafos_euler_3 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_euler_3)  # Fondo del botón
-    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+    # Draw the "Back" button
+    back_button_clicked_grafos_euler_3 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
         start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
@@ -100,12 +103,15 @@ def render_grafos_euler_3(screen, font):
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
+        restart_button_clicked_grafos_euler_3 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+
+        dead_flower.update_animation()
+        dead_flower.draw(screen, 1270, 470)
 
     # Check if time is up
     if remaining_time <= 0:
@@ -121,6 +127,7 @@ def render_grafos_euler_3(screen, font):
 
     return False
 
+
 def handle_grafos_euler_3_mousedown(event, go_to_map):
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started
     if back_button_clicked_grafos_euler_3 is not None and back_button_clicked_grafos_euler_3.collidepoint(event.pos):
@@ -133,6 +140,7 @@ def handle_grafos_euler_3_mousedown(event, go_to_map):
         timer_started = False
         reset_nodes(path)
 
+
 def reset_nodes(path):
     global current_node,G, seeds
     path.clear()
@@ -144,6 +152,7 @@ def reset_nodes(path):
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+
 
 def handle_grafos_euler_3_keydown(event):
     global current_node, seeds, won_level

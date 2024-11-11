@@ -7,12 +7,12 @@ from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 text_color = (255, 255, 255) 
 
 # Text box setup
-text_box_width, text_box_height = 1100, 250
-text_box_x = (SCREEN_WIDTH - text_box_width) // 2 - 100
+text_box_width, text_box_height = 1200, 250
+text_box_x = (SCREEN_WIDTH - text_box_width) // 2
 text_box_y = SCREEN_HEIGHT - text_box_height - 80
 
 # Circle setup
-circle_radius = 135
+circle_radius = 145
 circle_x = text_box_x - 10
 circle_y = text_box_y + text_box_height // 2
 

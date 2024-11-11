@@ -5,10 +5,12 @@ import networkx as nx
 
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.hamilton_2_flower import Hamilton2Flower
+from ui.flowers.black_white.hamilton_2_flower_black_white import Hamilton2FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.hamilton_2_seed_disabled import Hamilton2SeedDisabled
 from ui.seeds.enabled.hamilton_2_seed import Hamilton2Seed
@@ -17,7 +19,7 @@ G = nx.Graph()
 positions = {
     'A': (507,397-60), 'B': (379,575-60), 'C': (598,274-60), 'D': (765,496-60),
     'E': (230,465-60), 'F': (334,304-60), 'G': (1080,268-60), 'H': (805,314-60),
-    'I': (1015,615-60), 'J': (1376,320-60), 'K': (1138,437-60), 'L': (1465,577-60),
+    'I': (1015,615-60), 'J': (1376,320-60), 'K': (1138,437-60), 'L': (1225,632-60),
 }
 
 seeds = {
@@ -25,7 +27,10 @@ seeds = {
     'E': Hamilton2Seed(), 'F': Hamilton2Seed(), 'G': Hamilton2Seed(), 'H': Hamilton2Seed(),
     'I': Hamilton2Seed(), 'J': Hamilton2Seed(), 'K': Hamilton2Seed(), 'L': Hamilton2Seed(),
 }
+
+dead_flower = Hamilton2FlowerBlackWhite()
 flower = Hamilton2Flower()
+
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
@@ -55,6 +60,7 @@ back_button_clicked_grafos_hamilton_2 = None
 start_button_clicked_grafos_hamilton_2 = None
 restart_button_clicked_grafos_hamilton_2 = None
 
+
 def render_grafos_hamilton_2(screen, font):
     from graph import font_small_buttons
     global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2, restart_button_clicked_grafos_hamilton_2, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
@@ -79,11 +85,8 @@ def render_grafos_hamilton_2(screen, font):
     else:
         energy = initial_energy  # Reset energy if time runs out
 
-    # Dibujar el botón "Back"
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_grafos_hamilton_2 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_grafos_hamilton_2)  # Fondo del botón
-    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+    # Draw the "Back" button
+    back_button_clicked_grafos_hamilton_2 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
         start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
@@ -98,12 +101,15 @@ def render_grafos_hamilton_2(screen, font):
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
+        restart_button_clicked_grafos_hamilton_2 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
-    render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+
+        dead_flower.update_animation()
+        dead_flower.draw(screen, 1250, 500)
 
     # Check if time is up
     if remaining_time <= 0:
@@ -115,9 +121,11 @@ def render_grafos_hamilton_2(screen, font):
         return False
     if won_level:
         flower.update_animation()
-        flower.draw(screen, 1450, 780)
+        flower.draw(screen, 1200, 500)
 
     return False
+
+
 def handle_grafos_hamilton_2_mousedown(event, go_to_map):
     global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2, restart_button_clicked_grafos_hamilton_2, timer_started
     if back_button_clicked_grafos_hamilton_2 is not None and back_button_clicked_grafos_hamilton_2.collidepoint(event.pos):
@@ -130,6 +138,7 @@ def handle_grafos_hamilton_2_mousedown(event, go_to_map):
         timer_started = True
         reset_nodes(path)
 
+
 def reset_nodes(path):
     global current_node,G, seeds
     path.clear()
@@ -141,6 +150,7 @@ def reset_nodes(path):
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+
 
 def handle_grafos_hamilton_2_keydown(event):
     global current_node, seeds, won_level

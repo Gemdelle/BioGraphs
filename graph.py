@@ -82,15 +82,19 @@ def go_to_level(screen):
     global screen_selected
     screen_selected = screen
 
+
 def go_to_instructions():
     global screen_selected
     screen_selected = Screens.INSTRUCTIONS
+
 
 def go_to_main():
     global screen_selected
     screen_selected = Screens.MAIN
 
+
 buttons = []
+
 # Main game loop
 while running:
     for event in pygame.event.get():

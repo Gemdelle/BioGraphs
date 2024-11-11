@@ -3,10 +3,12 @@ import networkx as nx
 
 from ui.characters.frog_neutral import FrogNeutral
 from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
+from ui.flowers.black_white.d_hamilton_1_flower_black_white import DHamilton1FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
@@ -25,6 +27,7 @@ seeds = {
     'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
 }
 
+dead_flower = DHamilton1FlowerBlackWhite()
 flower = DHamilton1Flower()
 
 for node, pos in positions.items():
@@ -82,11 +85,8 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     else:
         energy = initial_energy  # Resetear energía si se acaba el tiempo
 
-    # Dibujar el botón "Back"
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_digrafos_hamilton_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_digrafos_hamilton_1)  # Fondo del botón
-    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+    # Draw the "Back" button
+    back_button_clicked_digrafos_hamilton_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
         start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
@@ -108,6 +108,9 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
+        dead_flower.update_animation()
+        dead_flower.draw(screen, 1250, 470)
+
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
         print("Time's up! You lost.")
@@ -119,7 +122,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
     if won_level:
         flower.update_animation()
-        flower.draw(screen, 1450, 780)
+        flower.draw(screen, 1250, 470)
 
     return False
 

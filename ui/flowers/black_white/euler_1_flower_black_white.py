@@ -1,8 +1,9 @@
 import os
 import pygame
-from ui.flowers.common import load_frame, update_animation, draw
+from ui.flowers.common import load_bw_flower_frame, update_bw_animation, draw
 
-class Euler1FlowerBlack:
+
+class Euler1FlowerBlackWhite:
     def __init__(self):
         self.frames = {}
         self.frame_index = 1
@@ -15,14 +16,14 @@ class Euler1FlowerBlack:
         self.visible = False
 
         # Atributos específicos para cada flor
-        self.flower_name = "euler-1-flower-black"  # Cambia este nombre según la flor
+        self.flower_name = "euler-1-flower-bw"  # Cambia este nombre según la flor
         self.total_frames = 74  # Número total de frames para la animación
 
     def load_frame(self, index):
-        load_frame(self, index)  # Llama a la función común
+        load_bw_flower_frame(self, index)  # Llama a la función común
 
     def update_animation(self):
-        update_animation(self)  # Llama a la función común
+        update_bw_animation(self)  # Llama a la función común
 
     def draw(self, screen, x, y):
         draw(self, screen, x, y)  # Llama a la función común

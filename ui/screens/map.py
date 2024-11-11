@@ -4,14 +4,14 @@ import networkx as nx
 import pygame
 import math
 from core.screens import Screens
-from ui.flowers.black.d_euler_1_flower import DEuler1FlowerBlack
-from ui.flowers.black.d_hamilton_1_flower import DHamilton1FlowerBlack
-from ui.flowers.black.euler_1_flower import Euler1FlowerBlack
-from ui.flowers.black.euler_2_flower import Euler2FlowerBlack
-from ui.flowers.black.euler_3_flower import Euler3FlowerBlack
-from ui.flowers.black.hamilton_1_flower import Hamilton1FlowerBlack
-from ui.flowers.black.hamilton_2_flower import Hamilton2FlowerBlack
-from ui.flowers.black.hamilton_3_flower import Hamilton3FlowerBlack
+from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack
+from ui.flowers.black.d_hamilton_1_flower_black import DHamilton1FlowerBlack
+from ui.flowers.black.euler_1_flower_black import Euler1FlowerBlack
+from ui.flowers.black.euler_2_flower_black import Euler2FlowerBlack
+from ui.flowers.black.euler_3_flower_black import Euler3FlowerBlack
+from ui.flowers.black.hamilton_1_flower_black import Hamilton1FlowerBlack
+from ui.flowers.black.hamilton_2_flower_black import Hamilton2FlowerBlack
+from ui.flowers.black.hamilton_3_flower_black import Hamilton3FlowerBlack
 from ui.screens.common.graph_renderer import render_map_graph
 
 #from graph import fonts
@@ -71,11 +71,11 @@ def render_map(screen, goToLevel):
         'Frood': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
         'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
         'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'DEII': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
-        'DEIII': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'EII': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
+        'EIII': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'DHII': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'DHIII': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'HII': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
+        'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
         'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': False}  # Frog
     }
 
@@ -88,8 +88,8 @@ def render_map(screen, goToLevel):
     }
 
     edges = [
-        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'DEII'),('DEII', 'DEIII'),('Frog', 'Uchya'),
-        ('Uchya', 'DHII'),('DHII', 'DHIII')
+        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'EII'),('EII', 'EIII'),('Frog', 'Uchya'),
+        ('Uchya', 'HII'),('HII', 'HIII')
     ]
 
     for edge in edges:
