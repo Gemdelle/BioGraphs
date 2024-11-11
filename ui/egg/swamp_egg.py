@@ -1,5 +1,6 @@
 import os
 import pygame
+from ui.common_graphic_functions import load_frame, update_animation, draw
 
 class SwampEgg:
     def __init__(self):
@@ -12,29 +13,14 @@ class SwampEgg:
         self.last_update_time = 0
         self.typing_speed = 100  # Time in milliseconds between each character
         self.visible = False
+        self.name = "swamp"
+        self.total_frames = 248
 
     def load_frame(self, index):
-        if index not in self.frames:
-            frame_path = os.path.join("./assets/giphs/egg/swamp", f'swamp{index}.gif')
-            if os.path.exists(frame_path):
-                surf = pygame.image.load(frame_path).convert_alpha()
-                surf = pygame.transform.scale(surf, (200, 200))
-                self.frames[index] = surf
-            else:
-                self.frames[index] = None  # Mark as None if the frame does not exist
+        load_frame(self, index)  # Llamada a la función importada
 
     def update_animation(self):
-        current_time = pygame.time.get_ticks()
-        self.frame_index = (current_time // 30) % 248  # Assuming 248 frames
-        self.load_frame(self.frame_index)  # Lazy load the current frame
+        update_animation(self)  # Llamada a la función importada
 
     def draw(self, screen, x, y):
-        self.rect.x = x
-        self.rect.y = y
-        was_visible = self.visible
-
-        if not was_visible:
-            self.load_frame(self.frame_index)
-        if self.frames[self.frame_index] is not None:
-            screen.blit(self.frames[self.frame_index], (self.rect.x, self.rect.y))
-        self.visible = True
+        draw(self, screen, x, y)  # Llamada a la función importada

@@ -1,3 +1,4 @@
+import os
 import pygame
 import sys
 
@@ -11,8 +12,9 @@ from core.pet import selected_pet
 
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1710, 1034
-CHARACTER_SIZE = (200, 200)  # Size for each character image
+CHARACTER_SIZE = (300, 300)  # Size for each character image
 BUTTON_SIZE = (300, 70)  # Size for the button
+
 
 
 def render_select_your_pet_screen(screen, go_to_level):
@@ -58,7 +60,7 @@ def render_select_your_pet_screen(screen, go_to_level):
         character["animation"].draw(screen, rect.topleft[0], rect.topleft[1])
 
         # Draw character name
-        font = pygame.font.Font(None, 36)
+        font = pygame.font.Font(os.path.join('assets/fonts/', 'Alice_in_Wonderland_3.ttf'), 40)
         text_surface = font.render(character["name"], True, (255, 255, 255))
         text_rect = text_surface.get_rect(center=(rect.centerx, rect.bottom + 30))
         screen.blit(text_surface, text_rect)
