@@ -65,10 +65,14 @@ restart_button_clicked_digrafos_hamilton_1 = None
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from graph import font_small_buttons
-    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes
+    global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
-    if timer_started:
+    if won_level:
+        background_image_win = pygame.image.load("assets/final-bg/d-hamilton.png").convert()
+        background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
+        screen.blit(background_image_win, (0, 0))
+    elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/d-hamilton.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))

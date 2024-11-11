@@ -56,13 +56,20 @@ back_button_clicked_digrafos_euler = None
 start_button_clicked_digrafos_euler = None
 restart_button_clicked_digrafos_euler = None
 
+# BACKGROUND IMG
+
+
 
 def render_digrafos_euler_1(screen, font):
     from graph import font_small_buttons
-    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes
+    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, background_image_win, remaining_time
 
     current_time = pygame.time.get_ticks()
-    if timer_started:
+    if won_level:
+        background_image_win = pygame.image.load("assets/final-bg/d-euler.png").convert()
+        background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
+        screen.blit(background_image_win, (0, 0))
+    elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/d-euler.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
@@ -119,8 +126,10 @@ def render_digrafos_euler_1(screen, font):
         return False
 
     if won_level:
+        
         flower.update_animation()
         flower.draw(screen, 1250, 470)
+
 
     return False
 
