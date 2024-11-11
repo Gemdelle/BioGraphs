@@ -4,20 +4,16 @@ import networkx as nx
 from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 # Colors
-background_color = (255, 255, 255)  # White
-button_color = (173, 216, 230)  # Light blue
-text_color = (0, 0, 0)  # Black
-circle_color = (255, 182, 193)  # Light pink
-border_color = (0, 0, 0)  # Black
+text_color = (255, 255, 255) 
 
 # Text box setup
-text_box_width, text_box_height = 1200, 150
-text_box_x = (SCREEN_WIDTH - text_box_width) // 2
-text_box_y = SCREEN_HEIGHT - text_box_height - 50
+text_box_width, text_box_height = 1100, 250
+text_box_x = (SCREEN_WIDTH - text_box_width) // 2 - 100
+text_box_y = SCREEN_HEIGHT - text_box_height - 80
 
 # Circle setup
-circle_radius = 100
-circle_x = text_box_x - 20
+circle_radius = 135
+circle_x = text_box_x - 10
 circle_y = text_box_y + text_box_height // 2
 
 def render_dialog(screen, text, font, avatar):
