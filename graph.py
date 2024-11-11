@@ -56,25 +56,11 @@ completed = False
 
 font_path = 'assets/fonts/'
 
-alice_in_wonderland = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
-berry_rotunda = pygame.font.Font(os.path.join(font_path, 'Berry Rotunda.ttf'), 32)
-cardinal = pygame.font.Font(os.path.join(font_path, 'Cardinal.ttf'), 32)
-cardinal_alternate = pygame.font.Font(os.path.join(font_path, 'Cardinal-Alternate.ttf'), 32)
-celtg = pygame.font.Font(os.path.join(font_path, 'CELTG___.TTF'), 32)
-magic_school_two = pygame.font.Font(os.path.join(font_path, 'MagicSchoolTwo.ttf'), 32)
-megphis = pygame.font.Font(os.path.join(font_path, 'MEGPHIS.otf'), 32)
-strange_dreams = pygame.font.Font(os.path.join(font_path, 'Strange Dreams.otf'), 32)
-strange_dreams_italic = pygame.font.Font(os.path.join(font_path, 'Strange Dreams Italic.otf'), 32)
-van_helsing = pygame.font.Font(os.path.join(font_path, 'Van Helsing.ttf'), 32)
-
-fonts = [alice_in_wonderland,berry_rotunda,celtg,magic_school_two,megphis,strange_dreams,strange_dreams_italic,
-         van_helsing]
-
 title_font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 55)
 
-font = fonts[0]
-font_water = fonts[4]
-fontButtons = alice_in_wonderland
+font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+fontButtons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+font_small_buttons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 28)
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()

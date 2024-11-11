@@ -21,7 +21,7 @@ def render_main_screen(screen, title_font, font):
         button_image = pygame.image.load("./assets/button.png").convert_alpha()
         button_image = pygame.transform.scale(button_image, (300, 80))
         
-        # Ajustar separación vertical (cambiado de 70 a 100)
+        # Ajustar separación vertical
         rect = button_image.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2.5 + i * 100))
         
         # Dibujar el botón con imagen y texto

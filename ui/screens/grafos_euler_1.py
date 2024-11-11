@@ -1,3 +1,5 @@
+import os
+
 import pygame
 import networkx as nx
 
@@ -16,7 +18,7 @@ warnings.filterwarnings("ignore")
 
 G = nx.Graph()
 positions = {
-    'A': (891, 254-60), 'B': (1339, 371-60), 'C': (1447, 546-60), 'D': (752, 595-60),
+    'A': (891, 254-60), 'B': (1084, 371-60), 'C': (1028, 546-60), 'D': (752, 595-60),
     'E': (235, 525-60), 'F': (484, 410-60)
 }
 seeds = {
@@ -54,9 +56,12 @@ back_button_clicked_grafos_euler_1 = None
 start_button_clicked_grafos_euler_1 = None
 restart_button_clicked_grafos_euler_1 = None
 
+
+
 def render_grafos_euler_1(screen, font):
     from graph import fontButtons
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
+    font_small_buttons = pygame.font.Font(os.path.join('assets/fonts/', 'Alice_in_Wonderland_3.ttf'), 25)
 
     current_time = pygame.time.get_ticks()
     if timer_started:
@@ -79,7 +84,7 @@ def render_grafos_euler_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Draw the "Back" button
-    back_button_clicked_grafos_euler_1 = render_map_button(screen, font, fontButtons)
+    back_button_clicked_grafos_euler_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
         start_button_text = fontButtons.render("Start", True, (255, 255, 255))
@@ -94,10 +99,10 @@ def render_grafos_euler_1(screen, font):
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_clicked_grafos_euler_1 = render_restart_button(screen, font, fontButtons)
+        restart_button_clicked_grafos_euler_1 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
-        render_main_menu_button(screen, font, fontButtons)
+        render_main_menu_button(screen, font_small_buttons)
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 

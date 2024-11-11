@@ -1,3 +1,5 @@
+import os
+
 import pygame
 import networkx as nx
 
@@ -6,6 +8,8 @@ from ui.flowers.euler_3_flower import Euler3Flower
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.seeds.disabled.euler_3_seed_disabled import Euler3SeedDisabled
 from ui.seeds.enabled.euler_3_seed import Euler3Seed
 
@@ -54,7 +58,7 @@ start_button_clicked_grafos_euler_3 = None
 restart_button_clicked_grafos_euler_3 = None
 
 def render_grafos_euler_3(screen, font):
-    from graph import fontButtons
+    from graph import font_small_buttons
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower
 
     current_time = pygame.time.get_ticks()
@@ -84,7 +88,7 @@ def render_grafos_euler_3(screen, font):
     screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
 
     if not timer_started:
-        start_button_text = fontButtons.render("Start", True, (255, 255, 255))
+        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
         start_button_clicked_grafos_euler_3 = pygame.Rect(750, 400, 160, 80)
         pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_3)
         screen.blit(start_button_text, (775, 415))
@@ -93,13 +97,13 @@ def render_grafos_euler_3(screen, font):
         render_graph(screen, G, font, path, positions, seeds)
 
         # Render energy bar and timer
-        render_energy_and_timer(screen, font, energy, timer_duration, remaining_time)
+        render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_text = fontButtons.render("RESTART", True, (0, 0, 0))
-        restart_button_clicked_grafos_euler_3 = pygame.Rect(1420, 85, 200, 60)
-        pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_grafos_euler_3, width=5, border_radius=15)
-        screen.blit(restart_button_text, (1430, 95))
+        restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
+
+        # Draw the "Main Menu" button
+        render_main_menu_button(screen, font_small_buttons)
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
