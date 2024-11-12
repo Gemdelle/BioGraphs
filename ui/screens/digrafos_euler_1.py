@@ -1,9 +1,8 @@
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.d_euler_1_flower import DEuler1Flower
-from ui.flowers.black_white.d_euler_1_flower_black_white import DEuler1FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -11,8 +10,6 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
-from ui.seeds.disabled.digrafos_euler_1_seed_disabled import DigrafosEuler1SeedDisabled
-from ui.seeds.enabled.digrafos_euler_1_seed import DigrafosEuler1Seed
 
 G = nx.DiGraph()
 positions = {
@@ -21,12 +18,17 @@ positions = {
 }
 
 seeds = {
-    'A': DigrafosEuler1Seed(), 'B': DigrafosEuler1Seed(), 'C': DigrafosEuler1Seed(), 'D': DigrafosEuler1Seed(),
-    'E': DigrafosEuler1Seed(), 'F': DigrafosEuler1Seed()
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
 }
 
-dead_flower = DEuler1FlowerBlackWhite()
-flower = DEuler1Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/d-euler-flower/d-euler-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -109,9 +111,9 @@ def render_digrafos_euler_1(screen, font):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes,DigrafosEuler1Seed())
+        render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()
@@ -149,8 +151,12 @@ def reset_nodes(path):
     path.clear()
     current_node = None
     seeds = {
-        'A': DigrafosEuler1Seed(), 'B': DigrafosEuler1Seed(), 'C': DigrafosEuler1Seed(), 'D': DigrafosEuler1Seed(),
-        'E': DigrafosEuler1Seed(), 'F': DigrafosEuler1Seed()
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
@@ -167,13 +173,13 @@ def handle_digrafos_euler_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = DigrafosEuler1SeedDisabled()
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = DigrafosEuler1SeedDisabled()
+                seeds[current_node] =  AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
             missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):

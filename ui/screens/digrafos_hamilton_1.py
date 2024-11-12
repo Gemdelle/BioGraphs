@@ -1,9 +1,8 @@
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
-from ui.flowers.black_white.d_hamilton_1_flower_black_white import DHamilton1FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -28,8 +27,9 @@ seeds = {
     'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
 }
 
-dead_flower = DHamilton1FlowerBlackWhite()
-flower = DHamilton1Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-hamilton-flower-bw/d-hamilton-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/d-hamilton-flower/d-hamilton-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -114,7 +114,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         render_seed_counter(screen,font,missing_nodes,DigrafosHamilton1Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()

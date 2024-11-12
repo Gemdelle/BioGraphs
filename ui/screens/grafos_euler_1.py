@@ -3,9 +3,8 @@ import os
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.euler_1_flower import Euler1Flower
-from ui.flowers.black_white.euler_1_flower_black_white import Euler1FlowerBlackWhite
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -29,8 +28,8 @@ seeds = {
     'E': Euler1Seed(), 'F': Euler1Seed()
 }
 
-dead_flower = Euler1FlowerBlackWhite()
-flower = Euler1Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-1-flower/euler-1-flower", frame_size=(480, 480), frame_count=74)
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -115,7 +114,7 @@ def render_grafos_euler_1(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,Euler1Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()

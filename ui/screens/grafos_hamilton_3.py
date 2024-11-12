@@ -3,9 +3,8 @@ import os
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.hamilton_3_flower import Hamilton3Flower
-from ui.flowers.black_white.hamilton_3_flower_black_white import Hamilton3FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
@@ -31,8 +30,9 @@ seeds = {
     'M': Hamilton3Seed(), 'N': Hamilton3Seed(), 'O': Hamilton3Seed(), 'P': Hamilton3Seed()
 }
 
-dead_flower= Hamilton3FlowerBlackWhite()
-flower = Hamilton3Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/hamilton-3-flower-bw/hamilton-3-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/hamilton-3-flower/hamilton-3-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -119,7 +119,7 @@ def render_grafos_hamilton_3(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,Hamilton3Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()

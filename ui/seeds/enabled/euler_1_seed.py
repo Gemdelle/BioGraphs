@@ -31,7 +31,7 @@ class Euler1Seed:
     def update_animation(self):
         current_time = pygame.time.get_ticks()
         self.frame_index = (current_time // 30) % 74  # Asumiendo 74 frames
-        self.load_frame(self.frame_index)  # Cargar solo el frame actual
+        self.load_frame(self.frame_index, 90, 90)  # Cargar solo el frame actual
 
     def draw(self, screen, x, y):
         # Centrar el rect en (x, y)
