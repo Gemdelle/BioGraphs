@@ -33,7 +33,7 @@ back_button_clicked_playground_1 = None
 restart_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
-    from graph import font_buttons
+    from main import font_buttons
     global back_button_clicked_playground_1, restart_button_clicked_playground_1
     background_image = pygame.image.load("assets/playground-bg/bg-level-1.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()

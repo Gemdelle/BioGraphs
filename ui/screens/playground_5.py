@@ -7,7 +7,7 @@ from ui.screens.common.graph_renderer import render_simple_node_graph
 
 G = nx.Graph()
 positions = {
-    'A': (685, 429), 'B': (851, 242), 'C': (1032, 429), 'D': (1032, 669), 'E': (685, 669)
+    'A': (557, 406-60), 'B': (914, 158-60), 'C': (1266, 406-60), 'D': (1266, 684-60), 'E': (557, 684-60)
 }
 
 for node, pos in positions.items():
@@ -31,7 +31,7 @@ current_node = None
 back_button_clicked_playground_5 = None
 restart_button_clicked_playground_5 = None
 def render_playground_5(screen, font):
-    from graph import font_buttons
+    from main import font_buttons
     global back_button_clicked_playground_5, restart_button_clicked_playground_5
     background_image = pygame.image.load("assets/playground-bg/bg-level-5.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()

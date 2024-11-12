@@ -220,7 +220,7 @@ while running:
         render_intro_hamilton_cicle(screen, font)
     elif screen_selected == Screens.INTRO_EULER_PATH:
         render_intro_euler_path(screen, font)
-    elif screen_selected == Screens.INTRO_EULER_CICLE:
+    elif screen_selected == Screens.INTRO_EULER_CYCLE:
         render_intro_euler_cycle(screen, font)
     else:
         print("Screen not found")

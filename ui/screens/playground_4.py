@@ -8,8 +8,8 @@ from ui.screens.common.graph_renderer import render_simple_node_graph
 G = nx.Graph()
 
 positions = {
-    'A': (933, 681),  'B': (728, 681),  'C': (866, 476-60),  'D': (627, 476-60),  'E': (742, 284-60),  'F': (866, 116-60),
-    'G': (1021, 284-60),  'H': (1045, 476-60)
+    'A': (1070, 690-60),  'B': (672, 690-60),  'C': (866, 406-60),  'D': (627, 476-60),  'E': (752, 284-60),  'F': (866, 116-60),
+    'G': (1001, 284-60),  'H': (1127, 476-60)
 }
 
 
@@ -34,7 +34,7 @@ current_node = None
 back_button_clicked_playground_4 = None
 restart_button_clicked_playground_4 = None
 def render_playground_4(screen, font):
-    from graph import font_buttons
+    from main import font_buttons
     global back_button_clicked_playground_4, restart_button_clicked_playground_4
     background_image = pygame.image.load("assets/playground-bg/bg-level-4.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()
