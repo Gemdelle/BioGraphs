@@ -19,7 +19,7 @@ class DEuler1Flower:
             frame_path = os.path.join("./assets/giphs/flowers/d-euler-flower", f'd-euler-flower{index}.gif')
             if os.path.exists(frame_path):
                 surf = pygame.image.load(frame_path).convert_alpha()
-                surf = pygame.transform.scale(surf, (200, 200))
+                surf = pygame.transform.scale(surf, (480, 480))
                 self.frames[index] = surf
             else:
                 self.frames[index] = None  # Mark as None if the frame does not exist

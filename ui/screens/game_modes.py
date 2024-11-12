@@ -1,7 +1,7 @@
 import pygame
 
 def render_main_screen(screen, title_font, font):
-    from graph import SCREEN_WIDTH, SCREEN_HEIGHT
+    from main import SCREEN_WIDTH, SCREEN_HEIGHT
 
     # Fondo
     background_image = pygame.image.load("assets/main-bg.png").convert()

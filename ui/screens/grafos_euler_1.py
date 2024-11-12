@@ -63,7 +63,7 @@ restart_button_clicked_grafos_euler_1 = None
 
 
 def render_grafos_euler_1(screen, font):
-    from graph import font_small_buttons
+    from main import font_small_buttons
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -117,8 +117,12 @@ def render_grafos_euler_1(screen, font):
 
         render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
 
-        dead_flower.update_animation()
-        dead_flower.draw(screen, 1200, 300)
+        if won_level:
+            flower.update_animation()
+            flower.draw(screen, 1200, 300)
+        else:
+            dead_flower.update_animation()
+            dead_flower.draw(screen, 1200, 300)
 
     # Check if time is up
     if remaining_time <= 0:
@@ -128,9 +132,7 @@ def render_grafos_euler_1(screen, font):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
 
-    if won_level:
-        flower.update_animation()
-        flower.draw(screen, 1200, 300)
+
 
     return False
 
