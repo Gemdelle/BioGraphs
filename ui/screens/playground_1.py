@@ -8,7 +8,7 @@ from ui.screens.common.graph_renderer import render_simple_node_graph
 G = nx.Graph()
 
 positions = {
-    'A': (1034, 147-60), 'B': (811, 223-60), 'C': (937, 321-60), 'D': (1102, 390-60), 'E': (788, 599-60)
+    'A': (1034, 147-60), 'B': (811, 223-60), 'C': (935, 311-60), 'D': (1072, 370-60), 'E': (768, 599-60)
 }
 
 for node, pos in positions.items():
