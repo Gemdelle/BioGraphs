@@ -3,9 +3,8 @@ import os
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.hamilton_2_flower import Hamilton2Flower
-from ui.flowers.black_white.hamilton_2_flower_black_white import Hamilton2FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
@@ -29,8 +28,9 @@ seeds = {
     'I': Hamilton2Seed(), 'J': Hamilton2Seed(), 'K': Hamilton2Seed(), 'L': Hamilton2Seed(),
 }
 
-dead_flower = Hamilton2FlowerBlackWhite()
-flower = Hamilton2Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/hamilton-2-flower-bw/hamilton-2-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/hamilton-2-flower/hamilton-2-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -64,7 +64,7 @@ restart_button_clicked_grafos_hamilton_2 = None
 
 
 def render_grafos_hamilton_2(screen, font):
-    from graph import font_small_buttons
+    from main import font_small_buttons
     global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2, restart_button_clicked_grafos_hamilton_2, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -114,10 +114,14 @@ def render_grafos_hamilton_2(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,Hamilton2Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
-        dead_flower.update_animation()
-        dead_flower.draw(screen, 1250, 500)
+        if won_level:
+            flower.update_animation()
+            flower.draw(screen, 1200, 300)
+        else:
+            dead_flower.update_animation()
+            dead_flower.draw(screen, 1200, 300)
 
     # Check if time is up
     if remaining_time <= 0:
@@ -127,9 +131,6 @@ def render_grafos_hamilton_2(screen, font):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
-    if won_level:
-        flower.update_animation()
-        flower.draw(screen, 1200, 500)
 
     return False
 

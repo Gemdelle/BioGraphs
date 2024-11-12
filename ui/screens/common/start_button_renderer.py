@@ -1,7 +1,7 @@
 import pygame
 
 def render_start_button(screen, font, seed):
-    from graph import SCREEN_WIDTH, SCREEN_HEIGHT
+    from main import SCREEN_WIDTH, SCREEN_HEIGHT
     # Cargar y ajustar la imagen del botón
     start_button_image = pygame.image.load("./assets/start-button.png").convert_alpha()
     start_button_image = pygame.transform.scale(start_button_image, (300, 300))
@@ -13,7 +13,7 @@ def render_start_button(screen, font, seed):
     screen.blit(start_button_image, start_button_rect)
 
     # Actualizar la animación de la semilla
-    seed.update_large_animation()
+    seed.update_animation()
 
     # Dibujar la semilla centrada en el botón
     seed_x = start_button_rect.centerx  # Centro del botón en el eje X

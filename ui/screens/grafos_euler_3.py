@@ -3,9 +3,8 @@ import os
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.euler_3_flower import Euler3Flower
-from ui.flowers.black_white.euler_3_flower_black_white import Euler3FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
@@ -30,8 +29,9 @@ seeds = {
     'I': Euler3Seed(), 'J': Euler3Seed()
 }
 
-dead_flower = Euler3FlowerBlackWhite()
-flower = Euler3Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower/euler-3-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-3-flower/euler-3-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -66,7 +66,7 @@ restart_button_clicked_grafos_euler_3 = None
 
 
 def render_grafos_euler_3(screen, font):
-    from graph import font_small_buttons
+    from main import font_small_buttons
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -116,10 +116,14 @@ def render_grafos_euler_3(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,Euler3Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
-        dead_flower.update_animation()
-        dead_flower.draw(screen, 1270, 470)
+        if won_level:
+            flower.update_animation()
+            flower.draw(screen, 1200, 300)
+        else:
+            dead_flower.update_animation()
+            dead_flower.draw(screen, 1200, 300)
 
     # Check if time is up
     if remaining_time <= 0:
@@ -129,9 +133,6 @@ def render_grafos_euler_3(screen, font):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
         return False
-    if won_level:
-        flower.update_animation()
-        flower.draw(screen, 1450, 780)
 
     return False
 

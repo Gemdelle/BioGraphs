@@ -1,9 +1,8 @@
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.flowers.d_hamilton_1_flower import DHamilton1Flower
-from ui.flowers.black_white.d_hamilton_1_flower_black_white import DHamilton1FlowerBlackWhite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -28,8 +27,9 @@ seeds = {
     'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
 }
 
-dead_flower = DHamilton1FlowerBlackWhite()
-flower = DHamilton1Flower()
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-hamilton-flower-bw/d-hamilton-flower-bw", frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/d-hamilton-flower/d-hamilton-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -64,7 +64,7 @@ restart_button_clicked_digrafos_hamilton_1 = None
 
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
-    from graph import font_small_buttons
+    from main import font_small_buttons
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -114,10 +114,14 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         render_seed_counter(screen,font,missing_nodes,DigrafosHamilton1Seed())
 
-        render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+        render_dialog(screen, "¿Qué querés saber?", font)
 
-        dead_flower.update_animation()
-        dead_flower.draw(screen, 1250, 470)
+        if won_level:
+            flower.update_animation()
+            flower.draw(screen, 1250, 470)
+        else:
+            dead_flower.update_animation()
+            dead_flower.draw(screen, 1250, 470)
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
@@ -127,10 +131,6 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Resetear color de los nodos
         return False
-
-    if won_level:
-        flower.update_animation()
-        flower.draw(screen, 1250, 470)
 
     return False
 

@@ -69,7 +69,7 @@ def render_playground_2(screen, font):
     pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_playground_2, width=5, border_radius=15)
     screen.blit(restart_button_text, (1430, 95))
 
-    render_dialog(screen, "¿Qué querés saber?", font, FrogNeutral())
+    render_dialog(screen, "¿Qué querés saber?", font)
     return False
 
 def handle_playground_2_mousedown(event, go_to_playground):
