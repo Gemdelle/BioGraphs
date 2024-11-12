@@ -28,10 +28,26 @@ class Euler1Seed:
             else:
                 self.frames[index] = None  # Marcar como None si el frame no existe
 
+
+    def load_large_frame(self, index):
+        if index not in self.frames:
+            frame_path = os.path.join("./assets/giphs/seeds/euler-1-seed", f'euler-1-seed.png{index}.gif')
+            if os.path.exists(frame_path):
+                surf = pygame.image.load(frame_path).convert_alpha()
+                surf = pygame.transform.scale(surf, (180, 180))
+                self.frames[index] = surf
+            else:
+                self.frames[index] = None  # Marcar como None si el frame no existe
+
     def update_animation(self):
         current_time = pygame.time.get_ticks()
         self.frame_index = (current_time // 30) % 74  # Asumiendo 74 frames
         self.load_frame(self.frame_index)  # Cargar solo el frame actual
+
+    def update_large_animation(self):
+        current_time = pygame.time.get_ticks()
+        self.frame_index = (current_time // 30) % 74  # Asumiendo 74 frames
+        self.load_large_frame(self.frame_index)  # Cargar solo el frame actual
 
     def draw(self, screen, x, y):
         # Centrar el rect en (x, y)

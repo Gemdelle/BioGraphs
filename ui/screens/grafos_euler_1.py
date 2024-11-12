@@ -13,6 +13,7 @@ from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.start_button_renderer import render_start_button
 from ui.seeds.disabled.euler_1_seed_disabled import Euler1SeedDisabled
 from ui.seeds.enabled.euler_1_seed import Euler1Seed
 import warnings
@@ -93,10 +94,12 @@ def render_grafos_euler_1(screen, font):
     back_button_clicked_grafos_euler_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
-        start_button_clicked_grafos_euler_1 = pygame.Rect(750, 400, 160, 80)
-        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_1)
-        screen.blit(start_button_text, (775, 415))
+        # start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
+        # start_button_clicked_grafos_euler_1 = pygame.Rect(750, 400, 160, 80)
+        # pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_1)
+        # screen.blit(start_button_text, (775, 415))
+        render_start_button(screen, font, Euler1Seed())
+
     else:
         # Render the graph
         render_graph(screen, G, font, path, positions, seeds)
