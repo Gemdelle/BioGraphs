@@ -1,6 +1,6 @@
 import os
 import pygame
-from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_neutral_frog
+from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_frog
 
 
 class NeutralFrog:
@@ -18,7 +18,7 @@ class NeutralFrog:
         self.total_frames = 248
 
     def load_frame(self, index):
-        load_frame_neutral_frog(self, index)  # Llamada a la función importada
+        load_frame_frog(self, index)  # Llamada a la función importada
 
     def update_animation(self):
         update_animation(self)  # Llamada a la función importada

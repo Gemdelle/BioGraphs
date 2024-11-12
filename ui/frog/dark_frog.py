@@ -1,6 +1,6 @@
 import os
 import pygame
-from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_dark_frog, draw_frog
+from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_frog
 
 
 class DarkFrog:
@@ -18,10 +18,10 @@ class DarkFrog:
         self.total_frames = 192
 
     def load_frame(self, index):
-        load_frame_dark_frog(self, index)  # Llamada a la función importada
+        load_frame_frog(self, index)  # Llamada a la función importada
 
     def update_animation(self):
         update_animation(self)  # Llamada a la función importada
 
     def draw(self, screen, x, y):
-        draw_frog(self, screen, x, y)  # Llamada a la función importada
+        draw(self, screen, x, y)  # Llamada a la función importada
