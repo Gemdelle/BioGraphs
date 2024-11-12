@@ -214,7 +214,7 @@ while running:
         completed = render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
         completed = render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
-    elif screen_selected == Screens.INTRO_HAMILTON_PATH:
+    elif screen_selected == Screens.INTRO_HAMILTON_PATH: 
         render_intro_hamilton_path(screen, font)
     elif screen_selected == Screens.INTRO_HAMILTON_CYCLE:
         render_intro_hamilton_cicle(screen, font)
