@@ -30,11 +30,10 @@ class AnimatedSprite:
         self.load_frame(self.frame_index)
 
     def draw(self, screen, x, y):
-        """Dibuja el frame actual en la posición especificada."""
-        self.rect.x = x
-        self.rect.y = y
+        """Dibuja el frame actual en la posición especificada con el pivot en el centro."""
+        self.rect.center = (x, y)
         if not self.visible:
             self.load_frame(self.frame_index)
         if self.frames[self.frame_index] is not None:
-            screen.blit(self.frames[self.frame_index], (self.rect.x, self.rect.y))
+            screen.blit(self.frames[self.frame_index], self.rect.topleft)
         self.visible = True
