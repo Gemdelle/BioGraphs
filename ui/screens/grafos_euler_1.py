@@ -23,9 +23,14 @@ positions = {
     'A': (891, 254-60), 'B': (1084, 371-60), 'C': (1028, 546-60), 'D': (752, 595-60),
     'E': (235, 525-60), 'F': (484, 410-60)
 }
+
 seeds = {
-    'A': Euler1Seed(), 'B': Euler1Seed(), 'C': Euler1Seed(), 'D': Euler1Seed(),
-    'E': Euler1Seed(), 'F': Euler1Seed()
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-1/euler-bug-1", frame_size=(120, 120), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -97,7 +102,7 @@ def render_grafos_euler_1(screen, font):
         # start_button_clicked_grafos_euler_1 = pygame.Rect(750, 400, 160, 80)
         # pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_1)
         # screen.blit(start_button_text, (775, 415))
-        render_start_button(screen, font, Euler1Seed())
+        render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74))
 
     else:
         # Render the graph
@@ -151,10 +156,16 @@ def reset_nodes(path):
     global current_node,G, seeds, missing_nodes
     path.clear()
     current_node = None
+    
     seeds = {
-        'A': Euler1Seed(), 'B': Euler1Seed(), 'C': Euler1Seed(), 'D': Euler1Seed(),
-        'E': Euler1Seed(), 'F': Euler1Seed()
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-1/bug-euler-1", frame_size=(120, 120), frame_count=74)
     }
+
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
     missing_nodes = len(positions)
@@ -168,13 +179,13 @@ def handle_grafos_euler_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = Euler1SeedDisabled()
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = Euler1SeedDisabled()
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
             missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):

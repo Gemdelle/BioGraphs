@@ -24,7 +24,7 @@ seeds = {
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
     'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
     'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug", frame_size=(90, 90), frame_count=74)
+    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug", frame_size=(120, 120), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -174,13 +174,13 @@ def handle_digrafos_euler_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] =  AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
+                seeds[current_node] =  AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
             missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):

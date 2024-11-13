@@ -23,8 +23,14 @@ positions = {
 }
 
 seeds = {
-    'A': DigrafosHamilton1Seed(), 'B': DigrafosHamilton1Seed(), 'C': DigrafosHamilton1Seed(), 'D': DigrafosHamilton1Seed(),
-    'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-hamilton/d-hamilton-bug", frame_size=(120, 120), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-hamilton-flower-bw/d-hamilton-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -112,7 +118,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes,DigrafosHamilton1Seed())
+        render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
 
         render_dialog(screen, "¿Qué querés saber?", font)
 
@@ -151,9 +157,16 @@ def reset_nodes(path):
     path.clear()
     current_node = None
     seeds = {
-        'A': DigrafosHamilton1Seed(), 'B': DigrafosHamilton1Seed(), 'C': DigrafosHamilton1Seed(), 'D': DigrafosHamilton1Seed(),
-        'E': DigrafosHamilton1Seed(), 'F': DigrafosHamilton1Seed(), 'G': DigrafosHamilton1Seed(), 'H': DigrafosHamilton1Seed()
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
+    'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-hamilton/d-hamilton-bug", frame_size=(120, 120), frame_count=74)
     }
+
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
@@ -201,13 +214,13 @@ def handle_digrafos_hamilton_1_keydown(event):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = DigrafosHamilton1SeedDisabled()
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.successors(current_node):  # Solo moverse a nodos sucesores válidos
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = DigrafosHamilton1SeedDisabled()
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74)
             missing_nodes -= 1
 
             # Verificar si el camino hamiltoniano está completo
