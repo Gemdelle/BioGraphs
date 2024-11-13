@@ -1,10 +1,6 @@
 import os
 import pygame
 
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning, module='pygame')
-
-
 from core.screens import Screens
 from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from ui.screens.intro_euler_cycle import render_intro_euler_cycle, is_back_button_clicked_intro_euler_cicle
@@ -46,8 +42,8 @@ from ui.screens.select_your_pet import render_select_your_pet_screen
 from ui.screens.splash import render_splash
 
 pygame.init()
-pygame.font.init()
 
+from core.fonts import title_font, font
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
@@ -55,16 +51,6 @@ clock = pygame.time.Clock()
 running = True
 current_node = None
 completed = False
-
-# FONTS
-
-font_path = 'assets/fonts/'
-
-title_font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 55)
-
-font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
-font_buttons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
-font_small_buttons = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 28)
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()

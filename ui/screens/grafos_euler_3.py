@@ -73,7 +73,7 @@ restart_button_clicked_grafos_euler_3 = None
 
 
 def render_grafos_euler_3(screen, font):
-    from main import font_small_buttons
+    from core.fonts import font_small_buttons
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -101,6 +101,7 @@ def render_grafos_euler_3(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Draw the "Back" button
+
     back_button_clicked_grafos_euler_3 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:

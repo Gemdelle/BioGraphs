@@ -64,7 +64,7 @@ restart_button_clicked_digrafos_euler = None
 
 
 def render_digrafos_euler_1(screen, font):
-    from main import font_small_buttons
+    from core.fonts import font_small_buttons
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, background_image_win, remaining_time
 
     current_time = pygame.time.get_ticks()
@@ -92,6 +92,7 @@ def render_digrafos_euler_1(screen, font):
         energy = initial_energy  # Reset energy if time runs out
 
     # Draw the "Back" button
+
     back_button_clicked_digrafos_euler = render_map_button(screen, font_small_buttons)
 
     if not timer_started:

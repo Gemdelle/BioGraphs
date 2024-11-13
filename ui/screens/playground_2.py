@@ -1,7 +1,6 @@
 import pygame
 import networkx as nx
 
-from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.graph_renderer import render_simple_node_graph
 
@@ -45,7 +44,7 @@ back_button_clicked_playground_2 = None
 restart_button_clicked_playground_2 = None
 
 def render_playground_2(screen, font):
-    from main import font_buttons
+    from core.fonts import font_buttons
     global back_button_clicked_playground_2, restart_button_clicked_playground_2
     background_image = pygame.image.load("assets/playground-bg/bg-level-2.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()

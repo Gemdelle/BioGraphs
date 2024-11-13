@@ -1,7 +1,8 @@
 import pygame
 
+from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+
 def render_start_button(screen, font, seed):
-    from main import SCREEN_WIDTH, SCREEN_HEIGHT
     # Cargar y ajustar la imagen del botón
     start_button_image = pygame.image.load("./assets/start-button.png").convert_alpha()
     start_button_image = pygame.transform.scale(start_button_image, (300, 300))
