@@ -1,9 +1,4 @@
-import pygame
-import math
 from core.screens import Screens
-
-import pygame
-import math
 
 import pygame
 import math

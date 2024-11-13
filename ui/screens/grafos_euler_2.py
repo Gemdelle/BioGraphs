@@ -73,7 +73,7 @@ restart_button_clicked_grafos_euler_2 = None
 
 
 def render_grafos_euler_2(screen, font):
-    from main import font_small_buttons
+    from core.fonts import font_small_buttons
     global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2, restart_button_clicked_grafos_euler_2, timer_started, start_time, path, start_node, positions, current_node, energy, flower, won_level, remaining_time
 
     current_time = pygame.time.get_ticks()

@@ -31,7 +31,7 @@ current_node = None
 back_button_clicked_playground_3 = None
 restart_button_clicked_playground_3 = None
 def render_playground_3(screen, font):
-    from main import font_buttons
+    from core.fonts import font_buttons
     global back_button_clicked_playground_3, restart_button_clicked_playground_3
     background_image = pygame.image.load("assets/playground-bg/bg-level-3.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()
