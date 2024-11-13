@@ -46,7 +46,7 @@ def render_map(screen, goToLevel):
 
     G = nx.Graph()
 
-    selected_frog = get_selected_pet()
+    selected_frog = get_selected_pet(size=(150, 150))
 
     nodes = {
         'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
