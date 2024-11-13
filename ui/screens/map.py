@@ -100,13 +100,15 @@ def render_map(screen, goToLevel):
 
     for node, data in nodes.items():
         if node != 'Frog':
+            # Dibujar fondo del nodo
             img_rect = undone_node_image.get_rect(center=data['pos'])
             screen.blit(undone_node_image, img_rect)
-        
-            # Renderizar la letra del nodo
-            letter_text = font.render(node, True, (255, 255, 255))
+            
+            # Renderizar la letra del nodo, excepto los niveles de Digrafo que no existen
+            letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True, (255, 255, 255))
             letter_rect = letter_text.get_rect(center=data['pos'])
             screen.blit(letter_text, letter_rect)
+
 
     graph_euler_text = font.render("Euler GRAPHS", True, (0, 0, 0))
     graph_hamilton_text = font.render("Hamilton GRAPHS", True, (0, 0, 0))
