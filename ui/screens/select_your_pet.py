@@ -63,10 +63,16 @@ def render_select_your_pet_screen(screen, go_to_level):
         text_rect = text_surface.get_rect(center=(rect.centerx, rect.bottom + 30))
         screen.blit(text_surface, text_rect)
 
-    # Draw Select button
-    button_rect = pygame.Rect((SCREEN_WIDTH - BUTTON_SIZE[0]) // 2, SCREEN_HEIGHT - 150, *BUTTON_SIZE)
-    button_color = (200, 0, 0) if button_rect.collidepoint(pygame.mouse.get_pos()) else (150, 0, 0)
-    pygame.draw.rect(screen, button_color, button_rect)
+    # # Draw Select button
+    # button_rect = pygame.Rect((SCREEN_WIDTH - BUTTON_SIZE[0]) // 2, SCREEN_HEIGHT - 150, *BUTTON_SIZE)
+    # button_color = (200, 0, 0) if button_rect.collidepoint(pygame.mouse.get_pos()) else (150, 0, 0)
+    # pygame.draw.rect(screen, button_color, button_rect)
+
+    # Carga y ajusta la imagen del botón
+    button_image = pygame.image.load("./assets/button.png").convert_alpha()
+    button_image = pygame.transform.scale(button_image, (300, 70))
+    button_rect = pygame.Rect((SCREEN_WIDTH - BUTTON_SIZE[0]) // 2, SCREEN_HEIGHT - 300, *BUTTON_SIZE)
+    screen.blit(button_image, button_rect.topleft)
 
     # Button text
     button_text = font.render("Select Pet", True, (255, 255, 255))
