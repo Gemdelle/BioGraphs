@@ -24,6 +24,8 @@ def render_map(screen, goToLevel):
 
     font_path = 'assets/fonts/'
     font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+    font_title = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 40)
+    font_subtitle = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 28)
 
     # NODE IMG
     done_node_image = pygame.image.load('./assets/map-nodes/done-node.png').convert_alpha()
@@ -109,21 +111,31 @@ def render_map(screen, goToLevel):
             letter_rect = letter_text.get_rect(center=data['pos'])
             screen.blit(letter_text, letter_rect)
 
+    # REGION NAMES
+    erryloom_text = font_title.render("Errybloom", True, (0, 0, 0))
+    luminore_grove_text = font_title.render("Luminore Grove", True, (0, 0, 0))
+    thornscar_text = font_title.render("Thornscar", True, (0, 0, 0))
+    chromecore_text = font_title.render("Chromecore", True, (0, 0, 0))
 
-    graph_euler_text = font.render("Euler GRAPHS", True, (0, 0, 0))
-    graph_hamilton_text = font.render("Hamilton GRAPHS", True, (0, 0, 0))
-    digraph_euler_text = font.render("Euler DIGRAPHS", True, (0, 0, 0))
-    digraph_hamilton_text = font.render("Hamilton DIGRAPHS", True, (0, 0, 0))
+    graph_euler_text = font_subtitle.render("Euler GRAPHS", True, (255, 255, 255))
+    graph_hamilton_text = font_subtitle.render("Hamilton GRAPHS", True, (255, 255, 255))
+    digraph_euler_text = font_subtitle.render("Euler DIGRAPHS", True, (255, 255, 255))
+    digraph_hamilton_text = font_subtitle.render("Hamilton DIGRAPHS", True, (255, 255, 255))
 
-    screen.blit(sign_euler_image, (40,50))
+    screen.blit(sign_euler_image, (40,30))
     screen.blit(sign_hamilton_image, (1340, 110))
     screen.blit(sign_d_euler_image, (200, 750))
     screen.blit(sign_d_hamilton_image, (1300, 550))
 
-    screen.blit(graph_euler_text, (110, 80))
-    screen.blit(graph_hamilton_text, (1400, 175))
-    screen.blit(digraph_euler_text, (270, 805))
-    screen.blit(digraph_hamilton_text, (1300+50, 550+50))
+    screen.blit(erryloom_text, (110+30, 80-25))
+    screen.blit(luminore_grove_text, (1400+25, 175-5))
+    screen.blit(thornscar_text, (270+40, 805-5))
+    screen.blit(chromecore_text, (1350+50, 600-5))
+
+    screen.blit(graph_euler_text, (110+30, 80+60))
+    screen.blit(graph_hamilton_text, (1400+25, 175-70))
+    screen.blit(digraph_euler_text, (270+20, 805+80))
+    screen.blit(digraph_hamilton_text, (1350+30, 600-70))
 
     handle_node_click(nodes, node_screens, goToLevel)
 
