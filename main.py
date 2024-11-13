@@ -39,7 +39,7 @@ from ui.screens.grafos_hamilton_2 import (render_grafos_hamilton_2, handle_grafo
 from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown,
                                           handle_grafos_hamilton_3_mousedown)
 from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
-from ui.screens.game_modes import render_main_screen
+from ui.screens.game_modes import render_main_screen, MovingImage
 from ui.screens.map import render_map
 from ui.screens.playground import render_playground
 from ui.screens.select_your_pet import render_select_your_pet_screen
@@ -99,7 +99,7 @@ def go_to_main():
 
 
 buttons = []
-
+moving_fishes = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -179,7 +179,7 @@ while running:
     elif screen_selected == Screens.SELECT_YOUR_PET:
         render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
-        buttons = render_main_screen(screen, title_font, font)
+        buttons = render_main_screen(screen, title_font, font, moving_fishes)
     elif screen_selected == Screens.MAP:
         render_map(screen, go_to_level)
     elif screen_selected == Screens.INSTRUCTIONS:
