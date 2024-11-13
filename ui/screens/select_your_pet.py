@@ -36,7 +36,7 @@ def render_select_your_pet_screen(screen, go_to_level):
     y_position = SCREEN_HEIGHT // 2 - CHARACTER_SIZE[1] // 2 - 100
 
     # Colors for highlighting
-    selected_color = (0, 255, 0)  # Green (selected)
+    selected_color = (255, 255, 255)  # White (selected)
 
     # Detect if a character is clicked and set it as selected
     if pygame.mouse.get_pressed()[0]:  # Left mouse button click
@@ -47,10 +47,18 @@ def render_select_your_pet_screen(screen, go_to_level):
                 selected_character = idx
                 selected_pet[0] = character["name"]
 
+    # Render title
+    # Render title
+    font_title = pygame.font.Font(os.path.join('assets/fonts/', 'Alice_in_Wonderland_3.ttf'), 60)
+    text_title_surface = font_title.render('S E L E C T   Y O U R   P E T', True, (255, 255, 255))
+    text_title_rect = text_title_surface.get_rect(center=(SCREEN_WIDTH // 2, 250))
+    screen.blit(text_title_surface, text_title_rect)
+
+
     # Render each character
     for idx, character in enumerate(characters):
         x_position = start_x + idx * (CHARACTER_SIZE[0] + spacing)
-        rect = pygame.Rect(x_position, y_position, *CHARACTER_SIZE)
+        rect = pygame.Rect(x_position, y_position+50, *CHARACTER_SIZE)
 
         # Draw character animation
         character["animation"].update_animation()
@@ -58,9 +66,9 @@ def render_select_your_pet_screen(screen, go_to_level):
 
         # Draw character name, highlighted if selected
         font = pygame.font.Font(os.path.join('assets/fonts/', 'Alice_in_Wonderland_3.ttf'), 40)
-        name_color = selected_color if selected_character == idx else (255, 255, 255)
+        name_color = selected_color if selected_character == idx else (100, 100, 100)
         text_surface = font.render(character["name"], True, name_color)
-        text_rect = text_surface.get_rect(center=(rect.centerx, rect.bottom + 30))
+        text_rect = text_surface.get_rect(center=(rect.centerx, rect.bottom + 10))
         screen.blit(text_surface, text_rect)
 
     # # Draw Select button
