@@ -13,7 +13,7 @@ class AnimatedSprite:
         self.visible = False
 
     def load_frame(self, index):
-        """Carga el frame si no ha sido cargado previamente."""
+        """Carga el frame si no fue cargado previamente."""
         if index not in self.frames:
             frame_file = f"{self.frame_path}{index}.gif"
             if os.path.exists(frame_file):

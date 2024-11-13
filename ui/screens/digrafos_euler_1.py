@@ -23,7 +23,7 @@ seeds = {
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
     'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
     'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74)
+    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug.png", frame_size=(90, 90), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw", frame_size=(480, 480), frame_count=74)
