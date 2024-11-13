@@ -16,7 +16,7 @@ clovers = {
     'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover", frame_size=(90, 90), frame_count=626),
     'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover", frame_size=(90, 90), frame_count=626),
     'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover", frame_size=(90, 90), frame_count=626),
-    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover", frame_size=(90, 90), frame_count=626)
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end", frame_size=(90, 90), frame_count=626)
 }
 
 for node, pos in positions.items():
