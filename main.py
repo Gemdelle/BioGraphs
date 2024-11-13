@@ -71,8 +71,6 @@ start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
 # FUNCTIONS
-
-
 def go_to_map():
     global screen_selected
     screen_selected = Screens.MAP
@@ -99,7 +97,7 @@ def go_to_main():
 
 
 buttons = []
-moving_fishes = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
+moving_tadpoles = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -179,7 +177,7 @@ while running:
     elif screen_selected == Screens.SELECT_YOUR_PET:
         render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
-        buttons = render_main_screen(screen, title_font, font, moving_fishes)
+        buttons = render_main_screen(screen, title_font, font, moving_tadpoles)
     elif screen_selected == Screens.MAP:
         render_map(screen, go_to_level)
     elif screen_selected == Screens.INSTRUCTIONS:

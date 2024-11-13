@@ -9,28 +9,47 @@ from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 class MovingImage:
     def __init__(self, screen_width, screen_height):
-        # Choose a random fish image from 1 to 3
-        fish_number = random.randint(1, 3)
-        image_path = os.path.join("assets", "fish", f"fish-{fish_number}.png")
+        # Choose a random fish image from 1 to 4
+        tadpole_number = random.randint(1, 4)
+        image_path = os.path.join("assets", "tadpole", f"tadpole-{tadpole_number}.png")
+
+        # Diccionario con tamaños personalizados según el número de la imagen
+        size_by_index = {
+            1: (94-20, 28-5),   # Tamaño para tadpole-1.png
+            2: (114-20, 24-5),  # Tamaño para tadpole-2.png
+            3: (91, 64),        # Tamaño para tadpole-3.png
+            4: (115, 91)        # Tamaño para tadpole-4.png
+        }
+        
+        # Selecciona el tamaño según el número de imagen
+        selected_size = size_by_index.get(tadpole_number, (75, 50))
 
         # Load and scale the image
         self.original_image = pygame.image.load(image_path).convert_alpha()
-        self.original_image = pygame.transform.scale(self.original_image, (75, 50))  # Adjust the size of the moving images
+        self.original_image = pygame.transform.scale(self.original_image, selected_size)
         self.image = self.original_image  # Set the initial image to the original
 
         self.screen_width = screen_width
         self.screen_height = screen_height
-        self.x = random.randint(0, screen_width)
+        
+        # Direccion y posicion inicial
+        self.direction = random.choice([-1, 1])  # Movement direction
+        
+        # Ajuste de posición inicial para que aparezcan desde fuera de la pantalla
+        if self.direction == 1:
+            self.x = -self.image.get_width()  # Inicia fuera del lado izquierdo
+        else:
+            self.x = self.screen_width  # Inicia fuera del lado derecho
 
-        # Spawn in the top 20% or bottom 20% of the screen
+        # Spawn en el 20% superior o inferior de la pantalla
         top_or_bottom = random.choice(["top", "bottom"])
         if top_or_bottom == "top":
-            self.y = random.randint(0, int(screen_height * 0.16))  # Top 16%
+            self.y = random.randint(0, int(screen_height * 0.2))  # 20% superior
         else:
-            self.y = random.randint(int(screen_height * 0.6), screen_height)  # Bottom 40%
+            self.y = random.randint(int(screen_height * 0.7), screen_height)  # 20% inferior
+
 
         self.speed = random.uniform(1, 2)  # Random speed for each image
-        self.direction = random.choice([-1, 1])  # Movement direction
         self.angle = random.uniform(0, 2 * math.pi)
 
         # Flip the image if the initial direction is -1
@@ -38,23 +57,20 @@ class MovingImage:
             self.image = pygame.transform.flip(self.original_image, True, False)
 
     def update(self):
-        # Horizontal wave-like movement
+        # Movimiento horizontal en forma de onda
         self.x += self.speed * self.direction
-        self.y += math.sin(self.angle) * 2  # Vertical oscillation to mimic ocean movement
-        self.angle += 0.05  # Controls the frequency of oscillation
+        self.y += math.sin(self.angle) * 2  # Oscilación vertical para simular movimiento en el agua
+        self.angle += 0.05  # Controla la frecuencia de oscilación
 
-        # Reset horizontal position when the image goes off-screen
-        if self.x > self.screen_width or self.x < -self.image.get_width():
-            self.x = -self.image.get_width() if self.direction == 1 else self.screen_width
-            # Respawn in the top or bottom 20% of the screen
-            top_or_bottom = random.choice(["top", "bottom"])
-            if top_or_bottom == "top":
-                self.y = random.randint(0, int(self.screen_height * 0.16))
-            else:
-                self.y = random.randint(int(self.screen_height * 0.6), self.screen_height)
+        # Resetear la posición horizontal cuando salga de la pantalla
+        if self.direction == 1 and self.x > self.screen_width:
+            self.x = -self.image.get_width()  # Reinicia desde el lado izquierdo
+        elif self.direction == -1 and self.x < -self.image.get_width():
+            self.x = self.screen_width  # Reinicia desde el lado derecho
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
+
 
 
 def render_main_screen(screen, title_font, font, moving_images):
