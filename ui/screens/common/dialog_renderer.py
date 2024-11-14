@@ -42,3 +42,23 @@ def render_dialog(screen, text, font):
     prompt_rect = prompt_text.get_rect(center=(text_box_x + text_box_width // 2, text_box_y + text_box_height // 2))
     screen.blit(prompt_text, prompt_rect)
 
+def render_playground_dialogue(screen, text, font):
+    # Cargar las imágenes de los marcos
+    dialogue_frame = pygame.image.load("./assets/dialogue/playground-dialogue-frame.png").convert_alpha()
+
+    # Escalar las imágenes al tamaño adecuado
+    dialogue_frame = pygame.transform.scale(dialogue_frame, (text_box_width, text_box_height))
+
+    # Dibuja el marco del diálogo (en lugar del rectángulo relleno)
+    screen.blit(dialogue_frame, (text_box_x, text_box_y))
+
+    avatar = get_selected_pet()
+    # Actualiza y dibuja la animación del avatar dentro del marco del personaje
+    avatar.update_animation()
+    avatar.draw(screen, circle_x - 75, circle_y - 75)
+
+    # Dibuja el texto en el marco de diálogo
+    prompt_text = font.render(text, True, text_color)
+    prompt_rect = prompt_text.get_rect(center=(text_box_x + text_box_width // 2, text_box_y + text_box_height // 2))
+    screen.blit(prompt_text, prompt_rect)
+

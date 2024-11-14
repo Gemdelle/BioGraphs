@@ -1,13 +1,29 @@
+import os
 from core.screens import Screens
 
 import pygame
 import math
+
+from ui.animated_sprite import AnimatedSprite
+from ui.screens.common.map_counter_renderer import counter_renderer
 
 
 def render_playground(screen, goToLevel, time):
     # Fondo de mapa con movimiento flotante
     background_image = pygame.image.load("assets/playground-bg/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
+
+    # NODE IMG
+    done_node_image = pygame.image.load('./assets/map-nodes/done-node.png').convert_alpha()
+    done_node_image = pygame.transform.scale(done_node_image,(130, 130))
+    undone_node_image = pygame.image.load('./assets/map-nodes/undone-node.png').convert_alpha()
+    undone_node_image = pygame.transform.scale(undone_node_image,(130,130))
+
+    # FONTS
+    font_path = 'assets/fonts/'
+    font = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 32)
+    font_title = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 45)
+    font_subtitle = pygame.font.Font(os.path.join(font_path, 'Alice_in_Wonderland_3.ttf'), 28)
 
     # Movimiento flotante suave
     float_offset = math.sin(time * 0.3) * 3  # Reduce la frecuencia (0.3) y amplitud (3) para suavizar
@@ -18,17 +34,28 @@ def render_playground(screen, goToLevel, time):
     background_clouds = pygame.transform.scale(background_clouds, (1710, 1034))
     screen.blit(background_clouds, (0, 0))
 
+    # Title
+    title_img = pygame.image.load("assets/playground-bg/title-background.png").convert_alpha()
+    title_img = pygame.transform.scale(title_img, (450, 400))
+    screen.blit(title_img, (60, 60))
+
+    playground_text = font_title.render("Playground", True, (255, 255, 255))
+    screen.blit(playground_text, (200, 180))
+
     nodes = {
-        'A': {'pos': (141, 602-60), 'color': (0, 0, 0), 'enabled': False},  # Negro
-        'B': {'pos': (597, 641-60), 'color': (255, 255, 255), 'enabled': True},  # Amarillo
-        'C': {'pos': (927, 709-60), 'color': (255, 255, 255), 'enabled': True},  # Lila
-        'D': {'pos': (600, 234-60), 'color': (255, 255, 255), 'enabled': True},  # Celeste
-        'E': {'pos': (994, 347-60), 'color': (255, 255, 255), 'enabled': True},  # Rosa
-        'F': {'pos': (1305, 485-60), 'color': (255, 255, 255), 'enabled': True},  # Verde
+        'Frog': {'pos': (141+60, 602), 'color': (0, 0, 0), 'enabled': False},  # Negro
+        'B': {'pos': (597+20, 641), 'color': (255, 255, 255), 'enabled': True},  # Amarillo
+        'C': {'pos': (927+20, 709), 'color': (255, 255, 255), 'enabled': True},  # Lila
+        'D': {'pos': (600+20, 234), 'color': (255, 255, 255), 'enabled': True},  # Celeste
+        'E': {'pos': (994+20, 347), 'color': (255, 255, 255), 'enabled': True},  # Rosa
+        'F': {'pos': (1305+20, 485), 'color': (255, 255, 255), 'enabled': True},  # Verde
     }
 
+    total_nodes = len(nodes)
+    missing_nodes = len(nodes)-1
+
     edges = [
-        ('A', 'B'), ('B', 'C'), ('C', 'D'),
+        ('Frog', 'B'), ('B', 'C'), ('C', 'D'),
         ('D', 'E'), ('E', 'F')
     ]
 
@@ -40,24 +67,28 @@ def render_playground(screen, goToLevel, time):
         'F': Screens.PLAYGROUND_5
     }
 
-    font = pygame.font.SysFont(None, 36)
-
     for edge in edges:
         start_pos = nodes[edge[0]]['pos']
         end_pos = nodes[edge[1]]['pos']
         draw_curved_line(screen, (0, 0, 0), start_pos, end_pos, dash_length=10)
 
+    clover = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(130, 130), frame_count=625)
     for node, data in nodes.items():
-        pygame.draw.circle(screen, data['color'], data['pos'], 40)
+        if node != 'Frog':       
+            # Renderizar el clover en el centro del nodo
+            clover.update_animation()
+            clover.draw(screen,data['pos'][0],data['pos'][1])
 
-        # Renderizar la letra del nodo
-        letter_text = font.render(node, True, (0, 0, 0))
-        letter_rect = letter_text.get_rect(center=data['pos'])
-        screen.blit(letter_text, letter_rect)
+            # Renderizar la letra del nodo, excepto los niveles de Digrafo que no existen
+            letter_text = font.render(node, True, (255, 255, 255))
+            letter_rect = letter_text.get_rect(center=data['pos'])
+            screen.blit(letter_text, letter_rect)
 
-    playground_text = font.render("Playground", True, (0, 0, 0))
+    
 
-    screen.blit(playground_text, (100, 100))
+    counter_renderer(screen, font_subtitle, total_nodes, missing_nodes, clover, 200, 200)
+
+    
 
     handle_node_click(nodes, node_screens, goToLevel)
 

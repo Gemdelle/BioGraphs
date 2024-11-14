@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.graph_renderer import render_simple_node_graph
 
@@ -20,6 +21,19 @@ positions = {
     'K': (1077, 519-60)
 }
 
+clovers = {
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+}
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -47,14 +61,13 @@ def render_playground_2(screen, font):
     from core.fonts import font_buttons
     global back_button_clicked_playground_2, restart_button_clicked_playground_2
     background_image = pygame.image.load("assets/playground-bg/bg-level-2.png").convert()
-    #background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions)
+    render_simple_node_graph(screen, G, font, path, positions, clovers)
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))

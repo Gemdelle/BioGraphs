@@ -97,10 +97,10 @@ def render_simple_node_graph(screen, G, font, path, positions, animated_nodes):
     # Dibujar nodos con la imagen de fondo y texto
     for node, pos in positions.items():
         animated_nodes[node].update_animation()
-        animated_nodes[node].draw(screen, pos[0]-45, pos[1]-40)  # Usa las coordenadas de 'pos'
+        animated_nodes[node].draw(screen, pos[0], pos[1])  # Usa las coordenadas de 'pos'
 
         # Dibuja el texto de cada nodo
-        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0], pos[1]))
+        screen.blit(font.render(node, True, (255, 255, 255)), (pos[0]-10, pos[1]-20))
 
 
 def get_node_at_position(G, pos):

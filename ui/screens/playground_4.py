@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.graph_renderer import render_simple_node_graph
@@ -12,6 +13,16 @@ positions = {
     'G': (1001, 284-60),  'H': (1127, 476-60)
 }
 
+clovers = {
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+}
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
@@ -44,7 +55,7 @@ def render_playground_4(screen, font):
     global timer_started, start_time, path, start_node, positions, current_node, energy
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions)
+    render_simple_node_graph(screen, G, font, path, positions, clovers)
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
