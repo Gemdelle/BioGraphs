@@ -26,13 +26,13 @@ positions = {
 }
 
 seeds = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+    'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
     'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-2/euler-2-bug", frame_size=(120, 120), frame_count=74)
 }
 
@@ -162,14 +162,17 @@ def handle_grafos_euler_2_keydown(event):
             if current_node is None:
                 current_node = key
                 path.append(current_node)
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
+                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
                     current_node = key
                     missing_nodes -= 1
+                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
 
                     # Revisa si completaste el camino de Euler
                     if current_node == end_node and len(visited_edges) == len(G.edges):
