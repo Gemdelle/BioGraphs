@@ -45,7 +45,7 @@ def render_euler_digraph(screen, G, font, remaining_time, visited_edges , start_
     for start, end in G.edges():
         start_pos = G.nodes[start]['pos']
         end_pos = G.nodes[end]['pos']
-        color = (255, 0, 0) if (start, end) in visited_edges else (0, 0, 0)
+        color = (128,128,128) if (start, end) in visited_edges else (0, 0, 0)
         draw_arrow(screen, start_pos, end_pos, color)
 
 def get_node_at_position(G, pos):

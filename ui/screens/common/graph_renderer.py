@@ -90,7 +90,7 @@ def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes
     for edge in G.edges():
         start_pos = positions[edge[0]]
         end_pos = positions[edge[1]]
-        color = (255, 0, 0) if edge in visited_edges or (edge[1], edge[0]) in visited_edges else (255, 255, 255)
+        color = (128,128,128) if edge in visited_edges or (edge[1], edge[0]) in visited_edges else (0, 0, 0)
         draw_curved_line(screen, color, start_pos, end_pos)
 
     # Dibuja nodos y animaciones
