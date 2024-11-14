@@ -4,16 +4,13 @@ import pygame
 import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
-from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
-from ui.screens.common.graph_renderer import render_graph
+from ui.screens.common.graph_renderer import render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
-from ui.seeds.disabled.euler_2_seed_disabled import Euler2SeedDisabled
-from ui.seeds.enabled.euler_2_seed import Euler2Seed
 
 G = nx.Graph()
 # restarle 60 a y
@@ -70,7 +67,7 @@ timer_duration = 60000  # 60 seconds duration
 back_button_clicked_grafos_euler_2 = None
 start_button_clicked_grafos_euler_2 = None
 restart_button_clicked_grafos_euler_2 = None
-
+visited_edges = []
 
 def render_grafos_euler_2(screen, font):
     from core.fonts import font_small_buttons
@@ -110,7 +107,7 @@ def render_grafos_euler_2(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_graph(screen, G, font, path, positions, seeds)
+        render_euler_graph(screen, G, font, visited_edges, positions, seeds)
 
         # Render energy bar and timer
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
@@ -157,48 +154,53 @@ def handle_grafos_euler_2_mousedown(event, go_to_map):
         reset_nodes(path)
 
 
-def reset_nodes(path):
-    global current_node,G, seeds, missing_nodes
-    path.clear()
-    current_node = None
-
-    seeds = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-    'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-2/euler-bug-2", frame_size=(120, 120), frame_count=74)
-    }
-
-    for node in G.nodes:
-        G.nodes[node]['color'] = (0, 0, 0)
-    
-    missing_nodes = len(positions)
-
-
 def handle_grafos_euler_2_keydown(event):
-    global current_node, seeds, won_level, G, missing_nodes
+    global current_node, seeds, won_level, G, missing_nodes, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
             if current_node is None:
                 current_node = key
-                G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
-                G.nodes[current_node]['color'] = (0, 100, 0)
-                current_node = key
-                G.nodes[current_node]['color'] = (255, 0, 0)
-                path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
-            missing_nodes -= 1
+                # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
+                edge = (current_node, key)
+                if edge not in visited_edges and (key, current_node) not in visited_edges:
+                    visited_edges.append(edge)  # Marca la arista como visitada
+                    path.append(key)  # Agrega el nodo al camino
+                    seeds[key] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
+                    current_node = key
+                    missing_nodes -= 1
 
-            if current_node == end_node and len(path) == len(G.nodes):
-                won_level = True
-                print("Congratulations! You completed the Hamiltonian Path.")
-                return True, current_node
+                    # Revisa si completaste el camino de Euler
+                    if current_node == end_node and len(visited_edges) == len(G.edges):
+                        won_level = True
+                        print("¡Felicidades! Has completado el Camino de Euler.")
+                        return True, current_node
+            else:
+                print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
     return False, current_node
+
+
+def reset_nodes(path):
+    global current_node, G, seeds, missing_nodes, visited_edges
+    path.clear()
+    current_node = None
+    visited_edges.clear()  # Reinicia las aristas visitadas
+
+    seeds = {
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-2/euler-bug-2", frame_size=(120, 120), frame_count=74)
+    }
+
+    for node in G.nodes:
+        G.nodes[node]['color'] = (0, 0, 0)
+
+    missing_nodes = len(positions)
