@@ -87,9 +87,6 @@ def render_graph(screen, G, font, path, positions, animated_nodes):
 
 
 def render_simple_node_graph(screen, G, font, path, positions, animated_nodes):
-    # Cargar la imagen de fondo del nodo
-    background_image = pygame.image.load("assets/playground-bg/node.png").convert_alpha()
-    background_image = pygame.transform.scale(background_image, (130, 130))  # Ajustar el tamaño de la imagen
     # Dibujar aristas
     for edge in G.edges():
         pygame.draw.line(screen, (0, 0, 0), positions[edge[0]], positions[edge[1]], 8)
