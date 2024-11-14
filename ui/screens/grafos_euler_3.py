@@ -163,14 +163,12 @@ def handle_grafos_euler_3_keydown(event):
             if current_node is None:
                 current_node = key
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
-                    seeds[key] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
                     current_node = key
                     missing_nodes -= 1
 
