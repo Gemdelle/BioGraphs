@@ -3,7 +3,7 @@ import networkx as nx
 import numpy as np
 
 
-def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10, dot_radius=2):
+def draw_curved_line_doted(surface, color, start_pos, end_pos, dash_length=10, dot_radius=2):
     # Definir el punto de control para la curva
     control_x = (start_pos[0] + end_pos[0]) / 2
     control_y = min(start_pos[1], end_pos[1]) - 50
@@ -34,10 +34,11 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10, dot_rad
 
 
 
-def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
-    # Definir el punto de control para la curva
-    control_x = (start_pos[0] + end_pos[0]) / 2
-    control_y = min(start_pos[1], end_pos[1]) - 50
+def draw_curved_line(surface, color, start_pos, end_pos, curve_intensity=50, line_width=2):
+    # Ajuste de posición de control para mayor prominencia en la curva
+    control_x = (start_pos[0] + end_pos[0]) / 2 + curve_intensity * 0.5  # Desplazamiento horizontal
+    control_y = min(start_pos[1], end_pos[1]) + curve_intensity  # Desplazamiento vertical más pronunciado
+
     points = []
 
     # Generar puntos a lo largo de la curva usando interpolación cuadrática
@@ -52,7 +53,6 @@ def draw_curved_line(surface, color, start_pos, end_pos, line_width=2):
         end_point = points[i + 1]
         pygame.draw.line(surface, color, start_point, end_point, line_width)
 
-
 def render_map_graph(screen, graph, positions, animated_nodes):
     # Dibuja bordes curvos y punteados
     for edge in graph.edges():
@@ -62,7 +62,7 @@ def render_map_graph(screen, graph, positions, animated_nodes):
         if len(start_pos) != 2 or len(end_pos) != 2:
             print(f"Error: Invalid position for edge {edge}. start_pos: {start_pos}, end_pos: {end_pos}")
         else:
-            draw_curved_line(screen, (255, 255, 255), start_pos, end_pos)
+            draw_curved_line_doted(screen, (255, 255, 255), start_pos, end_pos)
 
     for node, pos in positions.items():
         if pos['enabled']:  # Si el nodo está habilitado
@@ -85,13 +85,14 @@ def render_graph(screen, G, font, path, positions, animated_nodes):
         # Dibuja el texto de cada nodo
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
-def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes):
+def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes, curve_intensities= {}):
     # Dibuja aristas curvadas y cambia de color si están en el camino
     for edge in G.edges():
         start_pos = positions[edge[0]]
         end_pos = positions[edge[1]]
         color = (128,128,128) if edge in visited_edges or (edge[1], edge[0]) in visited_edges else (0, 0, 0)
-        draw_curved_line(screen, color, start_pos, end_pos)
+        curve_intensity = curve_intensities.get((edge[1], edge[0])) or curve_intensities.get((edge[0], edge[1]), 50)
+        draw_curved_line(screen, color, start_pos, end_pos, curve_intensity)
 
     # Dibuja nodos y animaciones
     for node, pos in positions.items():

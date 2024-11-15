@@ -42,10 +42,40 @@ for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
 
 edges = [
-    ('H', 'G'), ('I', 'H'), ('I', 'J'), ('G', 'I'), ('E', 'I'),
-    ('F', 'G'), ('E', 'F'), ('D', 'E'), ('D', 'F'), ('B', 'F'),
-    ('C', 'D'), ('B', 'C'), ('A', 'D'), ('A', 'B'), ('E', 'G')
+    ('H', 'G'),
+    ('I', 'H'),
+    ('I', 'J'),
+    ('G', 'I'),
+    ('E', 'I'),
+    ('F', 'G'),
+    ('E', 'F'),
+    ('D', 'E'),
+    ('D', 'F'),
+    ('B', 'F'),
+    ('C', 'D'),
+    ('B', 'C'),
+    ('A', 'D'),
+    ('A', 'B'),
+    ('E', 'G')
 ]
+
+curve_intensities = {
+    edges[0]: 50,
+    edges[1]: 50,
+    edges[2]: 50,
+    edges[3]: 50,
+    edges[4]: 50,
+    edges[5]: 50,
+    edges[6]: 50,
+    edges[7]: 50,
+    edges[8]: 50,
+    edges[9]: 50,
+    edges[10]: 50,
+    edges[11]: 50,
+    edges[12]: 50,
+    edges[13]: 50,
+    edges[14]: 50
+}
 
 for edge in edges:
     G.add_edge(edge[0], edge[1])
@@ -108,7 +138,7 @@ def render_grafos_euler_3(screen, font):
         screen.blit(start_button_text, (775, 415))
     else:
         # Render the graph and energy bar
-        render_euler_graph(screen, G, font, visited_edges, positions, seeds)
+        render_euler_graph(screen, G, font, visited_edges, positions, seeds, curve_intensities)
 
         # Render energy bar and timer
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
