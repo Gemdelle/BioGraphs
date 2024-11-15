@@ -39,7 +39,7 @@ for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('A', 'B'),('B', 'C'),('C', 'D'),('B', 'D'),('A', 'D'),('F', 'D'),('A', 'F'),('D', 'E')
+    ('A', 'B'),('B', 'C'),('C', 'D'),('A', 'D'),('F', 'D'),('A', 'F'),('D', 'E')
 ]
 
 for edge in edges:
