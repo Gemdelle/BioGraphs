@@ -51,6 +51,7 @@ edges = [
     ('B', 'A'), ('B', 'C'), ('A', 'C'), ('A', 'E'), ('C', 'D'),
     ('C', 'F'), ('D', 'F'), ('F', 'E'), ('F', 'H'), ('E', 'G'), ('G', 'H')
 ]
+
 for edge in edges:
     G.add_edge(edge[0], edge[1])
 

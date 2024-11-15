@@ -3,6 +3,7 @@ import os
 import pygame
 import networkx as nx
 
+from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -30,7 +31,7 @@ seeds = {
     'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
     'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
     'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'J': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(120, 120), frame_count=74)
+    'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower/euler-3-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -48,7 +49,7 @@ edges = [
     ('G', 'I'),
     ('E', 'I'),
     ('F', 'G'),
-    ('E', 'F'),
+    ('E', 'F'), #6
     ('D', 'E'),
     ('D', 'F'),
     ('B', 'F'),
@@ -61,13 +62,13 @@ edges = [
 
 curve_intensities = {
     edges[0]: 50,
-    edges[1]: 50,
+    edges[1]: 350,
     edges[2]: 50,
     edges[3]: 50,
     edges[4]: 50,
     edges[5]: 50,
-    edges[6]: 50,
-    edges[7]: 50,
+    edges[6]: -30,
+    edges[7]: -20,
     edges[8]: 50,
     edges[9]: 50,
     edges[10]: 50,

@@ -113,7 +113,7 @@ def render_grafos_euler_1(screen, font):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes,Euler1Seed())
+        render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74))
 
         render_dialog(screen, "¿Qué querés saber?", font)
 

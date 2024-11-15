@@ -44,34 +44,34 @@ for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
 
 edges = [
-    ('H', 'C'),
-    ('C', 'A'),
-    ('A', 'D'),
-    ('D', 'E'),
-    ('E', 'B'),
-    ('B', 'D'),
-    ('D', 'G'),
-    ('H', 'C'),
-    ('G', 'F'),
-    ('F', 'C'),
-    ('G', 'C'),
-    ('A', 'D'),
-    ('D', 'E'),
-    ('E', 'B'),
+    ('H', 'C'), #0
+    ('C', 'A'), #1
+    ('A', 'D'), #2
+    ('D', 'E'), #3
+    ('E', 'B'), #4
+    ('B', 'D'), #5
+    ('D', 'G'), #6
+    ('H', 'C'), #7
+    ('G', 'F'), #8
+    ('F', 'C'), #9
+    ('G', 'C'), #10
+    ('A', 'D'), #11
+    ('D', 'E'), #12
+    ('E', 'B'), #13
 ]
 
 curve_intensities = {
-    edges[0]: 50,
+    edges[0]: 120,
     edges[1]: 50,
     edges[2]: 50,
     edges[3]: 50,
     edges[4]: 50,
-    edges[5]: 150,
+    edges[5]: 250,
     edges[6]: 50,
     edges[7]: 50,
-    edges[8]: 50,
-    edges[9]: 50,
-    edges[10]: 250,
+    edges[8]: -40,
+    edges[9]: -40,
+    edges[10]: 350,
     edges[11]: 50,
     edges[12]: 50,
     edges[13]: 50
