@@ -25,3 +25,4 @@ def render_start_button(screen, font, seed):
     start_text = font.render("START", True, (255, 255, 255)) 
     start_text_rect = start_text.get_rect(center=start_button_rect.center)
     screen.blit(start_text, start_text_rect)
+    return start_button_rect

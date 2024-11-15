@@ -9,6 +9,7 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.start_button_renderer import render_start_button
 
 G = nx.DiGraph()
 
@@ -93,10 +94,7 @@ def render_digrafos_euler_1(screen, font):
     back_button_clicked_digrafos_euler = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
-        start_button_clicked_digrafos_euler = pygame.Rect(750, 400, 160, 80)
-        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_digrafos_euler)
-        screen.blit(start_button_text, (775, 415))
+        start_button_clicked_digrafos_euler = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74))
     else:
         # Render the graph and energy bar
         render_euler_digraph(screen, G, font, remaining_time, visited_edges, start_node, end_node, positions, seeds)
@@ -145,7 +143,7 @@ def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
         timer_started = False
         reset_nodes(path)
 
-def handle_digrafos_euler_1_keydown(event):
+def handle_digrafos_euler_1_keydown(event,go_to_map):
     global current_node, seeds, won_level, G, missing_nodes, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()

@@ -128,21 +128,21 @@ while running:
             handle_playground_5_mousedown(event, go_to_playground)
 
         if screen_selected == Screens.GRAFOS_EULER_1:
-            completed, current_node = handle_grafos_euler_1_keydown(event)
+            completed, current_node = handle_grafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_2:
-            completed, current_node = handle_grafos_euler_2_keydown(event)
+            completed, current_node = handle_grafos_euler_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_3:
-            completed, current_node = handle_grafos_euler_3_keydown(event)
+            completed, current_node = handle_grafos_euler_3_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_1:
-            completed, current_node = handle_grafos_hamilton_1_keydown(event)
+            completed, current_node = handle_grafos_hamilton_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_2:
-            completed, current_node = handle_grafos_hamilton_2_keydown(event)
+            completed, current_node = handle_grafos_hamilton_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_3:
-            completed, current_node = handle_grafos_hamilton_3_keydown(event)
+            completed, current_node = handle_grafos_hamilton_3_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_EULER_1:
-            completed, current_node = handle_digrafos_euler_1_keydown(event)
+            completed, current_node = handle_digrafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
-            completed, current_node = handle_digrafos_hamilton_1_keydown(event)
+            completed, current_node = handle_digrafos_hamilton_1_keydown(event,go_to_map)
 
         elif screen_selected == Screens.PLAYGROUND_1:
             completed, current_node = handle_playground_1_keydown(event)
