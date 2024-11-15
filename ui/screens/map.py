@@ -162,6 +162,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
 
 
 def handle_node_click(nodes, node_screens, goToLevel):
+    global game_progress
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 
