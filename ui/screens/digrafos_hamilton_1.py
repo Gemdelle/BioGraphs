@@ -10,6 +10,7 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.start_button_renderer import render_start_button
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
 
@@ -101,10 +102,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     back_button_clicked_digrafos_hamilton_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
-        start_button_clicked_digrafos_hamilton_1 = pygame.Rect(750, 400, 160, 80)
-        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_digrafos_hamilton_1)
-        screen.blit(start_button_text, (775, 415))
+        start_button_clicked_digrafos_hamilton_1 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
     else:
         # Renderizar el grafo con flechas
         render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, seeds)
@@ -204,7 +202,7 @@ def draw_arrow(screen, start, end):
 
 
 # Función para manejar eventos de teclas en el digrafo de Hamilton
-def handle_digrafos_hamilton_1_keydown(event):
+def handle_digrafos_hamilton_1_keydown(event,go_to_map):
     global current_node, seeds, won_level, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()

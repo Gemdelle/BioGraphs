@@ -4,6 +4,7 @@ import networkx as nx
 import pygame
 import math
 
+from core.game_progress import game_progress
 from core.pet import get_selected_pet
 from core.screens import Screens
 from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack
@@ -103,8 +104,12 @@ def render_map(screen, goToLevel):
     for node, data in nodes.items():
         if node != 'Frog':
             # Dibujar fondo del nodo
-            img_rect = undone_node_image.get_rect(center=data['pos'])
-            screen.blit(undone_node_image, img_rect)
+            if (game_progress.get(node) is not None and game_progress.get(node)['completed']):
+                img_rect = done_node_image.get_rect(center=data['pos'])
+                screen.blit(done_node_image, img_rect)
+            else:
+                img_rect = undone_node_image.get_rect(center=data['pos'])
+                screen.blit(undone_node_image, img_rect)
             
             # Renderizar la letra del nodo, excepto los niveles de Digrafo que no existen
             letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True, (255, 255, 255))
@@ -162,7 +167,7 @@ def handle_node_click(nodes, node_screens, goToLevel):
 
     if mouse_pressed[0]:
         for node, data in nodes.items():
-            if data['enabled']:
+            if game_progress.get(node) is not None and game_progress.get(node)['enabled']:
                 node_pos = data['pos']
                 distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
                 if distance <= 20:

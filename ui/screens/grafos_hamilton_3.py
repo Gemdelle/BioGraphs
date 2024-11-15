@@ -12,6 +12,7 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.start_button_renderer import render_start_button
 from ui.seeds.disabled.hamilton_3_seed_disabled import Hamilton3SeedDisabled
 from ui.seeds.enabled.hamilton_3_seed import Hamilton3Seed
 
@@ -112,10 +113,7 @@ def render_grafos_hamilton_3(screen, font):
     back_button_clicked_grafos_hamilton_3 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
-        start_button_clicked_grafos_hamilton_3 = pygame.Rect(750, 400, 160, 80)
-        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_hamilton_3)
-        screen.blit(start_button_text, (775, 415))
+        start_button_clicked_grafos_hamilton_3 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74))
     else:
         # Render the graph and energy bar
         render_graph(screen, G, font, path, positions, seeds)
@@ -194,7 +192,7 @@ def reset_nodes(path):
     missing_nodes = len(positions)
 
 
-def handle_grafos_hamilton_3_keydown(event):
+def handle_grafos_hamilton_3_keydown(event,go_to_map):
     global current_node, seeds, won_level, missing_nodes
 
     if event.type == pygame.KEYDOWN:

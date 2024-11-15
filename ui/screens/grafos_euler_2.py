@@ -3,6 +3,7 @@ import os
 import pygame
 import networkx as nx
 
+from core.game_progress import complete_level
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_dialog
@@ -12,6 +13,7 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.start_button_renderer import render_start_button
 
 G = nx.Graph()
 # restarle 60 a y
@@ -132,10 +134,7 @@ def render_grafos_euler_2(screen, font):
     back_button_clicked_grafos_euler_2 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_text = font_small_buttons.render("Start", True, (255, 255, 255))
-        start_button_clicked_grafos_euler_2 = pygame.Rect(750, 400, 160, 80)
-        pygame.draw.rect(screen, (0, 0, 0), start_button_clicked_grafos_euler_2)
-        screen.blit(start_button_text, (775, 415))
+        start_button_clicked_grafos_euler_2 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74))
     else:
         # Render the graph and energy bar
         render_euler_graph(screen, G, font, visited_edges, positions, seeds, curve_intensities)
@@ -185,7 +184,7 @@ def handle_grafos_euler_2_mousedown(event, go_to_map):
         reset_nodes(path)
 
 
-def handle_grafos_euler_2_keydown(event):
+def handle_grafos_euler_2_keydown(event,go_to_map):
     global current_node, seeds, won_level, G, missing_nodes, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
@@ -209,6 +208,8 @@ def handle_grafos_euler_2_keydown(event):
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
+                        complete_level('Frood')
+                        go_to_map()
                         return True, current_node
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
