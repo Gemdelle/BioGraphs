@@ -4,6 +4,7 @@ import pygame
 import networkx as nx
 
 from core.game_progress import complete_level
+from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.dialog_renderer import render_dialog
@@ -26,8 +27,8 @@ seeds = {
     'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
     'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-1/euler-1-bug", frame_size=(120, 120), frame_count=74)
+    'E': AnimatedBug(x_position_extra=0, y_position_extra=0,frame_path="./assets/giphs/bugs/bug-euler-1/euler-1-bug", frame_size=(120, 120), frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
