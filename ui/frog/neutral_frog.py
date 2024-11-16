@@ -14,7 +14,7 @@ class NeutralFrog:
         self.last_update_time = 0
         self.typing_speed = 100  # Time in milliseconds between each character
         self.visible = False
-        self.name = "frog-neutral"
+        self.name = "frog-common"
         self.total_frames = 248
 
     def load_frame(self, index):
