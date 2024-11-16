@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_dialog
@@ -60,12 +61,15 @@ timer_duration = 60000  # 60 seconds duration
 back_button_clicked_digrafos_euler = None
 start_button_clicked_digrafos_euler = None
 restart_button_clicked_digrafos_euler = None
+main_menu_button_clicked_digrafos_euler = None
 
 visited_edges = []
 
 def render_digrafos_euler_1(screen, font):
     from core.fonts import font_small_buttons
-    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, background_image_win, remaining_time
+    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler,\
+        timer_started, start_time, path, start_node, positions, current_node, energy, won_level,\
+        flower, missing_nodes, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -109,7 +113,7 @@ def render_digrafos_euler_1(screen, font):
         restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
-        render_main_menu_button(screen, font_small_buttons)
+        main_menu_button_clicked_digrafos_euler = render_main_menu_button(screen, font_small_buttons)
 
         render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
@@ -131,17 +135,21 @@ def render_digrafos_euler_1(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
 
 
-def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
-    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler,restart_button_clicked_digrafos_euler, timer_started
+def handle_grafos_digrafos_euler_mousedown(event, go_to_level):
+    global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler,restart_button_clicked_digrafos_euler, timer_started, main_menu_button_clicked_digrafos_euler
     if back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = False
-        go_to_map()
+        go_to_level(Screens.MAP)
         reset_nodes(path)
     elif start_button_clicked_digrafos_euler is not None and start_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = True
     elif restart_button_clicked_digrafos_euler is not None and restart_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = False
         reset_nodes(path)
+    elif main_menu_button_clicked_digrafos_euler is not None and main_menu_button_clicked_digrafos_euler.collidepoint(event.pos):
+        timer_started = False
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 def handle_digrafos_euler_1_keydown(event,go_to_map):
     global current_node, seeds, won_level, G, missing_nodes, visited_edges

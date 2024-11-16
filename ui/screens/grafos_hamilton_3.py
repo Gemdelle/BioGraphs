@@ -3,6 +3,7 @@ import os
 import pygame
 import networkx as nx
 
+from core.screens import Screens
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialog_renderer import render_dialog
@@ -78,11 +79,14 @@ timer_duration = 60000  # 60 seconds duration
 back_button_clicked_grafos_hamilton_3 = None
 start_button_clicked_grafos_hamilton_3 = None
 restart_button_clicked_grafos_hamilton_3 = None
+main_menu_button_clicked_grafos_hamilton_3 = None
 
 
 def render_grafos_hamilton_3(screen, font):
     from core.fonts import font_small_buttons
-    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3, restart_button_clicked_grafos_hamilton_3, timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, missing_nodes, remaining_time
+    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3,\
+        restart_button_clicked_grafos_hamilton_3, timer_started, start_time, path, start_node,\
+        positions, current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_grafos_hamilton_3
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -125,7 +129,7 @@ def render_grafos_hamilton_3(screen, font):
         restart_button_clicked_grafos_hamilton_3 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
-        render_main_menu_button(screen, font_small_buttons)
+        main_menu_button_clicked_grafos_hamilton_3 = render_main_menu_button(screen, font_small_buttons)
 
         render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74))
 
@@ -147,17 +151,21 @@ def render_grafos_hamilton_3(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)
 
 
-def handle_grafos_hamilton_3_mousedown(event, go_to_map):
-    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3, restart_button_clicked_grafos_hamilton_3, timer_started
+def handle_grafos_hamilton_3_mousedown(event, go_to_level):
+    global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3, restart_button_clicked_grafos_hamilton_3, timer_started, main_menu_button_clicked_grafos_hamilton_3
     if back_button_clicked_grafos_hamilton_3 is not None and back_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = False
-        go_to_map()
+        go_to_level(Screens.MAP)
         reset_nodes(path)
     elif start_button_clicked_grafos_hamilton_3 is not None and start_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = True
     elif restart_button_clicked_grafos_hamilton_3 is not None and restart_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
         timer_started = False
         reset_nodes(path)
+    elif main_menu_button_clicked_grafos_hamilton_3 is not None and main_menu_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
+        timer_started = False
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 
 def reset_nodes(path):

@@ -4,6 +4,7 @@ import networkx as nx
 import pygame
 import math
 
+from core.fonts import font_small_buttons
 from core.game_progress import game_progress
 from core.pet import get_selected_pet
 from core.screens import Screens
@@ -16,9 +17,12 @@ from ui.flowers.black.hamilton_1_flower_black import Hamilton1FlowerBlack
 from ui.flowers.black.hamilton_2_flower_black import Hamilton2FlowerBlack
 from ui.flowers.black.hamilton_3_flower_black import Hamilton3FlowerBlack
 from ui.screens.common.graph_renderer import render_map_graph
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 
+main_menu_button_clicked_map = None
 
 def render_map(screen, go_to_level):
+    global main_menu_button_clicked_map
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
@@ -146,6 +150,9 @@ def render_map(screen, go_to_level):
 
     handle_node_click(nodes, node_screens, go_to_level)
 
+    # Draw the "Main Menu" button
+    main_menu_button_clicked_map = render_main_menu_button(screen, font_small_buttons, (1500, 30))
+
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2
@@ -164,16 +171,19 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
 
 
 def handle_node_click(nodes, node_screens, go_to_level):
-    global game_progress
+    global game_progress, main_menu_button_clicked_map
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 
     if mouse_pressed[0]:
-        for node, data in nodes.items():
-            if game_progress.get(node) is not None and game_progress.get(node)['enabled']:
-                node_pos = data['pos']
-                distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
-                if distance <= 20:
-                    print(f"Node {node} clicked! Navigating to {node_screens[node]}")
-                    level = node_screens[node]
-                    go_to_level(level)
+        if main_menu_button_clicked_map is not None and main_menu_button_clicked_map.collidepoint(mouse_pos):
+            go_to_level(Screens.MAIN)
+        else:
+            for node, data in nodes.items():
+                if game_progress.get(node) is not None and game_progress.get(node)['enabled']:
+                    node_pos = data['pos']
+                    distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
+                    if distance <= 20:
+                        print(f"Node {node} clicked! Navigating to {node_screens[node]}")
+                        level = node_screens[node]
+                        go_to_level(level)

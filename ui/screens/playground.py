@@ -1,14 +1,18 @@
 import os
+
+from core.fonts import font_small_buttons
 from core.screens import Screens
 
 import pygame
 import math
 
 from ui.animated_sprite import AnimatedSprite
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_counter_renderer import counter_renderer
 
-
+main_menu_button_clicked_playground = None
 def render_playground(screen, goToLevel, time):
+    global main_menu_button_clicked_playground
     # Fondo de mapa con movimiento flotante
     background_image = pygame.image.load("assets/playground-bg/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -88,9 +92,10 @@ def render_playground(screen, goToLevel, time):
 
     counter_renderer(screen, font_subtitle, total_nodes, missing_nodes, clover, 200, 200)
 
-    
-
     handle_node_click(nodes, node_screens, goToLevel)
+
+    # Draw the "Main Menu" button
+    main_menu_button_clicked_playground = render_main_menu_button(screen, font_small_buttons, (1500, 30))
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2
@@ -108,15 +113,19 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
 
 
-def handle_node_click(nodes, node_screens, goToLevel):
+def handle_node_click(nodes, node_screens, go_to_level):
+    global main_menu_button_clicked_playground
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 
     if mouse_pressed[0]:
-        for node, data in nodes.items():
-            if data['enabled']:
-                node_pos = data['pos']
-                distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
-                if distance <= 20:
-                    print(f"Node {node} clicked! Navigating to {node_screens[node]}")
-                    goToLevel(node_screens[node])
+        if main_menu_button_clicked_playground is not None and main_menu_button_clicked_playground.collidepoint(mouse_pos):
+            go_to_level(Screens.MAIN)
+        else:
+            for node, data in nodes.items():
+                if data['enabled']:
+                    node_pos = data['pos']
+                    distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
+                    if distance <= 20:
+                        print(f"Node {node} clicked! Navigating to {node_screens[node]}")
+                        go_to_level(node_screens[node])
