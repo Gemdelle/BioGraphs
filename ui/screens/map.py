@@ -107,12 +107,14 @@ def render_map(screen, go_to_level):
             if (game_progress.get(node) is not None and game_progress.get(node)['completed']):
                 img_rect = done_node_image.get_rect(center=data['pos'])
                 screen.blit(done_node_image, img_rect)
+                letter_text_color = (0, 0, 0)
             else:
                 img_rect = undone_node_image.get_rect(center=data['pos'])
                 screen.blit(undone_node_image, img_rect)
+                letter_text_color = (255, 255, 255)
             
             # Renderizar la letra del nodo, excepto los niveles de Digrafo que no existen
-            letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True, (255, 255, 255))
+            letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True, letter_text_color)
             letter_rect = letter_text.get_rect(center=data['pos'])
             screen.blit(letter_text, letter_rect)
 
