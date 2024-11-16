@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_dialog
 from ui.screens.common.digraph_renderer import render_euler_digraph
@@ -10,6 +11,7 @@ from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.screens.common.start_button_renderer import render_start_button
+from core.fonts import *
 
 G = nx.DiGraph()
 
@@ -24,7 +26,7 @@ seeds = {
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
     'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
     'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug", frame_size=(120, 120), frame_count=74)
+    'F': AnimatedBug(x_position_extra=-30, y_position_extra=-5,frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug", frame_size=(120, 120), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -94,7 +96,8 @@ def render_digrafos_euler_1(screen, font):
     back_button_clicked_digrafos_euler = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_clicked_digrafos_euler = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74))
+        start_button_clicked_digrafos_euler = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(150, 150), frame_count=74))
+
     else:
         # Render the graph and energy bar
         render_euler_digraph(screen, G, font, remaining_time, visited_edges, start_node, end_node, positions, seeds)
@@ -108,16 +111,16 @@ def render_digrafos_euler_1(screen, font):
         # Draw the "Main Menu" button
         render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90), frame_count=74))
+        render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
         render_dialog(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1250, 470)
+            flower.draw(screen, 1470, 750)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1250, 470)
+            dead_flower.draw(screen, 1470, 750)
 
     # Check if time is up
     if remaining_time <= 0:

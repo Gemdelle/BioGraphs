@@ -14,7 +14,7 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.screens.common.start_button_renderer import render_start_button
-from ui.seeds.enabled.euler_1_seed import Euler1Seed
+from core.fonts import *
 
 G = nx.Graph()
 positions = {
@@ -27,11 +27,11 @@ seeds = {
     'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
     'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedBug(x_position_extra=0, y_position_extra=0,frame_path="./assets/giphs/bugs/bug-euler-1/euler-1-bug", frame_size=(120, 120), frame_count=74),
+    'E': AnimatedBug(x_position_extra=-25, y_position_extra=-5,frame_path="./assets/giphs/bugs/bug-euler-1/euler-1-bug", frame_size=(120, 120), frame_count=74),
     'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
 }
 
-dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower-bw/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
 flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-1-flower/euler-1-flower", frame_size=(480, 480), frame_count=74)
 missing_nodes = len(positions)
 
@@ -96,7 +96,8 @@ def render_grafos_euler_1(screen, font):
     back_button_clicked_grafos_euler_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_clicked_grafos_euler_1 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74))
+        start_button_clicked_grafos_euler_1 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(150, 150), frame_count=74))
+
     else:
         # Render the graph
         render_euler_graph(screen, G, font, visited_edges, positions, seeds)
@@ -116,10 +117,10 @@ def render_grafos_euler_1(screen, font):
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1200, 300)
+            flower.draw(screen, 1430, 500)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1200, 300)
+            dead_flower.draw(screen, 1430, 500)
 
     # Check if time is up
     if remaining_time <= 0:

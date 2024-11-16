@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialog_renderer import render_dialog
@@ -13,6 +14,7 @@ from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.screens.common.start_button_renderer import render_start_button
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
+from core.fonts import *
 
 # Crear un DiGraph para representar el digrafo
 G = nx.DiGraph()
@@ -31,7 +33,7 @@ seeds = {
     'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
     'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
     'G': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
-    'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-hamilton/d-hamilton-bug", frame_size=(120, 120), frame_count=74)
+    'H': AnimatedBug(x_position_extra=-10, y_position_extra=5,frame_path="./assets/giphs/bugs/bug-d-hamilton/d-hamilton-bug", frame_size=(120, 120), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-hamilton-flower-bw/d-hamilton-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -102,7 +104,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     back_button_clicked_digrafos_hamilton_1 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_clicked_digrafos_hamilton_1 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
+        start_button_clicked_digrafos_hamilton_1 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(150, 150), frame_count=74))
     else:
         # Renderizar el grafo con flechas
         render_digraph(screen, G, font, remaining_time, path, start_node, end_node, positions, seeds)
@@ -122,10 +124,10 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1250, 470)
+            flower.draw(screen, 1430, 700)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1250, 470)
+            dead_flower.draw(screen, 1430, 700)
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:

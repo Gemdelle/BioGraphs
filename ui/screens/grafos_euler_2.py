@@ -14,6 +14,7 @@ from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_seed_counter
 from ui.screens.common.start_button_renderer import render_start_button
+from core.fonts import *
 
 G = nx.Graph()
 # restarle 60 a y
@@ -134,7 +135,8 @@ def render_grafos_euler_2(screen, font):
     back_button_clicked_grafos_euler_2 = render_map_button(screen, font_small_buttons)
 
     if not timer_started:
-        start_button_clicked_grafos_euler_2 = render_start_button(screen, font, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74))
+        start_button_clicked_grafos_euler_2 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(150, 150), frame_count=74))
+
     else:
         # Render the graph and energy bar
         render_euler_graph(screen, G, font, visited_edges, positions, seeds, curve_intensities)

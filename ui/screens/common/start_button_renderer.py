@@ -19,7 +19,7 @@ def render_start_button(screen, font, seed):
     # Dibujar la semilla centrada en el botón
     seed_x = start_button_rect.centerx  # Centro del botón en el eje X
     seed_y = start_button_rect.centery  # Centro del botón en el eje Y
-    seed.draw(screen, seed_x-25, seed_y-25)
+    seed.draw(screen, seed_x, seed_y)
 
     # Dibuja el texto en el botón (por ejemplo, mostrando el conteo de semillas)
     start_text = font.render("START", True, (255, 255, 255)) 
