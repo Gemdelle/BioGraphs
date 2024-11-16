@@ -6,7 +6,7 @@ def counter_renderer(screen, font, total_nodes, missing_nodes, element, img_size
     counter_image = pygame.transform.scale(counter_image, (img_size_x, img_size_y)) #120
 
     # Calcula la posición del botón (ajusta la posición según tu necesidad)
-    counter_rect = counter_image.get_rect(center=(1585, 120))
+    counter_rect = counter_image.get_rect(center=(1585, 200))
 
     # Dibujar la imagen del botón
     screen.blit(counter_image, counter_rect.topleft)

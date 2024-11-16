@@ -88,8 +88,6 @@ def render_playground(screen, goToLevel, time):
             letter_rect = letter_text.get_rect(center=data['pos'])
             screen.blit(letter_text, letter_rect)
 
-    
-
     counter_renderer(screen, font_subtitle, total_nodes, missing_nodes, clover, 200, 200)
 
     handle_node_click(nodes, node_screens, goToLevel)
