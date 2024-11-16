@@ -49,8 +49,6 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 running = True
-current_node = None
-completed = False
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
 start_ticks = pygame.time.get_ticks()
@@ -69,6 +67,7 @@ def go_to_playground():
 
 def go_to_level(screen):
     global screen_selected
+    print(f"Going to level {screen}")
     screen_selected = screen
 
 
@@ -128,32 +127,32 @@ while running:
             handle_playground_5_mousedown(event, go_to_playground)
 
         if screen_selected == Screens.GRAFOS_EULER_1:
-            completed, current_node = handle_grafos_euler_1_keydown(event,go_to_map)
+            handle_grafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_2:
-            completed, current_node = handle_grafos_euler_2_keydown(event,go_to_map)
+            handle_grafos_euler_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_3:
-            completed, current_node = handle_grafos_euler_3_keydown(event,go_to_map)
+            handle_grafos_euler_3_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_1:
-            completed, current_node = handle_grafos_hamilton_1_keydown(event,go_to_map)
+            handle_grafos_hamilton_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_2:
-            completed, current_node = handle_grafos_hamilton_2_keydown(event,go_to_map)
+            handle_grafos_hamilton_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_3:
-            completed, current_node = handle_grafos_hamilton_3_keydown(event,go_to_map)
+            handle_grafos_hamilton_3_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_EULER_1:
-            completed, current_node = handle_digrafos_euler_1_keydown(event,go_to_map)
+            handle_digrafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
-            completed, current_node = handle_digrafos_hamilton_1_keydown(event,go_to_map)
+            handle_digrafos_hamilton_1_keydown(event,go_to_map)
 
         elif screen_selected == Screens.PLAYGROUND_1:
-            completed, current_node = handle_playground_1_keydown(event)
+            handle_playground_1_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_2:
-            completed, current_node = handle_playground_2_keydown(event)
+            handle_playground_2_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_3:
-            completed, current_node = handle_playground_3_keydown(event)
+            handle_playground_3_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_4:
-            completed, current_node = handle_playground_4_keydown(event)
+            handle_playground_4_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_5:
-            completed, current_node = handle_playground_5_keydown(event)
+            handle_playground_5_keydown(event)
         elif screen_selected == Screens.INSTRUCTIONS:
             handle_instructions_keydown(event, go_to_level)
 
@@ -172,32 +171,32 @@ while running:
         render_playground(screen, go_to_level, pygame.time.get_ticks() / 150)
 
     elif screen_selected == Screens.PLAYGROUND_1:
-        completed = render_playground_1(screen, font)
+        render_playground_1(screen, font)
     elif screen_selected == Screens.PLAYGROUND_2:
-        completed = render_playground_2(screen, font)
+        render_playground_2(screen, font)
     elif screen_selected == Screens.PLAYGROUND_3:
-        completed = render_playground_3(screen, font)
+        render_playground_3(screen, font)
     elif screen_selected == Screens.PLAYGROUND_4:
-        completed = render_playground_4(screen, font)
+        render_playground_4(screen, font)
     elif screen_selected == Screens.PLAYGROUND_5:
-        completed = render_playground_5(screen, font)
+        render_playground_5(screen, font)
 
     elif screen_selected == Screens.GRAFOS_EULER_1:
-        completed = render_grafos_euler_1(screen, font)
+        render_grafos_euler_1(screen, font)
     elif screen_selected == Screens.GRAFOS_EULER_2:
-        completed = render_grafos_euler_2(screen, font)
+        render_grafos_euler_2(screen, font)
     elif screen_selected == Screens.GRAFOS_EULER_3:
-        completed = render_grafos_euler_3(screen, font)
+        render_grafos_euler_3(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_1:
-        completed = render_grafos_hamilton_1(screen, font)
+        render_grafos_hamilton_1(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_2:
-        completed = render_grafos_hamilton_2(screen, font)
+        render_grafos_hamilton_2(screen, font)
     elif screen_selected == Screens.GRAFOS_HAMILTON_3:
-        completed = render_grafos_hamilton_3(screen, font)
+        render_grafos_hamilton_3(screen, font)
     elif screen_selected == Screens.DIGRAFOS_EULER_1:
-        completed = render_digrafos_euler_1(screen, font)
+        render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
-        completed = render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
+        render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
     elif screen_selected == Screens.INTRO_HAMILTON_PATH: 
         render_intro_hamilton_path(screen, font)
     elif screen_selected == Screens.INTRO_HAMILTON_CYCLE:
@@ -208,9 +207,6 @@ while running:
         render_intro_euler_cycle(screen, font)
     else:
         print("Screen not found")
-
-    if completed:
-        screen_selected = Screens.MAP
 
     pygame.display.flip()
     clock.tick(30)

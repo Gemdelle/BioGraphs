@@ -129,10 +129,7 @@ def render_digrafos_euler_1(screen, font):
         current_node = None
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
-        return False
 
-
-    return False
 
 def handle_grafos_digrafos_euler_mousedown(event, go_to_map):
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler,restart_button_clicked_digrafos_euler, timer_started
@@ -171,10 +168,8 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
-                        return True, current_node
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
-    return False, current_node
 
 def reset_nodes(path):
     global current_node, G, seeds, missing_nodes, visited_edges

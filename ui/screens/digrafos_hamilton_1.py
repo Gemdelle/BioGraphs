@@ -135,10 +135,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         energy = initial_energy
         current_node = None
         for node in G.nodes():
-            G.nodes[node]['color'] = (0, 0, 0)  # Resetear color de los nodos
-        return False
-
-    return False
+            G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_map):
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started
@@ -227,5 +224,3 @@ def handle_digrafos_hamilton_1_keydown(event,go_to_map):
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True
                 print("Congratulations! You completed the Hamiltonian Path.")
-                return True, current_node
-    return False, current_node

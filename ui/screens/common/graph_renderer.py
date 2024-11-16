@@ -2,6 +2,8 @@ import pygame
 import networkx as nx
 import numpy as np
 
+from core.game_progress import game_progress
+
 
 def draw_curved_line_doted(surface, color, start_pos, end_pos, dash_length=10, dot_radius=2):
     # Definir el punto de control para la curva
@@ -65,7 +67,7 @@ def render_map_graph(screen, graph, positions, animated_nodes):
             draw_curved_line_doted(screen, (255, 255, 255), start_pos, end_pos)
 
     for node, pos in positions.items():
-        if pos['enabled']:  # Si el nodo está habilitado
+        if game_progress.get(node) is not None and game_progress.get(node)['enabled']:
             animated_nodes[node].update_animation()
             animated_nodes[node].draw(screen, pos['pos'][0]-80, pos['pos'][1]-100)  # Usa las coordenadas de 'pos'
 

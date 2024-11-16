@@ -144,10 +144,7 @@ def render_grafos_hamilton_3(screen, font):
         energy = initial_energy
         current_node = None
         for node in G.nodes():
-            G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
-        return False
-
-    return False
+            G.nodes[node]['color'] = (0, 0, 0)
 
 
 def handle_grafos_hamilton_3_mousedown(event, go_to_map):
@@ -215,5 +212,3 @@ def handle_grafos_hamilton_3_keydown(event,go_to_map):
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True
                 print("Congratulations! You completed the Hamiltonian Path.")
-                return True, current_node
-    return False, current_node

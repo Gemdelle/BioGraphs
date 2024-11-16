@@ -18,7 +18,7 @@ from ui.flowers.black.hamilton_3_flower_black import Hamilton3FlowerBlack
 from ui.screens.common.graph_renderer import render_map_graph
 
 
-def render_map(screen, goToLevel):
+def render_map(screen, go_to_level):
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
@@ -52,19 +52,19 @@ def render_map(screen, goToLevel):
     selected_frog = get_selected_pet(size=(150, 150))
 
     nodes = {
-        'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255), 'enabled': True},  # Yellow: GRAFOS_EULER_1
-        'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255), 'enabled': True},  # Light Blue: GRAFOS_HAMILTON_1
-        'Twyle': {'pos': (1307, 418-60), 'color': (255, 255, 255), 'enabled': True},  # Pink: GRAFOS_HAMILTON_2
-        'Bloona': {'pos': (1225, 246-60), 'color': (255, 255, 255), 'enabled': True},  # Orange: GRAFOS_HAMILTON_3
-        'Frood': {'pos': (450, 180), 'color': (255, 255, 255), 'enabled': True},  # Purple: DIGRAFOS_EULER_1
-        'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255), 'enabled': True},  # Red: DIGRAFOS_HAMILTON_1
-        'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'EII': {'pos': (754, 900-60), 'color': (255, 255, 255), 'enabled': False},  # Teal: GRAFOS_EULER_1
-        'EIII': {'pos': (930, 799-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255), 'enabled': True},  # Black: GRAFOS_EULER_1
-        'HII': {'pos': (1300, 850), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255), 'enabled': False},  # Black: GRAFOS_EULER_1
-        'Frog': {'pos': (870, 500), 'color': (255, 255, 255), 'enabled': True}  # Frog
+        'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255)},  # Yellow: GRAFOS_EULER_1
+        'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255)},  # Light Blue: GRAFOS_HAMILTON_1
+        'Twyle': {'pos': (1307, 418-60), 'color': (255, 255, 255)},  # Pink: GRAFOS_HAMILTON_2
+        'Bloona': {'pos': (1225, 246-60), 'color': (255, 255, 255)},  # Orange: GRAFOS_HAMILTON_3
+        'Frood': {'pos': (450, 180), 'color': (255, 255, 255)},  # Purple: DIGRAFOS_EULER_1
+        'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255)},  # Red: DIGRAFOS_HAMILTON_1
+        'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+        'EII': {'pos': (754, 900-60), 'color': (255, 255, 255)},  # Teal: GRAFOS_EULER_1
+        'EIII': {'pos': (930, 799-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+        'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+        'HII': {'pos': (1300, 850), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+        'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+        'Frog': {'pos': (870, 500), 'color': (255, 255, 255)}  # Frog
     }
 
     for node, pos in nodes.items():
@@ -142,7 +142,7 @@ def render_map(screen, goToLevel):
     screen.blit(digraph_euler_text, (270+20, 805+80))
     screen.blit(digraph_hamilton_text, (1350+30, 600-70))
 
-    handle_node_click(nodes, node_screens, goToLevel)
+    handle_node_click(nodes, node_screens, go_to_level)
 
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
@@ -161,7 +161,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
 
 
-def handle_node_click(nodes, node_screens, goToLevel):
+def handle_node_click(nodes, node_screens, go_to_level):
     global game_progress
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
@@ -173,4 +173,5 @@ def handle_node_click(nodes, node_screens, goToLevel):
                 distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
                 if distance <= 20:
                     print(f"Node {node} clicked! Navigating to {node_screens[node]}")
-                    goToLevel(node_screens[node])
+                    level = node_screens[node]
+                    go_to_level(level)
