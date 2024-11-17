@@ -92,6 +92,8 @@ start_time = 0
 
 current_node = None
 won_level = False
+lost_level = False
+click_locked = False
 
 initial_energy = 17
 energy = initial_energy  # Starting energy level
@@ -108,7 +110,7 @@ def render_grafos_euler_3(screen, font):
     from core.fonts import font_small_buttons
     global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3,\
         timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower,\
-        missing_edges, remaining_time, main_menu_button_clicked_grafos_euler_3
+        missing_edges, remaining_time, main_menu_button_clicked_grafos_euler_3, lost_level
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -138,9 +140,11 @@ def render_grafos_euler_3(screen, font):
 
     back_button_clicked_grafos_euler_3 = render_map_button(screen, font_small_buttons)
 
-    if not timer_started:
+    if lost_level:
+        restart_button_clicked_grafos_euler_3 = render_restart_button(screen, font_small_buttons, (800, 500))
+        render_dialogue(screen, "Beter luck next time", font)
+    elif not timer_started:
         start_button_clicked_grafos_euler_3 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(150, 150), frame_count=74))
-
     else:
         # Render the graph and energy bar
         render_euler_graph(screen, G, font, visited_edges, positions, seeds, curve_intensities)
@@ -166,29 +170,37 @@ def render_grafos_euler_3(screen, font):
             dead_flower.draw(screen, 1540, 750)
 
     # Check if time is up
-    if remaining_time <= 0:
+    if timer_started and remaining_time <= 0:
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
-        for node in G.nodes():
-            G.nodes[node]['color'] = (0, 0, 0)
+        won_level = False
+        timer_started = False
+        lost_level = True
 
 
 def handle_grafos_euler_3_mousedown(event, go_to_level):
-    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3, timer_started, main_menu_button_clicked_grafos_euler_3
-    if back_button_clicked_grafos_euler_3 is not None and back_button_clicked_grafos_euler_3.collidepoint(event.pos):
-        timer_started = False
-        go_to_level(Screens.MAP)
-        reset_nodes(path)
-    elif start_button_clicked_grafos_euler_3 is not None and start_button_clicked_grafos_euler_3.collidepoint(event.pos):
-        timer_started = True
-    elif restart_button_clicked_grafos_euler_3 is not None and restart_button_clicked_grafos_euler_3.collidepoint(event.pos):
-        timer_started = False
-        reset_nodes(path)
-    elif main_menu_button_clicked_grafos_euler_3 is not None and main_menu_button_clicked_grafos_euler_3.collidepoint(event.pos):
-        timer_started = False
-        reset_nodes(path)
-        go_to_level(Screens.MAIN)
+    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3,\
+        timer_started, main_menu_button_clicked_grafos_euler_3, click_locked
+
+    if click_locked:
+        return
+
+    click_locked = True
+
+    try:
+        if back_button_clicked_grafos_euler_3 is not None and back_button_clicked_grafos_euler_3.collidepoint(event.pos):
+            go_to_level(Screens.MAP)
+            reset_nodes(path)
+        elif restart_button_clicked_grafos_euler_3 is not None and restart_button_clicked_grafos_euler_3.collidepoint(event.pos):
+            reset_nodes(path)
+        elif start_button_clicked_grafos_euler_3 is not None and start_button_clicked_grafos_euler_3.collidepoint(event.pos):
+            timer_started = True
+        elif main_menu_button_clicked_grafos_euler_3 is not None and main_menu_button_clicked_grafos_euler_3.collidepoint(event.pos):
+            reset_nodes(path)
+            go_to_level(Screens.MAIN)
+    finally:
+        click_locked = False
 
 
 def handle_grafos_euler_3_keydown(event,go_to_map):
@@ -218,9 +230,13 @@ def handle_grafos_euler_3_keydown(event,go_to_map):
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
 def reset_nodes(path):
-    global current_node, G, seeds, missing_edges, visited_edges
+    global current_node, G, seeds, missing_edges, visited_edges, won_level,timer_started,lost_level, remaining_time
     path.clear()
     current_node = None
+    remaining_time = None
+    won_level = False
+    timer_started = False
+    lost_level = False
     visited_edges.clear()
 
     seeds = {

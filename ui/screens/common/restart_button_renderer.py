@@ -1,13 +1,13 @@
 import pygame
 
 
-def render_restart_button(screen, font_buttons):
+def render_restart_button(screen, font_buttons, position=(1500, 90)):
     # Carga y ajusta la imagen del botón
     button_image = pygame.image.load("./assets/button.png").convert_alpha()
     button_image = pygame.transform.scale(button_image, (180, 50))
 
     # Calcula la posición del botón (usando el rectángulo de la imagen)
-    restart_button_rect = button_image.get_rect(topleft=(1500, 90))
+    restart_button_rect = button_image.get_rect(topleft=position)
 
     # Dibuja solo la imagen del botón
     screen.blit(button_image, restart_button_rect.topleft)
