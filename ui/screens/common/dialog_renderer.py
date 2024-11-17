@@ -25,13 +25,13 @@ def render_dialog(screen, text, font):
 
     # Escalar las imágenes al tamaño adecuado
     dialogue_frame = pygame.transform.scale(dialogue_frame, (text_box_width, text_box_height))
-    character_frame = pygame.transform.scale(character_frame, (circle_radius * 2, circle_radius * 2))
+    character_frame = pygame.transform.scale(character_frame, (circle_radius * 2+150, circle_radius * 2+50))
 
-    # Dibuja el marco del diálogo (en lugar del rectángulo relleno)
+    # Dibuja el marco del diálogo
     screen.blit(dialogue_frame, (text_box_x, text_box_y))
 
-    # Dibuja el marco del personaje (en lugar del círculo)
-    screen.blit(character_frame, (circle_x - circle_radius, circle_y - circle_radius))
+    # Dibuja el marco del personaje 
+    screen.blit(character_frame, (circle_x - circle_radius-70, circle_y - circle_radius-25))
 
     avatar = get_selected_pet()
     # Actualiza y dibuja la animación del avatar dentro del marco del personaje
@@ -54,7 +54,7 @@ def render_playground_dialogue(screen, text, font):
     avatar = get_selected_pet()
     # Actualiza y dibuja la animación del avatar dentro del marco del personaje
     avatar.update_animation()
-    avatar.draw(screen, circle_x+100, circle_y+25)
+    avatar.draw(screen, circle_x+100, circle_y-10)
 
     # Dibuja el texto en el marco de diálogo
     prompt_text = font.render(text, True, text_black)

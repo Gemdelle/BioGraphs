@@ -1,6 +1,7 @@
 import os
 
 from core.fonts import font_small_buttons
+from core.pet import get_selected_pet
 from core.screens import Screens
 
 import pygame
@@ -11,6 +12,7 @@ from ui.screens.common.main_menu_button_renderer import render_playground_main_m
 from ui.screens.common.map_counter_renderer import counter_renderer
 
 main_menu_button_clicked_playground = None
+
 def render_playground(screen, goToLevel, time):
     global main_menu_button_clicked_playground
     # Fondo de mapa con movimiento flotante
@@ -75,6 +77,10 @@ def render_playground(screen, goToLevel, time):
         start_pos = nodes[edge[0]]['pos']
         end_pos = nodes[edge[1]]['pos']
         draw_curved_line(screen, (0, 0, 0), start_pos, end_pos, dash_length=10)
+
+    selected_frog = get_selected_pet(size=(180, 180))
+    selected_frog.update_animation()
+    selected_frog.draw(screen, nodes['Frog']['pos'][0], nodes['Frog']['pos'][1])
 
     clover = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(130, 130), frame_count=625)
     for node, data in nodes.items():
