@@ -10,22 +10,22 @@ game_progress = {
         'goesTo': 'Twyle'
     },
     'Twyle': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': 'Bloona'
     },
     'Bloona': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': None
     },
     'Frood': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': 'Orrox'
     },
     'Orrox': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': None
     },
