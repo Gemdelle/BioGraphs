@@ -236,7 +236,7 @@ def reset_nodes(path):
         'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
         'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
         'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'H': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-2/euler-bug-2", frame_size=(120, 120), frame_count=74)
+        'H': AnimatedBug(-20, 20, frame_path="./assets/giphs/bugs/bug-euler-2/euler-2-bug", frame_size=(120, 120), frame_count=74)
     }
 
     for node in G.nodes:

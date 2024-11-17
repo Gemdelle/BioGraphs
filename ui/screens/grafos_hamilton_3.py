@@ -4,6 +4,7 @@ import pygame
 import networkx as nx
 
 from core.screens import Screens
+from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialogue_renderer import render_dialogue
@@ -40,7 +41,7 @@ seeds = {
     'M': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
     'N': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
     'O': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-    'P': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-hamilton-3/hamilton-3-bug", frame_size=(120, 120), frame_count=74)
+    'P': AnimatedBug(x_position_extra=-20, y_position_extra=0,frame_path="./assets/giphs/bugs/bug-hamilton-3/hamilton-3-bug", frame_size=(140, 140), frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/hamilton-3-flower-bw/hamilton-3-flower-bw", frame_size=(480, 480), frame_count=74)
@@ -188,7 +189,7 @@ def reset_nodes(path):
         'M': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
         'N': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
         'O': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'P': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-hamilton-3/hamilton-3-bug", frame_size=(120, 120), frame_count=74)
+        'P':  AnimatedBug(x_position_extra=-20, y_position_extra=0,frame_path="./assets/giphs/bugs/bug-hamilton-3/hamilton-3-bug", frame_size=(140, 140), frame_count=74)
     }
 
     for node in G.nodes:
