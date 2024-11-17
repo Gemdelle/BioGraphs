@@ -2,7 +2,7 @@ from ui.animated_sprite import AnimatedSprite
 
 selected_pet = [None]
 
-def get_selected_pet(size=(260, 260)):
+def get_selected_pet(size=(290, 290)):
     if selected_pet[0] is not None and selected_pet[0].upper() == "DARK":
         return AnimatedSprite(frame_path="./assets/giphs/frog/neutral/frog-dark/frog-dark", frame_size=size, frame_count=192)
     elif selected_pet[0] is not None and selected_pet[0].upper() == "NEUTRAL":
