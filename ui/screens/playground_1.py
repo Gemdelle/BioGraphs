@@ -5,9 +5,9 @@ from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from core.fonts import *
-from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
-from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button
-from ui.screens.common.restart_button_renderer import render_playground_restart_button, render_restart_button
+from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
+from ui.screens.common.map_button_renderer import render_playground_map_button
+from ui.screens.common.restart_button_renderer import render_playground_restart_button
 
 G = nx.Graph()
 
