@@ -156,7 +156,7 @@ def render_grafos_euler_3(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialogue(screen, "Restore the plant 'Erlem' by solving the Euler graph before the timer runs out.\n- You must pass through ALL 16 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!", font)
+        render_dialogue(screen, "Restore the plant 'Erlem' by solving the Euler path before the timer runs out.\n- You must pass through ALL 16 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!", font)
 
         if won_level:
             flower.update_animation()

@@ -69,7 +69,7 @@ def render_playground_5(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_5 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_playground_dialogue(screen, "¿Qué querés saber?", font)
+    render_playground_dialogue(screen, "Now, be careful with the house, it can be tricky... Let's solve it with an Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 
     return False
 

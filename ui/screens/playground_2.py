@@ -85,7 +85,7 @@ def render_playground_2(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_2 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_playground_dialogue(screen, "Hello there! We can now build a leaf together. Let's solve this Euler graph.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
+    render_playground_dialogue(screen, "Hello again! We can now build a leaf together. Let's solve this Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
     
     return False
 

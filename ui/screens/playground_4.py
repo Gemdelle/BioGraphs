@@ -74,7 +74,7 @@ def render_playground_4(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_4 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_playground_dialogue(screen, "¿Qué querés saber?", font)
+    render_playground_dialogue(screen, "See this pine tree? My guess is we can make it shine by solving a Hamilton path.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 
     return False
 
