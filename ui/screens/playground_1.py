@@ -4,6 +4,10 @@ import networkx as nx
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialog_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
+from core.fonts import *
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
+from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button
+from ui.screens.common.restart_button_renderer import render_playground_restart_button, render_restart_button
 
 G = nx.Graph()
 
@@ -41,6 +45,7 @@ missing_nodes = len(clovers)
 
 back_button_clicked_playground_1 = None
 restart_button_clicked_playground_1 = None
+main_menu_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
     from core.fonts import font_buttons
@@ -53,17 +58,14 @@ def render_playground_1(screen, font):
 
     render_simple_node_graph(screen, G, font, path, positions, clovers)
 
-    # Dibujar el botón "Back"
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_playground_1 = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_playground_1)  # Fondo del botón
-    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+    # Draw the "Back" button
+    back_button_clicked_playground_1 = render_playground_map_button(screen, font_small_buttons)
 
     # Draw the "Restart" button
-    restart_button_text = font_buttons.render("RESTART", True, (0, 0, 0))
-    restart_button_clicked_playground_1 = pygame.Rect(1420, 85, 200, 60)
-    pygame.draw.rect(screen, (0, 0, 0), restart_button_clicked_playground_1, width=5, border_radius=15)
-    screen.blit(restart_button_text, (1430, 95))
+    restart_button_clicked_playground_1 = render_playground_restart_button(screen, font_small_buttons)
+
+    # Draw the "Main Menu" button
+    main_menu_button_clicked_playground_1 = render_playground_main_menu_button(screen, font_small_buttons)
 
     render_playground_dialogue(screen, "¿Qué querés saber?", font)
 

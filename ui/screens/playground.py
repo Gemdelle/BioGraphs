@@ -7,7 +7,7 @@ import pygame
 import math
 
 from ui.animated_sprite import AnimatedSprite
-from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_counter_renderer import counter_renderer
 
 main_menu_button_clicked_playground = None
@@ -93,7 +93,7 @@ def render_playground(screen, goToLevel, time):
     handle_node_click(nodes, node_screens, goToLevel)
 
     # Draw the "Main Menu" button
-    main_menu_button_clicked_playground = render_main_menu_button(screen, font_small_buttons, (1500, 30))
+    main_menu_button_clicked_playground = render_playground_main_menu_button(screen, font_small_buttons, (1500, 30))
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2
