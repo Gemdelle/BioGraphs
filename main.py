@@ -35,7 +35,7 @@ from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafo
                                           handle_grafos_hamilton_3_mousedown)
 from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
 from ui.screens.game_modes import render_main_screen, MovingImage
-from ui.screens.map import render_map
+from ui.screens.map import render_map, handle_node_click
 from ui.screens.playground import render_playground
 from ui.screens.select_your_pet import render_select_your_pet_screen
 from ui.splash_video import SplashVideo
@@ -48,6 +48,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 running = True
+mousedown_processing = False
 
 screen_selected = Screens.SELECT_YOUR_PET  # Start screen
 start_ticks = pygame.time.get_ticks()
@@ -93,39 +94,47 @@ while running:
             if event.key == pygame.K_ESCAPE:
                 running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = event.pos
-            if screen_selected == Screens.MAIN:
-                for text, btn_rect in buttons:
-                    if btn_rect.collidepoint(mouse_pos):
-                        if text == "Instructions":
-                            screen_selected = Screens.INSTRUCTIONS
-                        elif text == "Playground":
-                            screen_selected = Screens.PLAYGROUND
-                        elif text == "Map":
-                            go_to_map()
+            if mousedown_processing:
+                continue
+            mousedown_processing = True
+            try:
+                mouse_pos = event.pos
+                if screen_selected == Screens.MAIN:
+                    for text, btn_rect in buttons:
+                        if btn_rect.collidepoint(mouse_pos):
+                            if text == "Instructions":
+                                screen_selected = Screens.INSTRUCTIONS
+                            elif text == "Playground":
+                                screen_selected = Screens.PLAYGROUND
+                            elif text == "Map":
+                                go_to_map()
 
-            elif (is_back_button_clicked_intro_euler_cicle(event) or
-                  is_back_button_clicked_intro_euler_path(event) or
-                  is_back_button_clicked_intro_hamilton_cicle(event) or
-                  is_back_button_clicked_intro_hamilton_path(event)):
-                go_to_instructions()
+                elif (is_back_button_clicked_intro_euler_cicle(event) or
+                      is_back_button_clicked_intro_euler_path(event) or
+                      is_back_button_clicked_intro_hamilton_cicle(event) or
+                      is_back_button_clicked_intro_hamilton_path(event)):
+                    go_to_instructions()
 
-            elif is_back_button_clicked_instructions(event):
-                go_to_main()
+                elif is_back_button_clicked_instructions(event):
+                    go_to_main()
 
-            handle_grafos_digrafos_euler_mousedown(event, go_to_level)
-            handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level)
-            handle_grafos_euler_1_mousedown(event, go_to_level)
-            handle_grafos_euler_2_mousedown(event, go_to_level)
-            handle_grafos_euler_3_mousedown(event, go_to_level)
-            handle_grafos_hamilton_1_mousedown(event, go_to_level)
-            handle_grafos_hamilton_2_mousedown(event, go_to_level)
-            handle_grafos_hamilton_3_mousedown(event, go_to_level)
-            handle_playground_1_mousedown(event, go_to_playground)
-            handle_playground_2_mousedown(event, go_to_playground)
-            handle_playground_3_mousedown(event, go_to_playground)
-            handle_playground_4_mousedown(event, go_to_playground)
-            handle_playground_5_mousedown(event, go_to_playground)
+                handle_node_click(go_to_level)
+                handle_grafos_digrafos_euler_mousedown(event, go_to_level)
+                handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level)
+                handle_grafos_euler_1_mousedown(event, go_to_level)
+                handle_grafos_euler_2_mousedown(event, go_to_level)
+                handle_grafos_euler_3_mousedown(event, go_to_level)
+                handle_grafos_hamilton_1_mousedown(event, go_to_level)
+                handle_grafos_hamilton_2_mousedown(event, go_to_level)
+                handle_grafos_hamilton_3_mousedown(event, go_to_level)
+                handle_playground_1_mousedown(event, go_to_playground)
+                handle_playground_2_mousedown(event, go_to_playground)
+                handle_playground_3_mousedown(event, go_to_playground)
+                handle_playground_4_mousedown(event, go_to_playground)
+                handle_playground_5_mousedown(event, go_to_playground)
+
+            finally:
+                mousedown_processing = False
 
         if screen_selected == Screens.GRAFOS_EULER_1:
             handle_grafos_euler_1_keydown(event,go_to_map)

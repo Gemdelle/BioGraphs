@@ -20,9 +20,60 @@ from ui.screens.common.graph_renderer import render_map_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 
 main_menu_button_clicked_map = None
+G = nx.Graph()
+
+
+
+nodes = {
+    'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255)},  # Yellow: GRAFOS_EULER_1
+    'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255)},  # Light Blue: GRAFOS_HAMILTON_1
+    'Twyle': {'pos': (1307, 418-60), 'color': (255, 255, 255)},  # Pink: GRAFOS_HAMILTON_2
+    'Bloona': {'pos': (1225, 246-60), 'color': (255, 255, 255)},  # Orange: GRAFOS_HAMILTON_3
+    'Frood': {'pos': (450, 180), 'color': (255, 255, 255)},  # Purple: DIGRAFOS_EULER_1
+    'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255)},  # Red: DIGRAFOS_HAMILTON_1
+    'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+    'EII': {'pos': (754, 900-60), 'color': (255, 255, 255)},  # Teal: GRAFOS_EULER_1
+    'EIII': {'pos': (930, 799-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+    'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+    'HII': {'pos': (1300, 850), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+    'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
+    'Frog': {'pos': (870, 500), 'color': (255, 255, 255)}  # Frog
+}
+
+for node, pos in nodes.items():
+    G.add_node(node, pos=pos, color=(0, 0, 0))
+
+edges = [
+    ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'EII'),('EII', 'EIII'),('Frog', 'Uchya'),
+    ('Uchya', 'HII'),('HII', 'HIII')
+]
+
+for edge in edges:
+    G.add_edge(edge[0], edge[1])
+
+node_screens = {
+    'Erlem': Screens.GRAFOS_EULER_1,
+    'Ulfex': Screens.GRAFOS_HAMILTON_1,
+    'Twyle': Screens.GRAFOS_HAMILTON_2,
+    'Bloona': Screens.GRAFOS_HAMILTON_3,
+    'Frood': Screens.GRAFOS_EULER_2,
+    'Orrox': Screens.GRAFOS_EULER_3,
+    'Spyx': Screens.DIGRAFOS_EULER_1,
+    # 'H': Screens.DIGRAFOS_EULER_1,
+    # 'I': Screens.DIGRAFOS_EULER_1,
+    'Uchya': Screens.DIGRAFOS_HAMILTON_1,
+    # 'K': Screens.DIGRAFOS_HAMILTON_2,
+    # 'L': Screens.DIGRAFOS_HAMILTON_3,
+    # 'M': Screens.PROFILE
+}
 
 def render_map(screen, go_to_level):
     global main_menu_button_clicked_map
+    selected_frog = get_selected_pet(size=(150, 150))
+    seeds = {
+        'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
+        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack(), 'Frog': selected_frog
+    }
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
@@ -50,58 +101,6 @@ def render_map(screen, go_to_level):
     sign_d_euler_image = pygame.transform.scale(sign_d_euler_image,(sign_width,sign_height))
     sign_d_hamilton_image = pygame.image.load('./assets/signs/sign-d-hamilton.png').convert_alpha()
     sign_d_hamilton_image = pygame.transform.scale(sign_d_hamilton_image,(sign_width,sign_height))
-
-    G = nx.Graph()
-
-    selected_frog = get_selected_pet(size=(150, 150))
-
-    nodes = {
-        'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255)},  # Yellow: GRAFOS_EULER_1
-        'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255)},  # Light Blue: GRAFOS_HAMILTON_1
-        'Twyle': {'pos': (1307, 418-60), 'color': (255, 255, 255)},  # Pink: GRAFOS_HAMILTON_2
-        'Bloona': {'pos': (1225, 246-60), 'color': (255, 255, 255)},  # Orange: GRAFOS_HAMILTON_3
-        'Frood': {'pos': (450, 180), 'color': (255, 255, 255)},  # Purple: DIGRAFOS_EULER_1
-        'Orrox': {'pos': (329, 364-60), 'color': (255, 255, 255)},  # Red: DIGRAFOS_HAMILTON_1
-        'Spyx': {'pos': (753, 713-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
-        'EII': {'pos': (754, 900-60), 'color': (255, 255, 255)},  # Teal: GRAFOS_EULER_1
-        'EIII': {'pos': (930, 799-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
-        'Uchya': {'pos': (1121, 877-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
-        'HII': {'pos': (1300, 850), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
-        'HIII': {'pos': (1439, 808-60), 'color': (255, 255, 255)},  # Black: GRAFOS_EULER_1
-        'Frog': {'pos': (870, 500), 'color': (255, 255, 255)}  # Frog
-    }
-
-    for node, pos in nodes.items():
-        G.add_node(node, pos=pos, color=(0, 0, 0))
-
-    seeds = {
-        'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
-        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack(), 'Frog': selected_frog
-    }
-
-    edges = [
-        ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'EII'),('EII', 'EIII'),('Frog', 'Uchya'),
-        ('Uchya', 'HII'),('HII', 'HIII')
-    ]
-
-    for edge in edges:
-        G.add_edge(edge[0], edge[1])
-
-    node_screens = {
-        'Erlem': Screens.GRAFOS_EULER_1,
-        'Ulfex': Screens.GRAFOS_HAMILTON_1,
-        'Twyle': Screens.GRAFOS_HAMILTON_2,
-        'Bloona': Screens.GRAFOS_HAMILTON_3,
-        'Frood': Screens.GRAFOS_EULER_2,
-        'Orrox': Screens.GRAFOS_EULER_3,
-        'Spyx': Screens.DIGRAFOS_EULER_1,
-        # 'H': Screens.DIGRAFOS_EULER_1,
-        # 'I': Screens.DIGRAFOS_EULER_1,
-        'Uchya': Screens.DIGRAFOS_HAMILTON_1,
-        # 'K': Screens.DIGRAFOS_HAMILTON_2,
-        # 'L': Screens.DIGRAFOS_HAMILTON_3,
-        # 'M': Screens.PROFILE
-    }
 
     render_map_graph(screen, G, nodes, seeds)
 
@@ -148,7 +147,7 @@ def render_map(screen, go_to_level):
     screen.blit(digraph_euler_text, (270+20, 805+80))
     screen.blit(digraph_hamilton_text, (1350+30, 600-70))
 
-    handle_node_click(nodes, node_screens, go_to_level)
+    # handle_node_click(nodes, node_screens, go_to_level)
 
     # Draw the "Main Menu" button
     main_menu_button_clicked_map = render_main_menu_button(screen, font_small_buttons, (1500, 30))
@@ -173,8 +172,8 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
 
 
-def handle_node_click(nodes, node_screens, go_to_level):
-    global game_progress, main_menu_button_clicked_map
+def handle_node_click(go_to_level):
+    global game_progress, main_menu_button_clicked_map, nodes, node_screens
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 
