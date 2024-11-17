@@ -8,6 +8,7 @@ from core.fonts import *
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
 from ui.screens.common.restart_button_renderer import render_playground_restart_button
+from ui.screens.common.seed_counter_renderer import render_counter
 
 G = nx.Graph()
 
@@ -66,6 +67,8 @@ def render_playground_1(screen, font):
 
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_1 = render_playground_main_menu_button(screen, font_small_buttons)
+
+    render_counter(screen, font, missing_nodes, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
 
     render_playground_dialogue(screen, "Hello, friend! Do you want to build a kite with me? Let's solve this Hamilton path.\n- You must pass through ALL 4 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 

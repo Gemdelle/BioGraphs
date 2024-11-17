@@ -10,7 +10,7 @@ from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
-from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.seed_counter_renderer import render_counter
 from ui.screens.common.start_button_renderer import render_start_button
 from core.fonts import *
 
@@ -33,14 +33,14 @@ seeds = {
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw", frame_size=(480, 480), frame_count=74)
 flower = AnimatedSprite(frame_path="./assets/giphs/flowers/d-euler-flower/d-euler-flower", frame_size=(480, 480), frame_count=74)
 
-missing_nodes = len(positions)
-
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
     ('B', 'A'), ('A', 'B'), ('A', 'D'), ('A', 'C'), ('B', 'D'), ('C', 'B'), ('D', 'E'), ('E', 'F')
 ]
+
+missing_edges = len(edges)
 
 for edge in edges:
     G.add_edge(edge[0], edge[1])
@@ -69,7 +69,7 @@ def render_digrafos_euler_1(screen, font):
     from core.fonts import font_small_buttons
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler,\
         timer_started, start_time, path, start_node, positions, current_node, energy, won_level,\
-        flower, missing_nodes, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler
+        flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -115,7 +115,7 @@ def render_digrafos_euler_1(screen, font):
         # Draw the "Main Menu" button
         main_menu_button_clicked_digrafos_euler = render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
+        render_counter(screen,font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
         render_dialogue(screen, "Restore the plant 'Spyx' by solving the Euler path before the timer runs out.\n- You must pass through ALL 8 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!", font)
 
@@ -152,7 +152,7 @@ def handle_grafos_digrafos_euler_mousedown(event, go_to_level):
         go_to_level(Screens.MAIN)
 
 def handle_digrafos_euler_1_keydown(event,go_to_map):
-    global current_node, seeds, won_level, G, missing_nodes, visited_edges
+    global current_node, seeds, won_level, G,  missing_edges, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
 
@@ -169,7 +169,7 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                     path.append(key)  # Agrega el nodo al camino
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
                     current_node = key
-                    missing_nodes -= 1
+                    missing_edges -= 1
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
 
                     # Revisa si completaste el camino de Euler
@@ -180,7 +180,7 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
 def reset_nodes(path):
-    global current_node, G, seeds, missing_nodes, visited_edges
+    global current_node, G, seeds, missing_edges, visited_edges
     path.clear()
     current_node = None
     visited_edges.clear()  # Reinicia las aristas visitadas
@@ -196,4 +196,4 @@ def reset_nodes(path):
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
-    missing_nodes = len(positions)
+    missing_edges = len(edges)

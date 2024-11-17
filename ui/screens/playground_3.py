@@ -2,13 +2,13 @@ import pygame
 import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
-from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
-from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
-from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button
-from ui.screens.common.restart_button_renderer import render_playground_restart_button, render_restart_button
+from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
+from ui.screens.common.map_button_renderer import render_playground_map_button
+from ui.screens.common.restart_button_renderer import render_playground_restart_button
 from core.fonts import *
+from ui.screens.common.seed_counter_renderer import render_counter
 
 G = nx.Graph()
 
@@ -42,7 +42,7 @@ start_time = 0
 
 current_node = None
 won_level = False
-missing_nodes = len(clovers)
+missing_edges = len(edges)
 
 back_button_clicked_playground_3 = None
 restart_button_clicked_playground_3 = None
@@ -70,6 +70,8 @@ def render_playground_3(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_3 = render_playground_main_menu_button(screen, font_small_buttons)
 
+    render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
+
     render_playground_dialogue(screen, "Look at this star! It looks like we can build it using an Euler path.\n- You must pass through ALL 5 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
     
     return False
@@ -91,14 +93,14 @@ def reset_nodes(path):
         G.nodes[node]['color'] = (0, 0, 0)
 
 def handle_playground_3_keydown(event):
-    global current_node, clovers, won_level, G, missing_nodes
+    global current_node, clovers, won_level, G, missing_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
                 current_node = key
                 path.append(current_node)
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=626)
-                missing_nodes -= 1
+                missing_edges -= 1
 
                 if current_node == end_node and len(path) == len(G.nodes):
                     won_level = True

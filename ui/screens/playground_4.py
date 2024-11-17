@@ -2,13 +2,13 @@ import pygame
 import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
-from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from core.fonts import *
-from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
-from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button
-from ui.screens.common.restart_button_renderer import render_playground_restart_button, render_restart_button
+from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
+from ui.screens.common.map_button_renderer import render_playground_map_button
+from ui.screens.common.restart_button_renderer import render_playground_restart_button
+from ui.screens.common.seed_counter_renderer import render_counter
 
 G = nx.Graph()
 
@@ -73,6 +73,8 @@ def render_playground_4(screen, font):
 
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_4 = render_playground_main_menu_button(screen, font_small_buttons)
+
+    render_counter(screen, font, missing_nodes, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
 
     render_playground_dialogue(screen, "See this pine tree? My guess is we can make it shine by solving a Hamilton path.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 

@@ -1,6 +1,6 @@
 import pygame
 
-def render_seed_counter(screen, font, missing_nodes, seed):
+def render_counter(screen, font, missing_element, seed):
     # Cargar y ajustar la imagen del botón
     counter_image = pygame.image.load("./assets/seed-counter.png").convert_alpha()
     counter_image = pygame.transform.scale(counter_image, (180, 180))
@@ -20,6 +20,6 @@ def render_seed_counter(screen, font, missing_nodes, seed):
     seed.draw(screen, seed_x, seed_y)
 
     # Dibuja el texto en el botón (por ejemplo, mostrando el conteo de semillas)
-    seed_text = font.render(f"{missing_nodes}", True, (255, 255, 255))  # Texto en color negro
+    seed_text = font.render(f"{missing_element}", True, (255, 255, 255))  # Texto en color negro
     seed_text_rect = seed_text.get_rect(center=counter_rect.center)
     screen.blit(seed_text, seed_text_rect)

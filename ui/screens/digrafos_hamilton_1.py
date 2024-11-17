@@ -11,7 +11,7 @@ from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
-from ui.screens.common.seed_counter_renderer import render_seed_counter
+from ui.screens.common.seed_counter_renderer import render_counter
 from ui.screens.common.start_button_renderer import render_start_button
 from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
 from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
@@ -122,7 +122,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         # Draw the "Main Menu" button
         main_menu_button_clicked_digrafos_hamilton_1 = render_main_menu_button(screen, font_small_buttons)
 
-        render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
+        render_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
 
         render_dialogue(screen, "Restore the plant 'Uchya' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!", font)
 
