@@ -7,24 +7,32 @@ from PIL import Image
 class SplashVideo:
     def __init__(self, screen_width, screen_height):
         self.clip = VideoFileClip("./assets/videos/tutorial-digraph.mp4")
-        self.new_width, self.new_height = self.calculate_resize(screen_width, screen_height)
+        self.screen_width = screen_width
+        self.screen_height = screen_height
         self.is_video_playing = False
         self.is_clock_reseted = False
         self.initial_time = pygame.time.get_ticks()
 
-    def calculate_resize(self, screen_width, screen_height):
-        aspect_ratio = self.clip.size[0] / self.clip.size[1]
-        if screen_width / screen_height > aspect_ratio:
-            new_height = screen_height
-            new_width = int(aspect_ratio * new_height)
-        else:
-            new_width = screen_width
-            new_height = int(new_width / aspect_ratio)
-        return new_width, new_height
-
-    def resize_frame(self, frame):
+    def zoom_frame(self, frame):
+        # Convertir el frame a una imagen PIL
         pil_image = Image.fromarray(frame)
-        pil_image = pil_image.resize((self.new_width, self.new_height), Image.LANCZOS)
+
+        # Obtener dimensiones originales del video
+        original_width, original_height = pil_image.size
+
+        # Calcular factor de zoom para cubrir toda la pantalla
+        zoom_factor = max(self.screen_width / original_width, self.screen_height / original_height)
+        new_width = int(original_width * zoom_factor)
+        new_height = int(original_height * zoom_factor)
+
+        # Redimensionar con zoom y centrar
+        pil_image = pil_image.resize((new_width, new_height), Image.LANCZOS)
+
+        # Recortar para centrar el video en la pantalla
+        left = (new_width - self.screen_width) // 2
+        top = (new_height - self.screen_height) // 2
+        pil_image = pil_image.crop((left, top, left + self.screen_width, top + self.screen_height))
+
         return np.array(pil_image)
 
     def frame_to_surface(self, frame):
@@ -40,8 +48,11 @@ class SplashVideo:
             go_to_next_screen()
 
         current_frame = self.clip.get_frame(current_time)
-        current_frame = self.resize_frame(current_frame)
+        current_frame = self.zoom_frame(current_frame)
         surface = self.frame_to_surface(current_frame)
 
-        screen.fill((0, 0, 0))
-        screen.blit(surface, ((screen.get_width() - self.new_width) // 2, (screen.get_height() - self.new_height) // 2))
+        # Rellenar el fondo antes de dibujar el video
+        screen.fill((76, 72, 60))
+
+        # Dibujar el video a pantalla completa
+        screen.blit(surface, (0, 0))
