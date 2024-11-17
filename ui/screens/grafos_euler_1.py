@@ -8,7 +8,7 @@ from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.map_button_renderer import render_map_button
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -34,6 +34,7 @@ seeds = {
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-1-flower-bw/euler-1-flower-bw", frame_size=(480, 480), frame_count=74)
 flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-1-flower/euler-1-flower", frame_size=(480, 480), frame_count=74)
+
 missing_nodes = len(positions)
 
 for node, pos in positions.items():
@@ -117,7 +118,7 @@ def render_grafos_euler_1(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()

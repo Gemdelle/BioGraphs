@@ -3,7 +3,7 @@ import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.screens.common.dialog_renderer import render_dialog, render_playground_dialogue
+from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button

@@ -6,7 +6,7 @@ import networkx as nx
 from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -37,7 +37,7 @@ seeds = {
     'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130), frame_count=74)
 }
 
-dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower/euler-3-flower-bw", frame_size=(480, 480), frame_count=74)
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower-bw/euler-3-flower-bw", frame_size=(480, 480), frame_count=74)
 flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-3-flower/euler-3-flower", frame_size=(480, 480), frame_count=74)
 
 missing_nodes = len(positions)
@@ -156,14 +156,14 @@ def render_grafos_euler_3(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1200, 300)
+            flower.draw(screen, 1470, 750)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1200, 300)
+            dead_flower.draw(screen, 1470, 750)
 
     # Check if time is up
     if remaining_time <= 0:

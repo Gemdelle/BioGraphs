@@ -7,7 +7,7 @@ from core.game_progress import complete_level
 from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -41,9 +41,10 @@ seeds = {
     'H': AnimatedBug(-20, 20, frame_path="./assets/giphs/bugs/bug-euler-2/euler-2-bug", frame_size=(120, 120), frame_count=74)
 }
 
-missing_nodes = len(positions)
-dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-2-flower/euler-2-flower-bw", frame_size=(480, 480), frame_count=74)
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-2-flower-bw/euler-2-flower-bw", frame_size=(480, 480), frame_count=74)
 flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-2-flower/euler-2-flower", frame_size=(480, 480), frame_count=74)
+
+missing_nodes = len(positions)
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
@@ -156,14 +157,14 @@ def render_grafos_euler_2(screen, font):
 
         render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1200, 300)
+            flower.draw(screen, 1470, 750)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1200, 300)
+            dead_flower.draw(screen, 1470, 750)
 
     # Check if time is up
     if remaining_time <= 0:

@@ -4,7 +4,7 @@ import networkx as nx
 from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.digraph_renderer import render_euler_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -110,14 +110,14 @@ def render_digrafos_euler_1(screen, font):
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
+        restart_button_clicked_digrafos_euler = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
         main_menu_button_clicked_digrafos_euler = render_main_menu_button(screen, font_small_buttons)
 
         render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()

@@ -18,22 +18,22 @@ circle_radius = 145
 circle_x = text_box_x - 10
 circle_y = text_box_y + text_box_height // 2
 
-def render_dialog(screen, text, font):
+def render_dialogue(screen, text, font):
     # Cargar las imágenes de los marcos
     dialogue_frame = pygame.image.load("./assets/dialogue/dialogue-frame.png").convert_alpha()
     character_frame = pygame.image.load("./assets/dialogue/character-frame.png").convert_alpha()
 
     # Escalar las imágenes al tamaño adecuado
     dialogue_frame = pygame.transform.scale(dialogue_frame, (text_box_width, text_box_height))
-    character_frame = pygame.transform.scale(character_frame, (circle_radius * 2+150, circle_radius * 2+50))
+    character_frame = pygame.transform.scale(character_frame, (circle_radius * 2+50, circle_radius * 2+50))
 
     # Dibuja el marco del diálogo
     screen.blit(dialogue_frame, (text_box_x, text_box_y))
 
     # Dibuja el marco del personaje 
-    screen.blit(character_frame, (circle_x - circle_radius-70, circle_y - circle_radius-25))
+    screen.blit(character_frame, (circle_x - circle_radius-25, circle_y - circle_radius-25))
 
-    avatar = get_selected_pet()
+    avatar = get_selected_pet(size=(220, 220))
     # Actualiza y dibuja la animación del avatar dentro del marco del personaje
     avatar.update_animation()
     avatar.draw(screen, circle_x, circle_y)

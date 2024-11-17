@@ -5,7 +5,7 @@ from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -124,7 +124,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         render_seed_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialog(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "¿Qué querés saber?", font)
 
         if won_level:
             flower.update_animation()
