@@ -153,6 +153,9 @@ def render_map(screen, go_to_level):
     # Draw the "Main Menu" button
     main_menu_button_clicked_map = render_main_menu_button(screen, font_small_buttons, (1500, 30))
 
+    selected_frog.update_animation()
+    selected_frog.draw(screen, 870, 500)
+
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2

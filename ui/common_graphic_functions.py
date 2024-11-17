@@ -65,7 +65,7 @@ def load_frame_neutral_frog(frog, index):
 def load_frame_frog(frog, index):
     if index not in frog.frames:
         frame_path = os.path.join(
-            f"./assets/giphs/frog/{frog.name}",
+            f"./assets/giphs/frog/neutral/{frog.name}",
             f"{frog.name}{index}.gif"
         )
         if os.path.exists(frame_path):
