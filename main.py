@@ -49,7 +49,7 @@ clock = pygame.time.Clock()
 
 running = True
 
-screen_selected = Screens.SPLASH  # Start screen
+screen_selected = Screens.MAIN  # Start screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
