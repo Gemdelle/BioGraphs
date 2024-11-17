@@ -3,7 +3,7 @@ import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
 from ui.characters.frog_neutral import FrogNeutral
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialog_renderer import render_dialog, render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from core.fonts import *
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
@@ -74,7 +74,7 @@ def render_playground_4(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_4 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_dialog(screen, "¿Qué querés saber?", font)
+    render_playground_dialogue(screen, "¿Qué querés saber?", font)
 
     return False
 

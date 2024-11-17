@@ -2,7 +2,7 @@ import pygame
 import networkx as nx
 
 from ui.animated_sprite import AnimatedSprite
-from ui.screens.common.dialog_renderer import render_dialog
+from ui.screens.common.dialog_renderer import render_dialog, render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button, render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button, render_playground_map_button
@@ -85,7 +85,8 @@ def render_playground_2(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_2 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_dialog(screen, "¿Qué querés saber?", font)
+    render_playground_dialogue(screen, "¿Qué querés saber?", font)
+    
     return False
 
 def handle_playground_2_mousedown(event, go_to_playground):

@@ -54,7 +54,7 @@ def render_playground_dialogue(screen, text, font):
     avatar = get_selected_pet()
     # Actualiza y dibuja la animación del avatar dentro del marco del personaje
     avatar.update_animation()
-    avatar.draw(screen, circle_x - 75, circle_y - 75)
+    avatar.draw(screen, circle_x+100, circle_y+25)
 
     # Dibuja el texto en el marco de diálogo
     prompt_text = font.render(text, True, text_black)
