@@ -1,4 +1,3 @@
-import os
 import pygame
 
 from core.screens import Screens
@@ -39,7 +38,7 @@ from ui.screens.game_modes import render_main_screen, MovingImage
 from ui.screens.map import render_map
 from ui.screens.playground import render_playground
 from ui.screens.select_your_pet import render_select_your_pet_screen
-from ui.screens.splash import render_splash
+from ui.splash_video import SplashVideo
 
 pygame.init()
 
@@ -50,7 +49,7 @@ clock = pygame.time.Clock()
 
 running = True
 
-screen_selected = Screens.SELECT_YOUR_PET  # Start at MAIN screen
+screen_selected = Screens.SPLASH  # Start screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
 
@@ -83,6 +82,8 @@ def go_to_main():
 
 buttons = []
 moving_tadpoles = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
+splash_video = SplashVideo(SCREEN_WIDTH, SCREEN_HEIGHT)
+
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -158,7 +159,7 @@ while running:
 
     # Screen rendering
     if screen_selected == Screens.SPLASH:
-        render_splash(screen, go_to_map)
+        splash_video.play_video(screen, lambda: go_to_level(Screens.SELECT_YOUR_PET))
     elif screen_selected == Screens.SELECT_YOUR_PET:
         render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
