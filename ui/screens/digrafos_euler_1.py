@@ -117,14 +117,14 @@ def render_digrafos_euler_1(screen, font):
 
         render_seed_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialogue(screen, "¿Qué querés saber?", font)
+        render_dialogue(screen, "Restore the plant 'Spyx' by solving the Euler digraph before the timer runs out.\n- You must pass through ALL 8 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!", font)
 
         if won_level:
             flower.update_animation()
-            flower.draw(screen, 1470, 750)
+            flower.draw(screen, 1490, 750)
         else:
             dead_flower.update_animation()
-            dead_flower.draw(screen, 1470, 750)
+            dead_flower.draw(screen, 1490, 750)
 
     # Check if time is up
     if remaining_time <= 0:

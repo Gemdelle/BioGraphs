@@ -67,7 +67,7 @@ def render_playground_1(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_1 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_playground_dialogue(screen, "¿Qué querés saber?", font)
+    render_playground_dialogue(screen, "Hello, friend! Do you want to build a kite with me? Let's solve this Hamilton graph.\n- You must pass through ALL 4 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 
     return False
 
