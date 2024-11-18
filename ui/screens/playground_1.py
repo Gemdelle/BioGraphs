@@ -8,6 +8,7 @@ from ui.screens.common.graph_renderer import render_simple_node_graph
 from core.fonts import *
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
+from ui.screens.common.playground_sign_renderer import render_sign
 from ui.screens.common.restart_button_renderer import render_playground_restart_button
 from ui.screens.common.seed_counter_renderer import render_counter
 
@@ -51,7 +52,7 @@ main_menu_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
     global map_button_clicked_playground_1, restart_button_clicked_playground_1, main_menu_button_clicked_playground_1
-    background_image = pygame.image.load("assets/playground-bg/bg-level-1.png").convert()
+    background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-1.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
@@ -69,6 +70,8 @@ def render_playground_1(screen, font):
     main_menu_button_clicked_playground_1 = render_playground_main_menu_button(screen, font_small_buttons)
 
     render_counter(screen, font, missing_nodes, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
+
+    render_sign(screen,'hamilton')
 
     render_playground_dialogue(screen, "Hello, friend! Do you want to build a kite with me? Let's solve this Hamilton path.\n- You must pass through ALL 4 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 

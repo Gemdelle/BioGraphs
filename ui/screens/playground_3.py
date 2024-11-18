@@ -7,6 +7,7 @@ from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
+from ui.screens.common.playground_sign_renderer import render_sign
 from ui.screens.common.restart_button_renderer import render_playground_restart_button
 from core.fonts import *
 from ui.screens.common.seed_counter_renderer import render_counter
@@ -51,7 +52,7 @@ main_menu_button_clicked_playground_3 = None
 
 def render_playground_3(screen, font):
     global back_button_clicked_playground_3, restart_button_clicked_playground_3, main_menu_button_clicked_playground_3
-    background_image = pygame.image.load("assets/playground-bg/bg-level-3.png").convert()
+    background_image = pygame.image.load("assets/playground-bg/initial/bg-level-3.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
@@ -71,6 +72,8 @@ def render_playground_3(screen, font):
     main_menu_button_clicked_playground_3 = render_playground_main_menu_button(screen, font_small_buttons)
 
     render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
+
+    render_sign(screen,'euler')
 
     render_playground_dialogue(screen, "Look at this star! It looks like we can build it using an Euler path.\n- You must pass through ALL 5 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
     
