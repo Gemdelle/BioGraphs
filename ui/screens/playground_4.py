@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from core.screens import Screens
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
@@ -53,8 +54,7 @@ restart_button_clicked_playground_4 = None
 main_menu_button_clicked_playground_4 = None
 
 def render_playground_4(screen, font):
-    from core.fonts import font_buttons
-    global back_button_clicked_playground_4, restart_button_clicked_playground_4
+    global back_button_clicked_playground_4, restart_button_clicked_playground_4, main_menu_button_clicked_playground_4
     background_image = pygame.image.load("assets/playground-bg/bg-level-4.png").convert()
     #background_image = pygame.image.load("assets/default-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -80,17 +80,21 @@ def render_playground_4(screen, font):
 
     return False
 
-def handle_playground_4_mousedown(event, go_to_playground, is_screen_on_focus):
-    global back_button_clicked_playground_4, restart_button_clicked_playground_4, timer_started, path, current_node
+def handle_playground_4_mousedown(event, go_to_level, is_screen_on_focus):
+    global back_button_clicked_playground_4, restart_button_clicked_playground_4, timer_started, path,\
+        current_node, main_menu_button_clicked_playground_4
     if not is_screen_on_focus:
         return
 
     if back_button_clicked_playground_4 is not None and back_button_clicked_playground_4.collidepoint(event.pos):
-        go_to_playground()
+        go_to_level(Screens.PLAYGROUND)
         reset_nodes(path)
     elif restart_button_clicked_playground_4 is not None and restart_button_clicked_playground_4.collidepoint(event.pos):
         timer_started = False
         reset_nodes(path)
+    elif main_menu_button_clicked_playground_4 is not None and main_menu_button_clicked_playground_4.collidepoint(event.pos):
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 def reset_nodes(path):
     global current_node,G

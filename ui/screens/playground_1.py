@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from core.screens import Screens
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
@@ -44,13 +45,12 @@ current_node = None
 won_level = False
 missing_nodes = len(clovers)
 
-back_button_clicked_playground_1 = None
+map_button_clicked_playground_1 = None
 restart_button_clicked_playground_1 = None
 main_menu_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
-    from core.fonts import font_buttons
-    global back_button_clicked_playground_1, restart_button_clicked_playground_1
+    global map_button_clicked_playground_1, restart_button_clicked_playground_1, main_menu_button_clicked_playground_1
     background_image = pygame.image.load("assets/playground-bg/bg-level-1.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
@@ -60,7 +60,7 @@ def render_playground_1(screen, font):
     render_simple_node_graph(screen, G, font, path, positions, clovers)
 
     # Draw the "Back" button
-    back_button_clicked_playground_1 = render_playground_map_button(screen, font_small_buttons)
+    map_button_clicked_playground_1 = render_playground_map_button(screen, font_small_buttons)
 
     # Draw the "Restart" button
     restart_button_clicked_playground_1 = render_playground_restart_button(screen, font_small_buttons)
@@ -75,23 +75,27 @@ def render_playground_1(screen, font):
     return False
 
 
-def handle_playground_1_mousedown(event, go_to_playground, is_screen_on_focus):
-    global back_button_clicked_playground_1, restart_button_clicked_playground_1, timer_started, path, current_node
+def handle_playground_1_mousedown(event, go_to_level, is_screen_on_focus):
+    global map_button_clicked_playground_1, restart_button_clicked_playground_1, timer_started,\
+        path, current_node, main_menu_button_clicked_playground_1
     if not is_screen_on_focus:
         return
 
-    if back_button_clicked_playground_1 is not None and back_button_clicked_playground_1.collidepoint(event.pos):
-        go_to_playground()
+    if map_button_clicked_playground_1 is not None and map_button_clicked_playground_1.collidepoint(event.pos):
+        go_to_level(Screens.PLAYGROUND)
         reset_nodes(path)
     elif restart_button_clicked_playground_1 is not None and restart_button_clicked_playground_1.collidepoint(event.pos):
-        timer_started = False
         reset_nodes(path)
+    elif main_menu_button_clicked_playground_1 is not None and main_menu_button_clicked_playground_1.collidepoint(event.pos):
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node,G, timer_started
     path.clear()
     current_node = None
+    timer_started = False
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 

@@ -36,7 +36,7 @@ from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafo
 from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
 from ui.screens.game_modes import render_main_screen, MovingImage
 from ui.screens.map import render_map, handle_map_mousedown
-from ui.screens.playground import render_playground
+from ui.screens.playground import render_playground, handle_playground_mousedown
 from ui.screens.select_your_pet import render_select_your_pet_screen
 from ui.splash_video import SplashVideo
 
@@ -119,6 +119,7 @@ while running:
                     go_to_main()
 
                 handle_map_mousedown(go_to_level, screen_selected==Screens.MAP)
+                handle_playground_mousedown(go_to_level, screen_selected==Screens.PLAYGROUND)
                 handle_grafos_digrafos_euler_mousedown(event, go_to_level, screen_selected==Screens.DIGRAFOS_EULER_1)
                 handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level, screen_selected==Screens.DIGRAFOS_HAMILTON_1)
                 handle_grafos_euler_1_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_EULER_1)
@@ -127,11 +128,11 @@ while running:
                 handle_grafos_hamilton_1_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_HAMILTON_1)
                 handle_grafos_hamilton_2_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_HAMILTON_2)
                 handle_grafos_hamilton_3_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_HAMILTON_3)
-                handle_playground_1_mousedown(event, go_to_playground, screen_selected==Screens.PLAYGROUND_1)
-                handle_playground_2_mousedown(event, go_to_playground, screen_selected==Screens.PLAYGROUND_2)
-                handle_playground_3_mousedown(event, go_to_playground, screen_selected==Screens.PLAYGROUND_3)
-                handle_playground_4_mousedown(event, go_to_playground, screen_selected==Screens.PLAYGROUND_4)
-                handle_playground_5_mousedown(event, go_to_playground, screen_selected==Screens.PLAYGROUND_5)
+                handle_playground_1_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_1)
+                handle_playground_2_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_2)
+                handle_playground_3_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_3)
+                handle_playground_4_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_4)
+                handle_playground_5_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_5)
 
             finally:
                 mousedown_processing = False
@@ -178,7 +179,7 @@ while running:
     elif screen_selected == Screens.INSTRUCTIONS:
         render_instructions(screen)
     elif screen_selected == Screens.PLAYGROUND:
-        render_playground(screen, go_to_level, pygame.time.get_ticks() / 150)
+        render_playground(screen, pygame.time.get_ticks() / 150)
 
     elif screen_selected == Screens.PLAYGROUND_1:
         render_playground_1(screen, font)

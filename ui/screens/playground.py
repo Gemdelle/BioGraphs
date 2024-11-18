@@ -12,9 +12,32 @@ from ui.screens.common.main_menu_button_renderer import render_playground_main_m
 from ui.screens.common.map_counter_renderer import counter_renderer
 
 main_menu_button_clicked_playground = None
+nodes = {
+    'Frog': {'pos': (141+60, 602), 'color': (0, 0, 0), 'enabled': False},  # Negro
+    'B': {'pos': (597+20, 641), 'color': (255, 255, 255), 'enabled': True},  # Amarillo
+    'C': {'pos': (927+20, 709), 'color': (255, 255, 255), 'enabled': True},  # Lila
+    'D': {'pos': (600+20, 234), 'color': (255, 255, 255), 'enabled': True},  # Celeste
+    'E': {'pos': (994+20, 347), 'color': (255, 255, 255), 'enabled': True},  # Rosa
+    'F': {'pos': (1305+20, 485), 'color': (255, 255, 255), 'enabled': True},  # Verde
+}
 
-def render_playground(screen, goToLevel, time):
-    global main_menu_button_clicked_playground
+total_nodes = len(nodes)
+missing_nodes = len(nodes)-1
+
+edges = [
+    ('Frog', 'B'), ('B', 'C'), ('C', 'D'),
+    ('D', 'E'), ('E', 'F')
+]
+
+node_screens = {
+    'B': Screens.PLAYGROUND_1,
+    'C': Screens.PLAYGROUND_2,
+    'D': Screens.PLAYGROUND_3,
+    'E': Screens.PLAYGROUND_4,
+    'F': Screens.PLAYGROUND_5
+}
+def render_playground(screen, time):
+    global main_menu_button_clicked_playground, edges, total_nodes, missing_nodes, nodes
     # Fondo de mapa con movimiento flotante
     background_image = pygame.image.load("assets/playground-bg/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -48,31 +71,6 @@ def render_playground(screen, goToLevel, time):
     playground_text = font_title.render("Playground", True, (255, 255, 255))
     screen.blit(playground_text, (200, 180))
 
-    nodes = {
-        'Frog': {'pos': (141+60, 602), 'color': (0, 0, 0), 'enabled': False},  # Negro
-        'B': {'pos': (597+20, 641), 'color': (255, 255, 255), 'enabled': True},  # Amarillo
-        'C': {'pos': (927+20, 709), 'color': (255, 255, 255), 'enabled': True},  # Lila
-        'D': {'pos': (600+20, 234), 'color': (255, 255, 255), 'enabled': True},  # Celeste
-        'E': {'pos': (994+20, 347), 'color': (255, 255, 255), 'enabled': True},  # Rosa
-        'F': {'pos': (1305+20, 485), 'color': (255, 255, 255), 'enabled': True},  # Verde
-    }
-
-    total_nodes = len(nodes)
-    missing_nodes = len(nodes)-1
-
-    edges = [
-        ('Frog', 'B'), ('B', 'C'), ('C', 'D'),
-        ('D', 'E'), ('E', 'F')
-    ]
-
-    node_screens = {
-        'B': Screens.PLAYGROUND_1,
-        'C': Screens.PLAYGROUND_2,
-        'D': Screens.PLAYGROUND_3,
-        'E': Screens.PLAYGROUND_4,
-        'F': Screens.PLAYGROUND_5
-    }
-
     for edge in edges:
         start_pos = nodes[edge[0]]['pos']
         end_pos = nodes[edge[1]]['pos']
@@ -96,8 +94,6 @@ def render_playground(screen, goToLevel, time):
 
     counter_renderer(screen, font_subtitle, total_nodes, missing_nodes, clover, 200, 200)
 
-    handle_node_click(nodes, node_screens, goToLevel)
-
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground = render_playground_main_menu_button(screen, font_small_buttons, (1500, 30))
 
@@ -117,8 +113,11 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
 
 
-def handle_node_click(nodes, node_screens, go_to_level):
-    global main_menu_button_clicked_playground
+def handle_playground_mousedown(go_to_level, is_screen_on_focus):
+    global main_menu_button_clicked_playground, nodes, node_screens
+    if not is_screen_on_focus:
+        return
+
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 
