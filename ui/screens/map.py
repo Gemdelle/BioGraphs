@@ -5,7 +5,7 @@ import pygame
 import math
 
 from core.fonts import font_small_buttons
-from core.game_progress import game_progress
+from core.game_progress_map import game_map_progress
 from core.pet import get_selected_pet
 from core.screens import Screens
 from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack
@@ -68,7 +68,7 @@ node_screens = {
 }
 
 def render_map(screen, go_to_level):
-    global main_menu_button_clicked_map
+    global main_menu_button_clicked_map, game_map_progress
     selected_frog = get_selected_pet(size=(150, 150))
     seeds = {
         'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
@@ -107,7 +107,7 @@ def render_map(screen, go_to_level):
     for node, data in nodes.items():
         if node != 'Frog':
             # Dibujar fondo del nodo
-            if (game_progress.get(node) is not None and game_progress.get(node)['completed']):
+            if (game_map_progress.get(node) is not None and game_map_progress.get(node)['completed']):
                 img_rect = done_node_image.get_rect(center=data['pos'])
                 screen.blit(done_node_image, img_rect)
                 letter_text_color = (0, 0, 0)
@@ -173,7 +173,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
 
 
 def handle_map_mousedown(go_to_level, is_screen_on_focus):
-    global game_progress, main_menu_button_clicked_map, nodes, node_screens
+    global game_map_progress, main_menu_button_clicked_map, nodes, node_screens
     if not is_screen_on_focus:
         return
 
@@ -185,7 +185,7 @@ def handle_map_mousedown(go_to_level, is_screen_on_focus):
             go_to_level(Screens.MAIN)
         else:
             for node, data in nodes.items():
-                if game_progress.get(node) is not None and game_progress.get(node)['enabled']:
+                if game_map_progress.get(node) is not None and game_map_progress.get(node)['enabled']:
                     node_pos = data['pos']
                     distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
                     if distance <= 20:

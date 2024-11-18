@@ -1,9 +1,6 @@
-import os
-
-import pygame
 import networkx as nx
 
-from core.game_progress import complete_level
+from core.game_progress_map import complete_level
 from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite

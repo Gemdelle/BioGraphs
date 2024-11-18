@@ -1,4 +1,4 @@
-game_progress = {
+game_map_progress = {
     'Erlem': {
         'enabled': True,
         'completed': False,
@@ -42,6 +42,6 @@ game_progress = {
 }
 
 def complete_level(level_name):
-    game_progress[level_name]['completed'] = True
-    next_level = game_progress[level_name]['goesTo']
-    game_progress[next_level]['enabled'] = True
+    game_map_progress[level_name]['completed'] = True
+    next_level = game_map_progress[level_name]['goesTo']
+    game_map_progress[next_level]['enabled'] = True

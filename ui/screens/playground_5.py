@@ -1,6 +1,7 @@
 import pygame
 import networkx as nx
 
+from core.game_progress_playground import complete_level
 from core.screens import Screens
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
@@ -112,6 +113,7 @@ def handle_playground_5_keydown(event):
                 if current_node == end_node and len(path) == len(G.nodes):
                     won_level = True
                     print("Congratulations! You completed the Hamiltonian Path.")
+                    complete_level('F')
 
                 return True, current_node
     return False, current_node
