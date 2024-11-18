@@ -172,8 +172,11 @@ def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
             pygame.draw.line(surface, color, points[i], points[i + 1], 2)
 
 
-def handle_node_click(go_to_level):
+def handle_map_mousedown(go_to_level, is_screen_on_focus):
     global game_progress, main_menu_button_clicked_map, nodes, node_screens
+    if not is_screen_on_focus:
+        return
+
     mouse_pos = pygame.mouse.get_pos()
     mouse_pressed = pygame.mouse.get_pressed()
 

@@ -159,29 +159,23 @@ def render_grafos_hamilton_3(screen, font):
         lost_level = True
 
 
-def handle_grafos_hamilton_3_mousedown(event, go_to_level):
+def handle_grafos_hamilton_3_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_grafos_hamilton_3, start_button_clicked_grafos_hamilton_3,\
         restart_button_clicked_grafos_hamilton_3, timer_started, main_menu_button_clicked_grafos_hamilton_3, click_locked, timer_started
 
-    if click_locked:
+    if not is_screen_on_focus:
         return
 
-    click_locked = True
-
-    try:
-        if back_button_clicked_grafos_hamilton_3 is not None and back_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
-            go_to_level(Screens.MAP)
-            reset_nodes(path)
-        elif restart_button_clicked_grafos_hamilton_3 is not None and restart_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
-            reset_nodes(path)
-        elif start_button_clicked_grafos_hamilton_3 is not None and start_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
-            timer_started = True
-        elif main_menu_button_clicked_grafos_hamilton_3 is not None and main_menu_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
-            reset_nodes(path)
-            go_to_level(Screens.MAIN)
-    finally:
-        click_locked = False
-
+    if back_button_clicked_grafos_hamilton_3 is not None and back_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
+        go_to_level(Screens.MAP)
+        reset_nodes(path)
+    elif restart_button_clicked_grafos_hamilton_3 is not None and restart_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
+        reset_nodes(path)
+    elif start_button_clicked_grafos_hamilton_3 is not None and start_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
+        timer_started = True
+    elif main_menu_button_clicked_grafos_hamilton_3 is not None and main_menu_button_clicked_grafos_hamilton_3.collidepoint(event.pos):
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 def reset_nodes(path):
     global current_node,G, seeds, missing_nodes, won_level,timer_started,lost_level, remaining_time

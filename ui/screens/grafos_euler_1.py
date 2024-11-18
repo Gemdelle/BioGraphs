@@ -140,9 +140,11 @@ def render_grafos_euler_1(screen, font):
         lost_level = True
 
 
-def handle_grafos_euler_1_mousedown(event, go_to_level):
+def handle_grafos_euler_1_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1, restart_button_clicked_grafos_euler_1
     global main_menu_button_clicked_grafos_euler_1, click_locked, timer_started
+    if not is_screen_on_focus:
+        return
 
     if click_locked:
         return

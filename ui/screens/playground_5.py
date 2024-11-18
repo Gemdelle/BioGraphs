@@ -76,8 +76,11 @@ def render_playground_5(screen, font):
 
     return False
 
-def handle_playground_5_mousedown(event, go_to_playground):
+def handle_playground_5_mousedown(event, go_to_playground, is_screen_on_focus):
     global back_button_clicked_playground_5, restart_button_clicked_playground_5, timer_started, path, current_node
+    if not is_screen_on_focus:
+        return
+
     if back_button_clicked_playground_5 is not None and back_button_clicked_playground_5.collidepoint(event.pos):
         go_to_playground()
         reset_nodes(path)

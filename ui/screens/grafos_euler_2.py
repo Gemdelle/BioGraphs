@@ -180,29 +180,23 @@ def render_grafos_euler_2(screen, font):
         lost_level = True
 
 
-def handle_grafos_euler_2_mousedown(event, go_to_level):
+def handle_grafos_euler_2_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_grafos_euler_2, start_button_clicked_grafos_euler_2, restart_button_clicked_grafos_euler_2,\
-        timer_started, main_menu_button_clicked_grafos_euler_2, click_locked, timer_started
-
-    if click_locked:
+        timer_started, main_menu_button_clicked_grafos_euler_2, timer_started
+    if not is_screen_on_focus:
         return
 
-    click_locked = True
-
-    try:
-        if back_button_clicked_grafos_euler_2 is not None and back_button_clicked_grafos_euler_2.collidepoint(event.pos):
-            timer_started = False
-            go_to_level(Screens.MAP)
-            reset_nodes(path)
-        elif restart_button_clicked_grafos_euler_2 is not None and restart_button_clicked_grafos_euler_2.collidepoint(event.pos):
-            reset_nodes(path)
-        elif start_button_clicked_grafos_euler_2 is not None and start_button_clicked_grafos_euler_2.collidepoint(event.pos):
-            timer_started = True
-        elif main_menu_button_clicked_grafos_euler_2 is not None and main_menu_button_clicked_grafos_euler_2.collidepoint(event.pos):
-            reset_nodes(path)
-            go_to_level(Screens.MAIN)
-    finally:
-        click_locked = False
+    if back_button_clicked_grafos_euler_2 is not None and back_button_clicked_grafos_euler_2.collidepoint(event.pos):
+        timer_started = False
+        go_to_level(Screens.MAP)
+        reset_nodes(path)
+    elif restart_button_clicked_grafos_euler_2 is not None and restart_button_clicked_grafos_euler_2.collidepoint(event.pos):
+        reset_nodes(path)
+    elif start_button_clicked_grafos_euler_2 is not None and start_button_clicked_grafos_euler_2.collidepoint(event.pos):
+        timer_started = True
+    elif main_menu_button_clicked_grafos_euler_2 is not None and main_menu_button_clicked_grafos_euler_2.collidepoint(event.pos):
+        reset_nodes(path)
+        go_to_level(Screens.MAIN)
 
 
 def handle_grafos_euler_2_keydown(event,go_to_map):

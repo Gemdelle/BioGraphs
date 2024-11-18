@@ -141,8 +141,11 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)
 
-def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level):
+def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level,is_screen_on_focus):
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1, restart_button_clicked_digrafos_hamilton_1, timer_started
+    if not is_screen_on_focus:
+        return
+
     if back_button_clicked_digrafos_hamilton_1 is not None and back_button_clicked_digrafos_hamilton_1.collidepoint(event.pos):
         timer_started = False
         go_to_level(Screens.MAP)

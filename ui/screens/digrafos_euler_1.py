@@ -135,8 +135,11 @@ def render_digrafos_euler_1(screen, font):
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
 
 
-def handle_grafos_digrafos_euler_mousedown(event, go_to_level):
+def handle_grafos_digrafos_euler_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler,restart_button_clicked_digrafos_euler, timer_started, main_menu_button_clicked_digrafos_euler
+    if not is_screen_on_focus:
+        return
+
     if back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos):
         timer_started = False
         go_to_level(Screens.MAP)
