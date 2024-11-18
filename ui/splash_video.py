@@ -6,7 +6,7 @@ from PIL import Image
 
 class SplashVideo:
     def __init__(self, screen_width, screen_height):
-        self.clip = VideoFileClip("./assets/videos/tutorial-digraph.mp4")
+        self.clip = VideoFileClip("./assets/splash/splash.mp4")
         self.screen_width = screen_width
         self.screen_height = screen_height
         self.is_video_playing = False
