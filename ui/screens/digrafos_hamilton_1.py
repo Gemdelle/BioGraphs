@@ -4,7 +4,6 @@ import networkx as nx
 from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
-from ui.characters.frog_neutral import FrogNeutral
 from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -13,8 +12,6 @@ from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_counter
 from ui.screens.common.start_button_renderer import render_start_button
-from ui.seeds.disabled.digrafos_hamilton_1_seed_disabled import DigrafosHamilton1SeedDisabled
-from ui.seeds.enabled.digrafos_hamilton_1_seed import DigrafosHamilton1Seed
 from core.fonts import *
 
 # Crear un DiGraph para representar el digrafo

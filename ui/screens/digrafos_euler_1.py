@@ -5,7 +5,7 @@ from core.screens import Screens
 from ui.animated_bug import AnimatedBug
 from ui.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_dialogue
-from ui.screens.common.digraph_renderer import render_euler_digraph
+from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.common.map_button_renderer import render_map_button
@@ -37,7 +37,7 @@ for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('B', 'A'), ('A', 'B'), ('A', 'D'), ('A', 'C'), ('B', 'D'), ('C', 'B'), ('D', 'E'), ('E', 'F')
+    ('A', 'C'), ('C', 'B'), ('B', 'E'), ('E', 'F'), ('F', 'A'), ('A', 'D')
 ]
 
 missing_edges = len(edges)
@@ -46,7 +46,7 @@ for edge in edges:
     G.add_edge(edge[0], edge[1])
 
 start_node = None
-end_node = 'H'
+end_node = 'D'
 path = []
 timer_started = False
 start_time = 0
@@ -104,7 +104,7 @@ def render_digrafos_euler_1(screen, font):
 
     else:
         # Render the graph and energy bar
-        render_euler_digraph(screen, G, font, remaining_time, visited_edges, start_node, end_node, positions, seeds)
+        render_digraph(screen, G, font, remaining_time, visited_edges, start_node, end_node, positions, seeds)
 
         # Render energy bar and timer
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
