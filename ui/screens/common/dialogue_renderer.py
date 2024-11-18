@@ -57,7 +57,7 @@ def render_dialogue(screen, text, font, avatar_mood="neutral"):
         y_offset += font.get_height()  # Mover hacia abajo para la siguiente línea
 
 
-def render_playground_dialogue(screen, text, font):
+def render_playground_dialogue(screen, text, font, mood):
     # Cargar las imágenes de los marcos
     dialogue_frame = pygame.image.load("./assets/dialogue/playground-dialogue-frame.png").convert_alpha()
     dialogue_frame = pygame.transform.scale(dialogue_frame, (1450, 410))
@@ -65,7 +65,10 @@ def render_playground_dialogue(screen, text, font):
     # Dibuja el marco del diálogo (en lugar del rectángulo relleno)
     screen.blit(dialogue_frame, (150, 590))
 
-    avatar = get_selected_pet()
+    if mood == 'happy':
+        avatar = get_selected_pet(size=(290, 290), mood="happy")
+    else: 
+        avatar = get_selected_pet()
     # Actualiza y dibuja la animación del avatar dentro del marco del personaje
     avatar.update_animation()
     avatar.draw(screen, circle_x + 100, circle_y - 10)
