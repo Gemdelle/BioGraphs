@@ -52,7 +52,8 @@ restart_button_clicked_playground_1 = None
 main_menu_button_clicked_playground_1 = None
 
 def render_playground_1(screen, font):
-    global map_button_clicked_playground_1, restart_button_clicked_playground_1, main_menu_button_clicked_playground_1
+    global map_button_clicked_playground_1, restart_button_clicked_playground_1, main_menu_button_clicked_playground_1,\
+        timer_started, start_time, path, start_node, positions, current_node, energy
     if won_level:
         background_image = pygame.image.load("./assets/playground-bg/final/bg-level-1.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -63,8 +64,6 @@ def render_playground_1(screen, font):
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         render_playground_dialogue(screen, "Hello, friend! Do you want to build a kite with me? Let's solve this Hamilton path.\n- You must pass through ALL 4 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font, 'neutral')
-
-    global timer_started, start_time, path, start_node, positions, current_node, energy
 
     render_simple_node_graph(screen, G, font, path, positions, clovers)
 
