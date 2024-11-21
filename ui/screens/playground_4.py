@@ -55,14 +55,28 @@ back_button_clicked_playground_4 = None
 restart_button_clicked_playground_4 = None
 main_menu_button_clicked_playground_4 = None
 
-def render_playground_4(screen, font):
-    global back_button_clicked_playground_4, restart_button_clicked_playground_4, main_menu_button_clicked_playground_4
-    background_image = pygame.image.load("assets/playground-bg/initial/bg-level-4.png").convert()
-    #background_image = pygame.image.load("assets/default-bg.png").convert()
-    background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
 
-    global timer_started, start_time, path, start_node, positions, current_node, energy
+def render_playground_4(screen, font):
+    global back_button_clicked_playground_4, restart_button_clicked_playground_4, \
+        main_menu_button_clicked_playground_4, timer_started, start_time, path, start_node, positions, current_node, energy
+
+    if won_level:
+        background_image = pygame.image.load("./assets/playground-bg/final/bg-level-4.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.',
+                                   font, 'happy')
+    else:
+        background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-4.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   "See this pine tree? My guess is we can make it shine by solving a Hamilton "
+                                   "path.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes."
+                                   "\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress "
+                                   "the letters to navigate the entire graph in order!")
+
 
     # Render the graph and energy bar
     render_simple_node_graph(screen, G, font, path, positions, clovers)
@@ -79,8 +93,6 @@ def render_playground_4(screen, font):
     render_counter(screen, font, missing_nodes, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
 
     render_sign(screen,'hamilton')
-
-    render_playground_dialogue(screen, "See this pine tree? My guess is we can make it shine by solving a Hamilton path.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 
     return False
 

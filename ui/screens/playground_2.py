@@ -68,13 +68,23 @@ back_button_clicked_playground_2 = None
 restart_button_clicked_playground_2 = None
 main_menu_button_clicked_playground_2 = None
 
-def render_playground_2(screen, font):
-    global back_button_clicked_playground_2, restart_button_clicked_playground_2, main_menu_button_clicked_playground_2
-    background_image = pygame.image.load("assets/playground-bg/initial/bg-level-2.png").convert()
-    background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
 
-    global timer_started, start_time, path, start_node, positions, current_node, energy
+def render_playground_2(screen, font):
+    global back_button_clicked_playground_2, restart_button_clicked_playground_2, main_menu_button_clicked_playground_2, timer_started, start_time, path, start_node, positions, current_node, energy
+    if won_level:
+        background_image = pygame.image.load("./assets/playground-bg/final/bg-level-2.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.',
+                                   font, 'happy')
+    else:
+        background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-2.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   "Hello again! We can now build a leaf together. Let's solve this Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!",
+                                   font, 'neutral')
 
     # Render the graph and energy bar
     render_simple_node_graph(screen, G, font, path, positions, clovers)
@@ -92,8 +102,6 @@ def render_playground_2(screen, font):
 
     render_sign(screen,'euler')
 
-    render_playground_dialogue(screen, "Hello again! We can now build a leaf together. Let's solve this Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
-    
     return False
 
 def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):

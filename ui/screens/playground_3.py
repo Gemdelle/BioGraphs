@@ -51,14 +51,23 @@ back_button_clicked_playground_3 = None
 restart_button_clicked_playground_3 = None
 main_menu_button_clicked_playground_3 = None
 
-def render_playground_3(screen, font):
-    global back_button_clicked_playground_3, restart_button_clicked_playground_3, main_menu_button_clicked_playground_3
-    background_image = pygame.image.load("assets/playground-bg/initial/bg-level-3.png").convert()
-    #background_image = pygame.image.load("assets/default-bg.png").convert()
-    background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
 
-    global timer_started, start_time, path, start_node, positions, current_node, energy
+def render_playground_3(screen, font):
+    global back_button_clicked_playground_3, restart_button_clicked_playground_3, main_menu_button_clicked_playground_3, timer_started, start_time, path, start_node, positions, current_node, energy
+    if won_level:
+        background_image = pygame.image.load("./assets/playground-bg/final/bg-level-3.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.',
+                                   font, 'happy')
+    else:
+        background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-3.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   "Look at this star! It looks like we can build it using an Euler path.\n- You must pass through ALL 5 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!",
+                                   font, 'neutral')
 
     # Render the graph and energy bar
     render_simple_node_graph(screen, G, font, path, positions, clovers)
@@ -75,8 +84,6 @@ def render_playground_3(screen, font):
     render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
 
     render_sign(screen,'euler')
-
-    render_playground_dialogue(screen, "Look at this star! It looks like we can build it using an Euler path.\n- You must pass through ALL 5 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
     
     return False
 

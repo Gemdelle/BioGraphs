@@ -51,19 +51,34 @@ back_button_clicked_playground_5 = None
 restart_button_clicked_playground_5 = None
 main_menu_button_clicked_playground_5 = None
 
-def render_playground_5(screen, font):
-    global back_button_clicked_playground_5, restart_button_clicked_playground_5, main_menu_button_clicked_playground_5
-    background_image = pygame.image.load("assets/playground-bg/initial/bg-level-5.png").convert()
-    #background_image = pygame.image.load("assets/default-bg.png").convert()
-    background_image = pygame.transform.scale(background_image, (1710, 1034))
-    screen.blit(background_image, (0, 0))
 
-    global timer_started, start_time, path, start_node, positions, current_node, energy
+def render_playground_5(screen, font):
+    global back_button_clicked_playground_5, restart_button_clicked_playground_5, \
+        main_menu_button_clicked_playground_5, timer_started, start_time, path, start_node, positions, \
+        current_node, energy
+
+    if won_level:
+        background_image = pygame.image.load("./assets/playground-bg/final/bg-level-5.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" '
+                                   'to continue to the next level.',
+                                   font, 'happy')
+    else:
+        background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-5.png").convert()
+        background_image = pygame.transform.scale(background_image, (1710, 1034))
+        screen.blit(background_image, (0, 0))
+        render_playground_dialogue(screen,
+                                   "Now, be careful with the house, it can be tricky... Let's solve it with an "
+                                   "Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT "
+                                   "edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck."
+                                   "\nPress the letters to navigate the entire graph in order!")
 
     # Render the graph and energy bar
     render_simple_node_graph(screen, G, font, path, positions, clovers)
 
-# Draw the "Back" button
+    # Draw the "Back" button
     back_button_clicked_playground_5 = render_playground_map_button(screen, font_small_buttons)
 
     # Draw the "Restart" button
@@ -75,8 +90,6 @@ def render_playground_5(screen, font):
     render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
 
     render_sign(screen,'euler')
-
-    render_playground_dialogue(screen, "Now, be careful with the house, it can be tricky... Let's solve it with an Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!", font)
 
     return False
 
