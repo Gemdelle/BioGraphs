@@ -69,6 +69,7 @@ end_node = 'H'
 path = []
 timer_started = False
 start_time = 0
+remaining_time = None
 
 current_node = None
 won_level = False
@@ -109,7 +110,7 @@ def render_grafos_hamilton_3(screen, font):
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         start_time = pygame.time.get_ticks()
-        remaining_time = 60000
+        remaining_time = 120000
 
     # Update energy based on remaining time
     if remaining_time > 0:

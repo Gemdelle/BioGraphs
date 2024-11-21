@@ -96,6 +96,7 @@ current_node = None
 won_level = False
 lost_level = False
 click_locked = False
+remaining_time = None
 
 initial_energy = 17
 energy = initial_energy  # Starting energy level
@@ -130,7 +131,7 @@ def render_grafos_euler_2(screen, font):
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         start_time = pygame.time.get_ticks()
-        remaining_time = 60000
+        remaining_time = 90000
 
     # Update energy based on remaining time
     if remaining_time > 0:
@@ -224,7 +225,6 @@ def handle_grafos_euler_2_keydown(event,go_to_map):
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
                         complete_level('Frood')
-                        go_to_map()
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 

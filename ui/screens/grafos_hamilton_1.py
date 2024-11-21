@@ -58,6 +58,7 @@ end_node = 'H'
 path = []
 timer_started = False
 start_time = 0
+remaining_time = None
 
 current_node = None
 won_level = False
