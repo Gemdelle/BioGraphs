@@ -3,6 +3,7 @@ import os
 from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
+from core.game_progress_playground import game_playground_progress
 
 import pygame
 import math

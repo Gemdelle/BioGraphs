@@ -7,6 +7,7 @@ import math
 from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
+from core.game_progress_map import game_map_progress
 from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack
 from ui.flowers.black.d_hamilton_1_flower_black import DHamilton1FlowerBlack
 from ui.flowers.black.euler_1_flower_black import Euler1FlowerBlack
