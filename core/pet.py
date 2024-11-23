@@ -1,4 +1,4 @@
-from ui.animated_sprite import AnimatedSprite
+from ui.utils.animated_sprite import AnimatedSprite
 
 selected_pet = [None]
 

@@ -1,14 +1,13 @@
 import os
 
-from core.fonts import font_small_buttons
-from core.game_progress_playground import game_playground_progress
+from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
 
 import pygame
 import math
 
-from ui.animated_sprite import AnimatedSprite
+from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_counter_renderer import counter_renderer
 

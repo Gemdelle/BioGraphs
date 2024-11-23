@@ -1,8 +1,7 @@
 import pygame
-import networkx as nx
 
 from core.pet import get_selected_pet
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 # Colors
 text_white = (255, 255, 255) 

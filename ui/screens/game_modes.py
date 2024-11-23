@@ -4,7 +4,7 @@ import pygame
 import random
 import math
 
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
 class MovingImage:

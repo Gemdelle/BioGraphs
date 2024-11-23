@@ -1,6 +1,5 @@
-import os
 import pygame
-from ui.common_graphic_functions import load_frame, update_animation, draw, load_frame_frog
+from ui.utils.common_graphic_functions import update_animation, draw, load_frame_frog
 
 
 class NeutralFrog:

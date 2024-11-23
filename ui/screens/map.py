@@ -4,8 +4,7 @@ import networkx as nx
 import pygame
 import math
 
-from core.fonts import font_small_buttons
-from core.game_progress_map import game_map_progress
+from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
 from ui.flowers.black.d_euler_1_flower_black import DEuler1FlowerBlack

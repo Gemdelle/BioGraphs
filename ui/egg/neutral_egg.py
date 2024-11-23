@@ -1,6 +1,5 @@
-import os
 import pygame
-from ui.common_graphic_functions import load_frame, update_animation, draw
+from ui.utils.common_graphic_functions import load_frame, update_animation, draw
 
 class NeutralEgg:
     def __init__(self):

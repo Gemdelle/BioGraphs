@@ -1,12 +1,11 @@
-import pygame
 import networkx as nx
 
 from core.game_progress_playground import complete_level
 from core.screens import Screens
-from ui.animated_sprite import AnimatedSprite
+from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
-from core.fonts import *
+from ui.utils.fonts import *
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
 from ui.screens.common.playground_sign_renderer import render_sign

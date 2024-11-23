@@ -1,6 +1,5 @@
 import pygame
 
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 def render_sign(screen, graph):
     sign_image = pygame.image.load(f"./assets/signs/{graph}.png").convert_alpha()

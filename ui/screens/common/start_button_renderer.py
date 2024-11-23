@@ -1,6 +1,6 @@
 import pygame
 
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 def render_start_button(screen, font, seed):
     # Cargar y ajustar la imagen del botón

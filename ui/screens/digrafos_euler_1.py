@@ -1,9 +1,8 @@
-import pygame
 import networkx as nx
 
 from core.screens import Screens
-from ui.animated_bug import AnimatedBug
-from ui.animated_sprite import AnimatedSprite
+from ui.utils.animated_bug import AnimatedBug
+from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
@@ -12,7 +11,7 @@ from ui.screens.common.map_button_renderer import render_map_button
 from ui.screens.common.restart_button_renderer import render_restart_button
 from ui.screens.common.seed_counter_renderer import render_counter
 from ui.screens.common.start_button_renderer import render_start_button
-from core.fonts import *
+from ui.utils.fonts import *
 
 G = nx.DiGraph()
 
@@ -66,7 +65,7 @@ main_menu_button_clicked_digrafos_euler = None
 visited_edges = []
 
 def render_digrafos_euler_1(screen, font):
-    from core.fonts import font_small_buttons
+    from ui.utils.fonts import font_small_buttons
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler,\
         timer_started, start_time, path, start_node, positions, current_node, energy, won_level,\
         flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler

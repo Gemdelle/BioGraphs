@@ -1,7 +1,7 @@
 import pygame
 
 from core.screens import Screens
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from ui.screens.intro_euler_cycle import render_intro_euler_cycle, is_back_button_clicked_intro_euler_cicle
 from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
 from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back_button_clicked_intro_hamilton_cicle
@@ -38,11 +38,11 @@ from ui.screens.game_modes import render_main_screen, MovingImage
 from ui.screens.map import render_map, handle_map_mousedown
 from ui.screens.playground import render_playground, handle_playground_mousedown
 from ui.screens.select_your_pet import render_select_your_pet_screen
-from ui.splash_video import SplashVideo
+from ui.utils.splash_video import SplashVideo
 
 pygame.init()
 
-from core.fonts import title_font, font
+from ui.utils.fonts import title_font, font
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
@@ -208,7 +208,7 @@ while running:
         render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
         render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
-    elif screen_selected == Screens.INTRO_HAMILTON_PATH: 
+    elif screen_selected == Screens.INTRO_HAMILTON_PATH:
         render_intro_hamilton_path(screen, font)
     elif screen_selected == Screens.INTRO_HAMILTON_CYCLE:
         render_intro_hamilton_cicle(screen, font)

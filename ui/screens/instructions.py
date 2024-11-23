@@ -1,7 +1,7 @@
 import pygame
 
 from core.screens import Screens
-from ui.config import SCREEN_WIDTH, SCREEN_HEIGHT
+from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 # Button setup
 button_width, button_height = 600, 80
