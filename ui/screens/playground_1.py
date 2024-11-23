@@ -112,17 +112,20 @@ def handle_playground_1_keydown(event):
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
-                current_node = key
-                path.append(current_node)
-                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=626)
-                missing_nodes -= 1
+            current_node = key
+            path.append(current_node)
+            clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
+                                                   frame_size=(110, 110), frame_count=626)
+            missing_nodes -= 1
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    complete_level('B')
+            if current_node == end_node and len(path) == len(G.nodes):
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end-b&w/"
+                                                                  "clover-end", frame_size=(110, 110), frame_count=626)
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
+                complete_level('B')
 
-                return True, current_node
+            return True, current_node
     return False, current_node
 
 

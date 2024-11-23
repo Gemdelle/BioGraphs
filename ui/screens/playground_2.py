@@ -54,10 +54,11 @@ for edge in edges:
     G.add_edge(edge[0], edge[1])
 
 start_node = None
-end_node = 'H'
+end_node = 'B'
 path = []
 timer_started = False
 start_time = 0
+visited_edges = []
 
 current_node = None
 won_level = False
@@ -103,6 +104,7 @@ def render_playground_2(screen, font):
 
     return False
 
+
 def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_playground_2, restart_button_clicked_playground_2, timer_started,\
         path, current_node, main_menu_button_clicked_playground_2
@@ -119,6 +121,7 @@ def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):
         reset_nodes(path)
         go_to_level(Screens.MAIN)
 
+
 def reset_nodes(path):
     global current_node,G
     path.clear()
@@ -126,20 +129,36 @@ def reset_nodes(path):
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
+
 def handle_playground_2_keydown(event):
-    global current_node, clovers, won_level, G, missing_edges
+    global current_node, clovers, won_level, G, missing_edges, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
+            if current_node is None:
+                # Comienza en el nodo inicial
                 current_node = key
                 path.append(current_node)
-                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=626)
-                missing_edges -= 1
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+            elif key in G.neighbors(current_node):
+                # Verifica si la arista entre `current_node` y `key` ya fue visitada
+                edge = (current_node, key)
+                if edge not in visited_edges and (key, current_node) not in visited_edges:
+                    visited_edges.append(edge)  # Marca la arista como visitada
+                    path.append(key)  # Agrega el nodo al camino
+                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+                    current_node = key
+                    missing_edges -= 1
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    complete_level('C')
-
-                return True, current_node
+                    # Revisa si completaste el camino de Euler
+                    if current_node == end_node and len(visited_edges) == len(G.edges):
+                        won_level = True
+                        print("Congratulations! You completed the Eulerian Path.")
+                        complete_level('C')
+                else:
+                    print("Invalid move: cannot reuse the same edge.")
+            else:
+                print("Invalid move: nodes are not connected.")
+        return True, current_node
     return False, current_node
+
