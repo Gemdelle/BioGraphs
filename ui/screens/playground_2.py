@@ -4,7 +4,7 @@ from core.game_progress_playground import complete_level
 from core.screens import Screens
 from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
-from ui.screens.common.graph_renderer import render_simple_node_graph
+from ui.screens.common.graph_renderer import render_simple_node_graph, render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
 from ui.screens.common.playground_sign_renderer import render_sign
@@ -87,7 +87,7 @@ def render_playground_2(screen, font):
                                    font, 'neutral')
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions, clovers)
+    render_simple_node_graph(screen, G, font, visited_edges, positions, clovers)
 
     # Draw the "Back" button
     back_button_clicked_playground_2 = render_playground_map_button(screen, font_small_buttons)

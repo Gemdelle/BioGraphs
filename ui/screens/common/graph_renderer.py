@@ -103,10 +103,11 @@ def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes
         # Dibuja el texto de cada nodo
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
-def render_simple_node_graph(screen, G, font, path, positions, animated_nodes):
+def render_simple_node_graph(screen, G, font, visited_edges, positions, animated_nodes):
     # Dibujar aristas
     for edge in G.edges():
-        pygame.draw.line(screen, (0, 0, 0), positions[edge[0]], positions[edge[1]], 8)
+        color = (128, 128, 128) if edge in visited_edges or (edge[1], edge[0]) in visited_edges else (0, 0, 0)
+        pygame.draw.line(screen, color, positions[edge[0]], positions[edge[1]], 8)
 
     # Dibujar nodos con la imagen de fondo y texto
     for node, pos in positions.items():

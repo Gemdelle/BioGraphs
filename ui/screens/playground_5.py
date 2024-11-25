@@ -76,7 +76,7 @@ def render_playground_5(screen, font):
                                    "\nPress the letters to navigate the entire graph in order!", font, 'neutral')
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions, clovers)
+    render_simple_node_graph(screen, G, font, visited_edges, positions, clovers)
 
     # Draw the "Back" button
     back_button_clicked_playground_5 = render_playground_map_button(screen, font_small_buttons)

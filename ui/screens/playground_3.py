@@ -70,7 +70,7 @@ def render_playground_3(screen, font):
                                    font, 'neutral')
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions, clovers)
+    render_simple_node_graph(screen, G, font, visited_edges, positions, clovers)
 
     # Draw the "Back" button
     back_button_clicked_playground_3 = render_playground_map_button(screen, font_small_buttons)
