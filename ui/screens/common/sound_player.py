@@ -3,7 +3,7 @@ import pygame
 
 def play_sound(sound_name):
     """
-    Reproduce un archivo de sonido desde la carpeta 'assets/sounds/base/'.
+    Reproduce un archivo de sonido desde la carpeta 'assets/sounds/'.
 
     :param sound_name: Nombre del archivo de sonido (incluyendo extensión).
     """
@@ -12,7 +12,7 @@ def play_sound(sound_name):
         pygame.mixer.init()
 
     # Ruta base para los sonidos
-    base_path = "./assets/sounds/base/"
+    base_path = "./assets/sounds/"
     sound_path = f"{base_path}{sound_name}"
 
     # Cargar y reproducir el sonido
