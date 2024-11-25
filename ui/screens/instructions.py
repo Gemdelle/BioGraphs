@@ -1,16 +1,20 @@
 import pygame
 
 from core.screens import Screens
+from ui.screens.common.dialogue_renderer import render_dialogue, render_tutorial_dialogue
+from ui.screens.game_modes import draw_image_button
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
+
+from ui.utils.fonts import title_font, font
 
 # Button setup
 button_width, button_height = 600, 80
 button_spacing = 20
 button_texts = [
-    ("¿Qué es un camino de Euler?", Screens.INTRO_EULER_PATH),
-    ("¿Qué es un camino de Hamilton?", Screens.INTRO_HAMILTON_PATH),
-    ("¿Qué es un ciclo de Euler?", Screens.INTRO_EULER_CYCLE),
-    ("¿Qué es un ciclo de Hamilton?", Screens.INTRO_HAMILTON_CYCLE)
+    ("Euler paths in graphs", Screens.INTRO_EULER_PATH),
+    ("Hamilton paths in graphs", Screens.INTRO_HAMILTON_PATH),
+    ("Euler paths in digraphs", Screens.INTRO_EULER_CYCLE),
+    ("Hamilton paths in digraphs", Screens.INTRO_HAMILTON_CYCLE)
 ]
 
 # Colors
@@ -22,7 +26,7 @@ border_color = (0, 0, 0)  # Black
 
 # Calculate button positions
 button_x = (SCREEN_WIDTH - button_width) // 2
-buttons_start_y = (SCREEN_HEIGHT - len(button_texts) * (button_height + button_spacing)) // 2
+buttons_start_y = (SCREEN_HEIGHT - len(button_texts) * (button_height + button_spacing)) // 2.3
 
 # Text box setup
 text_box_width, text_box_height = 1400, 100
@@ -36,33 +40,33 @@ circle_y = text_box_y + text_box_height // 2
 is_instructions_screen_rendered = False
 back_button_clicked_instructions = None
 def render_instructions(screen):
-    global is_instructions_screen_rendered, back_button_clicked_instructions
-    screen.fill((255, 255, 255))
+    global is_instructions_screen_rendered, back_button_clicked_instructions, font
+    background_image = pygame.image.load("./assets/tutorial-background.png").convert()
+    background_image = pygame.transform.scale(background_image, (1710, 1034))
+    screen.blit(background_image, (0, 0))
 
-    font = pygame.font.SysFont(None, 36)
-    title_text = font.render("INSTRUCTIONS", True, (0, 0, 0))
-    title_rect = title_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4))
+    title_text = title_font.render("TUTORIALS", True, (0, 0, 0))
+    title_rect = title_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 4.5))
     screen.blit(title_text, title_rect)
 
     # Dibuja los botones
-    for i, (text, screen_value) in enumerate(button_texts):
-        button_y = buttons_start_y + i * (button_height + button_spacing)
-        pygame.draw.rect(screen, button_color, (button_x, button_y, button_width, button_height), border_radius=20)
-        button_text = font.render(text, True, text_color)
-        text_rect = button_text.get_rect(center=(button_x + button_width // 2, button_y + button_height // 2))
-        screen.blit(button_text, text_rect)
+    buttons = []
+    button_spacing = 100  # Reduce el espacio entre botones
+    start_height = SCREEN_HEIGHT // 3.2  # Mueve el inicio un poco más arriba
 
-    # Dibuja la caja de texto
-    pygame.draw.rect(screen, background_color, (text_box_x, text_box_y, text_box_width, text_box_height), border_radius=20)
-    pygame.draw.rect(screen, border_color, (text_box_x, text_box_y, text_box_width, text_box_height), 2, border_radius=20)
+    for i, (text, target_screen) in enumerate(button_texts):  # Renombrar 'screen' a 'target_screen'
+        # Button size and coordinates
+        button_image = pygame.image.load("./assets/playground-button.png").convert_alpha()
+        button_image = pygame.transform.scale(button_image, (400, 85))
 
-    # Dibuja el círculo a la izquierda de la caja de texto
-    pygame.draw.circle(screen, circle_color, (circle_x, circle_y), circle_radius)
+        # Adjust vertical spacing
+        rect = button_image.get_rect(center=(SCREEN_WIDTH // 2, start_height + i * button_spacing))
 
-    # Dibuja el texto del prompt en la caja de texto
-    prompt_text = font.render("¿Qué querés saber?", True, text_color)
-    prompt_rect = prompt_text.get_rect(center=(text_box_x + text_box_width // 2, text_box_y + text_box_height // 2))
-    screen.blit(prompt_text, prompt_rect)
+        # Draw button with image and text
+        buttons.append((target_screen, draw_image_button(screen, button_image, rect, text, font)))
+
+
+    render_tutorial_dialogue(screen, 'What do you want to know more about?', font)
 
     # Dibujar el botón "Back"
     back_button_text = font.render("Back", True, (255, 255, 255))
