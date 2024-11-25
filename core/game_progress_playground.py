@@ -5,22 +5,22 @@ game_playground_progress = {
         'goesTo': 'C'
     },
     'C': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': 'D'
     },
     'D': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': 'E'
     },
     'E': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': 'F'
     },
     'F': {
-        'enabled': False,
+        'enabled': True,
         'completed': False,
         'goesTo': None
     }

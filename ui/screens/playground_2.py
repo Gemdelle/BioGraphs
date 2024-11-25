@@ -4,7 +4,7 @@ from core.game_progress_playground import complete_level
 from core.screens import Screens
 from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
-from ui.screens.common.graph_renderer import render_simple_node_graph
+from ui.screens.common.graph_renderer import render_simple_node_graph, render_euler_graph
 from ui.screens.common.main_menu_button_renderer import render_playground_main_menu_button
 from ui.screens.common.map_button_renderer import render_playground_map_button
 from ui.screens.common.playground_sign_renderer import render_sign
@@ -29,16 +29,16 @@ positions = {
 }
 
 clovers = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
 }
 
@@ -87,7 +87,7 @@ def render_playground_2(screen, font):
                                    font, 'neutral')
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions, clovers)
+    render_simple_node_graph(screen, G, font, visited_edges, positions, clovers)
 
     # Draw the "Back" button
     back_button_clicked_playground_2 = render_playground_map_button(screen, font_small_buttons)
@@ -136,12 +136,11 @@ def handle_playground_2_keydown(event):
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
             if current_node is None:
-                # Comienza en el nodo inicial
                 current_node = key
                 path.append(current_node)
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
             elif key in G.neighbors(current_node):
-                # Verifica si la arista entre `current_node` y `key` ya fue visitada
+                # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
                     visited_edges.append(edge)  # Marca la arista como visitada
@@ -149,16 +148,14 @@ def handle_playground_2_keydown(event):
                     clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
                     current_node = key
                     missing_edges -= 1
-
+                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
                     # Revisa si completaste el camino de Euler
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         won_level = True
-                        print("Congratulations! You completed the Eulerian Path.")
+                        print("¡Felicidades! Has completado el Camino de Euler.")
                         complete_level('C')
-                else:
-                    print("Invalid move: cannot reuse the same edge.")
             else:
-                print("Invalid move: nodes are not connected.")
-        return True, current_node
-    return False, current_node
+                print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
+
+
 

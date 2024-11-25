@@ -19,10 +19,10 @@ positions = {
 }
 
 clovers = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
-    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
 }
 
@@ -41,6 +41,7 @@ end_node = 'H'
 path = []
 timer_started = False
 start_time = 0
+visited_edges = []
 
 current_node = None
 won_level = False
@@ -69,7 +70,7 @@ def render_playground_3(screen, font):
                                    font, 'neutral')
 
     # Render the graph and energy bar
-    render_simple_node_graph(screen, G, font, path, positions, clovers)
+    render_simple_node_graph(screen, G, font, visited_edges, positions, clovers)
 
     # Draw the "Back" button
     back_button_clicked_playground_3 = render_playground_map_button(screen, font_small_buttons)
@@ -114,15 +115,27 @@ def handle_playground_3_keydown(event):
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
+            if current_node is None:
                 current_node = key
                 path.append(current_node)
-                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=626)
-                missing_edges -= 1
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+            elif key in G.neighbors(current_node):
+                # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
+                edge = (current_node, key)
+                if edge not in visited_edges and (key, current_node) not in visited_edges:
+                    visited_edges.append(edge)  # Marca la arista como visitada
+                    path.append(key)  # Agrega el nodo al camino
+                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+                    current_node = key
+                    missing_edges -= 1
+                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+                    # Revisa si completaste el camino de Euler
+                    if current_node == end_node and len(visited_edges) == len(G.edges):
+                        won_level = True
+                        print("¡Felicidades! Has completado el Camino de Euler.")
+                        complete_level('D')
+            else:
+                print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    complete_level('D')
 
-                return True, current_node
-    return False, current_node
+
