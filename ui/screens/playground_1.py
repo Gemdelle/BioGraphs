@@ -106,16 +106,22 @@ def reset_nodes(path):
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
-
 def handle_playground_1_keydown(event):
     global current_node, clovers, won_level, G, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
+
         if key in G.nodes:
-            current_node = key
-            path.append(current_node)
-            clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
-                                                   frame_size=(110, 110), frame_count=626)
+            if current_node is None:
+                current_node = key
+                path.append(current_node)
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
+                                                       frame_size=(110, 110), frame_count=626)
+            elif key in G.neighbors(current_node):
+                current_node = key
+                path.append(current_node)
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
+                                                       frame_size=(110, 110), frame_count=626)
             missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
@@ -125,8 +131,6 @@ def handle_playground_1_keydown(event):
                 print("Congratulations! You completed the Hamiltonian Path.")
                 complete_level('B')
 
-            return True, current_node
-    return False, current_node
 
 
 

@@ -74,7 +74,7 @@ def render_playground_4(screen, font):
                                    "See this pine tree? My guess is we can make it shine by solving a Hamilton "
                                    "path.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes."
                                    "\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress "
-                                   "the letters to navigate the entire graph in order!")
+                                   "the letters to navigate the entire graph in order!", font, 'neutral')
 
 
     # Render the graph and energy bar
@@ -122,19 +122,25 @@ def handle_playground_4_keydown(event):
     global current_node, clovers, won_level, G, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
+
         if key in G.nodes:
+            if current_node is None:
                 current_node = key
                 path.append(current_node)
-                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=626)
-                missing_nodes -= 1
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
+                                                       frame_size=(110, 110), frame_count=626)
+            elif key in G.neighbors(current_node):
+                current_node = key
+                path.append(current_node)
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
+                                                       frame_size=(110, 110), frame_count=626)
+            missing_nodes -= 1
 
-                if current_node == end_node and len(path) == len(G.nodes):
-                    won_level = True
-                    print("Congratulations! You completed the Hamiltonian Path.")
-                    complete_level('E')
-
-                return True, current_node
-    return False, current_node
-
+            if current_node == end_node and len(path) == len(G.nodes):
+                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end-b&w/"
+                                                                  "clover-end", frame_size=(110, 110), frame_count=626)
+                won_level = True
+                print("Congratulations! You completed the Hamiltonian Path.")
+                complete_level('E')
 
 
