@@ -162,24 +162,51 @@ def handle_grafos_euler_1_mousedown(event, go_to_level, is_screen_on_focus):
 
 def handle_grafos_euler_1_keydown(event, go_to_map):
     global current_node, seeds, won_level, G, missing_edges, visited_edges, remaining_time, timer_started
+
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
+
         if key in G.nodes:
+            # Actualiza todos los nodos a blanco y negro excepto el nodo final
+            for node in G.nodes:
+                if node != end_node:
+                    seeds[node] = AnimatedSprite(
+                        frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed",
+                        frame_size=(90, 90), frame_count=74
+                    )
+
+            # El nodo final no cambia su imagen, se mantiene como está
+            # Aquí no se modifica el sprite del nodo final
+
             if current_node is None:
+                # Selecciona el primer nodo
                 current_node = key
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
+                if current_node != end_node:
+                    seeds[current_node] = AnimatedSprite(
+                        frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed",
+                        frame_size=(90, 90), frame_count=74
+                    )
             elif key in G.neighbors(current_node):
-                # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
+
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
-                    visited_edges.append(edge)  # Marca la arista como visitada
-                    path.append(key)  # Agrega el nodo al camino
-                    seeds[key] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
+                    # Marca la arista como visitada y actualiza el camino
+                    visited_edges.append(edge)
+                    path.append(key)
+
+                    # Cambia el nodo actual a color si no es el nodo final
+                    if key != end_node:
+                        seeds[key] = AnimatedSprite(
+                            frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed",
+                            frame_size=(90, 90), frame_count=74
+                        )
+
+                    # Actualiza el nodo actual y los bordes restantes
                     current_node = key
                     missing_edges -= 1
-                    seeds[key] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
-                    # Revisa si completaste el camino de Euler
+
+                    # Verifica si completaste el nivel
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
@@ -187,6 +214,9 @@ def handle_grafos_euler_1_keydown(event, go_to_map):
                         remaining_time = 60000
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
+
+
+
 
 def reset_nodes(path):
     global current_node, G, seeds, missing_edges, visited_edges,won_level,timer_started,lost_level, remaining_time
