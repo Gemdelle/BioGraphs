@@ -30,7 +30,7 @@ positions = {
 
 clovers = {
     'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625),
     'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
@@ -39,7 +39,7 @@ clovers = {
     'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
     'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+    'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625)
 }
 
 for node, pos in positions.items():
@@ -132,30 +132,64 @@ def reset_nodes(path):
 
 def handle_playground_2_keydown(event):
     global current_node, clovers, won_level, G, missing_edges, visited_edges
+
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
+
         if key in G.nodes:
+            # Asegura que todos los nodos tengan su imagen actualizada correctamente
+            for node in G.nodes:
+                if node != 'B':  # El nodo final ('B') no cambia su imagen
+                    if node == current_node:
+                        clovers[node] = AnimatedSprite(
+                            frame_path="./assets/giphs/playground-node/clover/clover",
+                            frame_size=(110, 110), frame_count=626
+                        )
+                    else:
+                        clovers[node] = AnimatedSprite(
+                            frame_path="./assets/giphs/playground-node/clover/clover-bw",
+                            frame_size=(110, 110), frame_count=626
+                        )
+
+            # El nodo final ('B') conserva su imagen específica y no se modifica
+
             if current_node is None:
+                # Selecciona el primer nodo
                 current_node = key
                 path.append(current_node)
-                clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+                if current_node != 'B':
+                    clovers[current_node] = AnimatedSprite(
+                        frame_path="./assets/giphs/playground-node/clover/clover",
+                        frame_size=(110, 110), frame_count=626
+                    )
             elif key in G.neighbors(current_node):
-                # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
+
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
-                    visited_edges.append(edge)  # Marca la arista como visitada
-                    path.append(key)  # Agrega el nodo al camino
-                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
+                    # Marca la arista como visitada y actualiza el camino
+                    visited_edges.append(edge)
+                    path.append(key)
+
+                    # Cambia el nodo al que se mueve, excepto si es el nodo final ('B')
+                    if key != 'B':
+                        clovers[key] = AnimatedSprite(
+                            frame_path="./assets/giphs/playground-node/clover/clover",
+                            frame_size=(110, 110), frame_count=626
+                        )
+
+                    # Actualiza el nodo actual y los bordes restantes
                     current_node = key
                     missing_edges -= 1
-                    clovers[key] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=626)
-                    # Revisa si completaste el camino de Euler
+
+                    # Verifica si completaste el nivel
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
                         complete_level('C')
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
+
+
 
 
 
