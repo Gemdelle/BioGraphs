@@ -4,6 +4,7 @@ import pygame
 import random
 import math
 
+from ui.screens.common.sound_player import play_sound
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
@@ -74,13 +75,16 @@ class MovingImage:
 
 
 def render_main_screen(screen, title_font, font, moving_images):
+    # Song
+    play_sound('button.mp3')
+
     # Background
     background_image = pygame.image.load("assets/main-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
 
     # Title
-    title_text = title_font.render("BIOGRAPHS", True, (0, 0, 0))
+    title_text = title_font.render("GRAPH HOPPER", True, (0, 0, 0))
     title_rect = title_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 3.5))
     screen.blit(title_text, title_rect)
 
