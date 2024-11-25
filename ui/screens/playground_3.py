@@ -45,6 +45,7 @@ visited_edges = []
 
 current_node = None
 won_level = False
+lost_level = False
 missing_edges = len(edges)
 
 back_button_clicked_playground_3 = None
@@ -104,11 +105,24 @@ def handle_playground_3_mousedown(event, go_to_level, is_screen_on_focus):
         go_to_level(Screens.MAIN)
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node, G, clovers, missing_edges, visited_edges, won_level, lost_level
     path.clear()
     current_node = None
+    won_level = False
+    lost_level = False
+    visited_edges.clear()
+
+    clovers = {
+        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+    }
+
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+    missing_edges = len(edges)
 
 def handle_playground_3_keydown(event):
     global current_node, clovers, won_level, G, missing_edges

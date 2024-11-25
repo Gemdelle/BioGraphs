@@ -62,6 +62,7 @@ visited_edges = []
 
 current_node = None
 won_level = False
+lost_level = False
 missing_edges = len(edges)
 
 back_button_clicked_playground_2 = None
@@ -123,11 +124,30 @@ def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):
 
 
 def reset_nodes(path):
-    global current_node,G
+    global current_node, G, clovers, missing_edges, visited_edges, won_level, lost_level
     path.clear()
     current_node = None
+    won_level = False
+    lost_level = False
+    visited_edges.clear()
+
+    clovers = {
+        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+    }
+
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+    missing_edges = len(edges)
 
 
 def handle_playground_2_keydown(event):

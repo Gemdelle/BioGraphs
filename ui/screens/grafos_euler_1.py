@@ -126,7 +126,6 @@ def render_grafos_euler_1(screen, font):
 
         render_counter(screen,font,missing_edges,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74))
 
-
         if won_level:
             flower.update_animation()
             flower.draw(screen, 1430, 500)

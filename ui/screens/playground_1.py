@@ -44,6 +44,7 @@ start_time = 0
 
 current_node = None
 won_level = False
+lost_level = False
 missing_nodes = len(clovers)
 
 map_button_clicked_playground_1 = None
@@ -99,12 +100,22 @@ def handle_playground_1_mousedown(event, go_to_level, is_screen_on_focus):
 
 
 def reset_nodes(path):
-    global current_node,G, timer_started
+    global current_node, G, clovers, missing_nodes, won_level, timer_started, lost_level
     path.clear()
     current_node = None
-    timer_started = False
+    won_level = False
+    lost_level = False
+    clovers = {
+        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(110, 110), frame_count=625),
+        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+    }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
+
+    missing_nodes = len(positions)
 
 def handle_playground_1_keydown(event):
     global current_node, clovers, won_level, G, missing_nodes
