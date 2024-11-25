@@ -133,7 +133,7 @@ def reset_nodes(path):
 
     clovers = {
         'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625),
         'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
         'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
         'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
@@ -142,7 +142,7 @@ def reset_nodes(path):
         'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
         'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
         'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+        'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625)
     }
 
     for node in G.nodes:
@@ -153,61 +153,63 @@ def reset_nodes(path):
 def handle_playground_2_keydown(event):
     global current_node, clovers, won_level, G, missing_edges, visited_edges
 
-    if event.type == pygame.KEYDOWN:
-        key = pygame.key.name(event.key).upper()
+    if event.type != pygame.KEYDOWN:
+        return
 
-        if key in G.nodes:
-            # Asegura que todos los nodos tengan su imagen actualizada correctamente
-            for node in G.nodes:
-                if node != 'B':  # El nodo final ('B') no cambia su imagen
-                    if node == current_node:
-                        clovers[node] = AnimatedSprite(
-                            frame_path="./assets/giphs/playground-node/clover/clover",
-                            frame_size=(110, 110), frame_count=626
-                        )
-                    else:
-                        clovers[node] = AnimatedSprite(
-                            frame_path="./assets/giphs/playground-node/clover/clover-bw",
-                            frame_size=(110, 110), frame_count=626
-                        )
+    key = pygame.key.name(event.key).upper()
 
-            # El nodo final ('B') conserva su imagen específica y no se modifica
+    if key not in G.nodes:
+        print("Tecla no válida: el nodo no existe.")
+        return
 
-            if current_node is None:
-                # Selecciona el primer nodo
-                current_node = key
-                path.append(current_node)
-                if current_node != 'B':
-                    clovers[current_node] = AnimatedSprite(
-                        frame_path="./assets/giphs/playground-node/clover/clover",
-                        frame_size=(110, 110), frame_count=626
-                    )
-            elif key in G.neighbors(current_node):
-                edge = (current_node, key)
+    def update_node_sprite(node, color='color'):
+        """Actualiza el sprite del nodo según el estado."""
+        frame_path = (
+            "./assets/giphs/playground-node/clover/clover"
+            if color == 'color' else
+            "./assets/giphs/playground-node/clover-b&w/clover"
+        )
+        clovers[node] = AnimatedSprite(frame_path=frame_path, frame_size=(110, 110), frame_count=626)
 
-                if edge not in visited_edges and (key, current_node) not in visited_edges:
-                    # Marca la arista como visitada y actualiza el camino
-                    visited_edges.append(edge)
-                    path.append(key)
+    if current_node is None:
+        # Selecciona el primer nodo
+        current_node = key
+        path.append(current_node)
+        if current_node != end_node:
+            update_node_sprite(current_node, 'color')
+        return
 
-                    # Cambia el nodo al que se mueve, excepto si es el nodo final ('B')
-                    if key != 'B':
-                        clovers[key] = AnimatedSprite(
-                            frame_path="./assets/giphs/playground-node/clover/clover",
-                            frame_size=(110, 110), frame_count=626
-                        )
+    if key not in G.neighbors(current_node):
+        print("Movimiento no permitido: no es vecino del nodo actual.")
+        return
 
-                    # Actualiza el nodo actual y los bordes restantes
-                    current_node = key
-                    missing_edges -= 1
+    edge = (current_node, key)
 
-                    # Verifica si completaste el nivel
-                    if current_node == end_node and len(visited_edges) == len(G.edges):
-                        won_level = True
-                        print("¡Felicidades! Has completado el Camino de Euler.")
-                        complete_level('C')
-            else:
-                print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
+    if edge in visited_edges or (key, current_node) in visited_edges:
+        print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
+        return
+
+    # Marca la arista como visitada y actualiza el camino
+    visited_edges.append(edge)
+    path.append(key)
+
+    # Actualiza el sprite del nodo actual y cambia al siguiente nodo
+    if current_node != end_node:
+        update_node_sprite(current_node, 'b&w')
+    current_node = key
+
+    if current_node != end_node:
+        update_node_sprite(current_node, 'color')
+
+    # Reduce el conteo de aristas restantes
+    missing_edges -= 1
+
+    # Verifica si se completó el nivel
+    if current_node == end_node and len(visited_edges) == len(G.edges):
+        won_level = True
+        print("¡Felicidades! Has completado el Camino de Euler.")
+        complete_level('C')
+
 
 
 
