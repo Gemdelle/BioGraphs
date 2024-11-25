@@ -237,13 +237,13 @@ def reset_nodes(path):
     visited_edges.clear()  # Reinicia las aristas visitadas
 
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
-        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74),
         'H': AnimatedBug(-20, 20, frame_path="./assets/giphs/bugs/bug-euler-2/euler-2-bug", frame_size=(120, 120), frame_count=74)
     }
 

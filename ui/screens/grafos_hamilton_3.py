@@ -183,22 +183,18 @@ def reset_nodes(path):
     timer_started = False
     lost_level = False
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'L': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'M': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'N': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'O': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74),
-        'P':  AnimatedBug(x_position_extra=-20, y_position_extra=0,frame_path="./assets/giphs/bugs/bug-hamilton-3/hamilton-3-bug", frame_size=(140, 140), frame_count=74)
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
+        'L': AnimatedBug(x_position_extra=0, y_position_extra=-10,frame_path="./assets/giphs/bugs/bug-hamilton-2/hamilton-2-bug", frame_size=(120, 120), frame_count=74)
     }
 
     for node in G.nodes:
