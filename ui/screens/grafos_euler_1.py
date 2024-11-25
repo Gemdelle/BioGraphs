@@ -199,12 +199,12 @@ def reset_nodes(path):
     visited_edges.clear()
 
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74),
         'E': AnimatedBug(x_position_extra=-25, y_position_extra=-5,frame_path="./assets/giphs/bugs/bug-euler-1/euler-1-bug", frame_size=(120, 120), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-euler-1/bug-euler-1", frame_size=(120, 120), frame_count=74)
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-1-seed/euler-1-seed", frame_size=(90, 90), frame_count=74)
     }
 
     for node in G.nodes:

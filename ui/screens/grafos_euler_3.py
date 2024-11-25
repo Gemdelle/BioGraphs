@@ -233,15 +233,15 @@ def reset_nodes(path):
     visited_edges.clear()
 
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'H': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'I': AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
+        'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
         'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130), frame_count=74)
     }
     for node in G.nodes:
