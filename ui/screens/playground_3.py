@@ -2,6 +2,7 @@ import networkx as nx
 
 from core.game_progress_playground import complete_level
 from core.screens import Screens
+from ui.screens.common.sound_player import play_button
 from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
@@ -133,6 +134,7 @@ def handle_playground_3_keydown(event):
     key = pygame.key.name(event.key).upper()
 
     if key not in G.nodes:
+        play_button('leaf.mp3')
         print("Tecla no válida: el nodo no existe.")
         return
 
@@ -180,6 +182,7 @@ def handle_playground_3_keydown(event):
 
     # Verifica si se completó el nivel
     if current_node == end_node and len(visited_edges) == len(G.edges):
+        play_button('victory.mp3')
         won_level = True
         print("¡Felicidades! Has completado el Camino de Euler.")
         complete_level('D')

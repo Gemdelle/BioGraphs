@@ -2,6 +2,7 @@ import networkx as nx
 
 from core.game_progress_playground import complete_level
 from core.screens import Screens
+from ui.screens.common.sound_player import play_button
 from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.graph_renderer import render_simple_node_graph
@@ -154,6 +155,7 @@ def handle_playground_4_keydown(event):
             if current_node == end_node and len(path) == len(G.nodes):
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end-b&w/"
                                                                   "clover-end", frame_size=(110, 110), frame_count=626)
+                play_button('victory.mp3')
                 won_level = True
                 print("Congratulations! You completed the Hamiltonian Path.")
                 complete_level('E')

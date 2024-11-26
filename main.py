@@ -2,7 +2,7 @@ import pygame
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 from core.screens import Screens
-from ui.screens.common.sound_player import play_sound
+from ui.screens.common.sound_player import play_button, play_sound
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
@@ -65,6 +65,7 @@ def go_to_playground():
 
 def go_to_level(screen):
     global screen_selected
+    play_button('button.mp3')
     print(f"Going to level {screen}")
     screen_selected = screen
 
