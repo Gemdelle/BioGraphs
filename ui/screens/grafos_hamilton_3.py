@@ -153,6 +153,7 @@ def render_grafos_hamilton_3(screen, font):
 
     # Check if time is up
     if timer_started and remaining_time <= 0:
+        play_button('lose.mp3')
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
@@ -220,12 +221,14 @@ def handle_grafos_hamilton_3_keydown(event,go_to_map):
 
         if key in G.nodes:
             if current_node is None:
+                play_button('node-click.wav')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
+                play_button('node-click.wav')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
@@ -233,5 +236,6 @@ def handle_grafos_hamilton_3_keydown(event,go_to_map):
                 missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
+                play_button('victory.mp3')
                 won_level = True
                 print("Congratulations! You completed the Hamiltonian Path.")

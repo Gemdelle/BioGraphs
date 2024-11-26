@@ -48,6 +48,7 @@ def render_select_your_pet_screen(screen, go_to_level):
             x_position = start_x + idx * (CHARACTER_SIZE[0] + spacing)
             rect = pygame.Rect(x_position, y_position, *CHARACTER_SIZE)
             if rect.collidepoint(pygame.mouse.get_pos()):
+                play_button('frog.mp3')
                 selected_character = idx
                 selected_pet[0] = character["name"]
 

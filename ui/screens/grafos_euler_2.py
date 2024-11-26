@@ -175,6 +175,7 @@ def render_grafos_euler_2(screen, font):
 
     # Check if time is up
     if timer_started and remaining_time <= 0:
+        play_button('lose.mp3')
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
@@ -212,6 +213,7 @@ def handle_grafos_euler_2_keydown(event,go_to_map):
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
             if current_node is None:
+                play_button('node-click.wav')
                 current_node = key
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
@@ -222,12 +224,14 @@ def handle_grafos_euler_2_keydown(event,go_to_map):
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
+                    play_button('node-click.wav')
                     current_node = key
                     missing_edges -= 1
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-2-seed/euler-2-seed", frame_size=(90, 90), frame_count=74)
 
                     # Revisa si completaste el camino de Euler
                     if current_node == end_node and len(visited_edges) == len(G.edges):
+                        play_button('victory.mp3')
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
                         complete_level('Frood')

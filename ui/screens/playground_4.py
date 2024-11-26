@@ -144,11 +144,13 @@ def handle_playground_4_keydown(event):
 
         if key in G.nodes:
             if current_node is None:
+                play_button('leaf.mp3')
                 current_node = key
                 path.append(current_node)
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
                                                        frame_size=(110, 110), frame_count=626)
             elif key in G.neighbors(current_node):
+                play_button('leaf.mp3')
                 current_node = key
                 path.append(current_node)
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",

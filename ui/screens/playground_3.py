@@ -175,6 +175,8 @@ def handle_playground_3_keydown(event):
     # Actualiza el sprite del nodo actual y cambia al siguiente nodo
     if current_node != end_node:
         update_node_sprite(current_node, 'b&w')
+
+    play_button('leaf.mp3')
     current_node = key
 
     if current_node != end_node:

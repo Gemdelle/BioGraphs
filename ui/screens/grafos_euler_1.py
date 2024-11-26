@@ -135,6 +135,7 @@ def render_grafos_euler_1(screen, font):
             dead_flower.draw(screen, 1430, 500)
 
     if timer_started and remaining_time <= 0:
+        play_button('lose.mp3')
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
@@ -184,6 +185,7 @@ def handle_grafos_euler_1_keydown(event, go_to_map):
 
             if current_node is None:
                 # Selecciona el primer nodo
+                play_button('node-click.wav')
                 current_node = key
                 path.append(current_node)
                 if current_node != end_node:
@@ -207,11 +209,13 @@ def handle_grafos_euler_1_keydown(event, go_to_map):
                         )
 
                     # Actualiza el nodo actual y los bordes restantes
+                    play_button('node-click.wav')
                     current_node = key
                     missing_edges -= 1
 
                     # Verifica si completaste el nivel
                     if current_node == end_node and len(visited_edges) == len(G.edges):
+                        play_button('victory.mp3')
                         won_level = True
                         print("¡Felicidades! Has completado el Camino de Euler.")
                         complete_level('Erlem')

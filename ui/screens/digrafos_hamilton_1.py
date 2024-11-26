@@ -140,6 +140,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
     # Verificar si se acabó el tiempo
     if remaining_time <= 0:
+        play_button('lose.mp3')
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
@@ -230,12 +231,14 @@ def handle_digrafos_hamilton_1_keydown(event,go_to_map):
 
         if key in G.nodes:
             if current_node is None:
+                play_button('node-click.wav')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.successors(current_node):  # Solo moverse a nodos sucesores válidos
                 G.nodes[current_node]['color'] = (0, 100, 0)
+                play_button('node-click.wav')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
@@ -244,5 +247,6 @@ def handle_digrafos_hamilton_1_keydown(event,go_to_map):
 
             # Verificar si el camino hamiltoniano está completo
             if current_node == end_node and len(path) == len(G.nodes):
+                play_button('victory.mp3')
                 won_level = True
                 print("Congratulations! You completed the Hamiltonian Path.")
