@@ -3,6 +3,10 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 
 from core.screens import Screens
 from ui.screens.common.sound_player import play_button, play_sound
+from ui.screens.intro_diagraphs import render_intro_diagraphs
+from ui.screens.intro_euler_path import render_intro_euler_path
+from ui.screens.intro_graphs import render_intro_graphs
+from ui.screens.intro_hamilton_path import render_intro_hamilton_path
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
@@ -65,7 +69,6 @@ def go_to_playground():
 
 def go_to_level(screen):
     global screen_selected
-    play_button('button.mp3')
     print(f"Going to level {screen}")
     screen_selected = screen
 
@@ -83,10 +86,8 @@ def go_to_main():
 buttons = []
 moving_tadpoles = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
 splash_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/splash/splash.mp4")
-intro_graphs_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-graph.mp4")
-intro_digraphs_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-digraph.mp4")
-intro_euler_path_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-euler.mp4")
-intro_hamilton_path_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-hamilton.mp4")
+
+
 
 
 # Main game loop
@@ -221,17 +222,13 @@ while running:
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
         render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
     elif screen_selected == Screens.INTRO_DIGRAPHS:
-        intro_digraphs_video.reset_clock()
-        intro_digraphs_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
+        render_intro_diagraphs(screen, go_to_level)
     elif screen_selected == Screens.INTRO_HAMILTON_PATH:
-        intro_hamilton_path_video.reset_clock()
-        intro_hamilton_path_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
+        render_intro_hamilton_path(screen, go_to_level)
     elif screen_selected == Screens.INTRO_GRAPHS:
-        intro_graphs_video.reset_clock()
-        intro_graphs_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
+        render_intro_graphs(screen, go_to_level)
     elif screen_selected == Screens.INTRO_EULER_PATH:
-        intro_euler_path_video.reset_clock()
-        intro_euler_path_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
+        render_intro_euler_path(screen, go_to_level)
     else:
         print("Screen not found")
 
