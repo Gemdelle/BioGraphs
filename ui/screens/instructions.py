@@ -2,19 +2,20 @@ import pygame
 
 from core.screens import Screens
 from ui.screens.common.dialogue_renderer import render_dialogue, render_tutorial_dialogue
+from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 from ui.screens.game_modes import draw_image_button
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
-from ui.utils.fonts import title_font, font
+from ui.utils.fonts import title_font, font, font_small_buttons
 
 # Button setup
 button_width, button_height = 600, 80
 button_spacing = 20
 button_texts = [
-    ("Euler paths in graphs", Screens.INTRO_EULER_PATH),
-    ("Hamilton paths in graphs", Screens.INTRO_HAMILTON_PATH),
-    ("Euler paths in digraphs", Screens.INTRO_EULER_CYCLE),
-    ("Hamilton paths in digraphs", Screens.INTRO_HAMILTON_CYCLE)
+    ("Graphs", Screens.INTRO_GRAPHS),
+    ("Digraphs", Screens.INTRO_DIGRAPHS),
+    ("Euler path", Screens.INTRO_EULER_PATH),
+    ("Hamilton path", Screens.INTRO_HAMILTON_PATH)
 ]
 
 # Colors
@@ -38,9 +39,9 @@ circle_radius = 50
 circle_x = text_box_x - circle_radius - 20
 circle_y = text_box_y + text_box_height // 2
 is_instructions_screen_rendered = False
-back_button_clicked_instructions = None
+main_menu_button_clicked_instructions = None
 def render_instructions(screen):
-    global is_instructions_screen_rendered, back_button_clicked_instructions, font
+    global is_instructions_screen_rendered, main_menu_button_clicked_instructions, font
     background_image = pygame.image.load("./assets/tutorial-background.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0, 0))
@@ -68,28 +69,24 @@ def render_instructions(screen):
 
     render_tutorial_dialogue(screen, 'What do you want to know more about?', font)
 
-    # Dibujar el botón "Back"
-    back_button_text = font.render("Back", True, (255, 255, 255))
-    back_button_clicked_instructions = pygame.Rect(1610, 10, 80, 40)  # Posición y tamaño del botón
-    pygame.draw.rect(screen, (0, 0, 200), back_button_clicked_instructions)  # Fondo del botón
-    screen.blit(back_button_text, (1620, 15))  # Texto centrado en el botón
+    main_menu_button_clicked_instructions = render_main_menu_button(screen, font_small_buttons, (1500, 30))
 
     is_instructions_screen_rendered = True
 
 
-def is_back_button_clicked_instructions(event):
-    global back_button_clicked_instructions, is_instructions_screen_rendered
-    is_back_button_clicked = back_button_clicked_instructions is not None and back_button_clicked_instructions.collidepoint(event.pos)
-    if is_back_button_clicked:
-        is_instructions_screen_rendered = False
-    return is_back_button_clicked
+def handle_instructions_mouse_down(event, go_to_level, is_screen_on_focus):
+    global main_menu_button_clicked_instructions, is_instructions_screen_rendered
+    if not is_screen_on_focus or not is_instructions_screen_rendered:
+        return
 
-def handle_instructions_keydown(event, go_to_level):
-    global is_instructions_screen_rendered
-    if event.type == pygame.MOUSEBUTTONDOWN and is_instructions_screen_rendered is True:
+    if main_menu_button_clicked_instructions is not None and main_menu_button_clicked_instructions.collidepoint(event.pos):
+        go_to_level(Screens.MAIN)
+        is_instructions_screen_rendered = False
+    else:
         for i, (text, screen_value) in enumerate(button_texts):
             button_y = buttons_start_y + i * (button_height + button_spacing)
             button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
             if button_rect.collidepoint(event.pos):
                 go_to_level(screen_value)
+                is_instructions_screen_rendered = False
                 break
