@@ -75,9 +75,6 @@ class MovingImage:
 
 
 def render_main_screen(screen, title_font, font, moving_images):
-    # Song
-    play_sound('button.mp3')
-
     # Background
     background_image = pygame.image.load("assets/main-bg.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))

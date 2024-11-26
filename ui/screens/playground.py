@@ -1,5 +1,6 @@
 import os
 
+from ui.screens.common.sound_player import play_button, play_sound
 from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
@@ -145,6 +146,7 @@ def handle_playground_mousedown(go_to_level, is_screen_on_focus):
 
     if mouse_pressed[0]:
         if main_menu_button_clicked_playground is not None and main_menu_button_clicked_playground.collidepoint(mouse_pos):
+            play_button('button.mp3')
             go_to_level(Screens.MAIN)
         else:
             for node, data in nodes.items():
@@ -152,6 +154,7 @@ def handle_playground_mousedown(go_to_level, is_screen_on_focus):
                     node_pos = data['pos']
                     distance = math.hypot(node_pos[0] - mouse_pos[0], node_pos[1] - mouse_pos[1])
                     if distance <= 20:
+                        play_button('frog.mp3')
                         print(f"Node {node} clicked! Navigating to {node_screens[node]}")
                         level = node_screens[node]
                         go_to_level(level)

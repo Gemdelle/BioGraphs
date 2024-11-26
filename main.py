@@ -1,6 +1,7 @@
 import pygame
 
 from core.screens import Screens
+from ui.screens.common.sound_player import play_sound
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 from ui.screens.intro_euler_cycle import render_intro_euler_cycle, is_back_button_clicked_intro_euler_cicle
 from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
@@ -138,31 +139,44 @@ while running:
                 mousedown_processing = False
 
         if screen_selected == Screens.GRAFOS_EULER_1:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_2:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_euler_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_EULER_3:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_euler_3_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_1:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_hamilton_1_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_2:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_hamilton_2_keydown(event,go_to_map)
         elif screen_selected == Screens.GRAFOS_HAMILTON_3:
+            play_sound('map-levels-bg.mp3')
             handle_grafos_hamilton_3_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_EULER_1:
+            play_sound('map-levels-bg.mp3')
             handle_digrafos_euler_1_keydown(event,go_to_map)
         elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
+            play_sound('map-levels-bg.mp3')
             handle_digrafos_hamilton_1_keydown(event,go_to_map)
 
         elif screen_selected == Screens.PLAYGROUND_1:
+            play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_1_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_2:
+            play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_2_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_3:
+            play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_3_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_4:
+            play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_4_keydown(event)
         elif screen_selected == Screens.PLAYGROUND_5:
+            play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_5_keydown(event)
         elif screen_selected == Screens.INSTRUCTIONS:
             handle_instructions_keydown(event, go_to_level)
@@ -171,14 +185,19 @@ while running:
     if screen_selected == Screens.SPLASH:
         splash_video.play_video(screen, lambda: go_to_level(Screens.SELECT_YOUR_PET))
     elif screen_selected == Screens.SELECT_YOUR_PET:
+        play_sound('menu-background.mp3')
         render_select_your_pet_screen(screen, go_to_level)
     elif screen_selected == Screens.MAIN:
+        play_sound('menu-background.mp3')
         buttons = render_main_screen(screen, title_font, font, moving_tadpoles)
     elif screen_selected == Screens.MAP:
+        play_sound('maps-background.mp3')
         render_map(screen, go_to_level)
     elif screen_selected == Screens.INSTRUCTIONS:
+        play_sound('maps-background.mp3')
         render_instructions(screen)
     elif screen_selected == Screens.PLAYGROUND:
+        play_sound('maps-background.mp3')
         render_playground(screen, pygame.time.get_ticks() / 150)
 
     elif screen_selected == Screens.PLAYGROUND_1:

@@ -7,6 +7,7 @@ from ui.egg.dark_egg import DarkEgg
 from ui.egg.neutral_egg import NeutralEgg
 from ui.egg.swamp_egg import SwampEgg
 from core.pet import selected_pet
+from ui.screens.common.sound_player import play_sound
 
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1710, 1034
@@ -16,6 +17,9 @@ BUTTON_SIZE = (300, 70)  # Size for the button
 selected_character = None
 
 def render_select_your_pet_screen(screen, go_to_level):
+    # Song
+    # play_sound('menu-background.mp3')
+    
     global selected_character  # Use the global variable to keep the selection across frames
 
     # Load background
