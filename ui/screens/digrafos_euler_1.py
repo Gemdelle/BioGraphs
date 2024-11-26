@@ -179,7 +179,7 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
 
         if key in G.nodes:
             if current_node is None:
-                play_button('node-click.wav')
+                play_button('node.mp3')
                 current_node = key
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
@@ -190,7 +190,7 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)
-                    play_button('node-click.wav')
+                    play_button('node.mp3')
                     current_node = key
                     missing_edges -= 1
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74)

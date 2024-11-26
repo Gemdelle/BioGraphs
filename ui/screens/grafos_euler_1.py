@@ -69,6 +69,7 @@ restart_button_clicked_grafos_euler_1 = None
 main_menu_button_clicked_grafos_euler_1 = None
 visited_edges = []
 
+
 def render_grafos_euler_1(screen, font):
     from ui.utils.fonts import font_small_buttons
     global back_button_clicked_grafos_euler_1, start_button_clicked_grafos_euler_1,restart_button_clicked_grafos_euler_1,\
@@ -190,7 +191,7 @@ def handle_grafos_euler_1_keydown(event, go_to_map):
 
             if current_node is None:
                 # Selecciona el primer nodo
-                play_button('node-click.wav')
+                play_button('node.mp3')
                 current_node = key
                 path.append(current_node)
                 if current_node != end_node:
@@ -214,7 +215,7 @@ def handle_grafos_euler_1_keydown(event, go_to_map):
                         )
 
                     # Actualiza el nodo actual y los bordes restantes
-                    play_button('node-click.wav')
+                    play_button('node.mp3')
                     current_node = key
                     missing_edges -= 1
 

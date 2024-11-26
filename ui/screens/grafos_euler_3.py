@@ -218,7 +218,7 @@ def handle_grafos_euler_3_keydown(event,go_to_map):
         key = pygame.key.name(event.key).upper()
         if key in G.nodes:
             if current_node is None:
-                play_button('node-click.wav')
+                play_button('node.mp3')
                 current_node = key
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
@@ -229,7 +229,7 @@ def handle_grafos_euler_3_keydown(event,go_to_map):
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
-                    play_button('node-click.wav')
+                    play_button('node.mp3')
                     current_node = key
                     missing_edges -= 1
                     seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)

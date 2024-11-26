@@ -227,14 +227,14 @@ def handle_grafos_hamilton_3_keydown(event,go_to_map):
 
         if key in G.nodes:
             if current_node is None:
-                play_button('node-click.wav')
+                play_button('node.mp3')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
-                play_button('node-click.wav')
+                play_button('node.mp3')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
