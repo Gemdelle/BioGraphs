@@ -1,12 +1,9 @@
 import pygame
+from moviepy.video.io.VideoFileClip import VideoFileClip
 
 from core.screens import Screens
 from ui.screens.common.sound_player import play_sound
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
-from ui.screens.intro_euler_cycle import render_intro_euler_cycle, is_back_button_clicked_intro_euler_cicle
-from ui.screens.intro_euler_path import render_intro_euler_path, is_back_button_clicked_intro_euler_path
-from ui.screens.intro_hamilton_cicle import render_intro_hamilton_cicle, is_back_button_clicked_intro_hamilton_cicle
-from ui.screens.intro_hamilton_path import render_intro_hamilton_path, is_back_button_clicked_intro_hamilton_path
 
 from ui.screens.playground_1 import (render_playground_1, handle_playground_1_keydown,
                                      handle_playground_1_mousedown)
@@ -34,12 +31,12 @@ from ui.screens.grafos_hamilton_2 import (render_grafos_hamilton_2, handle_grafo
                                           handle_grafos_hamilton_2_mousedown)
 from ui.screens.grafos_hamilton_3 import (render_grafos_hamilton_3, handle_grafos_hamilton_3_keydown,
                                           handle_grafos_hamilton_3_mousedown)
-from ui.screens.instructions import render_instructions, handle_instructions_keydown, is_back_button_clicked_instructions
+from ui.screens.instructions import render_instructions, handle_instructions_mouse_down
 from ui.screens.game_modes import render_main_screen, MovingImage
 from ui.screens.map import render_map, handle_map_mousedown
 from ui.screens.playground import render_playground, handle_playground_mousedown
 from ui.screens.select_your_pet import render_select_your_pet_screen
-from ui.utils.splash_video import SplashVideo
+from ui.utils.video import Video
 
 pygame.init()
 
@@ -84,7 +81,12 @@ def go_to_main():
 
 buttons = []
 moving_tadpoles = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
-splash_video = SplashVideo(SCREEN_WIDTH, SCREEN_HEIGHT)
+splash_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/splash/splash.mp4")
+intro_graphs_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-graph.mp4")
+intro_digraphs_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-digraph.mp4")
+intro_euler_path_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-euler.mp4")
+intro_hamilton_path_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/videos/tutorial-hamilton.mp4")
+
 
 # Main game loop
 while running:
@@ -110,15 +112,6 @@ while running:
                             elif text == "Map":
                                 go_to_map()
 
-                elif (is_back_button_clicked_intro_euler_cicle(event) or
-                      is_back_button_clicked_intro_euler_path(event) or
-                      is_back_button_clicked_intro_hamilton_cicle(event) or
-                      is_back_button_clicked_intro_hamilton_path(event)):
-                    go_to_instructions()
-
-                elif is_back_button_clicked_instructions(event):
-                    go_to_main()
-
                 handle_map_mousedown(go_to_level, screen_selected==Screens.MAP)
                 handle_playground_mousedown(go_to_level, screen_selected==Screens.PLAYGROUND)
                 handle_grafos_digrafos_euler_mousedown(event, go_to_level, screen_selected==Screens.DIGRAFOS_EULER_1)
@@ -134,6 +127,7 @@ while running:
                 handle_playground_3_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_3)
                 handle_playground_4_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_4)
                 handle_playground_5_mousedown(event, go_to_level, screen_selected==Screens.PLAYGROUND_5)
+                handle_instructions_mouse_down(event, go_to_level, screen_selected == Screens.INSTRUCTIONS)
 
             finally:
                 mousedown_processing = False
@@ -178,8 +172,6 @@ while running:
         elif screen_selected == Screens.PLAYGROUND_5:
             play_sound('playground-levels-bg.mp3',0.2)
             handle_playground_5_keydown(event)
-        elif screen_selected == Screens.INSTRUCTIONS:
-            handle_instructions_keydown(event, go_to_level)
 
     # Screen rendering
     if screen_selected == Screens.SPLASH:
@@ -227,14 +219,18 @@ while running:
         render_digrafos_euler_1(screen, font)
     elif screen_selected == Screens.DIGRAFOS_HAMILTON_1:
         render_digrafos_hamilton_1(screen, font, go_to_map, pygame.event.get())
+    elif screen_selected == Screens.INTRO_DIGRAPHS:
+        intro_digraphs_video.reset_clock()
+        intro_digraphs_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
     elif screen_selected == Screens.INTRO_HAMILTON_PATH:
-        render_intro_hamilton_path(screen, font)
-    elif screen_selected == Screens.INTRO_HAMILTON_CYCLE:
-        render_intro_hamilton_cicle(screen, font)
+        intro_hamilton_path_video.reset_clock()
+        intro_hamilton_path_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
+    elif screen_selected == Screens.INTRO_GRAPHS:
+        intro_graphs_video.reset_clock()
+        intro_graphs_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
     elif screen_selected == Screens.INTRO_EULER_PATH:
-        render_intro_euler_path(screen, font)
-    elif screen_selected == Screens.INTRO_EULER_CYCLE:
-        render_intro_euler_cycle(screen, font)
+        intro_euler_path_video.reset_clock()
+        intro_euler_path_video.play_video(screen, lambda: go_to_level(Screens.INSTRUCTIONS))
     else:
         print("Screen not found")
 
