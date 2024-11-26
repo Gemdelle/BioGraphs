@@ -23,9 +23,6 @@ nodes = {
     'F': {'pos': (1305+20, 485), 'color': (255, 255, 255)},  # Verde
 }
 
-total_nodes = len(nodes)
-missing_nodes = len(nodes)-1
-
 edges = [
     ('Frog', 'B'), ('B', 'C'), ('C', 'D'),
     ('D', 'E'), ('E', 'F')
@@ -39,16 +36,10 @@ node_screens = {
     'F': Screens.PLAYGROUND_5
 }
 def render_playground(screen, time):
-    global main_menu_button_clicked_playground, edges, total_nodes, missing_nodes, nodes
+    global main_menu_button_clicked_playground, edges, nodes
     # Fondo de mapa con movimiento flotante
     background_image = pygame.image.load("assets/playground-bg/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
-
-    # NODE IMG
-    done_node_image = pygame.image.load('./assets/map-nodes/done-node.png').convert_alpha()
-    done_node_image = pygame.transform.scale(done_node_image,(130, 130))
-    undone_node_image = pygame.image.load('./assets/map-nodes/undone-node.png').convert_alpha()
-    undone_node_image = pygame.transform.scale(undone_node_image,(130,130))
 
     # FONTS
     font_path = 'assets/fonts/'
@@ -114,8 +105,9 @@ def render_playground(screen, time):
                 letter_rect = letter_text.get_rect(center=data['pos'])
                 screen.blit(letter_text, letter_rect)
 
-
-    counter_renderer(screen, font_subtitle, total_nodes, missing_nodes, clover, 200, 200)
+    completed_count = sum(1 for value in game_playground_progress.values() if value['completed'])
+    total_nodes = len(game_playground_progress.keys())
+    counter_renderer(screen, font_subtitle, total_nodes, completed_count, clover, 200, 200)
 
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground = render_playground_main_menu_button(screen, font_small_buttons, (1500, 30))
