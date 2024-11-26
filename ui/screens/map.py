@@ -4,6 +4,7 @@ import networkx as nx
 import pygame
 import math
 
+from ui.screens.common.sound_player import play_button
 from ui.utils.fonts import font_small_buttons
 from core.pet import get_selected_pet
 from core.screens import Screens
@@ -182,6 +183,7 @@ def handle_map_mousedown(go_to_level, is_screen_on_focus):
 
     if mouse_pressed[0]:
         if main_menu_button_clicked_map is not None and main_menu_button_clicked_map.collidepoint(mouse_pos):
+            play_button('button.mp3')
             go_to_level(Screens.MAIN)
         else:
             for node, data in nodes.items():
@@ -191,4 +193,5 @@ def handle_map_mousedown(go_to_level, is_screen_on_focus):
                     if distance <= 20:
                         print(f"Node {node} clicked! Navigating to {node_screens[node]}")
                         level = node_screens[node]
+                        play_button('frog.mp3')
                         go_to_level(level)

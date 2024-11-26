@@ -7,7 +7,7 @@ from ui.egg.dark_egg import DarkEgg
 from ui.egg.neutral_egg import NeutralEgg
 from ui.egg.swamp_egg import SwampEgg
 from core.pet import selected_pet
-from ui.screens.common.sound_player import play_sound
+from ui.screens.common.sound_player import play_sound, play_button
 
 # Define constants
 SCREEN_WIDTH, SCREEN_HEIGHT = 1710, 1034
@@ -94,5 +94,6 @@ def render_select_your_pet_screen(screen, go_to_level):
     # Check if button clicked
     if button_rect.collidepoint(pygame.mouse.get_pos()) and pygame.mouse.get_pressed()[0]:
         if selected_pet[0] is not None:
+            play_button('button.mp3')
             go_to_level(Screens.MAIN)
 

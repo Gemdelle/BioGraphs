@@ -3,6 +3,7 @@ import pygame
 from core.screens import Screens
 from ui.screens.common.dialogue_renderer import render_dialogue, render_tutorial_dialogue
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
+from ui.screens.common.sound_player import play_button
 from ui.screens.game_modes import draw_image_button
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
@@ -80,6 +81,7 @@ def handle_instructions_mouse_down(event, go_to_level, is_screen_on_focus):
         return
 
     if main_menu_button_clicked_instructions is not None and main_menu_button_clicked_instructions.collidepoint(event.pos):
+        play_button('button.mp3')
         go_to_level(Screens.MAIN)
         is_instructions_screen_rendered = False
     else:
@@ -87,6 +89,7 @@ def handle_instructions_mouse_down(event, go_to_level, is_screen_on_focus):
             button_y = buttons_start_y + i * (button_height + button_spacing)
             button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
             if button_rect.collidepoint(event.pos):
+                play_button('button.mp3')
                 go_to_level(screen_value)
                 is_instructions_screen_rendered = False
                 break

@@ -108,10 +108,13 @@ while running:
                     for text, btn_rect in buttons:
                         if btn_rect.collidepoint(mouse_pos):
                             if text == "Instructions":
+                                play_button('button.mp3')
                                 screen_selected = Screens.INSTRUCTIONS
                             elif text == "Playground":
+                                play_button('button.mp3')
                                 screen_selected = Screens.PLAYGROUND
                             elif text == "Map":
+                                play_button('button.mp3')
                                 go_to_map()
 
                 handle_map_mousedown(go_to_level, screen_selected==Screens.MAP)
