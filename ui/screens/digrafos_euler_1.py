@@ -49,6 +49,7 @@ start_node = None
 end_node = 'D'
 path = []
 timer_started = False
+time_finishing_warning_done = False
 start_time = 0
 
 current_node = None
@@ -70,7 +71,7 @@ def render_digrafos_euler_1(screen, font):
     from ui.utils.fonts import font_small_buttons
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler,\
         timer_started, start_time, path, start_node, positions, current_node, energy, won_level,\
-        flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler, lost_level
+        flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler, lost_level,time_finishing_warning_done
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -117,6 +118,10 @@ def render_digrafos_euler_1(screen, font):
 
         # Render energy bar and timer
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
+
+        if remaining_time // 1000 <= 20 and time_finishing_warning_done is False:
+            play_button('timer.mp3')
+            time_finishing_warning_done = True
 
         # Draw the "Restart" button
         restart_button_clicked_digrafos_euler = render_restart_button(screen, font_small_buttons)
@@ -199,10 +204,11 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
 def reset_nodes(path):
-    global current_node, G, seeds, missing_edges, visited_edges, lost_level
+    global current_node, G, seeds, missing_edges, visited_edges, lost_level, time_finishing_warning_done
     path.clear()
     current_node = None
     lost_level = False
+    time_finishing_warning_done = False
     visited_edges.clear()  # Reinicia las aristas visitadas
 
     seeds = {

@@ -71,12 +71,14 @@ start_button_clicked_digrafos_hamilton_1 = None
 restart_button_clicked_digrafos_hamilton_1 = None
 main_menu_button_clicked_digrafos_hamilton_1 = None
 
+time_finishing_warning_done = False
+
 # Función de renderizado con flechas en aristas
 def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from ui.utils.fonts import font_small_buttons
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1,\
         restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node,\
-        positions, current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_digrafos_hamilton_1, lost_level
+        positions, current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_digrafos_hamilton_1, lost_level, time_finishing_warning_done
 
     current_time = pygame.time.get_ticks()
     if won_level:
@@ -122,6 +124,10 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
         # Render energy bar and timer
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
+
+        if remaining_time // 1000 <= 20 and time_finishing_warning_done is False:
+            play_button('timer.mp3')
+            time_finishing_warning_done = True
 
         # Draw the "Restart" button
         restart_button_clicked_digrafos_hamilton_1 = render_restart_button(screen, font_small_buttons)
@@ -172,10 +178,11 @@ def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level,is_screen_on_
         go_to_level(Screens.MAIN)
 
 def reset_nodes(path):
-    global current_node,G, seeds, missing_nodes,lost_level
+    global current_node,G, seeds, missing_nodes,lost_level, time_finishing_warning_done
     path.clear()
     current_node = None
     lost_level = False
+    time_finishing_warning_done = False
     seeds = {
     'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
     'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
