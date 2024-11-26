@@ -22,7 +22,7 @@ game_playground_progress = {
     'F': {
         'enabled': True,
         'completed': False,
-        'goesTo': None
+        'goesTo': 'F'
     }
 }
 
