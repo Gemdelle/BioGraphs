@@ -1,6 +1,7 @@
 import networkx as nx
 
 from core.screens import Screens
+from ui.screens.common.sound_player import play_button
 from ui.utils.animated_bug import AnimatedBug
 from ui.utils.animated_sprite import AnimatedSprite
 from ui.screens.common.dialogue_renderer import render_dialogue, render_playground_dialogue
@@ -148,15 +149,19 @@ def handle_grafos_digrafos_euler_mousedown(event, go_to_level, is_screen_on_focu
         return
 
     if back_button_clicked_digrafos_euler is not None and back_button_clicked_digrafos_euler.collidepoint(event.pos):
+        play_button('button.mp3')
         timer_started = False
         go_to_level(Screens.MAP)
         reset_nodes(path)
     elif start_button_clicked_digrafos_euler is not None and start_button_clicked_digrafos_euler.collidepoint(event.pos):
+        play_button('button.mp3')
         timer_started = True
     elif restart_button_clicked_digrafos_euler is not None and restart_button_clicked_digrafos_euler.collidepoint(event.pos):
+        play_button('button.mp3')
         timer_started = False
         reset_nodes(path)
     elif main_menu_button_clicked_digrafos_euler is not None and main_menu_button_clicked_digrafos_euler.collidepoint(event.pos):
+        play_button('button.mp3')
         timer_started = False
         reset_nodes(path)
         go_to_level(Screens.MAIN)

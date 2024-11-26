@@ -114,12 +114,15 @@ def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):
         return
 
     if back_button_clicked_playground_2 is not None and back_button_clicked_playground_2.collidepoint(event.pos):
+        play_button('button.mp3')
         go_to_level(Screens.PLAYGROUND)
         reset_nodes(path)
     elif restart_button_clicked_playground_2 is not None and restart_button_clicked_playground_2.collidepoint(event.pos):
+        play_button('button.mp3')
         timer_started = False
         reset_nodes(path)
     elif main_menu_button_clicked_playground_2 is not None and main_menu_button_clicked_playground_2.collidepoint(event.pos):
+        play_button('button.mp3')
         reset_nodes(path)
         go_to_level(Screens.MAIN)
 
