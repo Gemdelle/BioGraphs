@@ -4,7 +4,7 @@ from core.screens import Screens
 from ui.screens.common.sound_player import play_button
 from ui.utils.animated_bug import AnimatedBug
 from ui.utils.animated_sprite import AnimatedSprite
-from ui.screens.common.dialogue_renderer import render_dialogue, render_playground_dialogue
+from ui.screens.common.dialogue_renderer import render_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -85,14 +85,14 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         background_image_win = pygame.image.load("assets/final-bg/d-hamilton.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
-        render_playground_dialogue(screen, 'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
+        render_dialogue(screen, 'Congratulations, you have restored the local flora.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/d-hamilton.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
-        render_playground_dialogue(screen,
+        render_dialogue(screen,
                                    "Restore the plant 'Uchya' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!",
                                    font, 'neutral')
     else:
@@ -113,8 +113,8 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
 
     if lost_level:
         restart_button_clicked_digrafos_hamilton_1 = render_restart_button(screen, font_small_buttons, (800, 500))
-        render_playground_dialogue(screen,
-                                   "Beter luck next time",
+        render_dialogue(screen,
+                                   "Beter luck next time...",
                                    font, 'angry')
     elif not timer_started:
         start_button_clicked_digrafos_hamilton_1 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(150, 150), frame_count=74))
