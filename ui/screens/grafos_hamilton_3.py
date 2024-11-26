@@ -221,7 +221,7 @@ def handle_grafos_hamilton_3_keydown(event,go_to_map):
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
                 seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/hamilton-3-seed/hamilton-3-seed", frame_size=(90, 90), frame_count=74)
-            missing_nodes -= 1
+                missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
                 won_level = True

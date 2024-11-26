@@ -136,7 +136,7 @@ def handle_playground_1_keydown(event):
                 path.append(current_node)
                 clovers[current_node] = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover",
                                                        frame_size=(110, 110), frame_count=626)
-            missing_nodes -= 1
+                missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):
                 play_button('victory.mp3')
