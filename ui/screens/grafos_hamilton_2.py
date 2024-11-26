@@ -3,7 +3,7 @@ import networkx as nx
 from core.screens import Screens
 from ui.utils.animated_bug import AnimatedBug
 from ui.utils.animated_sprite import AnimatedSprite
-from ui.screens.common.dialogue_renderer import render_dialogue
+from ui.screens.common.dialogue_renderer import render_playground_dialogue
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.graph_renderer import render_graph
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -86,12 +86,16 @@ def render_grafos_hamilton_2(screen, font):
         background_image_win = pygame.image.load("assets/final-bg/hamilton-2.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
+        render_playground_dialogue(screen, 'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/hamilton-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
+        render_playground_dialogue(screen,
+                                   "Restore the plant 'Erlem' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 12 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!",
+                                   font, 'neutral')
     else:
         background_image = pygame.image.load("assets/blur/hamilton-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -110,7 +114,9 @@ def render_grafos_hamilton_2(screen, font):
 
     if lost_level:
         restart_button_clicked_grafos_hamilton_2 = render_restart_button(screen, font_small_buttons, (800, 500))
-        render_dialogue(screen, "Beter luck next time", font)
+        render_playground_dialogue(screen,
+                                   "Beter luck next time",
+                                   font, 'angry')
     elif not timer_started:
         start_button_clicked_grafos_hamilton_2 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(150, 150), frame_count=74))
     else:
@@ -127,8 +133,6 @@ def render_grafos_hamilton_2(screen, font):
         main_menu_button_clicked_grafos_hamilton_2 = render_main_menu_button(screen, font_small_buttons)
 
         render_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74))
-
-        render_dialogue(screen, "Restore the plant 'Erlem' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 12 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!", font)
 
         if won_level:
             flower.update_animation()

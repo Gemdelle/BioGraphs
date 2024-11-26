@@ -3,7 +3,7 @@ import networkx as nx
 from core.screens import Screens
 from ui.utils.animated_bug import AnimatedBug
 from ui.utils.animated_sprite import AnimatedSprite
-from ui.screens.common.dialogue_renderer import render_dialogue
+from ui.screens.common.dialogue_renderer import render_dialogue, render_playground_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -52,6 +52,7 @@ start_time = 0
 
 current_node = None
 won_level = False
+lost_level = False
 initial_energy = 17
 energy = initial_energy  # Starting energy level
 start_ticks = pygame.time.get_ticks()  # Start time for timer
@@ -68,19 +69,23 @@ def render_digrafos_euler_1(screen, font):
     from ui.utils.fonts import font_small_buttons
     global back_button_clicked_digrafos_euler, start_button_clicked_digrafos_euler, restart_button_clicked_digrafos_euler,\
         timer_started, start_time, path, start_node, positions, current_node, energy, won_level,\
-        flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler
+        flower, missing_edges, background_image_win, remaining_time, main_menu_button_clicked_digrafos_euler, lost_level
 
     current_time = pygame.time.get_ticks()
     if won_level:
         background_image_win = pygame.image.load("assets/final-bg/d-euler.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
+        render_playground_dialogue(screen, 'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/d-euler.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
+        render_playground_dialogue(screen,
+                                   "Restore the plant 'Spyx' by solving the Euler path before the timer runs out.\n- You must pass through ALL 8 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!",
+                                   font, 'neutral')
     else:
         background_image = pygame.image.load("assets/blur/d-euler.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -98,9 +103,13 @@ def render_digrafos_euler_1(screen, font):
 
     back_button_clicked_digrafos_euler = render_map_button(screen, font_small_buttons)
 
-    if not timer_started:
+    if lost_level:
+        restart_button_clicked_digrafos_euler = render_restart_button(screen, font_small_buttons, (800, 500))
+        render_playground_dialogue(screen,
+                                   "Beter luck next time",
+                                   font, 'angry')
+    elif not timer_started:
         start_button_clicked_digrafos_euler = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(150, 150), frame_count=74))
-
     else:
         # Render the graph and energy bar
         render_digraph(screen, G, font, remaining_time, visited_edges, start_node, end_node, positions, seeds)
@@ -116,8 +125,6 @@ def render_digrafos_euler_1(screen, font):
 
         render_counter(screen,font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed", frame_size=(90, 90), frame_count=74))
 
-        render_dialogue(screen, "Restore the plant 'Spyx' by solving the Euler path before the timer runs out.\n- You must pass through ALL 8 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!", font)
-
         if won_level:
             flower.update_animation()
             flower.draw(screen, 1490, 750)
@@ -130,6 +137,7 @@ def render_digrafos_euler_1(screen, font):
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
+        lost_level = True
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)  # Reset the color of nodes
 
@@ -182,9 +190,10 @@ def handle_digrafos_euler_1_keydown(event,go_to_map):
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
 def reset_nodes(path):
-    global current_node, G, seeds, missing_edges, visited_edges
+    global current_node, G, seeds, missing_edges, visited_edges, lost_level
     path.clear()
     current_node = None
+    lost_level = False
     visited_edges.clear()  # Reinicia las aristas visitadas
 
     seeds = {

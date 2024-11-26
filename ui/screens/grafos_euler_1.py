@@ -94,9 +94,6 @@ def render_grafos_euler_1(screen, font):
         screen.blit(background_image, (0, 0))
         start_time = pygame.time.get_ticks()
         remaining_time = 60000
-        render_playground_dialogue(screen,
-                                   "Beter luck next time",
-                                   font, 'angry')
 
     # Update energy based on remaining time
     if remaining_time > 0:
@@ -109,6 +106,9 @@ def render_grafos_euler_1(screen, font):
 
     if lost_level:
         restart_button_clicked_grafos_euler_1 = render_restart_button(screen, font_small_buttons, (800, 500))
+        render_playground_dialogue(screen,
+                                   "Beter luck next time",
+                                   font, 'angry')
     elif not timer_started:
         start_button_clicked_grafos_euler_1 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-1-seed/euler-1-seed", frame_size=(150, 150), frame_count=74))
     else:

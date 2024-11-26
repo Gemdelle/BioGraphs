@@ -3,7 +3,7 @@ import networkx as nx
 from core.screens import Screens
 from ui.utils.animated_bug import AnimatedBug
 from ui.utils.animated_sprite import AnimatedSprite
-from ui.screens.common.dialogue_renderer import render_dialogue
+from ui.screens.common.dialogue_renderer import render_dialogue, render_playground_dialogue
 from ui.screens.common.digraph_renderer import render_digraph
 from ui.screens.common.energy_timer_renderer import render_energy_and_timer
 from ui.screens.common.main_menu_button_renderer import render_main_menu_button
@@ -59,6 +59,7 @@ start_time = 0
 
 current_node = None
 won_level = False
+lost_level = False
 initial_energy = 17
 energy = initial_energy  # Energía inicial
 start_ticks = pygame.time.get_ticks()  # Tiempo de inicio
@@ -74,19 +75,23 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     from ui.utils.fonts import font_small_buttons
     global back_button_clicked_digrafos_hamilton_1, start_button_clicked_digrafos_hamilton_1,\
         restart_button_clicked_digrafos_hamilton_1, timer_started, start_time, path, start_node,\
-        positions, current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_digrafos_hamilton_1
+        positions, current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_digrafos_hamilton_1, lost_level
 
     current_time = pygame.time.get_ticks()
     if won_level:
         background_image_win = pygame.image.load("assets/final-bg/d-hamilton.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
+        render_playground_dialogue(screen, 'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/d-hamilton.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
+        render_playground_dialogue(screen,
+                                   "Restore the plant 'Uchya' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!",
+                                   font, 'neutral')
     else:
         background_image = pygame.image.load("assets/blur/d-hamilton.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -103,7 +108,12 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
     # Draw the "Back" button
     back_button_clicked_digrafos_hamilton_1 = render_map_button(screen, font_small_buttons)
 
-    if not timer_started:
+    if lost_level:
+        restart_button_clicked_digrafos_hamilton_1 = render_restart_button(screen, font_small_buttons, (800, 500))
+        render_playground_dialogue(screen,
+                                   "Beter luck next time",
+                                   font, 'angry')
+    elif not timer_started:
         start_button_clicked_digrafos_hamilton_1 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(150, 150), frame_count=74))
     else:
         # Renderizar el grafo con flechas
@@ -113,14 +123,12 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time)
 
         # Draw the "Restart" button
-        restart_button_clicked_grafos_euler_2 = render_restart_button(screen, font_small_buttons)
+        restart_button_clicked_digrafos_hamilton_1 = render_restart_button(screen, font_small_buttons)
 
         # Draw the "Main Menu" button
         main_menu_button_clicked_digrafos_hamilton_1 = render_main_menu_button(screen, font_small_buttons)
 
         render_counter(screen,font,missing_nodes,AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74))
-
-        render_dialogue(screen, "Restore the plant 'Uchya' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 8 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire digraph in order, REMEMBER the directions!", font)
 
         if won_level:
             flower.update_animation()
@@ -134,6 +142,7 @@ def render_digrafos_hamilton_1(screen, font, go_to_map, events):
         print("Time's up! You lost.")
         energy = initial_energy
         current_node = None
+        lost_level = True
         for node in G.nodes():
             G.nodes[node]['color'] = (0, 0, 0)
 
@@ -157,9 +166,10 @@ def handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level,is_screen_on_
         go_to_level(Screens.MAIN)
 
 def reset_nodes(path):
-    global current_node,G, seeds, missing_nodes
+    global current_node,G, seeds, missing_nodes,lost_level
     path.clear()
     current_node = None
+    lost_level = False
     seeds = {
     'A': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
     'B': AnimatedSprite(frame_path="./assets/giphs/seeds/d-hamilton-seed/d-hamilton-seed", frame_size=(90, 90), frame_count=74),
