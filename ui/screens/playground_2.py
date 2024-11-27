@@ -30,17 +30,28 @@ positions = {
 }
 
 clovers = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625),
-    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625)
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110),
+                        frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625)
 }
 
 for node, pos in positions.items():
@@ -72,20 +83,25 @@ main_menu_button_clicked_playground_2 = None
 
 
 def render_playground_2(screen, font):
-    global back_button_clicked_playground_2, restart_button_clicked_playground_2, main_menu_button_clicked_playground_2, timer_started, start_time, path, start_node, positions, current_node, energy
+    global back_button_clicked_playground_2, restart_button_clicked_playground_2, main_menu_button_clicked_playground_2, \
+        timer_started, start_time, path, start_node, positions, current_node, energy
     if won_level:
         background_image = pygame.image.load("./assets/playground-bg/final/bg-level-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         render_playground_dialogue(screen,
-                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to continue to the next level.',
+                                   'Congratulations, what a nice kite.\nPress "RESTART" to play again or "MAP" to '
+                                   'continue to the next level.',
                                    font, 'happy')
     else:
         background_image = pygame.image.load("./assets/playground-bg/initial/bg-level-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
         screen.blit(background_image, (0, 0))
         render_playground_dialogue(screen,
-                                   "Hello again! We can now build a leaf together. Let's solve this Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the letters to navigate the entire graph in order!",
+                                   "Hello again! We can now build a leaf together. Let's solve this Euler path.\n- "
+                                   "You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT edges.\n- You "
+                                   "can start anywhere, but must finish at the 4 leaf clover for luck.\nPress the "
+                                   "letters to navigate the entire graph in order!",
                                    font, 'neutral')
 
     # Render the graph and energy bar
@@ -100,7 +116,9 @@ def render_playground_2(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_2 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
+    render_counter(screen, font, missing_edges, AnimatedSprite(frame_path=
+                                                               "./assets/giphs/playground-node/clover/clover",
+                                                               frame_size=(90, 90), frame_count=626))
 
     render_sign(screen,'euler')
 
@@ -113,15 +131,18 @@ def handle_playground_2_mousedown(event, go_to_level, is_screen_on_focus):
     if not is_screen_on_focus:
         return
 
-    if back_button_clicked_playground_2 is not None and back_button_clicked_playground_2.collidepoint(event.pos):
+    if (back_button_clicked_playground_2 is not None and
+            back_button_clicked_playground_2.collidepoint(event.pos)):
         play_button('button.mp3')
         go_to_level(Screens.PLAYGROUND)
         reset_nodes(path)
-    elif restart_button_clicked_playground_2 is not None and restart_button_clicked_playground_2.collidepoint(event.pos):
+    elif (restart_button_clicked_playground_2 is not None and
+          restart_button_clicked_playground_2.collidepoint(event.pos)):
         play_button('button.mp3')
         timer_started = False
         reset_nodes(path)
-    elif main_menu_button_clicked_playground_2 is not None and main_menu_button_clicked_playground_2.collidepoint(event.pos):
+    elif (main_menu_button_clicked_playground_2 is not None and
+          main_menu_button_clicked_playground_2.collidepoint(event.pos)):
         play_button('button.mp3')
         reset_nodes(path)
         go_to_level(Screens.MAIN)
@@ -136,17 +157,28 @@ def reset_nodes(path):
     visited_edges.clear()
 
     clovers = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625),
-        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625)
+        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110),
+                            frame_count=625),
+        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'F': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'G': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'H': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'I': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'J': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'K': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625)
     }
 
     for node in G.nodes:

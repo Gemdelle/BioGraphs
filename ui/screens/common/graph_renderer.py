@@ -34,7 +34,6 @@ def draw_curved_line_doted(surface, color, start_pos, end_pos, dash_length=10, d
             current_length = 0  # Reinicia la longitud acumulada después de cada punto
 
 
-
 def draw_curved_line(surface, color, start_pos, end_pos, curve_intensity=50, line_width=2):
     # Ajuste de posición de control para mayor prominencia en la curva
     control_x = (start_pos[0] + end_pos[0]) / 2 + curve_intensity * 0.5  # Desplazamiento horizontal
@@ -53,6 +52,7 @@ def draw_curved_line(surface, color, start_pos, end_pos, curve_intensity=50, lin
         start_point = points[i]
         end_point = points[i + 1]
         pygame.draw.line(surface, color, start_point, end_point, line_width)
+
 
 def render_map_graph(screen, graph, positions, animated_nodes):
     # Dibuja bordes curvos y punteados
@@ -86,6 +86,7 @@ def render_graph(screen, G, font, path, positions, animated_nodes):
         # Dibuja el texto de cada nodo
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
+
 def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes, curve_intensities= {}):
     # Dibuja aristas curvadas y cambia de color si están en el camino
     for edge in G.edges():
@@ -102,6 +103,7 @@ def render_euler_graph(screen, G, font, visited_edges, positions, animated_nodes
 
         # Dibuja el texto de cada nodo
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
+
 
 def render_simple_node_graph(screen, G, font, visited_edges, positions, animated_nodes):
     # Dibujar aristas

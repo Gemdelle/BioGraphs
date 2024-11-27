@@ -17,26 +17,38 @@ from ui.utils.fonts import *
 G = nx.Graph()
 # restarle 60 a y
 positions = {
-    'A': (298, 295-60), 'B': (732, 245-60), 'C': (308, 533-60), 'D': (558, 514-60),
-    'E': (1070, 280-60), 'F': (708, 608-60), 'G': (929, 424-60), 'H': (1000, 620-60),
-    'I': (1480, 375-60), 'J': (1238, 477-60)
+    'A': (298, 295 - 60), 'B': (732, 245 - 60), 'C': (308, 533 - 60), 'D': (558, 514 - 60),
+    'E': (1070, 280 - 60), 'F': (708, 608 - 60), 'G': (929, 424 - 60), 'H': (1000, 620 - 60),
+    'I': (1480, 375 - 60), 'J': (1238, 477 - 60)
 }
 
 seeds = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-    'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130), frame_count=74)
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130),
+                     frame_count=74)
 }
 
-dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower-bw/euler-3-flower-bw", frame_size=(480, 480), frame_count=74)
-flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-3-flower/euler-3-flower", frame_size=(480, 480), frame_count=74)
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/euler-3-flower-bw/euler-3-flower-bw",
+                             frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/euler-3-flower/euler-3-flower", frame_size=(480, 480),
+                        frame_count=74)
 
 for node, pos in positions.items():
     G.add_node(node, pos=pos, color=(200, 0, 0))
@@ -48,7 +60,7 @@ edges = [
     ('G', 'I'),
     ('E', 'I'),
     ('F', 'G'),
-    ('E', 'F'), #6
+    ('E', 'F'),  # 6
     ('D', 'E'),
     ('D', 'F'),
     ('B', 'F'),
@@ -107,10 +119,12 @@ main_menu_button_clicked_grafos_euler_3 = None
 time_finishing_warning_done = False
 visited_edges = []
 
+
 def render_grafos_euler_3(screen, font):
     from ui.utils.fonts import font_small_buttons
-    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3,\
-        timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower,\
+    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, \
+        restart_button_clicked_grafos_euler_3, \
+        timer_started, start_time, path, start_node, positions, current_node, energy, won_level, flower, \
         missing_edges, remaining_time, main_menu_button_clicked_grafos_euler_3, lost_level, time_finishing_warning_done
 
     current_time = pygame.time.get_ticks()
@@ -118,7 +132,8 @@ def render_grafos_euler_3(screen, font):
         background_image_win = pygame.image.load("assets/final-bg/euler-3.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
-        render_dialogue(screen, 'Congratulations, you have restored the local flora.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
+        render_dialogue(screen, 'Congratulations, you have restored the local flora.\nPress "RESTART" '
+                                'to play again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/euler-3.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -126,8 +141,11 @@ def render_grafos_euler_3(screen, font):
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
         render_dialogue(screen,
-                                   "Restore the plant 'Erlem' by solving the Euler path before the timer runs out.\n- You must pass through ALL 16 edges.\n- You can repeat nodes, but NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!",
-                                   font, 'neutral')
+                        "Restore the plant 'Erlem' by solving the Euler path before the timer "
+                        "runs out.\n- You must pass through ALL 16 edges.\n- You can repeat nodes, but "
+                        "NOT edges.\n- You can start anywhere, but must finish at the bug node so I can eat it.\n"
+                        "Press the letters to navigate the entire graph in order!",
+                        font, 'neutral')
     else:
         background_image = pygame.image.load("assets/blur/euler-1.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -148,10 +166,11 @@ def render_grafos_euler_3(screen, font):
     if lost_level:
         restart_button_clicked_grafos_euler_3 = render_restart_button(screen, font_small_buttons, (800, 500))
         render_dialogue(screen,
-                                   "Beter luck next time...",
-                                   font, 'angry')
+                        "Beter luck next time...",
+                        font, 'angry')
     elif not timer_started:
-        start_button_clicked_grafos_euler_3 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(150, 150), frame_count=74))
+        start_button_clicked_grafos_euler_3 = render_start_button(screen, font_start, AnimatedSprite(
+            frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(150, 150), frame_count=74))
     else:
         # Render the graph and energy bar
         render_euler_graph(screen, G, font, visited_edges, positions, seeds, curve_intensities)
@@ -169,7 +188,9 @@ def render_grafos_euler_3(screen, font):
         # Draw the "Main Menu" button
         main_menu_button_clicked_grafos_euler_3 = render_main_menu_button(screen, font_small_buttons)
 
-        render_counter(screen,font,missing_edges,AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74))
+        render_counter(screen, font, missing_edges,
+                       AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                                      frame_count=74))
 
         if won_level:
             flower.update_animation()
@@ -190,7 +211,8 @@ def render_grafos_euler_3(screen, font):
 
 
 def handle_grafos_euler_3_mousedown(event, go_to_level, is_screen_on_focus):
-    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, restart_button_clicked_grafos_euler_3,\
+    global back_button_clicked_grafos_euler_3, start_button_clicked_grafos_euler_3, \
+        restart_button_clicked_grafos_euler_3, \
         timer_started, main_menu_button_clicked_grafos_euler_3
 
     if not is_screen_on_focus:
@@ -200,19 +222,22 @@ def handle_grafos_euler_3_mousedown(event, go_to_level, is_screen_on_focus):
         play_button('button.mp3')
         go_to_level(Screens.MAP)
         reset_nodes(path)
-    elif restart_button_clicked_grafos_euler_3 is not None and restart_button_clicked_grafos_euler_3.collidepoint(event.pos):
+    elif restart_button_clicked_grafos_euler_3 is not None and restart_button_clicked_grafos_euler_3.collidepoint(
+            event.pos):
         play_button('button.mp3')
         reset_nodes(path)
-    elif start_button_clicked_grafos_euler_3 is not None and start_button_clicked_grafos_euler_3.collidepoint(event.pos):
+    elif start_button_clicked_grafos_euler_3 is not None and start_button_clicked_grafos_euler_3.collidepoint(
+            event.pos):
         play_button('button.mp3')
         timer_started = True
-    elif main_menu_button_clicked_grafos_euler_3 is not None and main_menu_button_clicked_grafos_euler_3.collidepoint(event.pos):
+    elif main_menu_button_clicked_grafos_euler_3 is not None and main_menu_button_clicked_grafos_euler_3.collidepoint(
+            event.pos):
         play_button('button.mp3')
         reset_nodes(path)
         go_to_level(Screens.MAIN)
 
 
-def handle_grafos_euler_3_keydown(event,go_to_map):
+def handle_grafos_euler_3_keydown(event, go_to_map):
     global current_node, seeds, won_level, G, missing_edges, visited_edges
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
@@ -221,18 +246,21 @@ def handle_grafos_euler_3_keydown(event,go_to_map):
                 play_button('node.mp3')
                 current_node = key
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
+                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed",
+                                                     frame_size=(90, 90), frame_count=74)
             elif key in G.neighbors(current_node):
                 # Verifica si la arista entre `current_node` y `key` ya ha sido visitada
                 edge = (current_node, key)
                 if edge not in visited_edges and (key, current_node) not in visited_edges:
                     visited_edges.append(edge)  # Marca la arista como visitada
                     path.append(key)  # Agrega el nodo al camino
-                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
+                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed",
+                                                         frame_size=(90, 90), frame_count=74)
                     play_button('node.mp3')
                     current_node = key
                     missing_edges -= 1
-                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74)
+                    seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds/euler-3-seed/euler-3-seed",
+                                                         frame_size=(90, 90), frame_count=74)
                     # Revisa si completaste el camino de Euler
                     if current_node == end_node and len(visited_edges) == len(G.edges):
                         play_button('victory.mp3')
@@ -241,8 +269,10 @@ def handle_grafos_euler_3_keydown(event,go_to_map):
             else:
                 print("Movimiento no permitido: no se puede usar la misma arista dos veces.")
 
+
 def reset_nodes(path):
-    global current_node, G, seeds, missing_edges, visited_edges, won_level,timer_started,lost_level, remaining_time, time_finishing_warning_done
+    global current_node, G, seeds, missing_edges, visited_edges, won_level, timer_started, lost_level, remaining_time, \
+        time_finishing_warning_done
     path.clear()
     current_node = None
     remaining_time = None
@@ -253,16 +283,26 @@ def reset_nodes(path):
     visited_edges.clear()
 
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90), frame_count=74),
-        'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130), frame_count=74)
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'H': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'I': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/euler-3-seed/euler-3-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'J': AnimatedBug(-15, -10, frame_path="./assets/giphs/bugs/bug-euler-3/euler-3-bug", frame_size=(130, 130),
+                         frame_count=74)
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)

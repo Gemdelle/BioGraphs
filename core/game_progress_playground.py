@@ -26,6 +26,7 @@ game_playground_progress = {
     }
 }
 
+
 def complete_level(level_name):
     game_playground_progress[level_name]['completed'] = True
     next_level = game_playground_progress[level_name]['goesTo']

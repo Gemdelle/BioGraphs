@@ -49,7 +49,6 @@ class MovingImage:
         else:
             self.y = random.randint(int(screen_height * 0.7), screen_height)  # 20% inferior
 
-
         self.speed = random.uniform(1, 2)  # Random speed for each image
         self.angle = random.uniform(0, 2 * math.pi)
 
@@ -71,7 +70,6 @@ class MovingImage:
 
     def draw(self, screen):
         screen.blit(self.image, (self.x, self.y))
-
 
 
 def render_main_screen(screen, title_font, font, moving_images):

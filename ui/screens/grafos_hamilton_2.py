@@ -16,28 +16,43 @@ from ui.utils.fonts import *
 
 G = nx.Graph()
 positions = {
-    'A': (507,397-60), 'B': (379,575-60), 'C': (598,274-60), 'D': (765,496-60),
-    'E': (230,465-60), 'F': (334,304-60), 'G': (1080,268-60), 'H': (805,314-60),
-    'I': (1015,615-60), 'J': (1376,320-60), 'K': (1138,437-60), 'L': (1225,632-60),
+    'A': (507, 397 - 60), 'B': (379, 575 - 60), 'C': (598, 274 - 60), 'D': (765, 496 - 60),
+    'E': (230, 465 - 60), 'F': (334, 304 - 60), 'G': (1080, 268 - 60), 'H': (805, 314 - 60),
+    'I': (1015, 615 - 60), 'J': (1376, 320 - 60), 'K': (1138, 437 - 60), 'L': (1225, 632 - 60),
 }
 
 seeds = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-    'L': AnimatedBug(x_position_extra=0, y_position_extra=-10,frame_path="./assets/giphs/bugs/bug-hamilton-2/hamilton-2-bug", frame_size=(120, 120), frame_count=74)
+    'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                        frame_count=74),
+    'L': AnimatedBug(x_position_extra=0, y_position_extra=-10,
+                     frame_path="./assets/giphs/bugs/bug-hamilton-2/hamilton-2-bug", frame_size=(120, 120),
+                     frame_count=74)
 }
 
-dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/hamilton-2-flower-bw/hamilton-2-flower-bw", frame_size=(480, 480), frame_count=74)
-flower = AnimatedSprite(frame_path="./assets/giphs/flowers/hamilton-2-flower/hamilton-2-flower", frame_size=(480, 480), frame_count=74)
+dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/hamilton-2-flower-bw/hamilton-2-flower-bw",
+                             frame_size=(480, 480), frame_count=74)
+flower = AnimatedSprite(frame_path="./assets/giphs/flowers/hamilton-2-flower/hamilton-2-flower", frame_size=(480, 480),
+                        frame_count=74)
 
 missing_nodes = len(positions)
 
@@ -77,18 +92,21 @@ main_menu_button_clicked_grafos_hamilton_2 = None
 
 time_finishing_warning_done = False
 
+
 def render_grafos_hamilton_2(screen, font):
     from ui.utils.fonts import font_small_buttons
-    global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2,\
-        restart_button_clicked_grafos_hamilton_2, timer_started, start_time, path, start_node, positions,\
-        current_node, energy, won_level, flower, missing_nodes, remaining_time, main_menu_button_clicked_grafos_hamilton_2, lost_level, time_finishing_warning_done
+    global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2, \
+        restart_button_clicked_grafos_hamilton_2, timer_started, start_time, path, start_node, positions, \
+        current_node, energy, won_level, flower, missing_nodes, remaining_time, \
+        main_menu_button_clicked_grafos_hamilton_2, lost_level, time_finishing_warning_done
 
     current_time = pygame.time.get_ticks()
     if won_level:
         background_image_win = pygame.image.load("assets/final-bg/hamilton-2.png").convert()
         background_image_win = pygame.transform.scale(background_image_win, (1710, 1034))
         screen.blit(background_image_win, (0, 0))
-        render_dialogue(screen, 'Congratulations, you have restored the local flora.\nPress "RESTART" to play again or "MAP" to continue to the next level.', font, 'happy')
+        render_dialogue(screen, 'Congratulations, you have restored the local flora.\nPress "RESTART" to play '
+                                'again or "MAP" to continue to the next level.', font, 'happy')
     elif timer_started:
         background_image = pygame.image.load("assets/initial-bg/hamilton-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -96,8 +114,11 @@ def render_grafos_hamilton_2(screen, font):
         elapsed_time = current_time - start_time
         remaining_time = max(0, 60000 - elapsed_time)  # 1 minute (60000 ms)
         render_dialogue(screen,
-                                   "Restore the plant 'Erlem' by solving the Hamilton path before the timer runs out.\n- You must pass through ALL 12 nodes.\n- You can repeat edges, but NOT nodes.\n- You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters to navigate the entire graph in order!",
-                                   font, 'neutral')
+                        "Restore the plant 'Erlem' by solving the Hamilton path before the timer runs "
+                        "out.\n- You must pass through ALL 12 nodes.\n- You can repeat edges, but NOT nodes.\n- "
+                        "You can start anywhere, but must finish at the bug node so I can eat it.\nPress the letters "
+                        "to navigate the entire graph in order!",
+                        font, 'neutral')
     else:
         background_image = pygame.image.load("assets/blur/hamilton-2.png").convert()
         background_image = pygame.transform.scale(background_image, (1710, 1034))
@@ -117,10 +138,11 @@ def render_grafos_hamilton_2(screen, font):
     if lost_level:
         restart_button_clicked_grafos_hamilton_2 = render_restart_button(screen, font_small_buttons, (800, 500))
         render_dialogue(screen,
-                                   "Beter luck next time...",
-                                   font, 'angry')
+                        "Beter luck next time...",
+                        font, 'angry')
     elif not timer_started:
-        start_button_clicked_grafos_hamilton_2 = render_start_button(screen, font_start, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(150, 150), frame_count=74))
+        start_button_clicked_grafos_hamilton_2 = render_start_button(screen, font_start, AnimatedSprite(
+            frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(150, 150), frame_count=74))
     else:
         # Render the graph and energy bar
         render_graph(screen, G, font, path, positions, seeds)
@@ -138,7 +160,9 @@ def render_grafos_hamilton_2(screen, font):
         # Draw the "Main Menu" button
         main_menu_button_clicked_grafos_hamilton_2 = render_main_menu_button(screen, font_small_buttons)
 
-        render_counter(screen,font,missing_nodes, AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74))
+        render_counter(screen, font, missing_nodes,
+                       AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed",
+                                      frame_size=(90, 90), frame_count=74))
 
         if won_level:
             flower.update_animation()
@@ -159,30 +183,35 @@ def render_grafos_hamilton_2(screen, font):
 
 
 def handle_grafos_hamilton_2_mousedown(event, go_to_level, is_screen_on_focus):
-    global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2,\
-        restart_button_clicked_grafos_hamilton_2, timer_started, main_menu_button_clicked_grafos_hamilton_2, click_locked, timer_started
+    global back_button_clicked_grafos_hamilton_2, start_button_clicked_grafos_hamilton_2, \
+        restart_button_clicked_grafos_hamilton_2, timer_started, main_menu_button_clicked_grafos_hamilton_2, \
+        click_locked, timer_started
 
     if not is_screen_on_focus:
         return
 
-    if back_button_clicked_grafos_hamilton_2 is not None and back_button_clicked_grafos_hamilton_2.collidepoint(event.pos):
+    if back_button_clicked_grafos_hamilton_2 is not None and back_button_clicked_grafos_hamilton_2.collidepoint(
+            event.pos):
         play_button('button.mp3')
         go_to_level(Screens.MAP)
         reset_nodes(path)
-    elif restart_button_clicked_grafos_hamilton_2 is not None and restart_button_clicked_grafos_hamilton_2.collidepoint(event.pos):
+    elif restart_button_clicked_grafos_hamilton_2 is not None and restart_button_clicked_grafos_hamilton_2.collidepoint(
+            event.pos):
         play_button('button.mp3')
         reset_nodes(path)
-    elif start_button_clicked_grafos_hamilton_2 is not None and start_button_clicked_grafos_hamilton_2.collidepoint(event.pos):
+    elif start_button_clicked_grafos_hamilton_2 is not None and start_button_clicked_grafos_hamilton_2.collidepoint(
+            event.pos):
         play_button('button.mp3')
         timer_started = True
-    elif main_menu_button_clicked_grafos_hamilton_2 is not None and main_menu_button_clicked_grafos_hamilton_2.collidepoint(event.pos):
+    elif main_menu_button_clicked_grafos_hamilton_2 is not None and main_menu_button_clicked_grafos_hamilton_2.collidepoint(
+            event.pos):
         play_button('button.mp3')
         reset_nodes(path)
         go_to_level(Screens.MAIN)
 
 
 def reset_nodes(path):
-    global current_node,G, seeds, missing_nodes,  won_level,timer_started,lost_level, remaining_time, time_finishing_warning_done
+    global current_node, G, seeds, missing_nodes, won_level, timer_started, lost_level, remaining_time, time_finishing_warning_done
     path.clear()
     current_node = None
     remaining_time = None
@@ -191,25 +220,39 @@ def reset_nodes(path):
     lost_level = False
     time_finishing_warning_done = False
     seeds = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74),
-        'L': AnimatedBug(x_position_extra=0, y_position_extra=-10,frame_path="./assets/giphs/bugs/bug-hamilton-2/hamilton-2-bug", frame_size=(120, 120), frame_count=74)
+        'A': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'B': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'C': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'E': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'G': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'H': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'I': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'J': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'K': AnimatedSprite(frame_path="./assets/giphs/seeds/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                            frame_count=74),
+        'L': AnimatedBug(x_position_extra=0, y_position_extra=-10,
+                         frame_path="./assets/giphs/bugs/bug-hamilton-2/hamilton-2-bug", frame_size=(120, 120),
+                         frame_count=74)
     }
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
 
     missing_nodes = len(positions)
 
-def handle_grafos_hamilton_2_keydown(event,go_to_map):
+
+def handle_grafos_hamilton_2_keydown(event, go_to_map):
     global current_node, seeds, won_level, missing_nodes
     if event.type == pygame.KEYDOWN:
         key = pygame.key.name(event.key).upper()
@@ -220,14 +263,18 @@ def handle_grafos_hamilton_2_keydown(event,go_to_map):
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74)
+                seeds[current_node] = AnimatedSprite(
+                    frame_path="./assets/giphs/seeds-b&w/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                    frame_count=74)
             elif key in G.neighbors(current_node):
                 G.nodes[current_node]['color'] = (0, 100, 0)
                 play_button('node.mp3')
                 current_node = key
                 G.nodes[current_node]['color'] = (255, 0, 0)
                 path.append(current_node)
-                seeds[current_node] = AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90), frame_count=74)
+                seeds[current_node] = AnimatedSprite(
+                    frame_path="./assets/giphs/seeds-b&w/hamilton-2-seed/hamilton-2-seed", frame_size=(90, 90),
+                    frame_count=74)
                 missing_nodes -= 1
 
             if current_node == end_node and len(path) == len(G.nodes):

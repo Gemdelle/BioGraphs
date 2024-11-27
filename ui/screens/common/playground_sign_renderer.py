@@ -11,6 +11,7 @@ def render_sign(screen, graph):
     # Dibujar la imagen del botón
     screen.blit(sign_image, sign_image_rect)
 
+
 def render_hamilton_sign(screen):
     # Cargar y ajustar la imagen del botón
     sign_image = pygame.image.load("./assets/signs/euler.png").convert_alpha()

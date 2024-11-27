@@ -35,6 +35,8 @@ node_screens = {
     'E': Screens.PLAYGROUND_4,
     'F': Screens.PLAYGROUND_5
 }
+
+
 def render_playground(screen, time):
     global main_menu_button_clicked_playground, edges, nodes
     # Fondo de mapa con movimiento flotante
@@ -73,12 +75,16 @@ def render_playground(screen, time):
     selected_frog.update_animation()
     selected_frog.draw(screen, nodes['Frog']['pos'][0], nodes['Frog']['pos'][1])
 
-    clover = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(130, 130), frame_count=625)
-    clover_current = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(130, 130), frame_count=625)
-    clover_dead = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-black/clover-black", frame_size=(130, 130), frame_count=625)
+    clover = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(130, 130),
+                            frame_count=625)
+    clover_current = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(130, 130),
+                                    frame_count=625)
+    clover_dead = AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-black/clover-black",
+                                 frame_size=(130, 130), frame_count=625)
+
     for node, data in nodes.items():
         if node != 'Frog':
-            if (game_playground_progress.get(node) is not None and game_playground_progress.get(node)['completed']):
+            if game_playground_progress.get(node) is not None and game_playground_progress.get(node)['completed']:
                 # Renderizar el clover en el centro del nodo
                 clover.update_animation()
                 clover.draw(screen,data['pos'][0],data['pos'][1])
@@ -87,7 +93,7 @@ def render_playground(screen, time):
                 letter_text = font.render(node, True, (255, 255, 255))
                 letter_rect = letter_text.get_rect(center=data['pos'])
                 screen.blit(letter_text, letter_rect)
-            elif (game_playground_progress.get(node) is not None and game_playground_progress.get(node)['enabled']):
+            elif game_playground_progress.get(node) is not None and game_playground_progress.get(node)['enabled']:
                 # Renderizar el clover en el centro del nodo
                 clover_current.update_animation()
                 clover_current.draw(screen, data['pos'][0], data['pos'][1])
@@ -111,6 +117,7 @@ def render_playground(screen, time):
 
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground = render_playground_main_menu_button(screen, font_small_buttons, (1500, 30))
+
 
 def draw_curved_line(surface, color, start_pos, end_pos, dash_length=10):
     control_x = (start_pos[0] + end_pos[0]) / 2

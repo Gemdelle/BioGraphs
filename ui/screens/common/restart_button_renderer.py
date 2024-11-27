@@ -19,6 +19,7 @@ def render_restart_button(screen, font_buttons, position=(1500, 90)):
 
     return restart_button_rect
 
+
 def render_playground_restart_button(screen, font_buttons):
     # Carga y ajusta la imagen del botón
     button_image = pygame.image.load("./assets/playground-button.png").convert_alpha()

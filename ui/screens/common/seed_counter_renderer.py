@@ -1,5 +1,6 @@
 import pygame
 
+
 def render_counter(screen, font, missing_element, seed):
     # Cargar y ajustar la imagen del botón
     counter_image = pygame.image.load("./assets/seed-counter.png").convert_alpha()

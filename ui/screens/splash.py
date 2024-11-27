@@ -1,6 +1,5 @@
 import pygame
 
-
 start_scale = 1
 target_scale = 1.4
 total_duration = 2
@@ -9,6 +8,7 @@ frames_per_second = 60
 scale_change_per_frame = (target_scale - start_scale) / (total_duration * frames_per_second)
 
 current_scale = start_scale
+
 
 def render_splash(screen, go_to_map):
     global current_scale

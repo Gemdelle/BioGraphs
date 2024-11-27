@@ -1,6 +1,7 @@
 import os
 import pygame
 
+
 class FrogNeutral:
     def __init__(self):
         self.frames = {}

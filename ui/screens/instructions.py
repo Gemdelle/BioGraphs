@@ -41,6 +41,8 @@ circle_x = text_box_x - circle_radius - 20
 circle_y = text_box_y + text_box_height // 2
 is_instructions_screen_rendered = False
 main_menu_button_clicked_instructions = None
+
+
 def render_instructions(screen):
     global is_instructions_screen_rendered, main_menu_button_clicked_instructions, font
     background_image = pygame.image.load("./assets/tutorial-background.png").convert()

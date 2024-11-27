@@ -2,6 +2,7 @@ import os
 import pygame
 from ui.flowers.common import load_frame, update_animation, draw
 
+
 class Euler3FlowerBlack:
     def __init__(self):
         self.frames = {}

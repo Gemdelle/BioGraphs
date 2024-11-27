@@ -23,8 +23,6 @@ from ui.screens.common.main_menu_button_renderer import render_main_menu_button
 main_menu_button_clicked_map = None
 G = nx.Graph()
 
-
-
 nodes = {
     'Erlem': {'pos': (640, 400-60), 'color': (255, 255, 255)},  # Yellow: GRAFOS_EULER_1
     'Ulfex': {'pos': (1094, 510-60), 'color': (255, 255, 255)},  # Light Blue: GRAFOS_HAMILTON_1
@@ -45,8 +43,8 @@ for node, pos in nodes.items():
     G.add_node(node, pos=pos, color=(0, 0, 0))
 
 edges = [
-    ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),('Frog', 'Spyx'),('Spyx', 'EII'),('EII', 'EIII'),('Frog', 'Uchya'),
-    ('Uchya', 'HII'),('HII', 'HIII')
+    ('Frog', 'Erlem'),('Erlem', 'Frood'),('Frood', 'Orrox'),('Frog', 'Ulfex'),('Ulfex', 'Twyle'),('Twyle', 'Bloona'),
+    ('Frog', 'Spyx'),('Spyx', 'EII'),('EII', 'EIII'),('Frog', 'Uchya'), ('Uchya', 'HII'),('HII', 'HIII')
 ]
 
 for edge in edges:
@@ -68,13 +66,16 @@ node_screens = {
     # 'M': Screens.PROFILE
 }
 
+
 def render_map(screen, go_to_level):
     global main_menu_button_clicked_map, game_map_progress
     selected_frog = get_selected_pet(size=(150, 150))
     seeds = {
-        'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(), 'Bloona': Hamilton3FlowerBlack(),
-        'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(), 'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack(), 'Frog': selected_frog
+        'Erlem': Euler1FlowerBlack(), 'Ulfex': Hamilton1FlowerBlack(), 'Twyle': Hamilton2FlowerBlack(),
+        'Bloona': Hamilton3FlowerBlack(), 'Frood': Euler2FlowerBlack(), 'Orrox': Euler3FlowerBlack(),
+        'Spyx': DEuler1FlowerBlack(), 'Uchya': DHamilton1FlowerBlack(), 'Frog': selected_frog
     }
+
     background_image = pygame.image.load("assets/map.png").convert()
     background_image = pygame.transform.scale(background_image, (1710, 1034))
     screen.blit(background_image, (0,0))
@@ -108,7 +109,7 @@ def render_map(screen, go_to_level):
     for node, data in nodes.items():
         if node != 'Frog':
             # Dibujar fondo del nodo
-            if (game_map_progress.get(node) is not None and game_map_progress.get(node)['completed']):
+            if game_map_progress.get(node) is not None and game_map_progress.get(node)['completed']:
                 img_rect = done_node_image.get_rect(center=data['pos'])
                 screen.blit(done_node_image, img_rect)
                 letter_text_color = (0, 0, 0)
@@ -118,7 +119,8 @@ def render_map(screen, go_to_level):
                 letter_text_color = (255, 255, 255)
             
             # Renderizar la letra del nodo, excepto los niveles de Digrafo que no existen
-            letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True, letter_text_color)
+            letter_text = font.render(node if node not in ('EII', 'EIII', 'HII', 'HIII') else '?', True,
+                                      letter_text_color)
             letter_rect = letter_text.get_rect(center=data['pos'])
             screen.blit(letter_text, letter_rect)
 

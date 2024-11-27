@@ -1,5 +1,6 @@
 import pygame
 
+
 def render_energy_and_timer(screen, font, initial_energy, energy, timer_duration, remaining_time):
     # Cargar imágenes dentro de la función
     background_bar_img = pygame.image.load("./assets/timer/background-bar.png").convert_alpha()

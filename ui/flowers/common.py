@@ -37,7 +37,3 @@ def load_frame(flower, index):
             flower.frames[index] = surf
         else:
             flower.frames[index] = None  # Marcar como None si el frame no existe
-
-
-
-

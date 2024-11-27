@@ -4,6 +4,7 @@ import pygame
 # Variable global para rastrear la música actual
 current_music = None
 
+
 def play_sound(sound_name, volume=1.0):
     """
     Reproduce un archivo de sonido desde la carpeta 'assets/sounds/' sin reiniciar si ya está sonando.
@@ -33,7 +34,6 @@ def play_sound(sound_name, volume=1.0):
         current_music = sound_name  # Actualizar la música actual
     except pygame.error as e:
         print(f"Error al reproducir el sonido {sound_name}: {e}")
-
 
 
 def play_button(sound_name):

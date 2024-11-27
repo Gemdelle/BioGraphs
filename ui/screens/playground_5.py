@@ -20,11 +20,16 @@ positions = {
 }
 
 clovers = {
-    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625),
-    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625)
+    'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625),
+    'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110),
+                        frame_count=625),
+    'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                        frame_count=625)
 }
 
 for node, pos in positions.items():
@@ -73,7 +78,7 @@ def render_playground_5(screen, font):
         screen.blit(background_image, (0, 0))
         render_playground_dialogue(screen,
                                    "Now, be careful with the house, it can be tricky... Let's solve it with an "
-                                   "Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT "
+                                   "Euler path.\n- You must pass through ALL 13 edges.\n- You can repeat nodes, but NOT"
                                    "edges.\n- You can start anywhere, but must finish at the 4 leaf clover for luck."
                                    "\nPress the letters to navigate the entire graph in order!", font, 'neutral')
 
@@ -89,11 +94,13 @@ def render_playground_5(screen, font):
     # Draw the "Main Menu" button
     main_menu_button_clicked_playground_5 = render_playground_main_menu_button(screen, font_small_buttons)
 
-    render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover", frame_size=(90, 90), frame_count=626))
+    render_counter(screen, font, missing_edges, AnimatedSprite(frame_path="./assets/giphs/playground-node/clover/clover",
+                                                               frame_size=(90, 90), frame_count=626))
 
     render_sign(screen,'euler')
 
     return False
+
 
 def handle_playground_5_mousedown(event, go_to_level, is_screen_on_focus):
     global back_button_clicked_playground_5, restart_button_clicked_playground_5, timer_started,\
@@ -114,6 +121,7 @@ def handle_playground_5_mousedown(event, go_to_level, is_screen_on_focus):
         reset_nodes(path)
         go_to_level(Screens.MAIN)
 
+
 def reset_nodes(path):
     global current_node, G, clovers, missing_edges, visited_edges, won_level, lost_level
     path.clear()
@@ -123,16 +131,22 @@ def reset_nodes(path):
     visited_edges.clear()
 
     clovers = {
-        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110), frame_count=625),
-        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110), frame_count=625)
+        'A': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'B': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'C': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'D': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-b&w/clover", frame_size=(110, 110),
+                            frame_count=625),
+        'E': AnimatedSprite(frame_path="./assets/giphs/playground-node/clover-end/clover-end", frame_size=(110, 110),
+                            frame_count=625)
     }
 
     for node in G.nodes:
         G.nodes[node]['color'] = (0, 0, 0)
     missing_edges = len(edges)
+
 
 def handle_playground_5_keydown(event):
     global current_node, clovers, won_level, G, missing_edges, visited_edges

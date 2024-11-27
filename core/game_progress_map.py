@@ -41,6 +41,7 @@ game_map_progress = {
     },
 }
 
+
 def complete_level(level_name):
     game_map_progress[level_name]['completed'] = True
     next_level = game_map_progress[level_name]['goesTo']

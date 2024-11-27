@@ -2,6 +2,7 @@ import pygame
 
 from ui.utils.config import SCREEN_WIDTH, SCREEN_HEIGHT
 
+
 def render_start_button(screen, font, seed):
     # Cargar y ajustar la imagen del botón
     start_button_image = pygame.image.load("./assets/start-button.png").convert_alpha()

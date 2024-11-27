@@ -42,9 +42,9 @@ from ui.screens.playground import render_playground, handle_playground_mousedown
 from ui.screens.select_your_pet import render_select_your_pet_screen
 from ui.utils.video import Video
 
-pygame.init()
-
 from ui.utils.fonts import title_font, font
+
+pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
@@ -55,6 +55,7 @@ mousedown_processing = False
 screen_selected = Screens.SELECT_YOUR_PET  # Start screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000
+
 
 # FUNCTIONS
 def go_to_map():
@@ -88,8 +89,6 @@ moving_tadpoles = [MovingImage(SCREEN_WIDTH, SCREEN_HEIGHT) for _ in range(5)]
 splash_video = Video(SCREEN_WIDTH, SCREEN_HEIGHT, "./assets/splash/splash.mp4")
 
 
-
-
 # Main game loop
 while running:
     for event in pygame.event.get():
@@ -120,7 +119,8 @@ while running:
                 handle_map_mousedown(go_to_level, screen_selected==Screens.MAP)
                 handle_playground_mousedown(go_to_level, screen_selected==Screens.PLAYGROUND)
                 handle_grafos_digrafos_euler_mousedown(event, go_to_level, screen_selected==Screens.DIGRAFOS_EULER_1)
-                handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level, screen_selected==Screens.DIGRAFOS_HAMILTON_1)
+                handle_grafos_digrafos_hamilton_1_mousedown(event, go_to_level, screen_selected==Screens.
+                                                            DIGRAFOS_HAMILTON_1)
                 handle_grafos_euler_1_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_EULER_1)
                 handle_grafos_euler_2_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_EULER_2)
                 handle_grafos_euler_3_mousedown(event, go_to_level, screen_selected==Screens.GRAFOS_EULER_3)

@@ -42,6 +42,7 @@ def render_digraph(screen, G, font, remaining_time, visited_edges , start_node, 
         animated_nodes[node].draw(screen, pos[0], pos[1])
         screen.blit(font.render(node, True, (255, 255, 255)), (pos[0] - 15, pos[1] - 15))
 
+
 def get_node_at_position(G, pos):
     for node, data in G.nodes(data=True):
         node_pos = data['pos']

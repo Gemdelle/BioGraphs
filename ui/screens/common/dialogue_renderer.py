@@ -17,6 +17,7 @@ circle_radius = 145
 circle_x = text_box_x - 10
 circle_y = text_box_y + text_box_height // 2
 
+
 def render_dialogue(screen, text, font, avatar_mood="neutral"):
     # Cargar las imágenes de los marcos
     dialogue_frame = pygame.image.load("./assets/dialogue/dialogue-frame.png").convert_alpha()
@@ -54,6 +55,7 @@ def render_dialogue(screen, text, font, avatar_mood="neutral"):
         prompt_rect = prompt_text.get_rect(center=(text_box_x + text_box_width // 2 + x_offset, y_offset))
         screen.blit(prompt_text, prompt_rect)
         y_offset += font.get_height()  # Mover hacia abajo para la siguiente línea
+
 
 def render_tutorial_dialogue(screen, text, font, avatar_mood="neutral"):
     # Cargar las imágenes de los marcos

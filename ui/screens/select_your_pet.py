@@ -16,6 +16,7 @@ BUTTON_SIZE = (300, 70)  # Size for the button
 
 selected_character = None
 
+
 def render_select_your_pet_screen(screen, go_to_level):
     # Song
     # play_sound('menu-background.mp3')
@@ -58,7 +59,6 @@ def render_select_your_pet_screen(screen, go_to_level):
     text_title_surface = font_title.render('S E L E C T   Y O U R   P E T', True, (255, 255, 255))
     text_title_rect = text_title_surface.get_rect(center=(SCREEN_WIDTH // 2, 250))
     screen.blit(text_title_surface, text_title_rect)
-
 
     # Render each character
     for idx, character in enumerate(characters):

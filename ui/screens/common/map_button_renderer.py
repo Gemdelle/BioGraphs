@@ -19,6 +19,7 @@ def render_map_button(screen, font_buttons):
 
     return button_rect
 
+
 def render_playground_map_button(screen, font_buttons):
     # Carga y ajusta la imagen del botón
     button_image = pygame.image.load("./assets/playground-button.png").convert_alpha()
