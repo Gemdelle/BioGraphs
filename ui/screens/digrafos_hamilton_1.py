@@ -64,7 +64,7 @@ for edge in edges:
 
 # Variables para el juego
 start_node = None
-end_node = 'J'
+end_node = 'H'
 path = []
 timer_started = False
 start_time = 0

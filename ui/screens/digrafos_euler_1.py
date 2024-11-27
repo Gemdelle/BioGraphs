@@ -28,13 +28,13 @@ seeds = {
                         frame_count=74),
     'C': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90),
                         frame_count=74),
-    'D': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90),
-                        frame_count=74),
+    'D': AnimatedBug(x_position_extra=-30, y_position_extra=-5,
+                     frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug",
+                     frame_size=(120, 120), frame_count=74),
     'E': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90),
                         frame_count=74),
-    'F': AnimatedBug(x_position_extra=-30, y_position_extra=-5,
-                     frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug",
-                     frame_size=(120, 120), frame_count=74)
+    'F': AnimatedSprite(frame_path="./assets/giphs/seeds-b&w/d-euler-seed/d-euler-seed", frame_size=(90, 90),
+                        frame_count=74)
 }
 
 dead_flower = AnimatedSprite(frame_path="./assets/giphs/flowers-bw/d-euler-flower-bw/d-euler-flower-bw",
@@ -246,11 +246,11 @@ def reset_nodes(path):
                             frame_count=74),
         'C': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90),
                             frame_count=74),
-        'D': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90),
+        'D': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug.png", frame_size=(90, 90),
                             frame_count=74),
         'E': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90),
                             frame_count=74),
-        'F': AnimatedSprite(frame_path="./assets/giphs/bugs/bug-d-euler/d-euler-bug.png", frame_size=(90, 90),
+        'F': AnimatedSprite(frame_path="./assets/giphs/seeds/d-euler-seed/d-euler-seed.png", frame_size=(90, 90),
                             frame_count=74)
     }
 
