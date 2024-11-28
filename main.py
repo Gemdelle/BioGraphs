@@ -52,6 +52,7 @@ clock = pygame.time.Clock()
 running = True
 mousedown_processing = False
 
+screen_selected = Screens.SPLASH  # Start screen
 screen_selected = Screens.SELECT_YOUR_PET  # Start screen
 start_ticks = pygame.time.get_ticks()
 timer_duration = 30000

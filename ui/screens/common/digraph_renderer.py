@@ -2,6 +2,7 @@ import pygame
 import networkx as nx
 import math
 
+
 def draw_arrow(screen, start, end, color=(0, 0, 0), arrow_size=20, offset=30):
     # Calcular la dirección del borde
     dx, dy = end[0] - start[0], end[1] - start[1]
